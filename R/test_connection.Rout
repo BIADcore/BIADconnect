@@ -28,9 +28,9 @@ Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
 > print(dim(d))
-[1] 5483    8
+[1] 5529    8
 > #------------------------------------------------------------------
 > 
 > proc.time()
    user  system elapsed 
-  0.926   0.079   0.997 
+  0.932   0.080   1.006 
