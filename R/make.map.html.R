@@ -4,6 +4,8 @@
 source('functions.R')
 library(leaflet)
 library(htmlwidgets)
+#library(webshot)
+library(mapview)
 #------------------------------------------------------------------
 sql.command <- "SELECT * FROM COREX.Sites"
 d <- sql.wrapper(sql.command,user,password)
@@ -18,5 +20,9 @@ map <- leaflet()
 map <- fitBounds(map=map, lng1=lng1, lat1=lat1, lng2=lng2, lat2=lat2)
 map <- addTiles(map)
 map <- addCircles(map, lng=d$Longitude, lat=d$Latitude, radius = 1)
-saveWidget(map, file="../tools/plots/map.html", selfcontained = FALSE)
+#saveWidget(map, file="../tools/plots/map.html", selfcontained = FALSE)
 #------------------------------------------------------------------
+#webshot("../tools/plots/map.html", file = "../tools/plots/map.png", cliprect = "viewport")
+
+mapshot(map, file = "../tools/plots/map2.png")
+
