@@ -90,4 +90,124 @@ source('functions.R')#
 library(leaflet)
 library(mapview)
 install.packages('mapview')
-install.packages('mapview')
+mp <- map('world',xlim=range(d$Longitude,na.rm=T),ylim=range(d$Latitude, na.rm=T),col='grey',add=T, fill=T, border='grey90',plot=F)
+source('functions.R')#
+require(maptools)#
+require(mapdata)
+install.packages('mapdata')
+require(maptools)#
+require(mapdata)#
+#------------------------------------------------------------------#
+#
+#------------------------------------------------------------------#
+mp <- map('world',xlim=range(d$Longitude,na.rm=T),ylim=range(d$Latitude, na.rm=T),col='grey',add=T, fill=T, border='grey90',plot=F)
+#------------------------------------------------------------------#
+source('functions.R')#
+require(maptools)#
+require(mapdata)#
+#------------------------------------------------------------------#
+sql.command <- "SELECT * FROM COREX.Sites"#
+d <- sql.wrapper(sql.command,user,password)#
+#------------------------------------------------------------------#
+mp <- map('world',xlim=range(d$Longitude,na.rm=T),ylim=range(d$Latitude, na.rm=T),col='grey',add=T, fill=T, border='grey90',plot=F)
+mp
+IDs <- sapply(strsplit(mp$names, ":"), function(x) x[1])
+mp. <- map2SpatialPolygons(mp, IDs=IDs, proj4string=CRS("+proj=longlat +datum=WGS84"))
+require(maptools)
+install.packages('maptools')
+source('functions.R')#
+require(maptools)#
+require(mapdata)
+install.packages('rgeos')
+source('functions.R')#
+require(maptools)#
+require(mapdata)
+#------------------------------------------------------------------#
+sql.command <- "SELECT * FROM COREX.Sites"#
+d <- sql.wrapper(sql.command,user,password)
+mp <- map('world',xlim=range(d$Longitude,na.rm=T),ylim=range(d$Latitude, na.rm=T),col='grey',add=T, fill=T, border='grey90',plot=F)
+IDs <- sapply(strsplit(mp$names, ":"), function(x) x[1])
+mp. <- map2SpatialPolygons(mp, IDs=IDs, proj4string=CRS("+proj=longlat +datum=WGS84"))
+mp. <- gBuffer(mp., byid=TRUE, width=0)
+require(rgeos)
+#------------------------------------------------------------------#
+source('functions.R')#
+require(maptools)#
+require(mapdata)#
+require(rgeos)
+mp. <- rgeos::gBuffer(mp., byid=TRUE, width=0)
+source('functions.R')#
+require(maptools)#
+require(mapdata)#
+#------------------------------------------------------------------#
+sql.command <- "SELECT * FROM COREX.Sites"#
+d <- sql.wrapper(sql.command,user,password)#
+#------------------------------------------------------------------#
+mp <- map('world',xlim=range(d$Longitude,na.rm=T),ylim=range(d$Latitude, na.rm=T),col='grey',add=T, fill=T, border='grey90',plot=F)#
+IDs <- sapply(strsplit(mp$names, ":"), function(x) x[1])#
+mp. <- map2SpatialPolygons(mp, IDs=IDs, proj4string=CRS("+proj=longlat +datum=WGS84"))#
+mp. <- rgeos::gBuffer(mp., byid=TRUE, width=0)
+coords <- phase.data[,c('Longitude','Latitude')]
+coords <- d[,c('Longitude','Latitude')]
+coords <- subset(coords, !is.na(Longitude))
+pts <- SpatialPoints(coords,proj4string=CRS("+proj=longlat +datum=WGS84"))
+pts <- as.data.frame(pts[mp.])
+mp
+plot(mp)
+#------------------------------------------------------------------#
+xmn <- min(d$Longitude, na.rm=T)#
+xmx <- max(d$Longitude, na.rm=T)#
+ymn <- min(d$Latitude na.rm=T)#
+ymx <- max(d$Latitude, na.rm=T)
+xmn <- min(d$Longitude, na.rm=T)#
+xmx <- max(d$Longitude, na.rm=T)#
+ymn <- min(d$Latitude, na.rm=T)#
+ymx <- max(d$Latitude, na.rm=T)
+plot(NULL,xlim=c(xmn,xmx),ylim=c(ymn,ymx),bty='n',xaxs='i',yaxs='i',main=main,xlab='',ylab='',xaxt='n',yaxt='n')
+plot(NULL,xlim=c(xmn,xmx),ylim=c(ymn,ymx),bty='n',xaxs='i',yaxs='i',main='',xlab='',ylab='',xaxt='n',yaxt='n')
+polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='lightgrey',border=NA)
+map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='grey',add=T, fill=T, border='grey90')
+points(d$Longitude,d$Latitude,pch=20, col='red',cex=1.5)
+polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='lightgrey',border=NA)#
+	map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='grey',add=T, fill=T, border='grey90')#
+	points(d$Longitude,d$Latitude, col='red',cex=1.5)
+polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='lightgrey',border=NA)#
+	map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='skyblue',add=T, fill=T, border='grey90')#
+	points(d$Longitude,d$Latitude, col='red',cex=1.5)
+polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='steelblue',border=NA)#
+	map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='lightgrey',add=T, fill=T, border='grey90')#
+	points(d$Longitude,d$Latitude, col='red',cex=1.5)
+polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='steelblue',border=NA)#
+	map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='green',add=T, fill=T, border='grey90')#
+	points(d$Longitude,d$Latitude, col='firebrick',cex=1.5)
+polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='steelblue',border=NA)#
+	map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='olive',add=T, fill=T, border='grey90')#
+	points(d$Longitude,d$Latitude, col='firebrick',cex=1.5)
+polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='steelblue',border=NA)#
+	map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='olivegreen',add=T, fill=T, border='grey90')#
+	points(d$Longitude,d$Latitude, col='firebrick',cex=1.5)
+polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='steelblue',border=NA)#
+	map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='seagreen',add=T, fill=T, border='grey90')#
+	points(d$Longitude,d$Latitude, col='firebrick',cex=1.5)
+points(d$Longitude,d$Latitude, col='firebrick',pch=20, cex=1.5)
+plot(NULL,xlim=c(xmn,xmx),ylim=c(ymn,ymx),bty='n',xaxs='i',yaxs='i',main='',xlab='',ylab='',xaxt='n',yaxt='n')#
+	polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='steelblue',border=NA)#
+	map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='seagreen',add=T, fill=T, border='grey90')#
+	points(d$Longitude,d$Latitude, col='firebrick',pch=20, cex=1)
+par(mar=c(0,0,0,0))#
+plot(NULL,xlim=c(xmn,xmx),ylim=c(ymn,ymx),bty='n',xaxs='i',yaxs='i',main='',xlab='',ylab='',xaxt='n',yaxt='n')#
+polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='steelblue',border=NA)#
+map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='seagreen',add=T, fill=T, border='grey90')#
+points(d$Longitude,d$Latitude, col='firebrick',pch=20, cex=1)
+par(mar=c(0,0,0,0))#
+plot(NULL,xlim=c(xmn,xmx),ylim=c(ymn,ymx),bty='n',xaxs='i',yaxs='i',main='',xlab='',ylab='',xaxt='n',yaxt='n')#
+polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='steelblue',border=NA)#
+map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='darkolivegreen',add=T, fill=T, border='grey90')#
+points(d$Longitude,d$Latitude, col='firebrick',pch=20, cex=1)
+ymx <- max(d$Latitude, na.rm=T)#
+#
+par(mar=c(0,0,0,0))#
+plot(NULL,xlim=c(xmn,xmx),ylim=c(ymn,ymx),bty='n',xaxs='i',yaxs='i',main='',xlab='',ylab='',xaxt='n',yaxt='n')#
+polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='steelblue',border=NA)#
+map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='grey',add=T, fill=T, border='grey90')#
+points(d$Longitude,d$Latitude, col='firebrick',pch=20, cex=1)

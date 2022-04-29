@@ -1,28 +1,26 @@
-#------------------------------------------------------------------
-# overheads
+
 #------------------------------------------------------------------
 source('functions.R')
-library(leaflet)
-library(htmlwidgets)
-library(webshot)
+require(maptools)
+require(mapdata)
 #------------------------------------------------------------------
 sql.command <- "SELECT * FROM COREX.Sites"
 d <- sql.wrapper(sql.command,user,password)
 #------------------------------------------------------------------
-# map limits
-lng1 <- min(d$Longitude,na.rm=T)
-lng2 <- max(d$Longitude, na.rm=T)
-lat1 <- min(d$Latitude, na.rm=T)
-lat2 <- max(d$Latitude, na.rm=T)
+xmn <- min(d$Longitude, na.rm=T)
+xmx <- max(d$Longitude, na.rm=T)
+ymn <- min(d$Latitude, na.rm=T)
+ymx <- max(d$Latitude, na.rm=T)
 #------------------------------------------------------------------
-map <- leaflet()
-map <- fitBounds(map=map, lng1=lng1, lat1=lat1, lng2=lng2, lat2=lat2)
-map <- addTiles(map)
-map <- addCircles(map, lng=d$Longitude, lat=d$Latitude, radius = 1)
-saveWidget(map, file="../tools/plots/map.html", selfcontained = FALSE)
-webshot("../tools/plots/map.html", "../tools/plots/map.png")
+svg(file = '../tools/plots/map.svg', width = 16, height = 9 )
+par(mar=c(0,0,0,0))
+plot(NULL,xlim=c(xmn,xmx),ylim=c(ymn,ymx),bty='n',xaxs='i',yaxs='i',main='',xlab='',ylab='',xaxt='n',yaxt='n')
+polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='steelblue',border=NA)
+map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='grey',add=T, fill=T, border='grey90')
+points(d$Longitude,d$Latitude, col='firebrick',pch=20, cex=1)
+dev.off()
 #------------------------------------------------------------------
-
-
-
-
+	
+	
+	
+	
