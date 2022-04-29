@@ -73,3 +73,21 @@ remove.packages('rlang')
 require(remotes)
 install_version("rlang", version = "0.4.12")
 install.packages("https://cran.r-project.org/src/contrib/Archive/rlang/rlang_0.4.12.tar.gz", repo=NULL, type="source")
+source('functions.R')#
+library(leaflet)#
+library(htmlwidgets)#
+#library(webshot)#
+library(mapview)
+install.packages('mapview')
+source('functions.R')
+library(leaflet)
+library(htmlwidgets)
+#library(webshot)
+library(mapview)
+install.packages('mapview')
+install.packages('Rcpp')
+source('functions.R')#
+library(leaflet)
+library(mapview)
+install.packages('mapview')
+install.packages('mapview')
