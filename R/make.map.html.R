@@ -20,7 +20,7 @@ map <- fitBounds(map=map, lng1=lng1, lat1=lat1, lng2=lng2, lat2=lat2)
 map <- addTiles(map)
 map <- addCircles(map, lng=d$Longitude, lat=d$Latitude, radius = 1)
 saveWidget(map, file="../tools/plots/map.html", selfcontained = FALSE)
-webshot("../tools/plots/map.png", "../tools/plots/map.png")
+webshot("../tools/plots/map.html", "../tools/plots/map.png")
 #------------------------------------------------------------------
 
 
