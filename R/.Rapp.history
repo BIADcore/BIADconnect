@@ -1,0 +1,75 @@
+source('functions.R')
+sql.command <- "SELECT * FROM COREX.Sites"#
+d <- sql.wrapper(sql.command,user,password)
+head(d)
+rand_lng = function(n = 10) rnorm(n, -93.65, .01)#
+rand_lat = function(n = 10) rnorm(n, 42.0285, .01)
+m <- leaflet()
+library(leaflet)
+install.packages('leaflet')
+install.packages('rlang')
+install.packages('leaflet')
+install.packages('htmlwidgets')
+remove.packages('htmlwidgets')
+install.packages('htmlwidgets')
+install.packages('leaflet')
+remove.packages('htmlwidgets')
+install.packages('htmlwidgets')
+.libPaths()
+install.packages('htmlwidgets')
+install.packages('leaflet')
+install.packages('rlang')
+install.packages('leaflet')
+# overheads#
+#------------------------------------------------------------------#
+source('functions.R')#
+#------------------------------------------------------------------#
+sql.command <- "SELECT * FROM COREX.Sites"#
+d <- sql.wrapper(sql.command,user,password)
+source('functions.R')
+sql.command <- "SELECT * FROM COREX.Sites"
+d <- sql.wrapper(sql.command,user,password)
+remove.packages('rlang')
+install.packges('rlang')
+install.packages('rlang')
+source('functions.R')
+sql.command <- "SELECT * FROM COREX.Sites"
+d <- sql.wrapper(sql.command,user,password)
+# overheads#
+#------------------------------------------------------------------#
+source('functions.R')#
+#------------------------------------------------------------------#
+sql.command <- "SELECT * FROM COREX.Sites"#
+d <- sql.wrapper(sql.command,user,password)
+#------------------------------------------------------------------#
+# overheads#
+#------------------------------------------------------------------#
+source('functions.R')#
+#------------------------------------------------------------------#
+sql.command <- "SELECT * FROM COREX.Sites"#
+d <- sql.wrapper(sql.command,user,password)
+packages.remove('ellipsis')
+remove.packages('ellipsis')
+remove.packages('vctrs')
+install.packages('ellipses')
+source('functions.R')
+sql.command <- "SELECT * FROM COREX.Sites"
+d <- sql.wrapper(sql.command,user,password)
+remove.packages('rlang')
+require(remotes)
+install.packages('remotes')
+require(remotes)
+install.packages('rlang')
+#------------------------------------------------------------------#
+# overheads#
+#------------------------------------------------------------------#
+source('functions.R')#
+#------------------------------------------------------------------#
+sql.command <- "SELECT * FROM COREX.Sites"#
+d <- sql.wrapper(sql.command,user,password)
+uninstall.packages('rlang')
+.packages('rlang')remove
+remove.packages('rlang')
+require(remotes)
+install_version("rlang", version = "0.4.12")
+install.packages("https://cran.r-project.org/src/contrib/Archive/rlang/rlang_0.4.12.tar.gz", repo=NULL, type="source")
