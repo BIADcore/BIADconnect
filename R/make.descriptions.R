@@ -4,9 +4,9 @@ sql.command <- "SELECT table_comment FROM INFORMATION_SCHEMA.TABLES WHERE table_
 d <- sql.wrapper(sql.command,user,password)
 #------------------------------------------------------------------
 # Write to the Gist
-writeLines(d[1,1], con='../../Gist/Phases.md')
+writeLines(d[1,1], con='../../Gists/Phases/Phases.md')
 #------------------------------------------------------------------
-Sys.sleep(5)
+
 	
 	
 	
