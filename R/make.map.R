@@ -1,4 +1,6 @@
-
+#------------------------------------------------------------------
+require(maptools)
+require(mapdata)
 #------------------------------------------------------------------
 sql.command <- "SELECT * FROM COREX.Sites"
 d <- sql.wrapper(sql.command,user,password)
