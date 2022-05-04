@@ -211,3 +211,30 @@ plot(NULL,xlim=c(xmn,xmx),ylim=c(ymn,ymx),bty='n',xaxs='i',yaxs='i',main='',xlab
 polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='steelblue',border=NA)#
 map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='grey',add=T, fill=T, border='grey90')#
 points(d$Longitude,d$Latitude, col='firebrick',pch=20, cex=1)
+"SELECT table_comment FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='COREX' AND table_name='Phases';"
+source('functions.R')
+sql.command <- "SELECT table_comment FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='COREX' AND table_name='Phases';"
+d <- sql.wrapper(sql.command,user,password)
+d
+str(d)
+dim(str)
+dim(d)
+d[1,1]
+length(d[1,1])
+d[1]
+d[1,1]
+q <- readLines('../../Gist/bananbucket.md')
+list.files('../../')
+q <- readLines('../../Gist/bananabucket.md')
+q
+length(q)
+q <- read.txt('../../Gist/bananabucket.md')
+q <- read.csv('../../Gist/bananabucket.md')
+q
+sql.command <- "SELECT table_comment FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='COREX' AND table_name='Phases';"#
+d <- sql.wrapper(sql.command,user,password)
+d
+writeLines(d[1,1], con='../../Gist/Phases.md')
+writeLines(d[1,1], con='../../Gist/Phases.md')
+writeLines(d[1,1], con='../../Gist/Phases.md')
+source('make.descriptions.R')
