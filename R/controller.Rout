@@ -22,7 +22,7 @@ Type 'q()' to quit R.
 > source('functions.R')
 > #------------------------------------------------------------------
 > date()
-[1] "Wed May  4 21:29:19 2022"
+[1] "Wed May  4 21:32:36 2022"
 > source('make.map.R')
 Loading required package: maptools
 Loading required package: sp
@@ -36,8 +36,11 @@ Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
 > source('make.descriptions.R')
+Warning message:
+In rm("../../Gists/Phases/.DS_Store") :
+  object '../../Gists/Phases/.DS_Store' not found
 > date()
-[1] "Wed May  4 21:29:21 2022"
+[1] "Wed May  4 21:32:37 2022"
 > #------------------------------------------------------------------
 > 	
 > 	
@@ -46,4 +49,4 @@ Loading required package: odbc
 > 
 > proc.time()
    user  system elapsed 
-  1.489   0.146   1.645 
+  1.504   0.150   1.648 
