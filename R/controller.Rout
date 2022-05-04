@@ -22,7 +22,7 @@ Type 'q()' to quit R.
 > source('functions.R')
 > #------------------------------------------------------------------
 > date()
-[1] "Wed May  4 21:32:36 2022"
+[1] "Wed May  4 21:39:08 2022"
 > source('make.map.R')
 Loading required package: maptools
 Loading required package: sp
@@ -40,7 +40,7 @@ Warning message:
 In rm("../../Gists/Phases/.DS_Store") :
   object '../../Gists/Phases/.DS_Store' not found
 > date()
-[1] "Wed May  4 21:32:37 2022"
+[1] "Wed May  4 21:39:10 2022"
 > #------------------------------------------------------------------
 > 	
 > 	
@@ -49,4 +49,4 @@ In rm("../../Gists/Phases/.DS_Store") :
 > 
 > proc.time()
    user  system elapsed 
-  1.504   0.150   1.648 
+  1.503   0.143   1.640 
