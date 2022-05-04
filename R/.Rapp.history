@@ -237,3 +237,6 @@ d
 writeLines(d[1,1], con='../../Gist/Phases.md')
 source('make.descriptions.R')
 ?rm
+rm('../../Gists/Phases/.DS_Store')
+list.files('../../Gists')
+list.files('../../Gists/Phases')
