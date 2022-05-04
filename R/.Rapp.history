@@ -236,3 +236,4 @@ d <- sql.wrapper(sql.command,user,password)
 d
 writeLines(d[1,1], con='../../Gist/Phases.md')
 source('make.descriptions.R')
+?rm
