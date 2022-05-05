@@ -1,19 +1,7 @@
 
 #------------------------------------------------------------------
 # Pull table summaries from the dtabase, and update to Gists
-# Should be able to loop it
 #------------------------------------------------------------------
-# Sites
-sql.command <- "SELECT table_comment FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='COREX' AND table_name='Sites';"
-d <- sql.wrapper(sql.command,user,password)
-writeLines(d[1,1], con='../../Gists/Sites/Sites.md')
-#------------------------------------------------------------------
-# Phases
-sql.command <- "SELECT table_comment FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='COREX' AND table_name='Phases';"
-d <- sql.wrapper(sql.command,user,password)
-writeLines(d[1,1], con='../../Gists/Phases/Phases.md')
-#------------------------------------------------------------------
-########################
 
 # Pull all table meta data
 
@@ -43,6 +31,6 @@ for(n in 1:length(col.names)){
 	text <- c(text, paste('###', col.names[n]))
 	text <- c(text, col.comments[n])
 	}
-text <- c(text, '---')
+text <- c(text, '***)
 
-writeLines(text, con='../../Gists/Sites/Sites.md')
+writeLines(text, con='../../Gists/table_comments/standard.md')
