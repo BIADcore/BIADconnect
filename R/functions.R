@@ -49,7 +49,6 @@ create.markdown.for.several.tables <- function(d.tables, d.cols, table.names, fi
 		table.text <- create.markdown.for.single.table(d.tables, d.cols, table.name)	
 		text <- c(text, table.text)
 		}
-
-	writeLines(text, con=file)
+	writeLines(text, con=file, useBytes = TRUE )
 return(NULL)}
 #--------------------------------------------------------------------------------------------------
