@@ -41,3 +41,15 @@ create.markdown.for.single.table <- function(d.tables, d.cols, table.name){
 	text <- c(text, '***')
 return(text)}
 #--------------------------------------------------------------------------------------------------
+create.markdown.for.several.tables <- function(d.tables, d.cols, table.names, file){
+	
+	text <- c()
+	for(n in 1:length(table.names)){
+		table.name <- table.names[n]
+		table.text <- create.markdown.for.single.table(d.tables, d.cols, table.name)	
+		text <- c(text, table.text)
+		}
+
+	writeLines(text, con=file)
+return(NULL)}
+#--------------------------------------------------------------------------------------------------

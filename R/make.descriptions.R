@@ -19,15 +19,7 @@ copy <- all[grepl('_copy', all)]
 standard <- all[!all%in%c(ztemp,zoptions,copy)]
 
 # construct a single markdown file for all standard tables
-text <- c()
-for(n in 1:length(standard)){
-	table.name <- standard[n]
-	table.text <- create.markdown.for.single.table(d.tables, d.cols, table.name)	
-	text <- c(text, table.text)
-	}
+create.markdown.for.several.tables(d.tables, d.cols, table.names = standard, file = '../../Gists/table_comments/standard/standard.md')
+	
 
-writeLines(text, con='../../Gists/table_comments/standard/standard.md')
 #-----------------------------------------------------------------------------------------
-
-
-
