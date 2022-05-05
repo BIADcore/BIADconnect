@@ -33,4 +33,4 @@ for(n in 1:length(col.names)){
 	}
 text <- c(text, '***)
 
-writeLines(text, con='../../Gists/table_comments/standard.md')
+writeLines(text, con='../../Gists/table_comments/standard/standard.md')
