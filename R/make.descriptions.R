@@ -20,6 +20,6 @@ standard <- all[!all%in%c(ztemp,zoptions,copy)]
 
 # construct a single markdown file for all standard tables
 create.markdown.for.several.tables(d.tables, d.cols, table.names = standard, file = '../../Gists/table_comments/standard/standard.md')
-	
-
+create.markdown.for.several.tables(d.tables, d.cols, table.names = zoptions, file = '../../Gists/table_comments/zoptions/zoptions.md')
+create.markdown.for.several.tables(d.tables, d.cols, table.names = ztemp, file = '../../Gists/table_comments/ztemp/ztemp.md')
 #-----------------------------------------------------------------------------------------
