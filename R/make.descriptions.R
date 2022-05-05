@@ -1,6 +1,6 @@
 
 #------------------------------------------------------------------
-# Pull table summaries from the dtabase, and update to Gists
+# Pull table summaries from the database, and update to Gists
 #------------------------------------------------------------------
 
 # Pull all table meta data
@@ -31,6 +31,6 @@ for(n in 1:length(col.names)){
 	text <- c(text, paste('###', col.names[n]))
 	text <- c(text, col.comments[n])
 	}
-text <- c(text, '***)
+text <- c(text, '***')
 
 writeLines(text, con='../../Gists/table_comments/standard/standard.md')

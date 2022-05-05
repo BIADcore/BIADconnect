@@ -22,7 +22,7 @@ Type 'q()' to quit R.
 > source('functions.R')
 > #------------------------------------------------------------------
 > date()
-[1] "Thu May  5 13:43:33 2022"
+[1] "Thu May  5 13:45:12 2022"
 > source('make.map.R')
 Loading required package: maptools
 Loading required package: sp
@@ -36,9 +36,14 @@ Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
 > source('make.descriptions.R')
-Error in source("make.descriptions.R") : 
-  make.descriptions.R:36:23: unexpected symbol
-35: 
-36: writeLines(text, con='..
-                          ^
-Execution halted
+> date()
+[1] "Thu May  5 13:45:13 2022"
+> #------------------------------------------------------------------
+> 	
+> 	
+> 	
+> 	
+> 
+> proc.time()
+   user  system elapsed 
+  1.553   0.143   1.701 
