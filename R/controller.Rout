@@ -22,7 +22,7 @@ Type 'q()' to quit R.
 > source('functions.R')
 > #------------------------------------------------------------------
 > date()
-[1] "Thu May  5 13:40:08 2022"
+[1] "Thu May  5 13:41:38 2022"
 > source('make.map.R')
 Loading required package: maptools
 Loading required package: sp
