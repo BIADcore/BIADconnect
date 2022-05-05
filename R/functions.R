@@ -26,3 +26,18 @@ sql.wrapper <- function(sql.command,user,password){
 	suppressWarnings(dbDisconnect(con))
 return(query)}
 #--------------------------------------------------------------------------------------------------
+create.markdown.for.single.table <- function(d.tables, d.cols, table.name){
+	
+	table.comment <- subset(d.tables, TABLE_NAME==table.name)$TABLE_COMMENT
+	col.names <- subset(d.cols, TABLE_NAME==table.name)$COLUMN_NAME
+	col.comments <- subset(d.cols, TABLE_NAME==table.name)$COLUMN_COMMENT
+
+	text <- paste('#', table.name)
+	text <- c(text, table.comment)
+	for(n in 1:length(col.names)){
+		text <- c(text, paste('###', col.names[n]))
+		text <- c(text, col.comments[n])
+		}
+	text <- c(text, '***')
+return(text)}
+#--------------------------------------------------------------------------------------------------
