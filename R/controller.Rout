@@ -22,7 +22,7 @@ Type 'q()' to quit R.
 > source('functions.R')
 > #------------------------------------------------------------------
 > date()
-[1] "Sat May  7 15:07:01 2022"
+[1] "Sun May  8 15:07:01 2022"
 > source('make.map.R')
 Loading required package: maptools
 Loading required package: sp
@@ -37,7 +37,7 @@ Loading required package: DBI
 Loading required package: odbc
 > source('make.descriptions.R')
 > date()
-[1] "Sat May  7 15:07:04 2022"
+[1] "Sun May  8 15:07:04 2022"
 > #------------------------------------------------------------------
 > 	
 > 	
@@ -46,4 +46,4 @@ Loading required package: odbc
 > 
 > proc.time()
    user  system elapsed 
-  1.547   0.198   3.154 
+  1.538   0.197   2.713 
