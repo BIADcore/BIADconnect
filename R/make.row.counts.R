@@ -2,7 +2,7 @@
 # Pull table summaries from the database, and update to Gists
 #-----------------------------------------------------------------------------------------
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='COREX'"
-d <- db.wrapper(sql.command,user,password)
+d <- sql.wrapper(sql.command,user,password)	
 #-----------------------------------------------------------------------------------------
 # Pull out ust the main tables
 all <- d$TABLE_NAME

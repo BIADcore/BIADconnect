@@ -5,6 +5,7 @@ source('functions.R')
 date()
 source('make.map.R')
 source('make.descriptions.R')
+source('make.row.counts.R')
 date()
 #------------------------------------------------------------------
 	
