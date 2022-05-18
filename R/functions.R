@@ -54,12 +54,13 @@ return(NULL)}
 #--------------------------------------------------------------------------------------------------
 create.markdown.for.table.content <- function(x, d.cols, file){
        
-	text <- '| Table | Number of rows | Number of columns |'
-	text <- c(text,'| ----------- | ----------- | ----------- |')
+	text <- '| Table | Number of rows | Number of columns | Column names |'
+	text <- c(text,'| ----------- | ----------- | ----------- | ----------- |')
 
 	for(n in 1:nrow(x)){
 		cols <- subset(d.cols, TABLE_NAME==x$TABLE_NAME[n])
-		txt <- paste('| ',x$TABLE_NAME[n],' | ',x$TABLE_ROWS[n],' | ',' | ',nrow(cols),' | ',sep='')
+		colnames <- paste(cols$COLUMN_NAME,collapse=', ')
+		txt <- paste('| ',x$TABLE_NAME[n],' | ',x$TABLE_ROWS[n],' | ',nrow(cols),' | ', colnames,' | ', sep='')
 		text <- c(text,txt)
 		}
 	text <- c(text, '***')
