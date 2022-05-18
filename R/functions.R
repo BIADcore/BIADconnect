@@ -54,7 +54,7 @@ return(NULL)}
 #--------------------------------------------------------------------------------------------------
 create.markdown.for.table.content <- function(x, file){
        
-	text <- '| Table | Number of rows |'
+	text <- '| Table | Number of rows | Data length | Create time |'
 	text <- c(text,'| ----------- | ----------- | ----------- | ----------- |')
 
 	for(n in 1:nrow(x)){
