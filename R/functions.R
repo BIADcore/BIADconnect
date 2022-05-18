@@ -55,6 +55,8 @@ return(NULL)}
 create.markdown.for.table.content <- function(x, file){
        
 	text <- '| Table | Number of rows |'
+	text <- c(text,'	| ----------- | ----------- |')
+
 	for(n in 1:nrow(x)){
 		txt <- paste('| ',x$TABLE_NAME[n],' | ',x$TABLE_ROWS[n],' | ',sep='')
 		text <- c(text,txt)
