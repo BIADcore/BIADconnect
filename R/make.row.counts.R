@@ -3,8 +3,11 @@
 #-----------------------------------------------------------------------------------------
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='COREX'"
 d <- sql.wrapper(sql.command,user,password)	
+
+sql.command <- "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema='COREX';"	
+d.cols <- sql.wrapper(sql.command,user,password)	
 #-----------------------------------------------------------------------------------------
-# Pull out ust the main tables
+# Pull out just the main tables
 all <- d$TABLE_NAME
 ztemp <- all[grepl('ztemp', all)]
 zoptions <- all[grepl('zoptions', all)]
@@ -15,5 +18,5 @@ x <- subset(d, TABLE_NAME%in%standard)
 x <- subset(x, TABLE_ROWS>100)
 
 file = '../../Gists/summary_stats/row_counts/row_counts.md'
-create.markdown.for.table.content(x, file)
+create.markdown.for.table.content(x, d.cols, file)
 #-----------------------------------------------------------------------------------------

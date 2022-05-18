@@ -52,13 +52,14 @@ create.markdown.for.several.tables <- function(d.tables, d.cols, table.names, fi
 	writeLines(text, con=file, useBytes = TRUE )
 return(NULL)}
 #--------------------------------------------------------------------------------------------------
-create.markdown.for.table.content <- function(x, file){
+create.markdown.for.table.content <- function(x, d.cols, file){
        
-	text <- '| Table | Number of rows | Data length | Create time |'
-	text <- c(text,'| ----------- | ----------- | ----------- | ----------- |')
+	text <- '| Table | Number of rows | Number of columns |'
+	text <- c(text,'| ----------- | ----------- | ----------- |')
 
 	for(n in 1:nrow(x)){
-		txt <- paste('| ',x$TABLE_NAME[n],' | ',x$TABLE_ROWS[n],' | ',' | ',x$DATA_LENGTH[n],' | ',' | ',x$CREATE_TIME[n],' | ',sep='')
+		cols <- subset(d.cols, TABLE_NAME==x$TABLE_NAME[n])
+		txt <- paste('| ',x$TABLE_NAME[n],' | ',x$TABLE_ROWS[n],' | ',' | ',nrow(cols),' | ',sep='')
 		text <- c(text,txt)
 		}
 	text <- c(text, '***')
