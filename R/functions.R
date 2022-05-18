@@ -58,7 +58,7 @@ create.markdown.for.table.content <- function(x, file){
 	text <- c(text,'| ----------- | ----------- |')
 
 	for(n in 1:nrow(x)){
-		txt <- paste('| ',x$TABLE_NAME[n],' | ',x$TABLE_ROWS[n],' | ',sep='')
+		txt <- paste('| ',x$TABLE_NAME[n],' | ',x$TABLE_ROWS[n],' | ',' | ',x$DATA_LENGTH[n],' | ',' | ',x$CREATE_TIME[n],' | ',sep='')
 		text <- c(text,txt)
 		}
 	text <- c(text, '***')

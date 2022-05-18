@@ -13,7 +13,6 @@ standard <- all[!all%in%c(ztemp,zoptions,copy)]
 
 x <- subset(d, TABLE_NAME%in%standard)
 x <- subset(x, TABLE_ROWS>100)
-x <- x[,c('TABLE_NAME','TABLE_ROWS')]
 
 file = '../../Gists/summary_stats/row_counts/row_counts.md'
 create.markdown.for.table.content(x, file)
