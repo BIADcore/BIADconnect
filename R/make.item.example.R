@@ -11,3 +11,4 @@ png('../tools/plots/item.example5.png',width=700,height=700)
 pp <- plotmat(M, pos=pos, name=names, lwd = 1, box.lwd = 2, cex.txt = 0.8, box.type = "square", box.prop = 0.4, txt.yadj=0)
 text(pp$comp[5,1],pp$comp[5,2],'erewtwet',pos=1,cex=0.6)
 dev.off()
+
