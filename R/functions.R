@@ -53,10 +53,10 @@ create.markdown.for.several.tables <- function(d.tables, d.cols, table.names, fi
 return(NULL)}
 #--------------------------------------------------------------------------------------------------
 create.markdown.for.table.content <- function(x, file){
-        
-	text <- paste('#', 'Number of rows in main tables')
+       
+	text <- '| Table | Number of rows |'
 	for(n in 1:nrow(x)){
-		txt <- paste(x$TABLE_NAME[n],'\t\t\t',x$TABLE_ROWS[n])
+		txt <- paste('| ',x$TABLE_NAME[n],' | ',x$TABLE_ROWS[n],' | ',sep='')
 		text <- c(text,txt)
 		}
 	text <- c(text, '***')
