@@ -5,9 +5,10 @@ source('functions.R')
 #------------------------------------------------------------------
 files <- list.files()
 files_to_run <- files[substr(files,1,5)=='make.']
-for(file in files){
+N <- length(files_to_run)
+for(n in 1:N){
 	print(date())
-	source(file)
+	source(files_to_run[n])
 	}
 date()
 #------------------------------------------------------------------
