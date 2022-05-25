@@ -29,7 +29,7 @@ Type 'q()' to quit R.
 + 	print(date())
 + 	source(files_to_run[n])
 + 	}
-[1] "Wed May 25 11:10:02 2022"
+[1] "Wed May 25 11:33:01 2022"
 
 Attaching package: 'gmailr'
 
