@@ -18,39 +18,46 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > #------------------------------------------------------------------
-> # Runs all R scripts beginning with 'make.'
+> # Runs all R scripts beginning with 'auto.make.'
 > #------------------------------------------------------------------
 > source('functions.R')
 > #------------------------------------------------------------------
 > files <- list.files()
-> files_to_run <- files[substr(files,1,5)=='make.']
+> files_to_run <- files[substr(files,1,10)=='auto.make.']
 > N <- length(files_to_run)
 > for(n in 1:N){
 + 	print(date())
 + 	source(files_to_run[n])
 + 	}
-[1] "Wed May 25 11:51:01 2022"
-
-Attaching package: 'gmailr'
-
-The following object is masked from 'package:utils':
-
-    history
-
-The following objects are masked from 'package:base':
-
-    body, date, labels, message
-
+[1] "Wed May 25 12:07:01 2022"
+Loading required package: RMySQL
+Loading required package: DBI
+Loading required package: odbc
+[1] "Wed May 25 12:07:02 2022"
 ! Using an auto-discovered, cached token.
   To suppress this message, modify your code or options to clearly consent to
   the use of a cached token.
   See gargle's "Non-interactive auth" vignette for more details:
   <https://gargle.r-lib.org/articles/non-interactive-auth.html>
 i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
-Auto-refreshing stale OAuth token.
-Error in gm_date(x, ...) : argument "x" is missing, with no default
-Calls: print -> date -> gm_date
-In addition: Warning message:
-`date()` was deprecated in gmailr 1.0.0.
-Please use `gm_date()` instead. 
-Execution halted
+[1] "Wed May 25 12:07:03 2022"
+Loading required package: maptools
+Loading required package: sp
+Checking rgeos availability: TRUE
+Please note that 'maptools' will be retired by the end of 2023,
+plan transition at your earliest convenience;
+some functionality will be moved to 'sp'.
+Loading required package: mapdata
+Loading required package: maps
+[1] "Wed May 25 12:07:05 2022"
+> date()
+[1] "Wed May 25 12:07:05 2022"
+> #------------------------------------------------------------------
+> 	
+> 	
+> 	
+> 	
+> 
+> proc.time()
+   user  system elapsed 
+  2.223   0.206   3.550 
