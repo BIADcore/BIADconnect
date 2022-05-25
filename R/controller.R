@@ -1,11 +1,14 @@
-
+#------------------------------------------------------------------
+# Runs all R scripts beginning with 'make.'
 #------------------------------------------------------------------
 source('functions.R')
 #------------------------------------------------------------------
-date()
-source('make.map.R')
-source('make.descriptions.R')
-source('make.row.counts.R')
+files <- list.files()
+files_to_run <- files[substr(files,1,5)=='make.']
+for(file in files){
+	print(date())
+	source(file)
+	}
 date()
 #------------------------------------------------------------------
 	
