@@ -29,7 +29,7 @@ Type 'q()' to quit R.
 + 	print(date())
 + 	source(files_to_run[n])
 + 	}
-[1] "Wed May 25 11:33:01 2022"
+[1] "Wed May 25 11:51:01 2022"
 
 Attaching package: 'gmailr'
 
@@ -41,7 +41,16 @@ The following objects are masked from 'package:base':
 
     body, date, labels, message
 
-Error: lexical error: invalid char in json text.
-                                       ../tools/email/gmailr.json
-                     (right here) ------^
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+Auto-refreshing stale OAuth token.
+Error in gm_date(x, ...) : argument "x" is missing, with no default
+Calls: print -> date -> gm_date
+In addition: Warning message:
+`date()` was deprecated in gmailr 1.0.0.
+Please use `gm_date()` instead. 
 Execution halted
