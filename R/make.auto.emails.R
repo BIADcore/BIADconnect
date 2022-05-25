@@ -1,12 +1,7 @@
 #-----------------------------------------------------------------------------------------
 # Test autoemailing
 # This script is reliant on files that are not stored on the public github:
-# gmailr.json and .secret
-
-# Good advice here: https://github.com/jennybc/send-email-with-r
-# The gmailr.json was generated once using the gmail API https://console.cloud.google.com/apis/dashboard 
-# via 'credentials' -> create and save a new JSON -> change file name.
-# The .secret was then generated using the R library gmailr, which uses the .json
+# gmailr.json and .secret stored in tools/email
 #-----------------------------------------------------------------------------------------
 library(gmailr)
 gm_auth_configure(path='../tools/email/gmailr.json')
