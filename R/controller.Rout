@@ -29,18 +29,11 @@ Type 'q()' to quit R.
 + 	print(date())
 + 	source(files_to_run[n])
 + 	}
-[1] "Wed May 25 12:07:01 2022"
+[1] "Thu May 26 12:07:01 2022"
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
-[1] "Wed May 25 12:07:02 2022"
-! Using an auto-discovered, cached token.
-  To suppress this message, modify your code or options to clearly consent to
-  the use of a cached token.
-  See gargle's "Non-interactive auth" vignette for more details:
-  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
-i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
-[1] "Wed May 25 12:07:03 2022"
+[1] "Thu May 26 12:07:02 2022"
 Loading required package: maptools
 Loading required package: sp
 Checking rgeos availability: TRUE
@@ -49,9 +42,17 @@ plan transition at your earliest convenience;
 some functionality will be moved to 'sp'.
 Loading required package: mapdata
 Loading required package: maps
-[1] "Wed May 25 12:07:05 2022"
+[1] "Thu May 26 12:07:04 2022"
+[1] "Thu May 26 12:07:04 2022"
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+Auto-refreshing stale OAuth token.
 > date()
-[1] "Wed May 25 12:07:05 2022"
+[1] "Thu May 26 12:07:06 2022"
 > #------------------------------------------------------------------
 > 	
 > 	
@@ -60,4 +61,4 @@ Loading required package: maps
 > 
 > proc.time()
    user  system elapsed 
-  2.223   0.206   3.550 
+  2.327   0.275   4.865 

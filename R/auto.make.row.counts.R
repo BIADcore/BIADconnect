@@ -9,10 +9,10 @@ d.cols <- sql.wrapper(sql.command,user,password)
 #-----------------------------------------------------------------------------------------
 # Pull out just the main tables
 all <- d$TABLE_NAME
-ztemp <- all[grepl('ztemp', all)]
+zprivate <- all[grepl('zprivate', all)]
 zoptions <- all[grepl('zoptions', all)]
 copy <- all[grepl('_copy', all)]
-standard <- all[!all%in%c(ztemp,zoptions,copy)]
+standard <- all[!all%in%c(zprivate,zoptions,copy)]
 
 x <- subset(d, TABLE_NAME%in%standard)
 x <- subset(x, TABLE_ROWS>100)
