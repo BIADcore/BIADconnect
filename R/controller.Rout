@@ -29,11 +29,11 @@ Type 'q()' to quit R.
 + 	print(date())
 + 	source(files_to_run[n])
 + 	}
-[1] "Sat May 28 12:07:01 2022"
+[1] "Sun May 29 12:07:01 2022"
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
-[1] "Sat May 28 12:07:03 2022"
+[1] "Sun May 29 12:07:02 2022"
 Loading required package: maptools
 Loading required package: sp
 Checking rgeos availability: TRUE
@@ -42,8 +42,8 @@ plan transition at your earliest convenience;
 some functionality will be moved to 'sp'.
 Loading required package: mapdata
 Loading required package: maps
-[1] "Sat May 28 12:07:04 2022"
-[1] "Sat May 28 12:07:04 2022"
+[1] "Sun May 29 12:07:03 2022"
+[1] "Sun May 29 12:07:03 2022"
 ! Using an auto-discovered, cached token.
   To suppress this message, modify your code or options to clearly consent to
   the use of a cached token.
@@ -52,7 +52,7 @@ Loading required package: maps
 i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
 Auto-refreshing stale OAuth token.
 > date()
-[1] "Sat May 28 12:07:06 2022"
+[1] "Sun May 29 12:07:05 2022"
 > #------------------------------------------------------------------
 > 	
 > 	
@@ -61,4 +61,4 @@ Auto-refreshing stale OAuth token.
 > 
 > proc.time()
    user  system elapsed 
-  2.344   0.266   4.457 
+  2.324   0.252   4.519 
