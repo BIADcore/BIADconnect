@@ -7,7 +7,7 @@
 #-----------------------------------------------------------------------------------------
 # check for users that are missing from the zprivate_users table
 #-----------------------------------------------------------------------------------------
-d1 <- sql.wrapper(sql.command = "SELECT User FROM mysql.user",user,password)
+d1 <- sql.wrapper(sql.command = "SELECT User FROM mysql.db WHERE Db='corex'",user,password)
 d2 <- sql.wrapper(sql.command = "SELECT * FROM COREX.zprivate_users",user,password)
 
 d <- merge(d1,d2,by.x='User',by.y='user',all=T)
@@ -34,8 +34,10 @@ if(length(missing)>0){
 #-----------------------------------------------------------------------------------------
 # Send emails
 #-----------------------------------------------------------------------------------------
-gmailr::gm_auth_configure(path='../tools/email/gmailr.json')
-gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret")
+if(length(missing)>0){
+	gmailr::gm_auth_configure(path='../tools/email/gmailr.json')
+	gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret")
 
-gmailr::gm_send_message(email)
+	gmailr::gm_send_message(email)
+	}
 #-----------------------------------------------------------------------------------------
