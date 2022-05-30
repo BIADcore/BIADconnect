@@ -1,0 +1,48 @@
+#-----------------------------------------------------------------------------------------
+# Check for missing citations
+# This script is reliant on files that are not stored on the public github:
+# gmailr.json and .secret stored in tools/email
+#-----------------------------------------------------------------------------------------
+
+#-----------------------------------------------------------------------------------------
+# check for users that are missing from the zprivate_users table
+#-----------------------------------------------------------------------------------------
+sources <- '/Users/admin/../databaseuser/COREX/SOURCES/primary sources/'
+d1 <- sql.wrapper(sql.command = "SELECT * FROM COREX.zprivate_users",user,password)
+d2 <- sql.wrapper(sql.command = "SELECT CitationID, user_added FROM COREX.citations",user,password)
+#-----------------------------------------------------------------------------------------
+x <- Sys.glob(paths=paste(sources,'*',sep=''))
+x <- gsub(sources,'',x)
+x <- gsub('.pdf','',x)
+x <- utf8::utf8_normalize(x) 
+
+sub <- subset(d2, !is.na(user_added))
+sub$user <- gsub('@localhost|@macelab-server.biochem.ucl.ac.uk', '', sub$user_added)
+sub <- subset(sub, user %in% d1$user)
+
+sub <- sub[!sub$CitationID%in%x,]
+
+names <- names(table(sub$user))
+for(n in 1:length(names)){
+	
+	missing <- sub$CitationID[sub$user==names[n]]
+	email.address <- d1$email[d1$user==names[n]]
+	
+	body1 <- 'The following citations are missing from the shared drive, but are in the Citations table. Please put them in the shared drive: '
+	body2 <- paste(missing,collapse=', ')
+	body3 <- 'Many thanks,'
+	body4 <- 'BIAD'	
+	
+	email <- gmailr::gm_mime(
+    	To = email.address,
+    	From = "BIAD.committee@gmail.com",
+    	Subject = 'Missing citations',
+    	body = paste(body1,body2,body3,body4,sep="\n")
+    	)
+    	
+	gmailr::gm_auth_configure(path='../tools/email/gmailr.json')
+	gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret")
+	gmailr::gm_send_message(email)
+	}
+#-----------------------------------------------------------------------------------------	
+	
