@@ -13,6 +13,7 @@ d2 <- sql.wrapper(sql.command = "SELECT CitationID, user_added FROM COREX.citati
 #-----------------------------------------------------------------------------------------
 x <- Sys.glob(paths=paste(sources,'*',sep=''))
 x <- gsub(sources,'',x)
+x <- tolower(x)
 x <- gsub('.pdf','',x)
 x <- utf8::utf8_normalize(x) 
 
@@ -40,9 +41,11 @@ for(n in 1:length(names)){
     	body = paste(body1,body2,body3,body4,sep="\n")
     	)
     	
-	gmailr::gm_auth_configure(path='../tools/email/gmailr.json')
-	gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret")
-	gmailr::gm_send_message(email)
+    if(length(missing)!=0){
+		gmailr::gm_auth_configure(path='../tools/email/gmailr.json')
+		gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret")
+		gmailr::gm_send_message(email)	
+		}
 	}
 #-----------------------------------------------------------------------------------------	
 	
