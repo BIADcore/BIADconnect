@@ -29,11 +29,11 @@ Type 'q()' to quit R.
 + 	print(date())
 + 	source(files_to_run[n])
 + 	}
-[1] "Wed Jun 22 16:42:42 2022"
+[1] "Wed Jun 22 17:03:57 2022"
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
-[1] "Wed Jun 22 16:42:43 2022"
+[1] "Wed Jun 22 17:03:57 2022"
 Loading required package: maptools
 Loading required package: sp
 Checking rgeos availability: TRUE
@@ -42,8 +42,8 @@ plan transition at your earliest convenience;
 some functionality will be moved to 'sp'.
 Loading required package: mapdata
 Loading required package: maps
-[1] "Wed Jun 22 16:42:44 2022"
-[1] "Wed Jun 22 16:42:44 2022"
+[1] "Wed Jun 22 17:03:58 2022"
+[1] "Wed Jun 22 17:03:58 2022"
 Error: Can't get Google credentials.
 Are you running gmailr in a non-interactive session? Consider:
   * Call `gm_auth()` directly with all necessary specifics.
