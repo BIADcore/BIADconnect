@@ -18,7 +18,7 @@ sql.wrapper <- function(sql.command,user,password){
 	dbSendQuery(con,"SET NAMES 'utf8'")
 
 	# query the database and tidy
-	res <- suppressWarnings(dbSendQuery(con,sql.command))
+	for(n in 1:length(sql.command)) res <- suppressWarnings(dbSendQuery(con,sql.command[n]))
 	query <- fetch(res, n= -1)
 	query <- encoder(query)
 
