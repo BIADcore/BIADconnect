@@ -5,10 +5,10 @@
 
 # Pull all table meta data
 
-sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='COREX';"	
+sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='BIAD';"	
 d.tables <- sql.wrapper(sql.command,user,password)	
 	
-sql.command <- "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema='COREX';"	
+sql.command <- "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema='BIAD';"	
 d.cols <- sql.wrapper(sql.command,user,password)	
 
 # Group tables to put into different parts of the wiki:

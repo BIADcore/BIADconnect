@@ -7,9 +7,9 @@
 #-----------------------------------------------------------------------------------------
 # check for users that are missing from the zprivate_users table
 #-----------------------------------------------------------------------------------------
-sources <- '/Users/admin/../databaseuser/COREX/SOURCES/primary sources/'
-d1 <- sql.wrapper(sql.command = "SELECT * FROM COREX.zprivate_users",user,password)
-d2 <- sql.wrapper(sql.command = "SELECT CitationID, user_added FROM COREX.citations",user,password)
+sources <- '/Users/admin/../BIAD/BIAD/SOURCES/primary sources/'
+d1 <- sql.wrapper(sql.command = "SELECT * FROM BIAD.zprivate_users",user,password)
+d2 <- sql.wrapper(sql.command = "SELECT CitationID, user_added FROM BIAD.citations",user,password)
 #-----------------------------------------------------------------------------------------
 x <- Sys.glob(paths=paste(sources,'*',sep=''))
 x <- gsub(sources,'',x)
@@ -24,6 +24,7 @@ sub <- subset(sub, user %in% d1$user)
 sub <- sub[!sub$CitationID%in%x,]
 
 names <- names(table(sub$user))
+options(httr_oob_default=TRUE) 
 for(n in 1:length(names)){
 	
 	missing <- sub$CitationID[sub$user==names[n]]
@@ -40,7 +41,7 @@ for(n in 1:length(names)){
     	Subject = 'Missing citations',
     	body = paste(body1,body2,body3,body4,sep="\n")
     	)
-    	
+  	
     if(length(missing)!=0){
 		gmailr::gm_auth_configure(path='../tools/email/gmailr.json')
 		gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret")
@@ -49,3 +50,4 @@ for(n in 1:length(names)){
 	}
 #-----------------------------------------------------------------------------------------	
 	
+#-----------------------------------------------------------------------------------------		
