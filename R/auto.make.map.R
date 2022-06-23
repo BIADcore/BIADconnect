@@ -2,7 +2,7 @@
 require(maptools)
 require(mapdata)
 #------------------------------------------------------------------
-sql.command <- "SELECT * FROM COREX.Sites"
+sql.command <- "SELECT * FROM BIAD.Sites"
 d <- sql.wrapper(sql.command,user,password)
 #------------------------------------------------------------------
 xmn <- min(d$Longitude, na.rm=T)
