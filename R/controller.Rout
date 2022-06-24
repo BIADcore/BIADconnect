@@ -41,11 +41,11 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.descriptions.R at Fri Jun 24 20:43:56 2022"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Fri Jun 24 20:50:35 2022"
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
-Error in sql.wrapper(sql.command, user, password) : 
-  argument "ssh" is missing, with no default
+Error in sql.wrapper(sql.command, user, password, hostname, hostuser,  : 
+  object 'ssh' not found
 Calls: source -> withVisible -> eval -> eval -> sql.wrapper
 Execution halted
