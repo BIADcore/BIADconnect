@@ -41,17 +41,17 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.descriptions.R at Fri Jun 24 14:53:44 2022"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Fri Jun 24 15:07:25 2022"
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
-[1] "Starting to run script: auto.make.daily.map.R at Fri Jun 24 14:53:45 2022"
+[1] "Starting to run script: auto.make.daily.map.R at Fri Jun 24 15:07:26 2022"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
 Loading required package: rnaturalearth
 Loading required package: rnaturalearthdata
-[1] "Starting to run script: auto.make.daily.row.counts.R at Fri Jun 24 14:53:47 2022"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Fri Jun 24 15:07:27 2022"
 > 
 > if(NW>0 & today==run.day)for(n in 1:NW){
 + 	file <- weekly.files[n]
@@ -67,4 +67,4 @@ Loading required package: rnaturalearthdata
 > 
 > proc.time()
    user  system elapsed 
-  2.730   0.237   4.128 
+  2.699   0.167   2.882 
