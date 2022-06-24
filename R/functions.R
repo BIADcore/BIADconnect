@@ -16,7 +16,7 @@ get.plink.pid <- function(){
 		}
 return(pid)}
 #--------------------------------------------------------------------------------------------------
-sql.wrapper <- function(sql.command,user,password,hostname=NULL,hostuser=NULL,ssh=FALSE){
+sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh){
 	require(RMySQL)
 	require(odbc)
 	drv <- dbDriver("MySQL")
@@ -28,7 +28,7 @@ sql.wrapper <- function(sql.command,user,password,hostname=NULL,hostuser=NULL,ss
 		pid.current <- get.plink.pid()
 
 		# open new ssh tunnel for R
-		open.ssh.tunnel <- paste("plink -ssh ",hostuser,"@",hostname, -i",keypath,"-N -L 3306:",hostname,":3306")
+		open.ssh.tunnel <- paste("plink -ssh ",hostuser,"@",hostname," -i",keypath,"-N -L 3306:",hostname,":3306")
 		shell(open.ssh.tunnel, wait=FALSE)	
 
 		# get pid for this tunnel
