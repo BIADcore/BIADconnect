@@ -19,13 +19,13 @@ NW <- length(weekly.files)
 
 if(ND>0)for(n in 1:ND){
 	file <- daily.files[n]
-	print(paste('Starting to run script:',file,'at',date())
+	print(paste('Starting to run script:',file,'at',date()))
 	source(file)
 	}
 
 if(NW>0 & today==run.day)for(n in 1:NW){
 	file <- weekly.files[n]
-	print(paste('Starting to run script:',file,'at',date())
+	print(paste('Starting to run script:',file,'at',date()))
 	source(file)
 	}
 
