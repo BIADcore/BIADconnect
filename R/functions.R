@@ -7,12 +7,35 @@ encoder <- function(df){
 		return(df)	
 		}
 	}
+#-----------------------------------------------------------------------------------------------
+get.plink.pid <- function(){
+	tasklist <- shell(cmd='tasklist /nh /fo "csv" /fi "imagename eq plink.exe"',intern=T)
+	pid <- c()
+	for(n in 1:length(tasklist)){
+		pid[n] <- as.numeric(strsplit(tasklist[n],split='\",\"')[[1]][2])
+		}
+return(pid)}
 #--------------------------------------------------------------------------------------------------
-sql.wrapper <- function(sql.command,user,password){
+sql.wrapper <- function(sql.command,user,password,hostname=NULL,hostuser=NULL,ssh=FALSE){
 	require(RMySQL)
 	require(odbc)
 	drv <- dbDriver("MySQL")
 	
+	# only needed if connecting externally
+	if(ssh){
+
+		# check if plink already has some tunnels open
+		pid.current <- get.plink.pid()
+
+		# open new ssh tunnel for R
+		open.ssh.tunnel <- paste("plink -ssh ",hostuser,"@",hostname, -i",keypath,"-N -L 3306:",hostname,":3306")
+		shell(open.ssh.tunnel, wait=FALSE)	
+
+		# get pid for this tunnel
+		pid.all <- get.plink.pid()
+		pid.remove <- pid.all[!pid.all%in%pid.current]
+		}
+
 	# connect locally to the database
 	con <- dbConnect(drv,host = "127.0.0.1", user=user, pass=password)
 	dbSendQuery(con,"SET NAMES 'utf8'")
@@ -24,6 +47,13 @@ sql.wrapper <- function(sql.command,user,password){
 
 	# close the connection to the database
 	suppressWarnings(dbDisconnect(con))
+
+	# close this tunnel
+	if(ssh){
+		close.ssh.tunnel <- paste('taskkill /f /fi "pid eq ',pid.remove,'"',sep='')
+		shell(close.ssh.tunnel)
+		}
+
 return(query)}
 #--------------------------------------------------------------------------------------------------
 create.markdown.for.single.table <- function(d.tables, d.cols, table.name){
