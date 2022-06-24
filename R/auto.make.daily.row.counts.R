@@ -2,10 +2,10 @@
 # Pull table summaries from the database, and update to Gists
 #-----------------------------------------------------------------------------------------
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='BIAD'"
-d <- sql.wrapper(sql.command,user,password)	
+d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)	
 
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema='BIAD';"	
-d.cols <- sql.wrapper(sql.command,user,password)	
+d.cols <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)	
 #-----------------------------------------------------------------------------------------
 # Pull out just the main tables
 all <- d$TABLE_NAME

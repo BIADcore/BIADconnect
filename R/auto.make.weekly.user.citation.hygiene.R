@@ -8,8 +8,8 @@
 # check for users that are missing from the zprivate_users table
 #-----------------------------------------------------------------------------------------
 sources <- '/Users/admin/../BIAD/BIAD/SOURCES/primary sources/'
-d1 <- sql.wrapper(sql.command = "SELECT * FROM BIAD.zprivate_users",user,password)
-d2 <- sql.wrapper(sql.command = "SELECT CitationID, user_added FROM BIAD.citations",user,password)
+d1 <- sql.wrapper(sql.command = "SELECT * FROM BIAD.zprivate_users",user,password,hostname,hostuser,keypath,ssh)
+d2 <- sql.wrapper(sql.command = "SELECT CitationID, user_added FROM BIAD.citations",user,password,hostname,hostuser,keypath,ssh)
 #-----------------------------------------------------------------------------------------
 x <- Sys.glob(paths=paste(sources,'*',sep=''))
 x <- gsub(sources,'',x)
