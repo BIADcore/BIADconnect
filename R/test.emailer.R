@@ -6,7 +6,7 @@ source('functions.R')
 email <- gmailr::gm_mime(
     	To = "kittymede@gmail.com",
     	From = "BIAD.committee@gmail.com",
-    	Subject = "mushrooms",
+    	Subject = "pears",
     	body = "are you there?"
     	)
 

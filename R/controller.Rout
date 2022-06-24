@@ -19,32 +19,28 @@ Type 'q()' to quit R.
 
 > #------------------------------------------------------------------
 > # Runs all R scripts beginning with 'auto.make.'
+> # This script is invoked by a regular CRON schedule (Admin),
+> # However, some scripts need not be run so frequently.
+> # Rather than specifying a CRON schedule for each script, 
+> # this script decides when to run which script, based on the filename.
 > #------------------------------------------------------------------
 > source('functions.R')
 > #------------------------------------------------------------------
+> run.day <- 'Mon'
+> today <- strsplit(date(),split=' ')[[1]][1]
+> 
 > files <- list.files()
-> files_to_run <- files[substr(files,1,10)=='auto.make.']
-> N <- length(files_to_run)
-> for(n in 1:N){
-+ 	print(date())
-+ 	source(files_to_run[n])
-+ 	}
-[1] "Wed Jun 22 17:03:57 2022"
-Loading required package: RMySQL
-Loading required package: DBI
-Loading required package: odbc
-[1] "Wed Jun 22 17:03:57 2022"
-Loading required package: maptools
-Loading required package: sp
-Checking rgeos availability: TRUE
-Please note that 'maptools' will be retired by the end of 2023,
-plan transition at your earliest convenience;
-some functionality will be moved to 'sp'.
-Loading required package: mapdata
-Loading required package: maps
-[1] "Wed Jun 22 17:03:58 2022"
-[1] "Wed Jun 22 17:03:58 2022"
-Error: Can't get Google credentials.
-Are you running gmailr in a non-interactive session? Consider:
-  * Call `gm_auth()` directly with all necessary specifics.
+> daily.files <- files[grepl('auto.make.daily',files)]
+> weekly.files <- files[grepl('auto.make.weekly',files)]
+> 
+> ND <- length(daily.files)
+> NW <- length(weekly.files)
+> 
+> if(ND>0)for(n in 1:ND){
++ 	file <- daily.files[n]
++ 	print(paste('Starting to run script:',file,'at',date())
++ 	source(file)
+Error: unexpected symbol in:
+"        print(paste('Starting to run script:',file,'at',date())
+        source"
 Execution halted
