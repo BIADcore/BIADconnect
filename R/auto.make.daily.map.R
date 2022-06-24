@@ -1,6 +1,6 @@
 #------------------------------------------------------------------
 sql.command <- "SELECT * FROM BIAD.Sites"
-d <- sql.wrapper(sql.command,user,password)
+d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 #------------------------------------------------------------------
 xmn <- min(d$Longitude, na.rm=T)
 xmx <- max(d$Longitude, na.rm=T)
