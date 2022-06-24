@@ -25,9 +25,27 @@ Type 'q()' to quit R.
 > # this script decides when to run which script, based on the filename.
 > #------------------------------------------------------------------
 > source('functions.R')
-Error in source("functions.R") : 
-  functions.R:31:81: unexpected string constant
-30:                 # open new ssh tunnel for R
-31:                 open.ssh.tunnel <- paste("plink -ssh ",hostuser,"@",hostname, -i",keypath,"
-                                                                                    ^
+> #------------------------------------------------------------------
+> run.day <- 'Mon'
+> today <- strsplit(date(),split=' ')[[1]][1]
+> 
+> files <- list.files()
+> daily.files <- files[grepl('auto.make.daily',files)]
+> weekly.files <- files[grepl('auto.make.weekly',files)]
+> 
+> ND <- length(daily.files)
+> NW <- length(weekly.files)
+> 
+> if(ND>0)for(n in 1:ND){
++ 	file <- daily.files[n]
++ 	print(paste('Starting to run script:',file,'at',date()))
++ 	source(file)
++ 	}
+[1] "Starting to run script: auto.make.daily.descriptions.R at Fri Jun 24 20:40:58 2022"
+Loading required package: RMySQL
+Loading required package: DBI
+Loading required package: odbc
+Error in sql.wrapper(sql.command, user, password) : 
+  argument "ssh" is missing, with no default
+Calls: source -> withVisible -> eval -> eval -> sql.wrapper
 Execution halted
