@@ -28,7 +28,7 @@ sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh)
 		pid.current <- get.plink.pid()
 
 		# open new ssh tunnel for R
-		open.ssh.tunnel <- paste("plink -ssh ",hostuser,"@",hostname," -i",keypath,"-N -L 3306:",hostname,":3306")
+		open.ssh.tunnel <- paste("plink -ssh ",hostuser,"@",hostname," -i ",keypath," -N -L 3306:",hostname,":3306",sep='')
 		shell(open.ssh.tunnel, wait=FALSE)	
 
 		# get pid for this tunnel
