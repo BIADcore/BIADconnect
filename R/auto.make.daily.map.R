@@ -23,13 +23,13 @@ points <- st_transform(points, crs=crs)
 world <- ne_countries(scale='medium',returnclass='sf')
 world <- st_transform(world, crs=crs)
 
-svg(file = '../tools/plots/map.svg', width = 20, height = 15 )
-ggplot() + 
+map <- ggplot() + 
 geom_sf(data=world, color='grey90',fill='grey') +
 geom_sf(data = points, color = 'firebrick', pch=20, size=2) +
 coord_sf(xlim=st_bbox(points$geometry)[c('xmin','xmax')],ylim=st_bbox(points$geometry)[c('ymin','ymax')]) + 
 theme(panel.background=element_rect(fill='steelblue2'))
-dev.off()
+
+ggsave(file = '../tools/plots/map.svg', plot=map, width = 20, height = 15 )
 #------------------------------------------------------------------
 # Old mecator projection
 #------------------------------------------------------------------
