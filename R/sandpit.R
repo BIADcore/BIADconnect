@@ -5,9 +5,15 @@ source('functions.R')
 #-----------------------------------------------------------------------------------------
 # Convert skeleton parts to a zoptions look up
 #-----------------------------------------------------------------------------------------
+map <- read.csv('mapping final.csv')
+map[map==''] <- '\\N'
+d <- sql.wrapper(sql.command = "SELECT SkeletonPart, SkeletonSide FROM BIAD.FaunalIsotopesCopyAdrian",user,password,hostname,hostuser,keypath,ssh)
+N <- nrow(map)
 
-d <- sql.wrapper(sql.command = "SELECT SkeletonPart, SkeletonSide FROM BIAD.FaunalIsotopes",user,password,hostname,hostuser,keypath,ssh)
-
+sql.side <- c()
+for(n in 1:N){
+	sql.side[n] <- paste("UPDATE BIAD.FaunalIsotopesCopyAdrian SET SkeletonSide='",map$symmetry[n],"' WHERE SkeletonPart='",map$oldpart[n],"';",sep='')
+	}
 
 
 # map everything with a loop

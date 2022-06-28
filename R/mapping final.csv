@@ -1,0 +1,172 @@
+oldpart,newpart,symmetry
+1st phalanx,phalanx: 1st,
+1st phalanx dx/pair,phalanx: 1st,right
+2nd & 3rd carpal sn,carpal: carpal 2+3,left
+2nd phalanx,phalanx: 2nd,
+2nd phalanx sn/pair,phalanx: 2nd,left
+3rd phalanx,phalanx: 3rd,
+4th tarsal,tarsal: tarsal 4,
+antler,antler,
+Antler,antler,
+Astragalus,tarsal: astragalus,
+Astragalus dex.,tarsal: astragalus,right
+Astragulus,tarsal: astragalus,
+astrahalus,tarsal: astragalus,
+Axis,vertebra: cervical,central
+bone,bone,
+Calcaneum,tarsal: calcaneus,
+calcaneus,tarsal: calcaneus,
+Calcaneus,tarsal: calcaneus,
+calcaneus R,tarsal: calcaneus,right
+Canine,tooth: canine,
+Carpal,carpal ,
+Carpal/tarsal,carpal/tarsal,
+cervical vertebra,vertebra: cervical,central
+Condylus occipitalis,skull,
+Costa affixi,rib,
+Cranium,skull,
+cuerno,horncore,
+Dentary,mandible,
+femur,femur,
+Femur,femur,
+Femur D,femur,right
+Femur dex.,femur,right
+Femur G,femur,left
+First phalanx,phalanx: 1st,
+First Phalanx,phalanx: 1st,
+Frontal,skull,
+Hemimand. L,mandible,left
+Hemimand. R,mandible,right
+Hemimandible L,mandible,left
+Hemimandible R,mandible,right
+Horn,horncore,
+Horncore,horncore,
+humerus,humerus,
+Humerus,humerus,
+Humerus dex.,humerus,right
+humerus distal L,humerus,left
+humerus distal R,humerus,right
+humerus L,humerus,left
+Humerus L,humerus,left
+humerus R,humerus,right
+Humerus R,humerus,right
+Humerus sin.,humerus,left
+Humerus ,humerus,
+Humerus*,humerus,
+Humerus**,humerus,
+Humerus†,humerus,
+Ilium,pelvis: illium,
+Innom,pelvis ,
+L humerus,humerus,left
+LLM2,tooth: M2: lower,left
+LLM3,tooth: M3: lower,left
+long bone,long bone,
+Long Bone,long bone,
+"Long Bone, foetus",long bone,
+Longbone,long bone,
+lower canine,tooth: lower canine,
+lower M2,tooth: M2: lower,
+LRM2,tooth: M2: lower,right
+LRM3,tooth: M3: lower,right
+lumbar vertebra,vertebra: lumbar,central
+M,tooth: M,
+M2,tooth: M2,
+M3,tooth: M3,
+Malleolare,tarsal: malleolare ,
+mandible,mandible,
+Mandible,mandible,
+mandible L,mandible,left
+mandible L; M2,mandible,left
+mandible L; M3,mandible,left
+mandible R,mandible,right
+mandible R; M3,mandible,right
+mandibula,mandible,
+Mandibula,mandible,
+Mandibula dex.,mandible,right
+Matacarpus,metacarpal,
+maxilla,maxilla,
+Maxilla,maxilla,
+Maxilla ,maxilla,
+Maxillar,maxilla,
+Metacarp/metatars,metapodial,
+metacarpal,metacarpal,
+Metacarpal,metacarpal,
+metacarpal L,metacarpal,left
+metacarpal R,metacarpal,right
+metacarpus,metacarpal,
+Metacarpus,metacarpal,
+Metacarpus III,metacarpal: 3,
+Metacarpus sin.,metacarpal,left
+metapodial,metapodial,
+Metapodial,metapodial,
+metatarsal,metatarsal,
+Metatarsal,metatarsal,
+metatarsal R,metatarsal,right
+Metatarsus,metatarsal,
+Metatarsus dex.,metatarsal,right
+Metatarsus ,metatarsal,
+Molar,tooth: M,
+n/a,bone,
+Navicular,tarsal: naviculare,
+Naviculocuboid sn,tarsal: naviculocuboid,left
+Omoplate,scapula,
+Operculum,,
+Os frontale adult,skull,
+Os pyramidal,carpal: os pyramidal,
+pelvis,pelvis,
+Pelvis,pelvis,
+phalange,phalanx,
+Phalange,phalanx,
+Phalanx,phalanx,
+Phalanx 1,phalanx: 1st,
+Phalanx 2,phalanx: 2nd,
+phalanx I,phalanx: 1st,
+Phalanx I,phalanx: 1st,
+Phalanx II,phalanx: 2nd,
+"Phalanx, adult",phalanx,
+Pisiform sn,carpal: pisiform,left
+post-cranial,bone,
+R femur,femur,right
+radius,radius,
+Radius,radius,
+radius distal L,radius: distal,left
+radius distal R,radius: distal,right
+radius L,radius,left
+Radius L,radius,left
+radius proximal L,radius: proximal,left
+radius proximal R,radius: proximal,right
+Radius R,radius,right
+radius shaft L,radius: shaft,left
+radius shaft R,radius: shaft,right
+"Radius, adult",radius,
+rib,rib,
+Rib,rib,
+Sacrum,vertebra: sacrum,central
+scapula,scapula,
+Scapula,scapula,
+Scapula sin.,scapula,left
+Sésamoïde,sesamoid,
+skull,skull,
+Skull,skull,
+Skull fragment,skull,
+Talus,tarsal: astragalus,
+tibia,tibia,
+Tibia,tibia,
+Tibia dex.,tibia,right
+tibia distal L ,tibia: distal,left
+tibia distal R,tibia: distal,right
+tibia L,tibia,left
+tibia R,tibia,right
+Tibia sin.,tibia,left
+Tuberc. artic.,skull: tuberculum articularis,
+Tuberc. Artic.,skull: tuberculum articularis,
+Tuberc. artic. r.,skull: tuberculum articularis,right
+ulna,ulna,
+Ulna,ulna,
+ulna distal L,ulna: distal,left
+ulna proximal R,ulna: proximal,right
+upper M3,tooth: upper M3,
+Vert. Cerv. IV/V,vertebra: cervical,
+vertebra,vertebra,
+Vertebra,vertebra,
+Vertebrum,vertebra,
