@@ -45,8 +45,9 @@ sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh)
 	query <- fetch(res, n= -1)
 	query <- encoder(query)
 
-	# close the connection to the database
-	suppressWarnings(dbDisconnect(con))
+	# close the connection to the database (and any previous connections if a query failed)
+	cons <- dbListConnections(MySQL())
+	for(con in cons)dbDisconnect(con)
 
 	# close this tunnel
 	if(ssh){
