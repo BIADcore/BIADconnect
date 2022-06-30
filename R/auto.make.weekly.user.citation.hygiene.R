@@ -18,7 +18,7 @@ x <- gsub('.pdf','',x)
 x <- utf8::utf8_normalize(x) 
 
 sub <- subset(d2, !is.na(user_added))
-sub$user <- gsub(paste('@localhost|@',hostname,sep=''), '', sub$user_added)
+sub$user <- matrix(unlist(strsplit(sub$user_added,split='@')),2,nrow(sub))[1,]
 sub <- subset(sub, user %in% d1$user)
 sub <- sub[!sub$CitationID%in%x,]
 
