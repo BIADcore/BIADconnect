@@ -18,9 +18,8 @@ x <- gsub('.pdf','',x)
 x <- utf8::utf8_normalize(x) 
 
 sub <- subset(d2, !is.na(user_added))
-sub$user <- gsub('@localhost|@macelab-server.biochem.ucl.ac.uk', '', sub$user_added)
+sub$user <- gsub(paste('@localhost|@',hostname,sep=''), '', sub$user_added)
 sub <- subset(sub, user %in% d1$user)
-
 sub <- sub[!sub$CitationID%in%x,]
 
 names <- names(table(sub$user))
@@ -37,7 +36,7 @@ for(n in 1:length(names)){
 	
 	email <- gmailr::gm_mime(
     	To = email.address,
-    	From = "BIAD.committee@gmail.com",
+    	From = biad.address,
     	Subject = 'Missing citations',
     	body = paste(body1,body2,body3,body4,sep="\n")
     	)

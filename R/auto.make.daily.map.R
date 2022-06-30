@@ -31,15 +31,5 @@ theme(panel.background=element_rect(fill='steelblue2'))
 
 ggsave(file = '../tools/plots/map.svg', plot=map, width = 20, height = 15 )
 #------------------------------------------------------------------
-# Old mecator projection
-#------------------------------------------------------------------
-#require(maptools)
-#require(mapdata)
-#svg(file = '../tools/plots/map.svg', width = 16, height = 9 )
-#par(mar=c(0,0,0,0))
-#plot(NULL,xlim=c(xmn,xmx),ylim=c(ymn,ymx),bty='n',xaxs='i',yaxs='i',main='',xlab='',ylab='',xaxt='n',yaxt='n')
-#polygon(x=c(xmn,xmx,xmx,xmn),y=c(ymn,ymn,ymx,ymx),col='steelblue',border=NA)
-#map('world',xlim=c(xmn,xmx),ylim=c(ymn,ymx),col='grey',add=T, fill=T, border='grey90')
-#points(d$Longitude,d$Latitude, col='firebrick',pch=20, cex=1)
-#dev.off()
+
 #-----------------------------------------------------------------

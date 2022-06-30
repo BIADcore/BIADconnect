@@ -22,6 +22,22 @@ d1 <- sql.wrapper(sql.command = "SELECT Element FROM BIAD.zoptions_SkeletalEleme
 a <- d1[,1]
 b <- map$new
 b[!b%in%a]
+#-----------------------------------------------------------------------------------------	
+# Test emailer
+#-----------------------------------------------------------------------------------------	
+source('functions.R')
+email <- gmailr::gm_mime(
+    	To = "???@gmail.com",
+    	From = biad.address,
+    	Subject = "pears",
+    	body = "are you there?"
+    	)
+
+options(httr_oob_default=TRUE) 
+gmailr::gm_auth_configure(path='../tools/email/gmailr.json')
+gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret")
+gmailr::gm_send_message(email)		
+#-----------------------------------------------------------------------------------------		
 
 df <- data.frame(element=b[!b%in%a])
 write.csv(df,file='new.csv', row.names=F)

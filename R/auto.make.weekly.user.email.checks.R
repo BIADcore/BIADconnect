@@ -11,7 +11,8 @@ d1 <- sql.wrapper(sql.command = "SELECT User FROM mysql.db WHERE Db='BIAD'",user
 d2 <- sql.wrapper(sql.command = "SELECT * FROM BIAD.zprivate_users",user,password,hostname,hostuser,keypath,ssh)
 
 d <- merge(d1,d2,by.x='User',by.y='user',all=T)
-d <- subset(d, !User%in%c('Rscripts','root','user'))
+d <- subset(d, !User%in%c(user,'root','user'))
+
 missing <- subset(d, is.na(email))$User
 #-----------------------------------------------------------------------------------------
 # construct emails
@@ -26,7 +27,7 @@ if(length(missing)>0){
 	
 	email <- gmailr::gm_mime(
     	To = subset(d2,administrator=='YES')$email,
-    	From = "BIAD.committee@gmail.com",
+    	From = biad.address,
     	Subject = 'Missing users information',
     	body = paste(body1,body2,body3,body4,sep="\n")
     	)
@@ -37,7 +38,6 @@ if(length(missing)>0){
 if(length(missing)>0){
 	gmailr::gm_auth_configure(path='../tools/email/gmailr.json')
 	gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret")
-
 	gmailr::gm_send_message(email)
 	}
 #-----------------------------------------------------------------------------------------
