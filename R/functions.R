@@ -7,33 +7,15 @@ encoder <- function(df){
 		return(df)	
 		}
 	}
-#-----------------------------------------------------------------------------------------------
-get.plink.pid <- function(){
-	suppressPackageStartupMessages(library(installr))
-	all.processes <- get_tasklist()
-	pid <- all.processes$PID[all.processes$`Image Name`=='plink.exe']
-return(pid)}
 #--------------------------------------------------------------------------------------------------
 sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh){
 	require(RMySQL)
 	require(odbc)
-	require(tools)
+	require(ssh)
 	drv <- dbDriver("MySQL")
 	
 	# only needed if connecting externally
-	if(ssh){
-
-		# check if plink already has some tunnels open
-		pid.current <- get.plink.pid()
-
-		# open new ssh tunnel for R
-		open.ssh.tunnel <- paste("plink -ssh ",hostuser,"@",hostname," -i ",keypath," -N -L 3306:",hostname,":3306",sep='')
-		shell(open.ssh.tunnel, wait=FALSE)	
-
-		# get pid for this tunnel
-		pid.all <- get.plink.pid()
-		pid.remove <- pid.all[!pid.all%in%pid.current]
-		}
+	if(ssh)session <- ssh_connect(host=hostname, keyfile=keypath)
 
 	# connect locally to the database
 	con <- dbConnect(drv,host = "127.0.0.1", user=user, pass=password)
@@ -49,11 +31,7 @@ sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh)
 	for(con in cons)dbDisconnect(con)
 
 	# close this tunnel
-	if(ssh){
-		#close.ssh.tunnel <- paste('taskkill /f /fi "pid eq ',pid.remove,'"',sep='')
-		#shell(close.ssh.tunnel)
-		pskill(pid.remove)
-		}
+	if(ssh)ssh_disconnect(session)
 
 return(query)}
 #--------------------------------------------------------------------------------------------------
@@ -98,13 +76,4 @@ create.markdown.for.table.content <- function(x, d.cols, file){
 	writeLines(text, con=file, useBytes = TRUE )
 return(NULL)}
 #--------------------------------------------------------------------------------------------------
-# OLD TO DELETE
-#--------------------------------------------------------------------------------------------------
-#get.plink.pid <- function(){
-#	tasklist <- shell(cmd='tasklist /nh /fo "csv" /fi "imagename eq plink.exe"',intern=T)
-#	pid <- c()
-#	for(n in 1:length(tasklist)){
-#		pid[n] <- as.numeric(strsplit(tasklist[n],split='\",\"')[[1]][2])
-#		}
-#return(pid)}
-#--------------------------------------------------------------------------------------------------
+
