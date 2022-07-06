@@ -42,8 +42,3 @@ gmailr::gm_send_message(email)
 df <- data.frame(element=b[!b%in%a])
 write.csv(df,file='new.csv', row.names=F)
 #-----------------------------------------------------------------------------------------	
-get.plink.pid <- function(){
-	require(installr)
-	all.processes <- get_tasklist()
-	plink.processes <- all.processes$PID[all.processes$`Image Name`=='plink.exe']
-return(plink.processes)}
