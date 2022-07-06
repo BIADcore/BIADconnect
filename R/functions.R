@@ -9,16 +9,15 @@ encoder <- function(df){
 	}
 #-----------------------------------------------------------------------------------------------
 get.plink.pid <- function(){
-	tasklist <- shell(cmd='tasklist /nh /fo "csv" /fi "imagename eq plink.exe"',intern=T)
-	pid <- c()
-	for(n in 1:length(tasklist)){
-		pid[n] <- as.numeric(strsplit(tasklist[n],split='\",\"')[[1]][2])
-		}
+	suppressPackageStartupMessages(library(installr))
+	all.processes <- get_tasklist()
+	pid <- all.processes$PID[all.processes$`Image Name`=='plink.exe']
 return(pid)}
 #--------------------------------------------------------------------------------------------------
 sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh){
 	require(RMySQL)
 	require(odbc)
+	require(tools)
 	drv <- dbDriver("MySQL")
 	
 	# only needed if connecting externally
@@ -51,8 +50,9 @@ sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh)
 
 	# close this tunnel
 	if(ssh){
-		close.ssh.tunnel <- paste('taskkill /f /fi "pid eq ',pid.remove,'"',sep='')
-		shell(close.ssh.tunnel)
+		#close.ssh.tunnel <- paste('taskkill /f /fi "pid eq ',pid.remove,'"',sep='')
+		#shell(close.ssh.tunnel)
+		pskill(pid.remove)
 		}
 
 return(query)}
@@ -97,4 +97,14 @@ create.markdown.for.table.content <- function(x, d.cols, file){
 	text <- c(text, '***')
 	writeLines(text, con=file, useBytes = TRUE )
 return(NULL)}
+#--------------------------------------------------------------------------------------------------
+# OLD TO DELETE
+#--------------------------------------------------------------------------------------------------
+#get.plink.pid <- function(){
+#	tasklist <- shell(cmd='tasklist /nh /fo "csv" /fi "imagename eq plink.exe"',intern=T)
+#	pid <- c()
+#	for(n in 1:length(tasklist)){
+#		pid[n] <- as.numeric(strsplit(tasklist[n],split='\",\"')[[1]][2])
+#		}
+#return(pid)}
 #--------------------------------------------------------------------------------------------------
