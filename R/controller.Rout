@@ -41,23 +41,38 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.descriptions.R at Wed Jul  6 07:15:01 2022"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Thu Jul  7 07:15:02 2022"
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
-[1] "Starting to run script: auto.make.daily.map.R at Wed Jul  6 07:15:03 2022"
+Loading required package: ssh
+Loading required package: ssh
+[1] "Starting to run script: auto.make.daily.map.R at Thu Jul  7 07:15:03 2022"
+Loading required package: ssh
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
 Loading required package: rnaturalearth
 Loading required package: rnaturalearthdata
-[1] "Starting to run script: auto.make.daily.row.counts.R at Wed Jul  6 07:15:07 2022"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Thu Jul  7 07:15:07 2022"
+Loading required package: ssh
+Loading required package: ssh
 Warning messages:
-1: Closing open result sets 
+1: In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  there is no package called 'ssh'
 2: Closing open result sets 
-3: Closing open result sets 
+3: In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  there is no package called 'ssh'
 4: Closing open result sets 
-5: Closing open result sets 
+5: In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  there is no package called 'ssh'
+6: Closing open result sets 
+7: In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  there is no package called 'ssh'
+8: Closing open result sets 
+9: In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  there is no package called 'ssh'
+10: Closing open result sets 
 > 
 > if(NW>0 & today==run.day)for(n in 1:NW){
 + 	file <- weekly.files[n]
@@ -73,4 +88,4 @@ Warning messages:
 > 
 > proc.time()
    user  system elapsed 
-  4.474   0.335   5.922 
+  4.471   0.324   5.771 
