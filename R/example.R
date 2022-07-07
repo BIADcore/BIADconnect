@@ -2,7 +2,7 @@
 # Example R script for directly querying BIAD using the RMySQL package
 #------------------------------------------------------------------
 # First obtain the following objects from the BIAD administrator.
-# Either keep them at the beginning of each script, or shove them into a .Rprofile file
+# Put them in a .Rprofile file, in the same folder that this script is in.
 
 user <- '???'
 password <- '???'
