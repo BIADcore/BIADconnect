@@ -15,17 +15,26 @@ get.plink.pids <- function(){
 	if(system=='windows'){
 		tasklist <- system('tasklist /nh /fo "csv" /fi "imagename eq plink.exe"',intern=T)
 		pid <- c()
-		for(n in 1:length(tasklist)){
-			pid[n] <- as.numeric(strsplit(tasklist[n],split='\",\"')[[1]][2])
+		N <- length(tasklist)
+		if(N>0){
+			for(n in 1:N){
+				pid[n] <- as.numeric(strsplit(tasklist[n],split='\",\"')[[1]][2])
+				}
 			}
 		}
 	if(system=='unix'){
-		tasklist <- system("lsof -i -n | egrep 'ssh'",intern=T)
+		tasklist <- suppressWarnings(system("lsof -i -n | egrep 'ssh'",intern=T))
 		pid <- c()
-		for(n in 1:length(tasklist)){
-			pid[n] <- as.numeric(strsplit(tasklist[n],split=' ')[[1]][2])
+		N <- length(tasklist)
+		if(N>0){
+			for(n in 1:N){
+				x <- strsplit(tasklist[n],split=' ')[[1]]	
+				x <- x[x!='']
+				pid[n] <- as.numeric(x[2])
+				}
 			}
 		}
+		pid <- unique(pid)
 return(pid)}
 #--------------------------------------------------------------------------------------------------
 open.ssh.tunnel <- function(hostuser, hostname, keypath){
