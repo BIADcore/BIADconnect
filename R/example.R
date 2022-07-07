@@ -24,7 +24,7 @@ head(query)
 table(query$Country)
 plot(table(query$Country))
 #-----------------------------------------------------------------
-Example 2: Joins done in MySQL
+#Example 2: Joins done in MySQL
 #-----------------------------------------------------------------
 sql.command <- "SELECT `Sites`.`SiteName`, `Sites`.`SiteID`, `Phases`.`PhaseID`, `Graves`.`GraveID`, `GraveIndividuals`.`IndividualID`,  `GraveIndividuals`.`Sex`, `GraveIndividuals`.`AgeCategorical`
 FROM `Sites`
@@ -35,7 +35,7 @@ WHERE `AgeCategorical` = 'infant'
 ORDER BY `IndividualID`"
 query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 #-----------------------------------------------------------------
-Example 3: Exactly the same output, but joins done in R
+#Example 3: Exactly the same output, but joins done in R
 #-----------------------------------------------------------------
 sql.command1 <- "SELECT `SiteName`, `SiteID` FROM `Sites`"
 query1 <- sql.wrapper(sql.command1,user,password,hostname,hostuser,keypath,ssh)
