@@ -8,17 +8,59 @@ encoder <- function(df){
 		}
 	}
 #--------------------------------------------------------------------------------------------------
-sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh){
+get.plink.pids <- function(){
+
+	system <- .Platform$OS.type
+
+	if(system=='windows'){
+		tasklist <- system('tasklist /nh /fo "csv" /fi "imagename eq plink.exe"',intern=T)
+		pid <- c()
+		for(n in 1:length(tasklist)){
+			pid[n] <- as.numeric(strsplit(tasklist[n],split='\",\"')[[1]][2])
+			}
+		}
+	if(system=='unix'){
+		tasklist <- system("lsof -i -n | egrep 'ssh'",intern=T)
+		pid <- c()
+		for(n in 1:length(tasklist)){
+			pid[n] <- as.numeric(strsplit(tasklist[n],split=' ')[[1]][2])
+			}
+		}
+return(pid)}
+#--------------------------------------------------------------------------------------------------
+open.ssh.tunnel <- function(hostuser, hostname, keypath){
+
+	system <- .Platform$OS.type
+	if(system=='windows'){
+		cmd <- paste("plink -ssh ",hostuser,"@",hostname," -i ",keypath," -N -L 3306:",hostname,":3306",sep='')
+		system(cmd, wait=FALSE)
+		}
+	if(system=='unix'){
+		cmd <- paste("ssh ",hostuser,"@",hostname," -i ",keypath," -N -L 3306:",hostname,":3306",sep='')
+		system(cmd,wait=FALSE)
+		}
+return(NULL)}
+#--------------------------------------------------------------------------------------------------
+close.ssh.tunnel <- function(pid){
+
+	system <- .Platform$OS.type
+	if(system=='windows'){
+		cmd <- paste('taskkill /f /fi "pid eq ',pid,'"',sep='')
+		system(cmd, wait=FALSE)
+		}
+	if(system=='unix'){
+		cmd <- paste("kill -9 ",pid,sep='')
+		system(cmd,wait=FALSE)
+		}
+return(NULL)}
+#--------------------------------------------------------------------------------------------------
+query.database <- function(user, password, sql.command){
 	require(RMySQL)
 	require(odbc)
-	require(ssh)
 	drv <- dbDriver("MySQL")
-	
-	# only needed if connecting externally
-	if(ssh)session <- ssh_connect(host=hostname, keyfile=keypath)
 
 	# connect locally to the database
-	con <- dbConnect(drv,host = "127.0.0.1", user=user, pass=password)
+	con <- dbConnect(drv, user=user, pass=password, dbname='BIAD', host = "127.0.0.1", port=3306)
 	dbSendQuery(con,"SET NAMES 'utf8'")
 
 	# query the database and tidy
@@ -29,9 +71,16 @@ sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh)
 	# close the connection to the database (and any previous connections if a query failed)
 	cons <- dbListConnections(MySQL())
 	for(con in cons)dbDisconnect(con)
+return(query)}
+#--------------------------------------------------------------------------------------------------
+sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh){
 
-	# close this tunnel
-	if(ssh)ssh_disconnect(session)
+	pids.before <- get.plink.pids()
+	open.ssh.tunnel(hostuser, hostname, keypath)
+	pids.after <- get.plink.pids()
+	pid <- pids.after[!pids.after%in%pids.before]
+	query <- query.database(user, password, sql.command)
+	close.ssh.tunnel(pid)
 
 return(query)}
 #--------------------------------------------------------------------------------------------------
