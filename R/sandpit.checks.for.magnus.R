@@ -95,7 +95,7 @@ for(n in 1:N){
   
   #get abot info
   abo.info <- subset(abo, PhaseID%in%phase.info$PhaseID)
-  abo.sample[n] <- sum(abo.info$TotalCount)
+  abo.sample[n] <- length(unique(abo.info$TaxonCode))
   
   #get zooarch info
   zoo.info <- subset(zoo, PhaseID%in%phase.info$PhaseID)
