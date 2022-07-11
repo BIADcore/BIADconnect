@@ -8,7 +8,7 @@ sql.command <- "SELECT SiteID, SiteName, Longitude, Latitude
 FROM Sites
 WHERE Country = 'Sweden'
 ORDER BY 'SiteName'"
-query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+query <- sql.wrapper(sql.command, user, password, hostname, hostuser, keypath, ssh)
 head(query)
 
 # Secondly, we want to query this information for phases and associated finds.
@@ -72,7 +72,7 @@ zoo <- sql.wrapper("SELECT * FROM `FaunalSpecies`",user,password,hostname,hostus
 #------------------------------------------------------------------
 #loop 
 #------------------------------------------------------------------
-c14data <- c14.count <- cults <- grave.individuals <- abo.sample <- zoo.count <- c()
+c14data <- c14.count <- cults <- peri <- grave.individuals <- abo.sample <- zoo.count <- c()
 sweden <- subset(sit, Country == 'Sweden')
 N <- nrow(sweden)
 
@@ -89,6 +89,12 @@ for(n in 1:N){
   cultures <- cultures[!is.na(cultures)]
   cults[n] <- paste(cultures, collapse=';')
   
+  #get periods
+  period.info <- subset(pha, SiteID==site)
+  periods <- c(phase.info$Period)
+  periods <- periods[!is.na(periods)]
+  peri[n] <- paste(periods, collapse=';')
+  
   #get grave info
   grave.info <- subset(gra, PhaseID%in%phase.info$PhaseID)
   grave.individuals[n] <- sum(grave.info$HumanMNI)
@@ -103,6 +109,6 @@ for(n in 1:N){
   
 }
 
-df <- data.frame(SiteID = sweden$SiteID, SiteName = sweden$SiteName, lat = sweden$Latitude, lon = sweden$Longitude, cultures = cults, indivs = grave.individuals, c14count = c14.count, abo.sum = abo.sample, zoocount = zoo.count)
+df <- data.frame(SiteID = sweden$SiteID, SiteName = sweden$SiteName, lat = sweden$Latitude, lon = sweden$Longitude, cultures = cults, period = peri, indivs = grave.individuals, c14count = c14.count, abo.sum = abo.sample, zoocount = zoo.count)
 View(df)
 write.csv(df, file = "sweden_sumary.csv", row.names = F)
