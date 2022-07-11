@@ -1,0 +1,343 @@
+"SiteID","SiteName","lat","lon","cultures","indivs","c14count","abo.sum","zoocount"
+"S01007","Abbekås",55.4,13.6,"",0,1,0,0
+"S01038","Ackes tomt",58.1,11.86,"",0,2,0,0
+"S01042","Ageröd V",55.93,13.42,"Ertebolle",0,6,NA,0
+"S01048","Ajvide",57.284,18.2,"Pitted Ware",0,12,0,32
+"S01055","Alby",56.483,16.567,"",0,17,0,0
+"S01076","Alvastra, V.Tollstad 12",58.28,14.68,"Trichterbecher;Pitted Ware",30,1,0,0
+"S01077","Alvastra",58.3,14.65,"Pitted Ware",0,22,0,58
+"S01082","Ängås",58.15,11.81,"Trichterbecher",0,3,0,0
+"S01083","Ängdala",55.58,13.12,"",0,10,0,0
+"S01116","Arlöv I",55.61,13.06,"Ertebolle",0,3,0,12
+"S01132","Asige",56.88,12.73,"",0,1,0,0
+"S01139","Äs",59.7,16.58,"",0,2,0,0
+"S01144","Återvall",59.27,18.47,"",0,1,0,0
+"S01147","Åttagården",58.16,13.57,"Trichterbecher",0,5,0,0
+"S01218","Barnabro",57.12,12.27,"Pitted Ware",0,2,0,0
+"S01225","Båtsberg",57.14,12.36,"Trichterbecher",0,1,0,0
+"S01273","Berga",59.65,16.82,"",0,1,0,0
+"S01308","Björkärr",56.11,15.81,"Pitted Ware",0,3,0,0
+"S01309","Bjurhovda",59.63,16.61,"",0,3,0,0
+"S01310","Bjurselet",65,21.08,"Corded Ware",0,2,0,0
+"S01329","Bökeberg III",55.55,13.21,"Ertebolle",0,12,0,13
+"S01359","Breared",56.73,13.11,"",0,3,0,0
+"S01361","Bredasten",55.45,13.91,"Ertebolle",0,2,0,14
+"S01375","Bronsyxegatan",55.56,13.04,"",0,1,0,0
+"S01394","Bultoftagården",55.59,13.07,"Ertebolle;Kongemose",0,2,0,0
+"S01461","Carlshögen",55.41,14.14,"",0,3,0,0
+"S01746","Dragby",59.98,17.57,"",0,1,0,0
+"S01819","Elinelund",55.563,12.95,"Ertebolle;Trichterbecher",0,2,0,8
+"S01864","Evensås, Skaftö",58.24,11.47,"Trichterbecher;Pitted Ware",2,2,0,0
+"S01870","Fågelbacken",55.59,12.96,"Trichterbecher",0,15,0,0
+"S01871","Fagervik",58.66,16.41,"Pitted Ware",0,2,0,0
+"S01873","Fairyhill",55.9,13.41,"",0,5,0,0
+"S01877","Fårabacken",55.75,12.98,"Corded Ware",0,1,0,0
+"S01959","Fridhem",56.183,14.858,"",0,2,0,0
+"S01965","Frotorp",58.05,12.75,"Trichterbecher",0,12,0,0
+"S02023","Gladsax 8",55.57,14.27,"",0,1,0,0
+"S02035","Gökhem",58.183,13.4,"Trichterbecher",0,13,0,0
+"S02051","Göteborg 23:856",57.71,11.967,"",0,1,0,0
+"S02083","Gröninge",57.91,15.9,"Pitted Ware",0,1,0,0
+"S02169","Hagestad 2:2",55.433,14.133,"",0,1,0,0
+"S02170","Hagestad 22:8",55.433,14.133,"",0,1,0,0
+"S02171","Hagestad 7:3b",55.433,14.133,"",0,1,0,0
+"S02172","Hagestad 98:1A",55.433,14.133,"",0,1,0,0
+"S02178","Hallehög",57.38,11.99,"",0,2,0,0
+"S02180","Hallonflickan",58.11,13.52,"Trichterbecher",1,5,0,0
+"S02225","Hemmor",57.23,18.58,"Pitted Ware",0,1,0,0
+"S02237","Hindby mosse",55.567,13.05,"Trichterbecher",0,7,0,0
+"S02239","Hjulberga",59.35,15.117,"Trichterbecher;Trichterbecher",0,4,NA,0
+"S02258","Hörsås 6:1",56.82,12.74,"",0,2,0,0
+"S02266","Hovmansg 1:10",58.183,13.4,"",0,5,0,0
+"S02282","Hylliekroken",55.59,12.92,"",0,1,0,0
+"S02283","Hyllie",55.56,12.96,"Trichterbecher",0,11,0,0
+"S02298","Ingelstorp",55.433,14.033,"Trichterbecher",0,2,0,0
+"S02306","Ire",57.84,18.59,"Pitted Ware",0,6,0,0
+"S02320","Jägershill",55.56,13.05,"",0,1,0,0
+"S02327","Jättegraven",55.58,13.22,"Trichterbecher",0,1,0,0
+"S02335","Jonstorp",56.233,12.667,"Trichterbecher",0,2,0,0
+"S02346","Kabusa",55.433,13.967,"Corded Ware;Trichterbecher",0,6,0,0
+"S02361","Karlsfält",55.474,13.899,"Trichterbecher;Trichterbecher",0,3,NA,0
+"S02425","Korsnäs",59.15,17.8,"Pitted Ware",0,14,0,0
+"S02445","Kungsbacka",57.49,12.06,"",0,2,0,0
+"S02448","Kvarnby",55.58,13.11,"",0,7,0,0
+"S02449","Kvibille",56.78,12.83,"",0,1,0,0
+"S02600","Långåker",55.4,13.49,"",0,2,0,0
+"S02796","Letsegården",57.61,11.94,"Trichterbecher",0,1,0,0
+"S02804","Lilla Bedinge",55.4,13.45,"Trichterbecher",0,4,0,0
+"S02812","Lindberg",57.167,12.3,"Pitted Ware",0,11,0,0
+"S02814","Linköping",58.41,15.62,"Corded Ware",0,1,0,0
+"S02816","Linnebjär",56.31,14.25,"",0,1,0,0
+"S02835","Löddesborg",55.733,12.967,"Ertebolle",0,1,0,11
+"S02836","Loderup",55.432,14.113,"Trichterbecher",0,4,0,0
+"S02879","Lyse 7",58.347,11.426,"",0,1,0,0
+"S02949","Masmo",59.25,17.88,"Pitted Ware",0,2,0,0
+"S03008","Mölner",57.42,18.31,"",0,3,0,0
+"S03049","Mossby",55.417,13.633,"Trichterbecher",0,6,0,0
+"S03069","Munkeröd",58.07,11.86,"",0,11,0,0
+"S03084","Näbbe mosse",55.6,14.21,"",0,1,0,0
+"S03095","Nasume",57.55,18.13,"",0,2,0,0
+"S03158","Nymölla I",56.03,14.47,"Pitted Ware;Trichterbecher",0,5,0,0
+"S03175","Ödsmål",58.55,11.38,"",0,4,0,0
+"S03178","Öglunda",58.43,13.66,"",0,1,0,0
+"S03190","Olas",57.25,12.19,"Trichterbecher",0,2,0,0
+"S03219","Östra Vemmenhög",55.41,13.5,"",0,3,0,0
+"S03240","Överåda",58.89,17.49,"Pitted Ware",0,2,0,0
+"S03241","Överstekvarn",57.76,18.45,"",0,1,0,0
+"S03257","Pärlängsberget",59.105,17.563,"Ertebolle;Trichterbecher",0,6,0,0
+"S03429","Ramshög",55.409,14.167,"Trichterbecher",0,4,0,0
+"S03438","Rävgrav",55.39,13.49,"",0,5,0,0
+"S03527","Rolfsåker",57.48,12.13,"",0,2,0,0
+"S03539","Rössberga (Valtorp 2)",58.229,13.606,"Trichterbecher;Trichterbecher",128,56,0,0
+"S03652","Sandåkra",55.5,13.51,"",0,1,0,0
+"S03657","Sannagård",56.96,12.558,"",0,2,0,0
+"S03669","Säter",60.34,15.75,"",0,7,0,0
+"S03671","Säve",57.8,11.91,"",0,5,0,0
+"S03779","Siretorp",56.033,14.6,"Trichterbecher",0,3,0,0
+"S03788","Skillinge",55.467,14.283,"Pitted Ware",0,1,0,0
+"S03795","Slottsmöllan",56.7,12.867,"",0,5,0,0
+"S03802","Snöstorp",56.66,12.91,"",0,4,0,0
+"S03803","Söderbytorp",59.66,18.06,"",0,2,0,0
+"S03830","Spjälkö",56.167,15.217,"",0,2,0,0
+"S03838","St Domerarve",57.17,18.26,"",0,4,0,0
+"S03840","St Herrestad 68:103",55.46,13.86,"",0,1,0,0
+"S03853","Stångeb.",58.213,13.479,"",0,1,0,0
+"S03865","Stävie",55.767,13.067,"",0,2,0,0
+"S03875","Stenbocksvallar",55.76,12.91,"Ertebolle",0,1,0,0
+"S03879","Stora Förvar",57.28,17.97,"",0,1,0,0
+"S03880","Storeg., Barsebäck",55.77,12.96,"",0,1,0,0
+"S03896","Sturup",55.53,13.35,"Trichterbecher",0,2,NA,0
+"S03911","Svenstorp",55.76,13.25,"Trichterbecher",0,2,NA,0
+"S03931","Tågarp",55.93,12.94,"",0,4,0,0
+"S03981","Tibble",59.65,17.233,"",0,4,0,0
+"S03998","Tofta",57.52,18.16,"",0,4,0,0
+"S04013","Torslunda",56.633,16.5,"Pitted Ware;Trichterbecher",0,9,0,0
+"S04033","Trollasten",55.46,13.95,"Trichterbecher",0,3,0,0
+"S04045","Trunnerup",55.49,13.63,"",0,1,0,0
+"S04060","Tuve Tången",57.75,11.93,"",0,1,0,0
+"S04071","Ullstorp",55.533,13.983,"Corded Ware",0,1,0,0
+"S04098","Vadbron",60.01,17.41,"",0,4,0,0
+"S04107","Valleberga",55.983,12.95,"Corded Ware",0,1,0,0
+"S04112","Värby",55.58,13.18,"Trichterbecher",0,2,0,0
+"S04122","Västerbjers; Västerbjärs; Västerbjersfeld",57.85,18.71,"Pitted Ware;Trichterbecher",33,23,0,0
+"S04124","Vätteryd",56.01,13.66,"Trichterbecher",0,3,0,0
+"S04128","Veddige",57.267,12.317,"Trichterbecher",0,4,0,0
+"S04161","Visby",57.63,18.29,"Pitted Ware;Trichterbecher",0,5,0,0
+"S04257","Ytterby",59.42,18.35,"",0,5,0,0
+"S04358","Dösjöbro",55.82,13.02,"Trichterbecher",0,0,NA,0
+"S04419","Månasken",55.71,13.71,"Trichterbecher",0,1,NA,0
+"S04429","Mogetorp",58.98,16.18,"Trichterbecher",0,0,NA,0
+"S04445","Piledal",55.48,13.91,"Trichterbecher",0,1,NA,0
+"S04466","Stora Råby",55.67,13.22,"Trichterbecher",0,0,NA,0
+"S04608","Å1 Vilhelmina 188",64.62,16.64,"Trichterbecher",0,0,0,4
+"S04609","Å3 Asele 1023-1024",64.15,17.35,"",0,0,0,13
+"S04693","Dalälven 6 (Leksand 31)",60.73,15,"",0,0,0,8
+"S04694","Dalälven 9 (Grangärde 128)",60.27,14.98,"",0,0,0,13
+"S04714","Eklundshov",59.188,17.903,"",0,0,0,14
+"S04717","Enånger",61.54,17.01,"",0,0,0,4
+"S04808","Jattendal, Håcksta 14:1",61.991,17.369,"",0,0,0,8
+"S04820","Klarälven (Lima 3 and 4)",61.064,12.767,"",0,0,0,4
+"S04833","Kryktorp",57.25,17.05,"Pitted Ware",0,0,0,24
+"S04899","Nordingrå 26",62.94,18.29,"Trichterbecher",0,0,0,5
+"S05048","Valbo 105",60.662,17.062,"",0,0,0,5
+"S05049","Valbo 44",60.662,17.062,"",0,0,0,9
+"S05050","Valbo 49",60.662,17.062,"",0,0,0,6
+"S05051","Valbo 86",60.662,17.062,"",0,0,0,5
+"S07856","Algutsrum",56.683,16.517,"",0,1,0,0
+"S07857","Almhov",55.56,12.95,"Trichterbecher",0,16,0,6
+"S07859","Anneberg",59.998,17.362,"Trichterbecher",0,1,0,17
+"S07860","Annelund",57.661,18.337,"",0,1,0,0
+"S07863","Bäckaskog",56.104,14.35,"",0,1,0,0
+"S07867","Björktorp",59.242,17.895,"Pitted Ware",0,1,0,0
+"S07877","Bredgården",57.742,13.403,"",0,1,0,0
+"S07881","Brunna/Ekeby",59.853,17.449,"",0,1,0,0
+"S07884","Åby",58.664,16.177,"Pitted Ware",0,6,0,0
+"S07887","Dafter",58.9,11.2,"Pitted Ware",0,1,0,0
+"S07889","Dammen",58.408,11.43,"",0,1,0,0
+"S07890","Diseflat",57.265,12.31,"",0,1,0,0
+"S07896","Drottning Hackas grav, Göteburg",57.793,11.932,"",0,1,0,0
+"S07897","Dösemarken",55.568,12.948,"Corded Ware",0,1,0,0
+"S07901","Elinelund 2B",55.59,13.11,"",0,1,0,0
+"S07905","Falköping stad 3; Hjelmars rör",58.17,13.578,"Trichterbecher",26,3,0,0
+"S07907","Falk västra 7",58.167,13.532,"Trichterbecher",0,1,0,0
+"S07911","Fågelvik",57.744,11.796,"",0,1,0,0
+"S07913","Fjälkinge 9",56.05,14.283,"Trichterbecher",0,1,0,0
+"S07914","Fjälla",59.186,17.447,"",0,1,0,0
+"S07916","Folåsa",58.4,15.433,"",0,1,0,0
+"S07917","Forshälla 140",58.283,11.917,"",0,1,0,0
+"S07919","Fredriksberg 13E",55.57,13.09,"Trichterbecher",0,1,0,0
+"S07925","Glasrutan 2",58.43,15.589,"Corded Ware",0,1,0,0
+"S07926","Gläntan",59.197,17.426,"Corded Ware",0,1,0,0
+"S07934","Gribbylund",59.465,18.087,"",0,1,0,0
+"S07936","Grottan",57.742,18.407,"Trichterbecher",0,1,0,0
+"S07937","Hagestad 40:5",55.408,14.168,"",0,1,0,0
+"S07938","Hagestad 43:5A",55.408,14.168,"",0,1,0,0
+"S07939","Hakeröd",58.542,11.304,"Pitted Ware",0,1,0,0
+"S07943","Hanaskede",58.383,13.567,"",0,1,0,0
+"S07945","Hasslingehult",57.637,11.892,"Pitted Ware",0,1,0,0
+"S07951","Herrestad 353",58.351,11.82,"",0,1,0,0
+"S07952","Herrljunga 15",58.08,13.058,"",0,1,0,0
+"S07956","Hög 155",61.79,17.01,"Pitted Ware",0,1,0,0
+"S07957","Häggsta",59.237,17.885,"Trichterbecher;Pitted Ware",0,5,0,0
+"S07958","Hindbydösen",55.564,13.042,"",0,1,0,0
+"S07959","Hindbygården",55.567,13.045,"",0,1,0,0
+"S07962","Hånger",58.361,14.803,"",0,1,0,0
+"S07963","Hogdal 410",59.025,11.233,"",0,1,0,0
+"S07970","Holmen",58.327,14.725,"",0,1,0,0
+"S07971","Hornborga 96b",58.268,13.555,"",0,1,0,0
+"S07975","Humlekärrshult",57.274,16.461,"Pitted Ware",0,1,0,0
+"S07976","Hunnebostrand; Tossene 210",58.441,11.303,"Trichterbecher",3,1,0,0
+"S07977","Huseby klev",58.166,11.485,"Lihult",0,1,0,0
+"S07981","Ingelstorp 31:6",55.435,14.033,"",0,1,0,0
+"S07982","Ingelstorp 32:5",55.435,14.033,"",0,1,0,0
+"S07983","Jonstorp M2",56.22,12.672,"Pitted Ware",0,1,0,0
+"S07984","Jonstorp M3",56.233,12.667,"",0,1,0,0
+"S07988","Jörlanda 120",57.986,11.829,"",0,1,0,0
+"S07989","Jättendal 127",61.992,17.303,"Pitted Ware",0,1,0,0
+"S07991","Kalleguta",56.883,16.783,"",0,1,0,0
+"S07992","Kams",57.762,18.433,"",0,1,0,0
+"S07994","Karleby 105",58.19,13.633,"Trichterbecher",2,3,0,0
+"S07995","Karleby 194",58.152,13.642,"",0,1,0,0
+"S07996","Karleby 57",58.153,13.638,"Trichterbecher",80,3,0,0
+"S07997","Karleby 71",58.164,13.647,"Trichterbecher",30,4,0,0
+"S07998","Karlevi",56.6,16.467,"",0,1,0,0
+"S07999","Karlstorp",58.311,11.498,"",0,1,0,0
+"S08009","Källmossen",60.117,14.9,"Trichterbecher;Trichterbecher",0,3,0,0
+"S08011","Knatten",58.56,11.486,"",0,1,0,0
+"S08025","Köpingsvik",56.883,16.7,"",0,1,0,0
+"S08028","Kärragård",56.75,12.683,"Trichterbecher",0,1,0,0
+"S08030","Kvedesta II",59.15,17.617,"Pitted Ware",0,1,0,0
+"S08031","Kvisljungeby",57.75,11.833,"",0,1,0,0
+"S08032","kv Paragrafen",58.421,15.635,"Corded Ware",0,1,0,0
+"S08033","Kvärlöv",55.845,12.969,"Trichterbecher;Trichterbecher",10,1,0,0
+"S08034","Kv Skolan",55.469,13.018,"Corded Ware",0,1,0,0
+"S08035","Kyrktorp 8V",58.33,14.883,"Pitted Ware",0,1,0,0
+"S08036","Kyvik",57.548,11.944,"",0,1,0,0
+"S08037","Laholms lfs 141",56.513,13.043,"Trichterbecher",0,2,0,0
+"S08041","Älby 2",58.95,17.9,"Trichterbecher",0,1,0,0
+"S08044","Lerum 124",57.788,12.302,"",0,1,0,0
+"S08045","Lilleby",57.739,11.797,"Trichterbecher",0,1,0,0
+"S08049","Lisseläng 2",59.028,17.952,"Trichterbecher",0,2,0,0
+"S08052","Lockarp",55.533,13.033,"Trichterbecher",0,3,0,0
+"S08053","Lockarp 7",55.54,13.02,"",0,2,0,0
+"S08058","Lässmyran 1",59.041,17.971,"",0,1,0,0
+"S08063","Luttra 16",58.133,13.55,"Trichterbecher;Trichterbecher",5,6,0,0
+"S08064","Lyse 13",58.35,11.424,"Pitted Ware",0,3,0,0
+"S08072","Medelplana",58.583,13.367,"",0,1,0,0
+"S08077","Morlanda",58.2,11.5,"",0,1,0,0
+"S08078","Morlanda 367",58.2,11.5,"",0,1,0,0
+"S08079","Morlanda 59",58.2,11.5,"Trichterbecher",0,1,0,0
+"S08083","Mossby 27:1",55.412,13.612,"",0,1,0,0
+"S08087","Myrstugeberget 2",59.242,17.895,"Pitted Ware",0,1,0,0
+"S08088","Mysinge 2",56.518,16.441,"Trichterbecher",0,33,0,0
+"S08093","Ånneröd",58.966,11.179,"Pitted Ware",0,1,0,0
+"S08094","Nossamaden",58.083,12.828,"Trichterbecher;Pitted Ware",1,1,0,0
+"S08096","Nävertorp",58.983,16.183,"Trichterbecher",0,1,0,0
+"S08097","Nyckelby",59.289,17.706,"",0,1,0,0
+"S08098","Nyskottet",59.866,16.91,"Trichterbecher",0,1,0,0
+"S08099","Odensala prästgård",59.674,17.843,"",0,1,0,0
+"S08105","Petersborg 6",55.547,13.01,"Trichterbecher",0,1,0,0
+"S08107","Pärlängsberget N",59.107,17.546,"",0,1,0,0
+"S08113","Örnakulla",55.555,13.151,"",0,1,0,0
+"S08115","Årnäs",57.207,12.213,"Trichterbecher",0,1,0,0
+"S08116","Rojrhage",57.101,18.312,"",0,1,0,0
+"S08119","Rottjärnslid",58.258,11.527,"Lihult",0,1,0,0
+"S08120","Rörby",58.454,11.351,"Nordic Bronze Age",5,1,0,0
+"S08121","Rörvik",57.416,11.941,"Pitted Ware",0,1,0,0
+"S08122","Årstad",56.9,12.72,"",0,1,0,0
+"S08128","Söderåkra",56.45,16.067,"",0,1,0,0
+"S08132","Sillvik",57.739,11.73,"Trichterbecher;Pitted Ware",2,1,0,0
+"S08136","Skarastugan",58.628,16.94,"Pitted Ware",0,1,0,0
+"S08142","Skinnarbacken",60.033,17.462,"Pitted Ware",0,1,0,0
+"S08143","Skogome",57.767,11.95,"Trichterbecher",0,1,0,0
+"S08144","Skogsmossen",59.2,14.22,"Trichterbecher",0,10,0,0
+"S08145","Skumparberget",59.377,15.385,"Trichterbecher",0,3,0,7
+"S08147","Släperud",59.188,12.823,"",0,1,0,0
+"S08148","Slutarp",58.083,13.517,"Trichterbecher",0,1,0,0
+"S08150","Smällan II",59.154,17.802,"Trichterbecher",0,1,0,0
+"S08156","Sotmyra",60.033,17.45,"Pitted Ware",0,1,0,0
+"S08160","Össby",56.267,16.492,"",0,1,0,0
+"S08163","Österöd",58.395,11.426,"",0,1,0,0
+"S08166","St Mafrids",57.45,18.183,"",0,1,0,0
+"S08167","St Malmtorp",59.172,17.798,"",0,1,0,0
+"S08168","St Önnered",57.639,11.888,"Pitted Ware",0,1,0,0
+"S08169","Stora Bjärs",57.817,18.533,"",0,1,0,0
+"S08174","Östra Vrå",58.961,16.397,"Trichterbecher",0,2,0,0
+"S08177","Sund",59.125,12.946,"",0,1,0,0
+"S08178","Svintuna",58.661,16.391,"Pitted Ware",0,1,0,0
+"S08179","Svälinge",58.383,14.833,"Pitted Ware",0,1,0,0
+"S08182","Tågerup",55.856,12.938,"Kongemose;Ertebolle",0,1,0,14
+"S08186","Tings Ene 1:1",56.879,16.723,"",0,1,0,0
+"S08187","Tjugestatorp",59.363,15.387,"Trichterbecher",0,3,0,0
+"S08191","Tornby/Glaskulan",58.431,15.599,"Corded Ware",0,1,0,0
+"S08192","Torsborg",56.632,16.52,"",0,1,0,0
+"S08194","Trössla",58.946,17.561,"Trichterbecher",0,2,0,0
+"S08198","Tyttinge",59.167,17.75,"Trichterbecher",0,1,0,0
+"S08204","Valbo 339",60.65,17.033,"Pitted Ware",0,1,0,0
+"S08205","Valbo 397",60.65,17.033,"Pitted Ware",0,1,0,0
+"S08206","Valtorp 1",58.228,13.647,"Trichterbecher",0,1,0,0
+"S08208","Vedmora",61.533,16.95,"Pitted Ware",0,1,0,0
+"S08211","Vendel",60.167,17.6,"Pitted Ware",0,1,0,0
+"S08215","Vickleby",56.579,16.459,"",0,1,0,0
+"S08221","Värö 202, Olas",57.26,12.23,"Pitted Ware",0,1,0,0
+"S08222","Övra Vannborga",56.917,16.75,"",0,1,0,0
+"S08225","Västeräng",60.575,17.141,"Trichterbecher",0,1,0,0
+"S08230","Karleby Log B",58.155,13.646,"Trichterbecher",0,1,0,0
+"S08233","kv Bronsyxan",55.567,13.05,"Corded Ware",0,1,0,0
+"S08237","Skee 34",58.97,11.33,"Pitted Ware",0,1,0,0
+"S08238","Skee 45",58.97,11.33,"Pitted Ware",0,1,0,0
+"S08242","Mören",57.256,15.672,"",0,1,0,0
+"S08243","Värmland",59.707,13.168,"",0,1,0,0
+"S08391","Jettböle",60.152,19.949,"Pitted Ware",0,6,0,27
+"S08434","Skateholm",55.374,13.458,"",0,2,0,0
+"S08914","Skateholm II",55.38,13.48,"Ertebolle",0,0,0,16
+"S08915","Skateholm I",55.382,13.477,"Ertebolle",0,0,0,17
+"S08917","Saxtorp",56.28,13.95,"Trichterbecher",0,0,0,10
+"S08918","Hunneberget",50.6,14.28,"Trichterbecher",0,0,0,15
+"S08920","Sallerup",55.8,13.72,"Trichterbecher",0,0,0,7
+"S08921","Hotelltomten",55.56,12.96,"Trichterbecher",0,0,0,4
+"S08922","Postboda 2",60.17,18.4,"Pitted Ware",0,0,0,3
+"S08923","Högmossen",60.53,17.46,"Pitted Ware",0,0,0,24
+"S08924","Södra Mårtensbo",60.66,17.31,"Pitted Ware",0,0,0,27
+"S08925","Fräkenrönningen",60.6,17.46,"Pitted Ware",0,0,0,24
+"S08930","Nymölla III",56.03,14.47,"Ertebolle",0,7,0,11
+"S08931","Sittesta",58.983,17.917,"Pitted Ware",0,0,0,25
+"S09071","Bunkeflostrand",55.555,12.919,"Trichterbecher",0,2,0,21
+"S09072","Bunkeflostrand 3",55.555,12.919,"Trichterbecher",0,1,0,0
+"S09092","Fosie",55.567,13,"Trichterbecher",0,3,0,0
+"S09101","Hindbygaarden",55.522,13.051,"Trichterbecher",0,3,0,0
+"S09108","Karleby 59",58.155,13.638,"Nordic Bronze Age;Trichterbecher;Trichterbecher",63,5,0,0
+"S09132","Lunnebjar",55.611,13.07,"Trichterbecher",0,1,0,0
+"S09143","Oxie 50:1",55.547,13.499,"Trichterbecher",0,1,0,0
+"S09153","Skee 1616",56.513,13.043,"Trichterbecher",0,1,0,0
+"S09158","Stensborg",59.656,16.827,"Trichterbecher",0,3,0,0
+"S09159","Stora Karlsö",57.284,17.971,"Pitted Ware",0,1,0,0
+"S09160","Svågertorp industriomr. A",55.55,13.013,"Corded Ware",0,2,0,0
+"S09164","Vallensgaard I",55.08,14.92,"Trichterbecher",0,1,0,0
+"S09166","Vintriediket",55.533,12.995,"Trichterbecher",0,1,0,0
+"S09213","Lindangelund",55.55,13.003,"Trichterbecher",0,0,0,13
+"S09223","Nymölla II",56.03,14.47,"Pitted Ware",0,4,0,0
+"S09224","Nymölla",56.03,14.47,"Pitted Ware",0,5,0,0
+"S10333","Simris II",55.54,14.324,"Nordic Bronze Age",7,0,0,0
+"S10370","Falköping stad 5",58.166,13.573,"Nordic Bronze Age;Trichterbecher",31,21,0,0
+"S10371","Torbjörntorp 16",58.219,13.608,"Trichterbecher",11,12,0,0
+"S10372","Torbjörntorp 18",58.218,13.621,"Trichterbecher;Nordic Bronze Age",80,37,0,0
+"S10373","Torbjörntorp 31",58.209,13.633,"Trichterbecher;Trichterbecher;Nordic Bronze Age",30,21,0,0
+"S10374","Kinneved 73",58.084,13.532,"Trichterbecher",3,1,0,0
+"S10375","Vilske-Kleva 26",58.199,13.435,"Trichterbecher",1,1,0,0
+"S10376","Borgunda 106",58.267,13.774,"Trichterbecher",3,3,0,0
+"S10377","Kapellgatan",58.174,13.541,"Trichterbecher",1,1,0,0
+"S10378","Falköping stad 26",58.176,13.553,"Trichterbecher",7,5,0,0
+"S10379","Blinningsberg",58.14,13.521,"Trichterbecher",5,2,0,0
+"S10380","Falköping östra 1",58.14,13.521,"Nordic Bronze Age;Trichterbecher",7,4,0,0
+"S10381","Falköping stad 28; Kyrkerör",58.167,13.553,"Trichterbecher",2,0,0,0
+"S10382","Gökhem 94; Frälsegården",58.165,13.455,"Trichterbecher",51,4,0,0
+"S10383","Gökhem 17",58.178,13.435,"Trichterbecher",9,3,0,0
+"S10384","Assleröd; Askum 150",58.43,11.303,"Trichterbecher;Pitted Ware",8,0,0,0
+"S10385","Frölundaborg; Göteborg 181",57.688,11.935,"Trichterbecher;Pitted Ware",3,0,0,0
+"S10386","Strandvägen",58.54,15.061,"Lihult;Nøstvet",6,2,0,0
+"S10387","Kanaljorden",58.539,15.056,"Lihult;Nøstvet",22,8,0,0
+"S10522","Resmo",56.538,16.447,"Trichterbecher;Trichterbecher;Battle Axe;Pitted Ware;Pitted Ware;Nordic Bronze Age;Battle Axe",9,9,0,0
+"S10525","Norje Sunnansund",56.083,14.666,"Maglemose",12,0,0,0
+"S10651","Härlingstorp ",58.389,13.586,"",0,0,0,0
+"S10915","Ölsund",61.658,17.004,"Corded Ware",1,0,0,0

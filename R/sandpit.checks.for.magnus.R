@@ -103,5 +103,6 @@ for(n in 1:N){
   
 }
 
-df <- data.frame(SiteID = sweden$SiteID, cultures = cults, indivs = grave.individuals, c14count = c14.count, abo.sum = abo.sample, zoocount = zoo.count)
+df <- data.frame(SiteID = sweden$SiteID, SiteName = sweden$SiteName, lat = sweden$Latitude, lon = sweden$Longitude, cultures = cults, indivs = grave.individuals, c14count = c14.count, abo.sum = abo.sample, zoocount = zoo.count)
 View(df)
+write.csv(df, file = "sweden_sumary.csv", row.names = F)
