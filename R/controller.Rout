@@ -41,10 +41,9 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.descriptions.R at Tue Jul 19 07:15:01 2022"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Wed Jul 20 07:15:01 2022"
 sh: lsof: command not found
 sh: lsof: command not found
-Loading required package: RMySQL
 usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
            [-D [bind_address:]port] [-E log_file] [-e escape_char]
            [-F configfile] [-I pkcs11] [-i identity_file]
@@ -53,6 +52,7 @@ usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
            [-Q cipher | cipher-auth | mac | kex | key]
            [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] [user@]hostname [command]
+Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
 kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
@@ -67,7 +67,7 @@ usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
            [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] [user@]hostname [command]
 kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
-[1] "Starting to run script: auto.make.daily.map.R at Tue Jul 19 07:15:02 2022"
+[1] "Starting to run script: auto.make.daily.map.R at Wed Jul 20 07:15:03 2022"
 sh: lsof: command not found
 sh: lsof: command not found
 usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
@@ -84,7 +84,7 @@ Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
 Loading required package: rnaturalearth
 Loading required package: rnaturalearthdata
-[1] "Starting to run script: auto.make.daily.row.counts.R at Tue Jul 19 07:15:06 2022"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Wed Jul 20 07:15:07 2022"
 sh: lsof: command not found
 sh: lsof: command not found
 usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
@@ -128,4 +128,4 @@ Warning messages:
 > 
 > proc.time()
    user  system elapsed 
-  4.625   0.385   5.956 
+  4.849   0.417   5.961 
