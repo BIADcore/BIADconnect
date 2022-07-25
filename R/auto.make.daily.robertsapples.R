@@ -9,8 +9,8 @@ d$userstamp <- '\\N'
 library(gridExtra)
 
 
-mytheme <- ttheme_default(base_size=20)
+mytheme <- ttheme_default(base_size=25)
 
-png('../tools/plots/apples.png',width=2000, height=400)
+png('../tools/plots/apples.png',width=1200, height=350)
 grid.table(d, theme=mytheme)
 dev.off()
