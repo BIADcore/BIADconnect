@@ -7,7 +7,7 @@ d$userstamp <- '\\N'
 
 library(gridExtra)
 
-png('../tools/plots/apples.png',width=1000, height=350)
+png('../tools/plots/sites.png',width=1000, height=350)
 grid.table(d, theme=theme_minimal())
 dev.off()
 
