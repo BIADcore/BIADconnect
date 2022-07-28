@@ -65,3 +65,12 @@ type.count <- sort(table(query$Type), decreasing = T)
 View(type.count)
 sum(type.count)
 #------------------------------------------------------------------
+# Example 5: updating the database directly
+#------------------------------------------------------------------
+new <- data.frame(names=sample(c('andy','bob','chris','dave')), id=1:4)
+sql.command <- c()
+for(n in 1:4){
+	sql.command[n] <- paste("UPDATE `BIAD`.`zprivate_encoding` SET `latin`='",new$names[n],"' WHERE `ID`='",new$id[n],"'",sep="")
+	}
+sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+#------------------------------------------------------------------
