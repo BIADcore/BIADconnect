@@ -55,6 +55,13 @@ query <- merge(query,  query4, by = "GraveID")
 query <- subset(query, AgeCategorical=='infant')
 query <- subset(query, AgeCategorical=='infant')
 query <- query[order(query$IndividualID),]
-#-----------------------------------------------------------------
-
-
+#------------------------------------------------------------------
+# Example 4: quantifying PhaseType entries in BIAD using the RMySQL package
+#------------------------------------------------------------------
+sql.command1 <- "SELECT * FROM PhaseTypes"
+query <- sql.wrapper(sql.command1,user,password,hostname,hostuser,keypath,ssh)
+query
+type.count <- sort(table(query$Type), decreasing = T)
+View(type.count)
+sum(type.count)
+#------------------------------------------------------------------
