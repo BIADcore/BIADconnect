@@ -1,13 +1,13 @@
-sql.command <- "SELECT * FROM BIAD.Sites"
+sql.command <- "SELECT * FROM BIAD.Citations"
 d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
-d <- d[1:5,]
+d <- d[1:20,]
 d[is.na(d)] <- '\\N'
 d$timestamp <- '\\N'
 d$userstamp <- '\\N'
 
 library(gridExtra)
 
-png('../tools/plots/sites.png',width=1000, height=350)
+png('../tools/plots/citations.png',width=1000, height=350)
 grid.table(d, theme=ttheme_minimal())
 dev.off()
 
