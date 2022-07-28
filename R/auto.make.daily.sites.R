@@ -1,3 +1,4 @@
+source('functions.R')
 sql.command <- "SELECT * FROM BIAD.Sites"
 d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 d <- d[1:5,]

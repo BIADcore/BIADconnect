@@ -1,3 +1,4 @@
+source('functions.R')
 sql.command <- "SELECT * FROM BIAD.PhaseTypes"
 d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 d <- d[1:5,]
@@ -7,7 +8,7 @@ d$userstamp <- '\\N'
 
 library(gridExtra)
 
-png('../tools/plots/phasetypes.png',width=1000, height=350)
+png('../tools/plots/phasetypes.png',width=500, height=350)
 grid.table(d, theme=ttheme_minimal())
 dev.off()
 
