@@ -8,7 +8,7 @@ d$userstamp <- '\\N'
 
 library(gridExtra)
 
-png('../tools/plots/citations.png',width=4000, height=350)
+png('../tools/plots/citations.png',width=4000, height=500)
 grid.table(d, theme=ttheme_minimal())
 dev.off()
 
