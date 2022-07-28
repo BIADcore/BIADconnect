@@ -1,4 +1,3 @@
-
 sql.command <- "SELECT * FROM BIAD.Sites"
 d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 d <- d[1:5,]
@@ -8,8 +7,8 @@ d$userstamp <- '\\N'
 
 library(gridExtra)
 
-png('../tools/plots/apples.png',width=1200, height=350)
-grid.table(d, theme=ttheme_minimal())
+png('../tools/plots/apples.png',width=1000, height=350)
+grid.table(d, theme=theme_minimal())
 dev.off()
 
 
