@@ -14,6 +14,9 @@ sql.command <- "SELECT * FROM BIAD.Sites"
 library(rvest)
 url <- "https://scholar.google.com/scholar?q=apples+pears"
 url <- "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=apples+pears&btnG="
+
+page <- url %>% read_html() %>% html_elements
+
 page <- read_html(url)
 all.links <- page%>% html_nodes("a") %>% html_attr( "href")
 #-----------------------------------------------------------------------------------------
