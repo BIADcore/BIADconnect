@@ -68,6 +68,8 @@ node [shape = circle
 "
 #------------------------------------------------------------------
 library(DiagrammeR)
+library(rsvg)
+library(DiagrammeRsvg)
 diagram <- paste("digraph {", data.tables, look.ups, edges, subgraph, "}")
 image <- DiagrammeR::grViz(diagram)
 
@@ -75,5 +77,3 @@ export_svg(image) %>%
   charToRaw %>%
   rsvg_png("../tools/plots/database.relationships.plot.png")
 #------------------------------------------------------------------
-
-
