@@ -32,6 +32,8 @@ Phases -> PhaseType;
 }
 ")
 core.import
+library(rsvg)
+library(DiagrammeRsvg)
 export_svg(core.import) %>%
   charToRaw %>%
   rsvg_png("../tools/plots/database.core.import.png")
