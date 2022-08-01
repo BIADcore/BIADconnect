@@ -41,7 +41,7 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.citations.R at Sun Jul 31 07:15:01 2022"
+[1] "Starting to run script: auto.make.daily.citations.R at Mon Aug  1 07:15:02 2022"
 sh: lsof: command not found
 sh: lsof: command not found
 usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
@@ -56,7 +56,7 @@ Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
 kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
-[1] "Starting to run script: auto.make.daily.descriptions.R at Sun Jul 31 07:15:03 2022"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Mon Aug  1 07:15:04 2022"
 sh: lsof: command not found
 sh: lsof: command not found
 usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
@@ -79,7 +79,7 @@ usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
            [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] [user@]hostname [command]
 kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
-[1] "Starting to run script: auto.make.daily.map.R at Sun Jul 31 07:15:04 2022"
+[1] "Starting to run script: auto.make.daily.map.R at Mon Aug  1 07:15:04 2022"
 sh: lsof: command not found
 sh: lsof: command not found
 usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
@@ -96,7 +96,7 @@ Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
 Loading required package: rnaturalearth
 Loading required package: rnaturalearthdata
-[1] "Starting to run script: auto.make.daily.phasecitation.R at Sun Jul 31 07:15:08 2022"
+[1] "Starting to run script: auto.make.daily.phasecitation.R at Mon Aug  1 07:15:08 2022"
 sh: lsof: command not found
 sh: lsof: command not found
 usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
@@ -108,7 +108,7 @@ usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
            [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] [user@]hostname [command]
 kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
-[1] "Starting to run script: auto.make.daily.phases.R at Sun Jul 31 07:15:08 2022"
+[1] "Starting to run script: auto.make.daily.phases.R at Mon Aug  1 07:15:08 2022"
 sh: lsof: command not found
 sh: lsof: command not found
 usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
@@ -120,7 +120,7 @@ usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
            [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] [user@]hostname [command]
 kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
-[1] "Starting to run script: auto.make.daily.phasetypes.R at Sun Jul 31 07:15:09 2022"
+[1] "Starting to run script: auto.make.daily.phasetypes.R at Mon Aug  1 07:15:09 2022"
 sh: lsof: command not found
 sh: lsof: command not found
 usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
@@ -132,7 +132,7 @@ usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
            [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] [user@]hostname [command]
 kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
-[1] "Starting to run script: auto.make.daily.row.counts.R at Sun Jul 31 07:15:09 2022"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Mon Aug  1 07:15:09 2022"
 sh: lsof: command not found
 sh: lsof: command not found
 usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
@@ -155,7 +155,7 @@ usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
            [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] [user@]hostname [command]
 kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
-[1] "Starting to run script: auto.make.daily.sites.R at Sun Jul 31 07:15:09 2022"
+[1] "Starting to run script: auto.make.daily.sites.R at Mon Aug  1 07:15:09 2022"
 sh: lsof: command not found
 sh: lsof: command not found
 usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
@@ -167,7 +167,7 @@ usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
            [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] [user@]hostname [command]
 kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
-[1] "Starting to run script: auto.make.daily.zoptions_Types.R at Sun Jul 31 07:15:10 2022"
+[1] "Starting to run script: auto.make.daily.zoptions_Types.R at Mon Aug  1 07:15:10 2022"
 sh: lsof: command not found
 sh: lsof: command not found
 usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
@@ -186,13 +186,32 @@ There were 11 warnings (use warnings() to see them)
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-> 
-> #------------------------------------------------------------------
-> 	
-> 	
-> 	
-> 	
-> 
-> proc.time()
-   user  system elapsed 
-  7.641   0.604   9.134 
+[1] "Starting to run script: auto.make.weekly.database.relationships.plot.R at Mon Aug  1 07:15:10 2022"
+sh: lsof: command not found
+sh: lsof: command not found
+usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
+           [-D [bind_address:]port] [-E log_file] [-e escape_char]
+           [-F configfile] [-I pkcs11] [-i identity_file]
+           [-L [bind_address:]port:host:hostport] [-l login_name] [-m mac_spec]
+           [-O ctl_cmd] [-o option] [-p port]
+           [-Q cipher | cipher-auth | mac | kex | key]
+           [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
+           [-w local_tun[:remote_tun]] [user@]hostname [command]
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+sh: lsof: command not found
+sh: lsof: command not found
+usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
+           [-D [bind_address:]port] [-E log_file] [-e escape_char]
+           [-F configfile] [-I pkcs11] [-i identity_file]
+           [-L [bind_address:]port:host:hostport] [-l login_name] [-m mac_spec]
+           [-O ctl_cmd] [-o option] [-p port]
+           [-Q cipher | cipher-auth | mac | kex | key]
+           [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
+           [-w local_tun[:remote_tun]] [user@]hostname [command]
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+Error in library(DiagrammeR) : there is no package called 'DiagrammeR'
+Calls: source -> withVisible -> eval -> eval -> library
+In addition: Warning messages:
+1: Closing open result sets 
+2: Closing open result sets 
+Execution halted
