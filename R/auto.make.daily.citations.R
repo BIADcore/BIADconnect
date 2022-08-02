@@ -12,5 +12,3 @@ png('../tools/plots/citations.png',width=4000, height=500)
 grid.table(d, theme=ttheme_minimal())
 dev.off()
 
-
-# mytheme <- ttheme_default(base_size=25)
