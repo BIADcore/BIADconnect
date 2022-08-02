@@ -68,6 +68,10 @@ query.database <- function(user, password, sql.command){
 	require(odbc)
 	drv <- dbDriver("MySQL")
 
+	# close any connections to the database
+	cons <- dbListConnections(MySQL())
+	for(con in cons)dbDisconnect(con)
+
 	# connect locally to the database
 	con <- dbConnect(drv, user=user, pass=password, dbname='BIAD', host = "127.0.0.1", port=3306)
 	dbSendQuery(con,"SET NAMES 'utf8'")
@@ -77,7 +81,7 @@ query.database <- function(user, password, sql.command){
 	query <- fetch(res, n= -1)
 	query <- encoder(query)
 
-	# close the connection to the database (and any previous connections if a query failed)
+	# close any connections to the database
 	cons <- dbListConnections(MySQL())
 	for(con in cons)dbDisconnect(con)
 return(query)}
