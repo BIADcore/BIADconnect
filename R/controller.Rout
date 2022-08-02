@@ -41,37 +41,24 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.citations.R at Tue Aug  2 12:19:01 2022"
+[1] "Starting to run script: auto.make.daily.citations.R at Tue Aug  2 12:21:01 2022"
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
-[1] "Starting to run script: auto.make.daily.descriptions.R at Tue Aug  2 12:19:03 2022"
-[1] "Starting to run script: auto.make.daily.map.R at Tue Aug  2 12:19:03 2022"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Tue Aug  2 12:21:03 2022"
+[1] "Starting to run script: auto.make.daily.map.R at Tue Aug  2 12:21:04 2022"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
 Loading required package: rnaturalearth
 Loading required package: rnaturalearthdata
-[1] "Starting to run script: auto.make.daily.phasecitation.R at Tue Aug  2 12:19:07 2022"
-[1] "Starting to run script: auto.make.daily.phases.R at Tue Aug  2 12:19:07 2022"
-[1] "Starting to run script: auto.make.daily.phasetypes.R at Tue Aug  2 12:19:08 2022"
-[1] "Starting to run script: auto.make.daily.row.counts.R at Tue Aug  2 12:19:08 2022"
-[1] "Starting to run script: auto.make.daily.sites.R at Tue Aug  2 12:19:08 2022"
-[1] "Starting to run script: auto.make.daily.zoptions_Types.R at Tue Aug  2 12:19:09 2022"
-There were 11 warnings (use warnings() to see them)
-> 
-> if(NW>0 & today==run.day)for(n in 1:NW){
-+ 	file <- weekly.files[n]
-+ 	print(paste('Starting to run script:',file,'at',date()))
-+ 	source(file)
-+ 	}
-> 
-> #------------------------------------------------------------------
-> 	
-> 	
-> 	
-> 	
-> 
-> proc.time()
-   user  system elapsed 
-  7.590   0.455   8.139 
+[1] "Starting to run script: auto.make.daily.phasecitation.R at Tue Aug  2 12:21:07 2022"
+[1] "Starting to run script: auto.make.daily.phases.R at Tue Aug  2 12:21:07 2022"
+[1] "Starting to run script: auto.make.daily.phasetypes.R at Tue Aug  2 12:21:08 2022"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Tue Aug  2 12:21:08 2022"
+[1] "Starting to run script: auto.make.daily.sites.R at Tue Aug  2 12:21:08 2022"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Tue Aug  2 12:21:09 2022"
+Error in file(con, "w") : cannot open the connection
+Calls: source -> withVisible -> eval -> eval -> writeLines -> file
+In addition: There were 12 warnings (use warnings() to see them)
+Execution halted
