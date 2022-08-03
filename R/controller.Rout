@@ -41,25 +41,24 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.citations.R at Tue Aug  2 12:49:01 2022"
+[1] "Starting to run script: auto.make.daily.citations.R at Wed Aug  3 07:15:02 2022"
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
-[1] "Starting to run script: auto.make.daily.descriptions.R at Tue Aug  2 12:49:03 2022"
-[1] "Starting to run script: auto.make.daily.map.R at Tue Aug  2 12:49:03 2022"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Wed Aug  3 07:15:04 2022"
+[1] "Starting to run script: auto.make.daily.map.R at Wed Aug  3 07:15:04 2022"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
 Loading required package: rnaturalearth
 Loading required package: rnaturalearthdata
-[1] "Starting to run script: auto.make.daily.phasecitation.R at Tue Aug  2 12:49:07 2022"
-[1] "Starting to run script: auto.make.daily.phases.R at Tue Aug  2 12:49:07 2022"
-[1] "Starting to run script: auto.make.daily.phasetypes.R at Tue Aug  2 12:49:08 2022"
-[1] "Starting to run script: auto.make.daily.row.counts.R at Tue Aug  2 12:49:08 2022"
-[1] "Starting to run script: auto.make.daily.sites.R at Tue Aug  2 12:49:08 2022"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Tue Aug  2 12:49:09 2022"
-[1] "Starting to run script: auto.make.daily.zoptions_Types.R at Tue Aug  2 12:49:09 2022"
-There were 12 warnings (use warnings() to see them)
+[1] "Starting to run script: auto.make.daily.phasecitation.R at Wed Aug  3 07:15:08 2022"
+[1] "Starting to run script: auto.make.daily.phases.R at Wed Aug  3 07:15:08 2022"
+[1] "Starting to run script: auto.make.daily.phasetypes.R at Wed Aug  3 07:15:09 2022"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Wed Aug  3 07:15:09 2022"
+[1] "Starting to run script: auto.make.daily.sites.R at Wed Aug  3 07:15:09 2022"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Wed Aug  3 07:15:10 2022"
+[1] "Starting to run script: auto.make.daily.zoptions_Types.R at Wed Aug  3 07:15:10 2022"
 > 
 > if(NW>0 & today==run.day)for(n in 1:NW){
 + 	file <- weekly.files[n]
@@ -75,4 +74,4 @@ There were 12 warnings (use warnings() to see them)
 > 
 > proc.time()
    user  system elapsed 
-  7.646   0.453   8.241 
+  7.693   0.465   8.582 
