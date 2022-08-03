@@ -2,8 +2,6 @@
 # Autogenerate some useful mysql snippets stored on the shared drive.
 # Requires autogeneration as tables may occasionally change
 #-----------------------------------------------------------------------------------------
-source('functions.R')
-#-----------------------------------------------------------------------------------------
 file.1 <- '/Users/admin/../BIAD/BIAD/SQLcode/summary of all types of data by phase.sql'
 #-----------------------------------------------------------------------------------------
 # Pull all foreign keys
