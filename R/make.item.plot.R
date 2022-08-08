@@ -1,14 +1,319 @@
+#------------------------------------------------------------------
+# Example R script for relationships used in Items table
+#------------------------------------------------------------------
+# Created: 03.08.2022
+# Last modified: 03.08.2022
 
-library(diagram)
+#------------------------------------------------------------------
+# Example 1 - single buried individual with 87Sr/86Sr δ13C and δ15N
+# data from the upper right M1 tooth
+#------------------------------------------------------------------
 
-names <- c('Sites','Phases','C14Samples','Graves','Individual.A','Individual.B','tooth:M1','tooth:M2','tooth:M2')
-M <- matrix(nrow = 9, ncol = 9, byrow = TRUE, data = 0)
-M[2,1] <- M[3,2] <- M[4,2] <- M[5,4] <- M[6,4] <- M[7,5] <- M[8,5] <- M[9,6]  <- ''
-pos <- c(1,1,2,2,3)
+library(DiagrammeR)
+item.plot <- DiagrammeR::grViz("
+digraph {
+ node [shape = record];
+{
+node [shape = circle
+  style = filled,
+  fillcolor = orange,
+  fixedsize = true,
+  width = 2,
+  fontsize = 15]
+  Items Strontium HumanIsotopes GraveIndividuals
+  }
+{
+node [shape = box
+  style = filled
+  fillcolor = white
+  fixedsize = true,
+  width = 2,
+  fontsize = 15]
+  ItemID
+}
+{
+GraveIndividuals -> ItemID [dir = both]
+Items -> ItemID
+ItemID -> Strontium [dir = both]
+ItemID -> HumanIsotopes [dir = both]
+}
+subgraph cluster {
+node [shape = circle
+  style = filled,
+  fillcolor = orange,
+  fixedsize = true,
+  width = 1.2,
+  fontsize = 10]
+  DataTable
+  node [shape = box
+  fillcolor = white,
+  fixedsize = true,
+  width = 1.2
+  fontsize = 10]
+  DataID}
+}
+")
+item.plot
+library(rsvg)
+library(DiagrammeRsvg)
+export_svg(core.import) %>%
+  charToRaw %>%
+  rsvg_png("../tools/plots/database.core.import.png")
 
+#------------------------------------------------------------------
+# Example 2 - single buried individual with 87Sr/86Sr data from the
+# lower left M1 and a radiocarbon date from the right femur
+#------------------------------------------------------------------
 
-png('../tools/plots/item.example5.png',width=700,height=700)
-pp <- plotmat(M, pos=pos, name=names, lwd = 1, box.lwd = 2, cex.txt = 0.8, box.type = "square", box.prop = 0.4, txt.yadj=0)
-text(pp$comp[5,1],pp$comp[5,2],'erewtwet',pos=1,cex=0.6)
-dev.off()
+library(DiagrammeR)
+item.plot <- DiagrammeR::grViz("
+digraph {
+ node [shape = record];
+{
+node [shape = circle
+  style = filled,
+  fillcolor = orange,
+  fixedsize = true,
+  width = 2,
+  fontsize = 15]
+  Items Strontium C14Samples GraveIndividuals
+  }
+{
+node [shape = box
+  style = filled
+  fillcolor = white
+  fixedsize = true,
+  width = 2,
+  fontsize = 15]
+  ItemID
+  }
+{
+GraveIndividuals -> ItemID [dir = both]
+Items -> ItemID
+ItemID -> Strontium
+ItemID -> C14Samples
+}
+subgraph cluster {
+node [shape = circle
+  style = filled,
+  fillcolor = orange,
+  fixedsize = true,
+  width = 1.2,
+  fontsize = 10]
+  DataTable
+  node [shape = box
+  fillcolor = white,
+  fixedsize = true,
+  width = 1.2
+  fontsize = 10]
+  DataID}
+}
+")
+item.plot
+library(rsvg)
+library(DiagrammeRsvg)
+export_svg(core.import) %>%
+  charToRaw %>%
+  rsvg_png("../tools/plots/database.core.import.png")
 
+#------------------------------------------------------------------
+# Example 3 - two individuals from a single grave, each with one radiocarbon
+# date
+#------------------------------------------------------------------
+
+library(DiagrammeR)
+item.plot <- DiagrammeR::grViz("
+digraph circo{
+ node [shape = record];
+{
+node [shape = circle
+  style = filled,
+  fillcolor = orange,
+  fixedsize = true,
+  width = 2,
+  fontsize = 15]
+  Graves GraveIndividuals Items C14Samples
+  }
+{
+Graves -> GraveIndividuals
+GraveIndividuals -> ItemID [dir = both]
+Items -> ItemID
+ItemID -> C14Samples
+}
+subgraph cluster {
+node [shape = circle
+  style = filled,
+  fillcolor = orange,
+  fixedsize = true,
+  width = 1.2,
+  fontsize = 10]
+  DataTable
+  node [shape = box
+  fillcolor = white,
+  fixedsize = true,
+  width = 1.2
+  fontsize = 10]
+  DataID}
+}
+")
+item.plot
+library(rsvg)
+library(DiagrammeRsvg)
+export_svg(core.import) %>%
+  charToRaw %>%
+  rsvg_png("../tools/plots/database.core.import.png")
+
+#------------------------------------------------------------------
+# Example 4 - two individuals and a canine from a single grave, first individual with
+# 3 strontium sampled teeth, 1 tooth used for aDNA, 1 femur used
+# for radiocarbon data, second individual's tooth samled for carbon and nitrogen,
+# canine sampled for faunal data
+#------------------------------------------------------------------
+
+library(DiagrammeR)
+item.plot <- DiagrammeR::grViz("
+digraph {
+ node [shape = record];
+{
+node [shape = circle
+  style = filled,
+  fillcolor = orange,
+  fixedsize = true,
+  width = 2,
+  fontsize = 15]
+  Graves GraveIndividuals Items C14Samples FaunalSpecies FaunalBiometrics Strontium HumanIsotopes
+  }
+{
+node [shape = circle
+  style = filled,
+  style = dotted,
+  fillcolor = orange,
+  fixedsize = true,
+  width = 2,
+  fontsize = 15]
+  aDNA MaterialCulture
+  }  
+{
+node [shape = box
+  style = filled
+  fillcolor = white
+  fixedsize = true,
+  width = 2,
+  fontsize = 15]
+  ItemID1 ItemID2 ItemID3
+}
+subgraph {
+{rank = same Graves FaunalSpecies FaunalBiometrics HumanIsotopes MaterialCulture C14Samples Strontium aDNA}
+Graves -> GraveIndividuals
+ItemID1 -> Strontium  [dir = both]
+ItemID1 -> aDNA [dir = both]
+ItemID1 -> GraveIndividuals [dir = both]
+ItemID2 -> C14Samples [dir = both]
+ItemID2 -> Strontium [dir = both]
+ItemID2 -> GraveIndividuals [dir = both]
+ItemID3 -> GraveIndividuals [dir = both]
+ItemID3 -> MaterialCulture [dir = both]
+ItemID3 -> FaunalBiometrics [dir = both]
+ItemID3 -> FaunalSpecies [dir = both]
+ItemID3 -> HumanIsotopes [dir = both]
+ItemID3 -> Graves [dir=both]
+}
+subgraph {
+{rank = same ItemID1 ItemID2 ItemID3}
+Items -> ItemID1
+Items -> ItemID2
+Items -> ItemID3
+}
+subgraph cluster {
+node [shape = circle
+  style = filled,
+  fillcolor = orange,
+  fixedsize = true,
+  width = 1.2,
+  fontsize = 10]
+  DataTable
+  node [shape = box
+  fillcolor = white,
+  fixedsize = true,
+  width = 1.2
+  fontsize = 10]
+  DataID
+  node [shape = circle
+  style = dotted,
+  fillcolor = white,
+  fixedsize = true,
+  width = 1.2
+  fontsize = 10]
+  'Under construction'}
+}
+")
+item.plot
+library(rsvg)
+library(DiagrammeRsvg)
+export_svg(core.import) %>%
+  charToRaw %>%
+  rsvg_png("../tools/plots/database.core.import.png")
+
+#------------------------------------------------------------------
+# Example 5 - two individuals from a single grave with one radiocarbon
+# date each
+#------------------------------------------------------------------
+
+library(DiagrammeR)
+item.plot <- DiagrammeR::grViz("
+digraph circo{
+ node [shape = record];
+{
+node [shape = circle
+  style = filled,
+  fillcolor = orange,
+  fixedsize = true,
+  width = 2,
+  fontsize = 15]
+  GraveIndividuals Items Strontium HumanIsotopes
+  }
+  {
+  node [shape = box
+  style = filled
+  fillcolor = white
+  fixedsize = true,
+  width = 2,
+  fontsize = 15]
+  ItemID1 ItemID2
+  }
+subgraph{
+{rank = same GraveIndividuals}
+Items -> ItemID1
+Items -> ItemID2
+}
+subgraph{
+GraveIndividuals -> ItemID1 [dir= both]
+GraveIndividuals -> ItemID2 [dir = both]
+}
+subgraph{
+{rank = same Strontium HumanIsotopes Items}
+ItemID1 -> Strontium [dir = both]
+ItemID2 -> HumanIsotopes [dir = both]
+}
+subgraph cluster {
+node [shape = circle
+  style = filled,
+  fillcolor = orange,
+  fixedsize = true,
+  width = 1.2,
+  fontsize = 10]
+  DataTable
+  node [shape = box
+  fillcolor = white,
+  fixedsize = true,
+  width = 1.2
+  fontsize = 10]
+  DataID}
+}
+")
+item.plot
+library(rsvg)
+library(DiagrammeRsvg)
+export_svg(core.import) %>%
+  charToRaw %>%
+  rsvg_png("../tools/plots/database.core.import.png")

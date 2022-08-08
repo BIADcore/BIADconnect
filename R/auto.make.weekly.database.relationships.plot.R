@@ -24,7 +24,7 @@ tables <- paste(standard, collapse='; ')
 data.tables <- paste("
   node [shape = circle
   style = filled,
-  color = orange,
+  fillcolor = orange,
   fixedsize = true,
   width = 2.2,
   fontsize = 15]
@@ -37,7 +37,7 @@ tables <- zoptions
 look.ups <- paste("
   node [shape = box
   style = filled,
-  color = lightblue
+  fillcolor = lightblue,
   fixedsize = true,
   width = 3.0
   fontsize = 15]
@@ -52,14 +52,14 @@ subgraph <- "
 subgraph cluster {
 node [shape = circle
   style = filled,
-  color = orange,
+  fillcolor = orange,
   fixedsize = true,
   width = 1,
   fontsize = 10]
   DataTable
   node [shape = box
   style = filled,
-  color = lightblue
+  fillcolor = lightblue
   fixedsize = true,
   width = 1
   fontsize = 10]
