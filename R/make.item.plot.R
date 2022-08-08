@@ -276,19 +276,19 @@ node [shape = circle
   fixedsize = true,
   width = 2,
   fontsize = 15]
-  ItemID1
+  ItemID
   }
 subgraph{
 {rank = same GraveIndividuals}
-Items -> ItemID1
+Items -> ItemID
 }
 subgraph{
-GraveIndividuals -> ItemID1 [dir= both]
+GraveIndividuals -> ItemID [dir= both]
 }
 subgraph{
 {rank = same Strontium HumanIsotopes Items}
-ItemID1 -> Strontium [dir = both]
-ItemID1 -> HumanIsotopes [dir = both]
+ItemID -> Strontium [dir = both]
+ItemID -> HumanIsotopes [dir = both]
 }
 subgraph cluster {
 node [shape = circle
