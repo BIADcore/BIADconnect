@@ -56,9 +56,9 @@ node [shape = circle
 item.plot
 library(rsvg)
 library(DiagrammeRsvg)
-export_svg(core.import) %>%
+export_svg(item.plot) %>%
   charToRaw %>%
-  rsvg_png("../tools/plots/database.core.import.png")
+  rsvg_png("../tools/plots/database.items.example1.png")
 
 #------------------------------------------------------------------
 # Example 2 - single buried individual with 87Sr/86Sr data from the
@@ -112,9 +112,9 @@ node [shape = circle
 item.plot
 library(rsvg)
 library(DiagrammeRsvg)
-export_svg(core.import) %>%
+export_svg(item.plot) %>%
   charToRaw %>%
-  rsvg_png("../tools/plots/database.core.import.png")
+  rsvg_png("../tools/plots/database.items.example2.png")
 
 #------------------------------------------------------------------
 # Example 3 - two individuals from a single grave, each with one radiocarbon
@@ -159,9 +159,9 @@ node [shape = circle
 item.plot
 library(rsvg)
 library(DiagrammeRsvg)
-export_svg(core.import) %>%
+export_svg(item.plot) %>%
   charToRaw %>%
-  rsvg_png("../tools/plots/database.core.import.png")
+  rsvg_png("../tools/plots/database.items.example3.png")
 
 #------------------------------------------------------------------
 # Example 4 - two individuals and a canine from a single grave, first individual with
@@ -250,9 +250,9 @@ node [shape = circle
 item.plot
 library(rsvg)
 library(DiagrammeRsvg)
-export_svg(core.import) %>%
+export_svg(item.plot) %>%
   charToRaw %>%
-  rsvg_png("../tools/plots/database.core.import.png")
+  rsvg_png("../tools/plots/database.items.example4.png")
 
 #------------------------------------------------------------------
 # Example 5 - two individuals from a single grave with one radiocarbon
@@ -314,6 +314,6 @@ node [shape = circle
 item.plot
 library(rsvg)
 library(DiagrammeRsvg)
-export_svg(core.import) %>%
+export_svg(item.plot) %>%
   charToRaw %>%
-  rsvg_png("../tools/plots/database.core.import.png")
+  rsvg_png("../tools/plots/database.items.example5.png")
