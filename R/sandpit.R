@@ -60,6 +60,154 @@ url <- "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=apples+pears&btn
 
 page <- url %>% read_html() %>% html_elements
 
+
+
+
 page <- read_html(url)
 all.links <- page%>% html_nodes("a") %>% html_attr( "href")
 #-----------------------------------------------------------------------------------------
+page <- read_html(url)
+page %>% html_elements("section")
+
+#-----------------------------------------------------------------------------------------
+url<- "https://scholar.google.com/scholar?q=adrian+timpson"
+require(rvest)
+require(xml2)
+require(selectr)
+require(stringr)
+require(jsonlite)
+require(purrr)
+
+wp <- read_html(url)
+
+titles <- html_text(html_nodes(wp, '.gs_rt'))
+authors_years <- html_text(html_nodes(wp, '.gs_a'))
+authors <- gsub('^(.*?)\\W+-\\W+.*', '\\1', authors_years, perl = TRUE)
+years <- gsub('^.*(\\d{4}).*', '\\1', authors_years, perl = TRUE)
+titles <- gsub('\\[.+?\\]', '', titles, perl = TRUE)
+titles <- trimws(titles)
+authors <- trimws(authors)
+
+leftovers <- authors_years %>% 
+		str_remove_all(authors) %>% 
+		str_remove_all(years)
+
+journals <- str_split(leftovers, "-") %>% 
+            map_chr(2) %>% 
+            str_extract_all("[:alpha:]*") %>% 
+            map(function(x) x[x != ""]) %>% 
+            map(~paste(., collapse = " ")) %>% 
+            unlist()
+
+df <- data.frame(titles = titles, authors = authors, years = years, journals = journals, stringsAsFactors = FALSE)
+
+#------------------------------------------------------------------------------------
+remotes::install_github("ropensci/fulltext")
+
+https://stackoverflow.com/questions/55064193/retrieve-citations-of-a-journal-paper-using-r
+library(fulltext)
+res1 <- ft_search(query = "Protein measurement with the folin phenol reagent", from = "crossref")
+res1 <- ft_links(res1)
+res1$crossref$ids
+
+
+
+
+
+
+
+
+
+
+
+
+
+# File-Name: GScholarScraper_3.R
+# Date: 2012-08-22
+# Author: Kay Cichini
+# Email: kay.cichini@gmail.com
+# Purpose: Scrape Google Scholar search result
+# Packages used: XML
+# Licence: CC BY-SA-NC
+#
+# Arguments:
+# (1) input:
+# A search string as used in Google Scholar search dialog
+#
+# (2) write:
+# Logical, should a table be writen to user default directory?
+# if TRUE a CSV-file with hyperlinks to the publications will be created.
+#
+# Caveat: if a submitted search string gives more than 1000 hits there seem
+# to be some problems (I guess I'm being stopped by Google for roboting the site..)
+
+GScholar_Scraper <- function(input, write = F) {
+
+    require(XML)
+
+    # putting together the search-url:
+    url <- paste("http://scholar.google.com/scholar?q=", input, "&num=1&as_sdt=1&as_vis=1", 
+        sep = "")
+
+    # get content and parse it:
+    doc <- htmlParse(url)
+    
+    # number of hits:
+    x <- xpathSApply(doc, "//div[@id='gs_ab_md']", xmlValue)
+    y <- strsplit(x, " ")[[1]][2] 
+    num <- as.integer(sub("[[:punct:]]", "", y))
+    
+    # If there are no results, stop and throw an error message:
+    if (num == 0 | is.na(num)) {
+        stop("\n\n...There is no result for the submitted search string!")
+    }
+    
+    pages.max <- ceiling(num/100)
+    
+    # 'start' as used in url:
+    start <- 100 * 1:pages.max - 100
+    
+    # Collect urls as list:
+    urls <- paste("http://scholar.google.com/scholar?start=", start, "&q=", input, 
+        "&num=100&as_sdt=1&as_vis=1", sep = "")
+    
+    scraper_internal <- function(x) {
+        
+        doc <- htmlParse(x, encoding="UTF-8")
+        
+        # titles:
+        tit <- xpathSApply(doc, "//h3[@class='gs_rt']", xmlValue)
+        
+        # publication:
+        pub <- xpathSApply(doc, "//div[@class='gs_a']", xmlValue)
+        
+        # links:
+        lin <- xpathSApply(doc, "//h3[@class='gs_rt']/a", xmlAttrs)
+        
+        # summaries are truncated, and thus wont be used..  
+        # abst <- xpathSApply(doc, '//div[@class='gs_rs']', xmlValue)
+        # ..to be extended for individual needs
+        
+        dat <- data.frame(TITLES = tit, PUBLICATION = pub, LINKS = lin)
+        return(dat)
+    }
+
+    result <- do.call("rbind", lapply(urls, scraper_internal))
+    if (write == T) {
+      result$LINKS <- paste("=Hyperlink(","\"", result$LINKS, "\"", ")", sep = "")
+      write.table(result, "GScholar_Output.CSV", sep = ";", 
+                  row.names = F, quote = F)
+      shell.exec("GScholar_Output.CSV") 
+      } else {
+      return(result)
+    }
+}
+
+input <- "allintitle:live on mars"
+x <- GScholar_Scraper(input, write = F)
+
+
+library(scholar) 
+coauthor_network <- get_coauthors('amYIKXQAAAAJ&hl')
+
+get_scholar_id(last_name = "timpson", first_name = "adrian", affiliation = NA)
