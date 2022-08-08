@@ -11,6 +11,3 @@ library(gridExtra)
 png('../tools/plots/zoptions_types.png',width=500, height=350)
 grid.table(d, theme=ttheme_minimal())
 dev.off()
-
-
-# mytheme <- ttheme_default(base_size=25)

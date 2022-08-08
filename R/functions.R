@@ -92,7 +92,7 @@ sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh)
 	if(ssh) open.ssh.tunnel(hostuser, hostname, keypath)
 	if(ssh) pids.after <- get.plink.pids()
 	if(ssh) pid <- pids.after[!pids.after%in%pids.before]
-	query <- query.database(user, password, sql.command)
+	query <- suppressWarnings(query.database(user, password, sql.command))
 	if(ssh) close.ssh.tunnel(pid)
 
 return(query)}
