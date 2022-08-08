@@ -205,7 +205,6 @@ node [shape = box
 subgraph {
 {rank = same Graves FaunalSpecies FaunalBiometrics HumanIsotopes MaterialCulture C14Samples Strontium aDNA}
 Graves -> GraveIndividuals
-ItemID1 -> Strontium  [dir = both]
 ItemID1 -> aDNA [dir = both]
 ItemID1 -> GraveIndividuals [dir = both]
 ItemID1 -> C14Samples [dir = both]
