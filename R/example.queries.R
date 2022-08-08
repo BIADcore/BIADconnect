@@ -73,4 +73,3 @@ for(n in 1:4){
 	sql.command[n] <- paste("UPDATE `BIAD`.`zprivate_encoding` SET `latin`='",new$names[n],"' WHERE `ID`='",new$id[n],"'",sep="")
 	}
 sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
-#------------------------------------------------------------------
