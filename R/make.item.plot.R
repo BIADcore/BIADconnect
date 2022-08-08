@@ -181,7 +181,7 @@ node [shape = circle
   fixedsize = true,
   width = 2,
   fontsize = 15]
-  Graves GraveIndividuals Items C14Samples FaunalSpecies FaunalBiometrics Strontium HumanIsotopes
+  Graves GraveIndividuals Items C14Samples FaunalSpecies FaunalBiometrics Strontium HumanIsotopes MaterialCulture
   }
 {
 node [shape = circle
@@ -191,7 +191,7 @@ node [shape = circle
   fixedsize = true,
   width = 2,
   fontsize = 15]
-  aDNA MaterialCulture
+  aDNA
   }  
 {
 node [shape = box
@@ -200,7 +200,7 @@ node [shape = box
   fixedsize = true,
   width = 2,
   fontsize = 15]
-  ItemID1 ItemID2 ItemID3
+  ItemID1 ItemID2
 }
 subgraph {
 {rank = same Graves FaunalSpecies FaunalBiometrics HumanIsotopes MaterialCulture C14Samples Strontium aDNA}
@@ -208,21 +208,19 @@ Graves -> GraveIndividuals
 ItemID1 -> Strontium  [dir = both]
 ItemID1 -> aDNA [dir = both]
 ItemID1 -> GraveIndividuals [dir = both]
-ItemID2 -> C14Samples [dir = both]
-ItemID2 -> Strontium [dir = both]
+ItemID1 -> C14Samples [dir = both]
+ItemID1 -> Strontium [dir = both]
 ItemID2 -> GraveIndividuals [dir = both]
-ItemID3 -> GraveIndividuals [dir = both]
-ItemID3 -> MaterialCulture [dir = both]
-ItemID3 -> FaunalBiometrics [dir = both]
-ItemID3 -> FaunalSpecies [dir = both]
-ItemID3 -> HumanIsotopes [dir = both]
-ItemID3 -> Graves [dir=both]
+ItemID2 -> MaterialCulture [dir = both]
+ItemID2 -> FaunalBiometrics [dir = both]
+ItemID2 -> FaunalSpecies [dir = both]
+ItemID2 -> HumanIsotopes [dir = both]
+ItemID2 -> Graves [dir=both]
 }
 subgraph {
-{rank = same ItemID1 ItemID2 ItemID3}
+{rank = same ItemID1 ItemID2}
 Items -> ItemID1
 Items -> ItemID2
-Items -> ItemID3
 }
 subgraph cluster {
 node [shape = circle
@@ -279,21 +277,19 @@ node [shape = circle
   fixedsize = true,
   width = 2,
   fontsize = 15]
-  ItemID1 ItemID2
+  ItemID1
   }
 subgraph{
 {rank = same GraveIndividuals}
 Items -> ItemID1
-Items -> ItemID2
 }
 subgraph{
 GraveIndividuals -> ItemID1 [dir= both]
-GraveIndividuals -> ItemID2 [dir = both]
 }
 subgraph{
 {rank = same Strontium HumanIsotopes Items}
 ItemID1 -> Strontium [dir = both]
-ItemID2 -> HumanIsotopes [dir = both]
+ItemID1 -> HumanIsotopes [dir = both]
 }
 subgraph cluster {
 node [shape = circle
