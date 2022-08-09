@@ -41,11 +41,11 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.citations.R at Tue Aug  9 07:15:02 2022"
+[1] "Starting to run script: auto.make.daily.citations.R at Tue Aug  9 12:49:01 2022"
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Tue Aug  9 07:15:04 2022"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Tue Aug  9 12:49:03 2022"
 Error in library(DiagrammeR) : there is no package called 'DiagrammeR'
 Calls: source -> withVisible -> eval -> eval -> library
 Execution halted
