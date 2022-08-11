@@ -162,7 +162,8 @@ get.tables.from.backup <- function(file){
 				d <- substr(d,1,nchar(d)-2)
 				d <- gsub("\\'","´", d, fixed=TRUE)
 				d <- strsplit(d, split='),(', fixed=T)[[1]]
-				data <- read.table(text=d,sep=',', col.names=column.names, encoding = "UTF-8")
+				data <- read.table(text=d,sep=',', col.names=column.names, encoding = "UTF-8",stringsAsFactors=F)
+				data[data=='NULL'] <- NA
 				i <- i + 1
 				tables[[i]] <- data
 				names(tables)[i] <- table.name	
