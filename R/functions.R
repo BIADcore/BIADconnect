@@ -137,5 +137,37 @@ create.markdown.for.table.content <- function(x, d.cols, file){
 	text <- c(text, '***')
 	writeLines(text, con=file, useBytes = TRUE )
 return(NULL)}
+#-----------------------------------------------------------------------------------------
+get.tables.from.backup <- function(file){
+	tables <- list()
+	
+	raw <- readLines(file)
+	start.posts <- grep('CREATE TABLE', raw)
+	end.posts <- grep('Dumping data for table', raw)
+	
+	N <- length(start.posts)
+	i <- 0
+	for(n in 1:N){		
+		table.info <- raw[start.posts[n]:end.posts[n]]
+		table.name <- regmatches(table.info[1], gregexpr("(?<=\`)(.*?)(?=\`)", table.info[1], perl=T))[[1]]
+		key.row <- grep('KEY|CONSTRAINT|ENGINE', table.info)[1]
+		column.info <- table.info[2:(key.row -1)]
+		column.names <- unlist(regmatches(column.info, gregexpr("(?<=\`)(.*?)(?=\`)", column.info, perl=T)))
+		
+		# just keep main tables
+		if(!grepl('zoptions|zprivate',table.name)){
+			d <- raw[grep(paste("INSERT INTO `",table.name,"` VALUES ",sep=''),raw)]
+			if(length(d)>0){
+				d <- gsub(paste("INSERT INTO `",table.name,"` VALUES (",sep=''),"", d, fixed=TRUE)
+				d <- substr(d,1,nchar(d)-2)
+				d <- gsub("\\'","´", d, fixed=TRUE)
+				d <- strsplit(d, split='),(', fixed=T)[[1]]
+				data <- read.table(text=d,sep=',', col.names=column.names, encoding = "UTF-8")
+				i <- i + 1
+				tables[[i]] <- data
+				names(tables)[i] <- table.name	
+				}
+			}
+		}
+return(tables)}
 #--------------------------------------------------------------------------------------------------
-
