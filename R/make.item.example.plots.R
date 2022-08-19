@@ -60,17 +60,17 @@ rankdir=LR;
 
 strontium[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td colspan="4"><font color="blue">Strontium</font></td></tr>
-<tr><td>StrontiumID</td><td>IndividualID</td><td>ItemID</td><td>87Sr/86Sr</td></tr>
-<tr><td port="1">sr01</td><td>ind01</td><td>it01</td><td>0.70789</td></tr>
+<tr><td colspan="5"><font color="blue">Strontium</font></td></tr>
+<tr><td>StrontiumID</td><td>IndividualID</td><td>ItemID</td><td>Element</td><td>87Sr/86Sr</td></tr>
+<tr><td port="1">sr01</td><td>ind01</td><td>it01</td><td>upper right M1</td><td>0.70789</td></tr>
 </table>>];
 
 c14samples[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td colspan="3"><font color="blue">C14Samples</font></td></tr>
-<tr><td>C14ID</td><td>ItemID</td><td>LabID</td></tr>
-<tr><td port="1">c01</td><td>it01</td><td>OxA-1234</td></tr>
-<tr><td port="2">c02</td><td>it02</td><td>OxA-5678</td></tr>
+<tr><td colspan="4"><font color="blue">C14Samples</font></td></tr>
+<tr><td>C14ID</td><td>ItemID</td><td>LabID</td><td>Element</td></tr>
+<tr><td port="1">c01</td><td>it01</td><td>OxA-1234</td><td>upper right M1</td></tr>
+<tr><td port="2">c02</td><td>it02</td><td>OxA-5678</td><td>lower left M2</td></tr>
  </table>>];
 
 graveindividuals[ label=<
