@@ -1,13 +1,7 @@
-#------------------------------------------------------------------
-# Example R script for plotting database relationships between tables
-#------------------------------------------------------------------
-# Created: 28.07.2022
-# Last modified: 28.07.2022
-#------------------------------------------------------------------
+#----------------------------------------------------------------------------------
+# script to plot database relationships
+#----------------------------------------------------------------------------------
 # Pull all foreign keys
-#------------------------------------------------------------------
-source('functions.R')
-
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='BIAD';"	
 d.tables <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)$TABLE_NAME	
 
