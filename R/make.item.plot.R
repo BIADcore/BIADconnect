@@ -1,71 +1,38 @@
 #------------------------------------------------------------------
-# Example R script for relationships used in Items table
+# R script for relationships used in Items table
 #------------------------------------------------------------------
-# Created: 03.08.2022
-# Last modified: 03.08.2022
-
-#------------------------------------------------------------------
-# Example 1 - single buried individual with 87Sr/86Sr δ13C and δ15N
-# data from the upper right M1 tooth
-#------------------------------------------------------------------
-
 library(DiagrammeR)
-item.plot <- DiagrammeR::grViz("
-digraph {
- node [shape = record];
-{
-node [shape = circle
-  style = filled,
-  fillcolor = orange,
-  fixedsize = true,
-  width = 2,
-  fontsize = 15]
-  Items Strontium HumanIsotopes GraveIndividuals
-  }
-{
-node [shape = box
-  style = filled
-  fillcolor = white
-  fixedsize = true,
-  width = 2,
-  fontsize = 15]
-  ItemID
-}
-{
-GraveIndividuals -> ItemID [dir = both]
-Items -> ItemID
-ItemID -> Strontium [dir = both]
-ItemID -> HumanIsotopes [dir = both]
-}
-subgraph cluster {
-node [shape = circle
-  style = filled,
-  fillcolor = orange,
-  fixedsize = true,
-  width = 1.2,
-  fontsize = 10]
-  DataTable
-  node [shape = box
-  fillcolor = white,
-  fixedsize = true,
-  width = 1.2
-  fontsize = 10]
-  DataID}
-}
-")
-item.plot
 library(rsvg)
 library(DiagrammeRsvg)
-export_svg(item.plot) %>%
-  charToRaw %>%
-  rsvg_png("../tools/plots/database.items.example1.png")
-
 #------------------------------------------------------------------
-# Example 2 - single buried individual with 87Sr/86Sr data from the
-# lower left M1 and a radiocarbon date from the right femur
+# Example 1 
+# A single human individual with 87Sr/86Sr, δ13C and δ15N data from the upper right M1 tooth
 #------------------------------------------------------------------
+item.plot <- grViz("
+digraph {	
+graph [layout = dot,rankdir = LR]
+{
+node [shape = oval, style = filled, fillcolor = skyblue, height = 1, width = 3, fontsize = 15, fontname = Helvetica] 
+Sites Phases Graves GraveIndividuals Strontium C14Samples
+}
 
-library(DiagrammeR)
+{
+Sites -> Phases [dir=none, penwidth=3, label='SiteID']
+Phases -> Graves [dir=none, penwidth=3, label='PhaseID']
+Graves -> GraveIndividuals [dir=none, penwidth=3, label='GraveID']
+GraveIndividuals -> Strontium [dir=none, penwidth=3, label='IndividualID']
+Phases -> C14Samples [dir=none, penwidth=3, label='PhaseID']
+}
+}",height=200)
+
+item.plot
+
+
+export_svg(item.plot) %>% charToRaw %>% rsvg_png("../tools/plots/database.items.example1.png")
+#------------------------------------------------------------------
+# Example 2
+# A single human individual with 87Sr/86Sr data from the lower left M1 and a radiocarbon date from the right femur
+#------------------------------------------------------------------
 item.plot <- DiagrammeR::grViz("
 digraph {
  node [shape = record];
@@ -110,18 +77,13 @@ node [shape = circle
 }
 ")
 item.plot
-library(rsvg)
-library(DiagrammeRsvg)
 export_svg(item.plot) %>%
   charToRaw %>%
   rsvg_png("../tools/plots/database.items.example2.png")
 
 #------------------------------------------------------------------
-# Example 3 - two individuals from a single grave, each with one radiocarbon
-# date
+# Example 3 - two individuals from a single grave, each with one radiocarbon date
 #------------------------------------------------------------------
-
-library(DiagrammeR)
 item.plot <- DiagrammeR::grViz("
 digraph circo{
  node [shape = record];
@@ -157,8 +119,6 @@ node [shape = circle
 }
 ")
 item.plot
-library(rsvg)
-library(DiagrammeRsvg)
 export_svg(item.plot) %>%
   charToRaw %>%
   rsvg_png("../tools/plots/database.items.example3.png")
@@ -169,8 +129,6 @@ export_svg(item.plot) %>%
 # for radiocarbon data, second individual's tooth samled for carbon and nitrogen,
 # canine sampled for faunal data
 #------------------------------------------------------------------
-
-library(DiagrammeR)
 item.plot <- DiagrammeR::grViz("
 digraph {
  node [shape = record];
@@ -244,8 +202,6 @@ node [shape = circle
 }
 ")
 item.plot
-library(rsvg)
-library(DiagrammeRsvg)
 export_svg(item.plot) %>%
   charToRaw %>%
   rsvg_png("../tools/plots/database.items.example4.png")
@@ -254,8 +210,6 @@ export_svg(item.plot) %>%
 # Example 5 - two individuals from a single grave with one radiocarbon
 # date each
 #------------------------------------------------------------------
-
-library(DiagrammeR)
 item.plot <- DiagrammeR::grViz("
 digraph circo{
  node [shape = record];
@@ -306,8 +260,10 @@ node [shape = circle
 }
 ")
 item.plot
-library(rsvg)
-library(DiagrammeRsvg)
 export_svg(item.plot) %>%
   charToRaw %>%
   rsvg_png("../tools/plots/database.items.example5.png")
+
+#------------------------------------------------------------------------------------
+
+
