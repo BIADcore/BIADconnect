@@ -48,6 +48,23 @@ phases:1 -> c14samples:1 [dir="both"]
 graves:1 -> graveindividuals:1 [dir="both"]
 graveindividuals:1 -> strontium:1 [dir="both"]
 }'
+
+#-----------------------------------------------------------------------------------------
+# example 1 venn diagram
+#-----------------------------------------------------------------------------------------
+png('../tools/plots/items.example.1.venn.png',width=700,height=200)
+par(mar=c(0,0,0,0))
+plot(NULL, xlim=c(0,1),ylim=c(0,1),xlab='',ylab='',xaxt='n',yaxt='n',bty='n')
+rect(0.1,0.1,0.9,0.9,border='steelblue',lwd=3)
+rect(0.2,0.3,0.4,0.7,border='steelblue',lwd=3)
+rect(0.6,0.3,0.8,0.7,border='steelblue',lwd=3)
+text(x=0.3,y=0.55,'c01',cex=1.3)
+text(x=0.3,y=0.45,'sr01',cex=1.3)
+text(x=0.7,y=0.5,'c02',cex=1.3)
+text(x=0.3,y=0.35,'upper right M1',cex=1,col='steelblue')
+text(x=0.7,y=0.35,'lower left M2',cex=1,col='steelblue')
+text(x=0.5,y=0.15,'ind01',cex=1,col='steelblue')
+dev.off()
 #-----------------------------------------------------------------------------------------
 # example.1
 #-----------------------------------------------------------------------------------------
