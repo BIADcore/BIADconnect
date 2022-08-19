@@ -16,32 +16,32 @@ rankdir=LR;
 
 sites[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td port="1"><font color="#33DAFF">Sites</font></td></tr>
+<tr><td port="1"><font color="Steelblue">Sites</font></td></tr>
 </table>>];
 
 phases[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td port="1"><font color="#33DAFF">Phases</font></td></tr>
+<tr><td port="1"><font color="Steelblue">Phases</font></td></tr>
 </table>>];
 
 graves[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td port="1"><font color="#33DAFF">Graves</font></td></tr>
+<tr><td port="1"><font color="Steelblue">Graves</font></td></tr>
 </table>>];
 
 c14samples[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td port="1"><font color="#33DAFF">C14Samples</font></td></tr>
+<tr><td port="1"><font color="Steelblue">C14Samples</font></td></tr>
 </table>>];
 
 graveindividuals[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td port="1"><font color="#33DAFF">GraveIndividuals</font></td></tr>
+<tr><td port="1"><font color="Steelblue">GraveIndividuals</font></td></tr>
 </table>>];
 
 strontium[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td port="1"><font color="#33DAFF">Strontium</font></td></tr>
+<tr><td port="1"><font color="Steelblue">Strontium</font></td></tr>
 </table>>];
 
 sites:1 -> phases:1 [dir="both"]
@@ -60,14 +60,14 @@ rankdir=LR;
 
 strontium[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td colspan="5"><font color="#33DAFF">Strontium</font></td></tr>
+<tr><td colspan="5"><font color="Steelblue"><b>Strontium</b></font></td></tr>
 <tr><td>StrontiumID</td><td>IndividualID</td><td>ItemID</td><td>Element</td><td>87Sr/86Sr</td></tr>
 <tr><td port="1">sr01</td><td>ind01</td><td>it01</td><td>upper right M1</td><td>0.70789</td></tr>
 </table>>];
 
 c14samples[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td colspan="4"><font color="#33DAFF">C14Samples</font></td></tr>
+<tr><td colspan="4"><font color="Steelblue"><b>C14Samples</b></font></td></tr>
 <tr><td>C14ID</td><td>ItemID</td><td>LabID</td><td>Element</td></tr>
 <tr><td port="1">c01</td><td>it01</td><td>OxA-1234</td><td>upper right M1</td></tr>
 <tr><td port="2">c02</td><td>it02</td><td>OxA-5678</td><td>lower left M2</td></tr>
@@ -75,14 +75,14 @@ c14samples[ label=<
 
 graveindividuals[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td colspan="3"><font color="#33DAFF">GraveIndividuals</font></td></tr>
+<tr><td colspan="3"><font color="Steelblue"><b>GraveIndividuals</b></font></td></tr>
 <tr><td>IndividualID</td><td>GraveID</td><td>ItemID</td></tr>
 <tr><td port="1">ind01</td><td>grave01</td><td>it02</td></tr>
 </table>>];
 
 items[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td><font color="#33DAFF">Items</font></td></tr>
+<tr><td><font color="Steelblue"><b>Items</b></font></td></tr>
 <tr><td>ItemID</td></tr>
 <tr><td port="1">it01</td></tr>
 <tr><td port="2">it02</td></tr>
