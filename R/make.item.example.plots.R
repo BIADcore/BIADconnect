@@ -5,11 +5,9 @@ library(DiagrammeR)
 library(rsvg)
 library(DiagrammeRsvg)
 #-----------------------------------------------------------------------------------------
-# example 1
-#-----------------------------------------------------------------------------------------
 # overview
 #-----------------------------------------------------------------------------------------
-example.1.overview <- '
+overview <- '
 digraph cluster {
 node[ shape = none, fontname = "Arial" ]
 rankdir=LR;
@@ -51,9 +49,9 @@ graves:1 -> graveindividuals:1 [dir="both"]
 graveindividuals:1 -> strontium:1 [dir="both"]
 }'
 #-----------------------------------------------------------------------------------------
-# items
+# example.1
 #-----------------------------------------------------------------------------------------
-example.1.items <- '
+example.1 <- '
 digraph cluster {
 node[ shape = none, fontname = "Arial" ]
 rankdir=LR;
@@ -95,6 +93,6 @@ items:2 -> graveindividuals:1 [dir="both"]
 
 }'
 #-----------------------------------------------------------------------------------------
-export_svg(grViz(diagram=example.1.overview)) %>% charToRaw %>% rsvg_png("../tools/plots/items.example.1.overview.png")
-export_svg(grViz(diagram=example.1.items)) %>% charToRaw %>% rsvg_png("../tools/plots/items.example.1.items.png")
+export_svg(grViz(diagram=overview)) %>% charToRaw %>% rsvg_png("../tools/plots/items.overview.png")
+export_svg(grViz(diagram=example.1)) %>% charToRaw %>% rsvg_png("../tools/plots/items.example.1.png")
 #-----------------------------------------------------------------------------------------
