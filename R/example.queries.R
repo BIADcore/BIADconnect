@@ -73,3 +73,14 @@ for(n in 1:4){
 	sql.command[n] <- paste("UPDATE `BIAD`.`zprivate_encoding` SET `latin`='",new$names[n],"' WHERE `ID`='",new$id[n],"'",sep="")
 	}
 sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+#------------------------------------------------------------------
+# Example 6: check if LabIDs exist in the C14Samples table
+#------------------------------------------------------------------
+source('functions.R')
+library(dplyr)
+sql.command <- "SELECT LabID FROM C14Samples"
+query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+head(query)
+head(testc14)
+test <- merge(query, testc14, by = "LabID")
+test
