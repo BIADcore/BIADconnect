@@ -88,3 +88,12 @@ sql.command <- "SELECT GraveID, Graves.PhaseID, SiteID, Period FROM Graves JOIN 
 query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 test <- merge(query, test, by = "GraveID")
 write.csv(test, "metadata.csv")
+#------------------------------------------------------------------
+# Example 8: use IndividualID's to import ItemIDs
+#------------------------------------------------------------------
+source('functions.R')
+sql.command <- "SELECT * FROM GraveIndividuals"
+query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+test <- merge(query, test, by = "IndividualID")
+test
+write.csv(test, "metadata.csv")
