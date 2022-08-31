@@ -77,10 +77,14 @@ sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 # Example 6: check if LabIDs exist in the C14Samples table
 #------------------------------------------------------------------
 source('functions.R')
-library(dplyr)
 sql.command <- "SELECT LabID FROM C14Samples"
 query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
-head(query)
-head(testc14)
-test <- merge(query, testc14, by = "LabID")
-test
+test <- merge(query, test, by = "LabID")
+#------------------------------------------------------------------
+# Example 7: use GraveID's to extract associated metadata for the C14Samples
+#------------------------------------------------------------------
+source('functions.R')
+sql.command <- "SELECT GraveID, Graves.PhaseID, SiteID, Period FROM Graves JOIN Phases ON Graves.PhaseID = Phases.PhaseID GROUP BY GraveID ORDER BY GraveID"
+query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+test <- merge(query, test, by = "GraveID")
+write.csv(test, "metadata.csv")
