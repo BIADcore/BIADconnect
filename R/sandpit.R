@@ -7,7 +7,7 @@ source('functions.R')
 #-----------------------------------------------------------------------------------------
 fau <- sql.wrapper("SELECT * FROM BIAD.zoptions_FaunalTaxaList",user,password,hostname,hostuser,keypath,ssh)
 abo <- sql.wrapper("SELECT * FROM BIAD.zoptions_ABotTaxaList",user,password,hostname,hostuser,keypath,ssh)
-
+####
 a <- fau$TaxonCode
 b <- tolower(abo$TaxonCode)
 same <- a[a%in%b]
