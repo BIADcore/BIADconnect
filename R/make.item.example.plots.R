@@ -130,10 +130,10 @@ items[ label=<
 <tr><td port="2">it02</td></tr>
 </table>>];
 
-items:1 -> c14samples:1 [dir="both"]
-items:1 -> strontium:1 [dir="both"]
-items:2 -> c14samples:2 [dir="both"]
-items:2 -> graveindividuals:1 [dir="both"]
+#items:1 -> c14samples:1 [dir="both"]
+#items:1 -> strontium:1 [dir="both"]
+#items:2 -> c14samples:2 [dir="both"]
+#items:2 -> graveindividuals:1 [dir="both"]
 
 }'
 #-----------------------------------------------------------------------------------------
