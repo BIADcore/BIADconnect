@@ -15,6 +15,29 @@ same
 
 subset(fau, TaxonCode%in%same)
 subset(abo, TaxonCode%in%toupper(same))
+
+#-----------------------------------------------------------------------------------------
+# Jan
+#-----------------------------------------------------------------------------------------
+d <- read.csv('test.csv')
+d <- as.matrix(d)
+biad <- d[,c(1,3)]
+czech <- d[,c(2,4)]
+match <- !is.na(biad) &  !is.na(czech) & biad==czech
+biad.value <- !is.na(biad)
+czech.value <- !is.na(czech)
+
+keep.either <- match
+keep.biad <- !match & !czech.value
+keep.czech <- !match & !biad.value
+flag <- !match & biad.value & czech.value
+
+new.table <- biad
+new.table[keep.either] <- biad[keep.either]
+new.table[keep.biad] <- biad[keep.biad]
+new.table[keep.czech] <- czech[keep.czech]
+new.table[flag] <- paste(biad[flag],'::OR::',czech[flag])
+
 #-----------------------------------------------------------------------------------------
 # import problems
 #-----------------------------------------------------------------------------------------
