@@ -1,17 +1,12 @@
 #------------------------------------------------------------------
-sql.command <- "SELECT * FROM BIAD.Sites"
+sql.command <- "SELECT `Longitude`,`Latitude` FROM `BIAD`.`Sites`"
 d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
-#------------------------------------------------------------------
-xmn <- min(d$Longitude, na.rm=T)
-xmx <- max(d$Longitude, na.rm=T)
-ymn <- min(d$Latitude, na.rm=T)
-ymx <- max(d$Latitude, na.rm=T)
 #-----------------------------------------------------------------
 require(ggplot2)
 require(sf)
 require(rnaturalearth)
 require(rnaturalearthdata)
-
+#-----------------------------------------------------------------
 xmean <- mean(d$Longitude, na.rm=T)
 ymean <- mean(d$Latitude, na.rm=T)
 
@@ -30,6 +25,4 @@ coord_sf(xlim=st_bbox(points$geometry)[c('xmin','xmax')],ylim=st_bbox(points$geo
 theme(panel.background=element_rect(fill='steelblue2'))
 
 ggsave(file = '../tools/plots/map.svg', plot=map, width = 20, height = 15 )
-#------------------------------------------------------------------
-
 #-----------------------------------------------------------------
