@@ -6,6 +6,7 @@
 # this script decides when to run which script, based on the filename.
 #------------------------------------------------------------------
 source('functions.R')
+source('.Rprofile')
 #------------------------------------------------------------------
 run.day <- 'Mon'
 today <- strsplit(date(),split=' ')[[1]][1]
