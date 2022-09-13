@@ -7,7 +7,7 @@
 #-----------------------------------------------------------------------------------------
 # check for users that are missing from the zprivate_users table
 #-----------------------------------------------------------------------------------------
-d1 <- sql.wrapper(sql.command = "SELECT User FROM mysql.db WHERE Db='BIAD'",user,password,hostname,hostuser,keypath,ssh)
+d1 <- sql.wrapper(sql.command = "SELECT User FROM mysql.db WHERE Db='biad'",user,password,hostname,hostuser,keypath,ssh)
 d2 <- sql.wrapper(sql.command = "SELECT * FROM BIAD.zprivate_users",user,password,hostname,hostuser,keypath,ssh)
 
 d <- merge(d1,d2,by.x='User',by.y='user',all=T)
