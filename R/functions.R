@@ -73,7 +73,8 @@ query.database <- function(user, password, sql.command){
 	for(con in cons)dbDisconnect(con)
 
 	# connect locally to the database
-	con <- dbConnect(drv, user=user, pass=password, dbname='BIAD', host = "127.0.0.1", port=3306)
+#	con <- dbConnect(drv, user=user, pass=password, dbname='BIAD', host = "127.0.0.1", port=3306)
+	con <- dbConnect(drv, user=user, pass=password, dbname='BIAD', host = "localhost", port=3306)
 	dbSendQuery(con,"SET NAMES 'utf8'")
 
 	# query the database and tidy
@@ -87,15 +88,15 @@ query.database <- function(user, password, sql.command){
 return(query)}
 #--------------------------------------------------------------------------------------------------
 sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh){
-  
-  if(ssh) pids.before <- get.plink.pids()
-  if(ssh) open.ssh.tunnel(hostuser, hostname, keypath)
-  query <- suppressWarnings(query.database(user, password, sql.command))
-  if(ssh) pids.after <- get.plink.pids()
-  if(ssh) pid <- pids.after[!pids.after%in%pids.before]
-  if(ssh) close.ssh.tunnel(pid)
-  
-  return(query)}
+
+	if(ssh) pids.before <- get.plink.pids()
+	if(ssh) open.ssh.tunnel(hostuser, hostname, keypath)
+	if(ssh) pids.after <- get.plink.pids()
+	if(ssh) pid <- pids.after[!pids.after%in%pids.before]
+	query <- suppressWarnings(query.database(user, password, sql.command))
+	if(ssh) close.ssh.tunnel(pid)
+
+return(query)}
 #--------------------------------------------------------------------------------------------------
 create.markdown.for.single.table <- function(d.tables, d.cols, table.name){
 	
