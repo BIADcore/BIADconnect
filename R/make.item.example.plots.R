@@ -63,7 +63,7 @@ text(x=0.3,y=0.45,'sr01',cex=1.3)
 text(x=0.7,y=0.5,'c02',cex=1.3)
 text(x=0.3,y=0.35,'upper right M1',cex=1,col='steelblue')
 text(x=0.7,y=0.35,'lower left M2',cex=1,col='steelblue')
-text(x=0.5,y=0.05,'individual ind01',cex=1,col='steelblue')
+text(x=0.5,y=0.05,'individual indiv01',cex=1,col='steelblue')
 dev.off()
 #-----------------------------------------------------------------------------------------
 # example 2 venn diagram
@@ -102,32 +102,32 @@ rankdir=LR;
 
 strontium[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td colspan="5"><font color="Steelblue"><b>Strontium</b></font></td></tr>
-<tr><td>StrontiumID</td><td>IndividualID</td><td>ItemID</td><td>Element</td><td>87Sr/86Sr</td></tr>
-<tr><td port="1">sr01</td><td>ind01</td><td>it01</td><td>upper right M1</td><td>0.70789</td></tr>
+<tr><td colspan="6"><font color="Steelblue"><b>Strontium</b></font></td></tr>
+<tr><td>StrontiumID</td><td>IndividualID</td><td>ItemID</td><td>Element</td><td>87Sr/86Sr</td><td>etc...</td></tr>
+<tr><td port="1">sr01</td><td>ind01</td><td>it01</td><td>upper right M1</td><td>0.70789</td><td></td></tr>
 </table>>];
 
 c14samples[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td colspan="4"><font color="Steelblue"><b>C14Samples</b></font></td></tr>
-<tr><td>C14ID</td><td>ItemID</td><td>LabID</td><td>Element</td></tr>
-<tr><td port="1">c01</td><td>it01</td><td>OxA-1234</td><td>upper right M1</td></tr>
-<tr><td port="2">c02</td><td>it02</td><td>OxA-5678</td><td>lower left M2</td></tr>
+<tr><td colspan="5"><font color="Steelblue"><b>C14Samples</b></font></td></tr>
+<tr><td>C14ID</td><td>ItemID</td><td>LabID</td><td>Element</td><td>etc...</td></tr>
+<tr><td port="1">c01</td><td>it01</td><td>OxA-1234</td><td>upper right M1</td><td></td></tr>
+<tr><td port="2">c02</td><td>it02</td><td>OxA-5678</td><td>lower left M2</td><td></td></tr>
  </table>>];
 
 graveindividuals[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td colspan="3"><font color="Steelblue"><b>GraveIndividuals</b></font></td></tr>
-<tr><td>IndividualID</td><td>GraveID</td><td>ItemID</td></tr>
-<tr><td port="1">ind01</td><td>grave01</td><td>it02</td></tr>
+<tr><td colspan="4"><font color="Steelblue"><b>GraveIndividuals</b></font></td></tr>
+<tr><td>IndividualID</td><td>GraveID</td><td>ItemID</td><td>etc...</td></tr>
+<tr><td port="1">ind01</td><td>grave01</td><td>it02</td><td></td></tr>
 </table>>];
 
 items[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-<tr><td><font color="Steelblue"><b>Items</b></font></td></tr>
-<tr><td>ItemID</td></tr>
-<tr><td port="1">it01</td></tr>
-<tr><td port="2">it02</td></tr>
+<tr><td colspan="2"><font color="Steelblue"><b>Items</b></font></td></tr>
+<tr><td>ItemID</td><td>etc...</td></tr>
+<tr><td port="1">it01</td><td></td></tr>
+<tr><td port="2">it02</td><td></td></tr>
 </table>>];
 
 #items:1 -> c14samples:1 [dir="both"]
@@ -137,6 +137,56 @@ items[ label=<
 
 }'
 #-----------------------------------------------------------------------------------------
+# example.2
+#-----------------------------------------------------------------------------------------
+example.2 <- '
+digraph cluster {
+node[ shape = none, fontname = "Arial" ]
+rankdir=LR;
+
+c14samples[ label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+<tr><td colspan="6"><font color="Steelblue"><b>C14Samples</b></font></td></tr>
+<tr><td>C14ID</td><td>ItemID</td><td>LabID</td><td>Element</td><td>Species</td><td>etc...</td></tr>
+<tr><td>c01</td><td>it01</td><td>OxA-123</td><td>M1 tooth</td><td>human</td><td></td></tr>
+<tr><td>c02</td><td>it02</td><td>OxA-456</td><td>M2 tooth</td><td>human</td><td></td></tr>
+<tr><td>c03</td><td>it03</td><td>OxA-789</td><td></td><td>dog</td><td></td></tr>
+ </table>>];
+
+graveindividuals[ label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+<tr><td colspan="4"><font color="Steelblue"><b>GraveIndividuals</b></font></td></tr>
+<tr><td>IndividualID</td><td>GraveID</td><td>ItemID</td><td>etc...</td></tr>
+<tr><td>ind01</td><td>gr01</td><td>it02</td><td></td></tr>
+<tr><td>ind02</td><td>gr01</td><td></td><td></td></tr>
+</table>>];
+
+items[ label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+<tr><td colspan="2"><font color="Steelblue"><b>Items</b></font></td></tr>
+<tr><td>ItemID</td><td>etc...</td></tr>
+<tr><td>it01</td><td></td></tr>
+<tr><td>it02</td><td></td></tr>
+<tr><td>it03</td><td></td></tr>
+</table>>];
+
+graves[ label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+<tr><td colspan="3"><font color="Steelblue"><b>Graves</b></font></td></tr>
+<tr><td>GraveID</td><td>ItemID</td><td>etc...</td></tr>
+<tr><td>gr01</td><td>it03</td><td></td></tr>
+</table>>];
+
+humanisotopes[ label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+<tr><td colspan="5"><font color="Steelblue"><b>HumanIsotopes</b></font></td></tr>
+<tr><td>HumanIsoID</td><td>IndividualID</td><td>ItemID</td><td>SkeletalElement</td><td>etc...</td></tr>
+<tr><td>h01</td><td>ind01</td><td>it01</td><td>M1 tooth</td><td></td></tr>
+</table>>];
+
+}'
+#-----------------------------------------------------------------------------------------
 export_svg(grViz(diagram=overview)) %>% charToRaw %>% rsvg_png("../tools/plots/items.overview.png")
 export_svg(grViz(diagram=example.1)) %>% charToRaw %>% rsvg_png("../tools/plots/items.example.1.png")
+export_svg(grViz(diagram=example.2)) %>% charToRaw %>% rsvg_png("../tools/plots/items.example.2.png")
 #-----------------------------------------------------------------------------------------
