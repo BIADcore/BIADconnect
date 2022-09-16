@@ -1,16 +1,15 @@
 #------------------------------------------------------------------
 # Example R script for directly querying BIAD using the RMySQL package
 #------------------------------------------------------------------
-# First obtain the following objects from the BIAD administrator.
-# Put them in a .Rprofile file, in the same folder that this script is in.
+# First set up your .Rprofile file, in the same folder that this script is in.
 #------------------------------------------------------------------
+source('.Rprofile')
 source('functions.R')
 
 sit <- sql.wrapper("SELECT * FROM `Sites`",user,password,hostname,hostuser,keypath,ssh)
 pha <- sql.wrapper("SELECT * FROM `Phases`",user,password,hostname,hostuser,keypath,ssh)
 c14 <- sql.wrapper("SELECT * FROM `C14Samples`",user,password,hostname,hostuser,keypath,ssh)
 gra <- sql.wrapper("SELECT * FROM `Graves`",user,password,hostname,hostuser,keypath,ssh)
-
 #------------------------------------------------------------------
 # loop 
 #------------------------------------------------------------------
