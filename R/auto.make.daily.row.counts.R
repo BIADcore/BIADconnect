@@ -7,16 +7,19 @@ d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema='BIAD';"	
 d.cols <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)	
 #-----------------------------------------------------------------------------------------
-# Pull out just the main tables
 all <- d$TABLE_NAME
 zprivate <- all[grepl('zprivate', all)]
 zoptions <- all[grepl('zoptions', all)]
 copy <- all[grepl('_copy', all)]
 standard <- all[!all%in%c(zprivate,zoptions,copy)]
+lookup <- zoptions[!zoptions%in%copy]
 
-x <- subset(d, TABLE_NAME%in%standard)
-x <- subset(x, TABLE_ROWS>100)
+standard <- subset(d, TABLE_NAME%in%standard)
+standard <- subset(standard, TABLE_ROWS>10)
 
-file = '../../Gists/summary_stats/row_counts/row_counts.md'
-create.markdown.for.table.content(x, d.cols, file)
+lookup <- subset(d, TABLE_NAME%in%lookup)
+lookup <- subset(standard, TABLE_ROWS>1)
+
+create.markdown.for.table.content(standard, d.cols, file = '../../Gists/summary_stats/row_counts/row_counts.md')
+create.markdown.for.table.content(lookup, d.cols, file = '../../Gists/summary_stats/row_counts/row_counts.md')
 #-----------------------------------------------------------------------------------------
