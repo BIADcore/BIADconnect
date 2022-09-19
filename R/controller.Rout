@@ -42,27 +42,48 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Sun Sep 18 12:49:01 2022"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Mon Sep 19 07:15:01 2022"
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
 Linking to librsvg 2.48.4
-[1] "Starting to run script: auto.make.daily.descriptions.R at Sun Sep 18 12:49:05 2022"
-[1] "Starting to run script: auto.make.daily.map.R at Sun Sep 18 12:49:05 2022"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Mon Sep 19 07:15:05 2022"
+[1] "Starting to run script: auto.make.daily.map.R at Mon Sep 19 07:15:05 2022"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
 Loading required package: rnaturalearth
 Loading required package: rnaturalearthdata
-[1] "Starting to run script: auto.make.daily.row.counts.R at Sun Sep 18 12:49:09 2022"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Sun Sep 18 12:49:09 2022"
-[1] "Starting to run script: auto.make.daily.table.png.R at Sun Sep 18 12:49:09 2022"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Mon Sep 19 07:15:09 2022"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Mon Sep 19 07:15:09 2022"
+[1] "Starting to run script: auto.make.daily.table.png.R at Mon Sep 19 07:15:09 2022"
 > 
 > if(NW>0 & today==run.day)for(n in 1:NW){
 + 	file <- weekly.files[n]
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
+[1] "Starting to run script: auto.make.weekly.user.citation.hygiene.R at Mon Sep 19 07:15:13 2022"
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+Auto-refreshing stale OAuth token.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+[1] "Starting to run script: auto.make.weekly.user.email.checks.R at Mon Sep 19 07:15:16 2022"
 > 
 > #------------------------------------------------------------------
 > 	
@@ -72,4 +93,4 @@ Loading required package: rnaturalearthdata
 > 
 > proc.time()
    user  system elapsed 
- 11.024   0.699  11.982 
+ 11.883   0.711  14.791 
