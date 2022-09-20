@@ -59,9 +59,12 @@ close.ssh.tunnel <- function(pid){
 		}
 	if(system=='unix'){
 #		cmd <- paste("kill -9 ",pid,sep='')
-		cmd <- paste("killall ",pid,sep='')
+		cmd <- paste("pkill ",pid,sep='')
 		system(cmd,wait=FALSE)
 		}
+
+
+
 return(NULL)}
 #--------------------------------------------------------------------------------------------------
 query.database <- function(user, password, sql.command){
