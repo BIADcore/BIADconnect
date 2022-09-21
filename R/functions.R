@@ -1,68 +1,30 @@
+
 #--------------------------------------------------------------------------------------------------
-encoder <- function(df){
-	if(nrow(df)==0) return(NULL)
-	if(nrow(df)>0){
-		for(n in 1:ncol(df))
-		if(class(df[,n])=="character")df[,n] <- iconv(df[,n],"utf8","utf8")
-		return(df)	
+sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh){
+
+	if(!ssh){
+		query <- suppressWarnings(query.database(user, password, sql.command))
 		}
-	}
-#--------------------------------------------------------------------------------------------------
-get.plink.pids <- function(){
 
-	system <- .Platform$OS.type
+	if(ssh){
+		system <- .Platform$OS.type
 
-	if(system=='windows'){
-		tasklist <- system('tasklist /nh /fo "csv" /fi "imagename eq plink.exe"',intern=T)
-		pid <- c()
-		N <- length(tasklist)
-		if(N>0){
-			for(n in 1:N){
-				pid[n] <- as.numeric(strsplit(tasklist[n],split='\",\"')[[1]][2])
-				}
+		if(system=='windows'){
+			cmd <- paste("plink -ssh ",hostuser,"@",hostname," -i ",keypath," -N -L 3306:",hostname,":3306",sep='')
+			system(cmd, wait=FALSE)
+			query <- suppressWarnings(query.database(user, password, sql.command))
+			system("taskkill /F /IM ssh-agent.exe /T", wait=FALSE)
+			}
+
+		if(system=='unix'){
+			cmd <- paste("ssh ",hostuser,"@",hostname," -i ",keypath," -N -L 3306:",hostname,":3306",sep='')
+			system(cmd, wait=FALSE)
+			Sys.sleep(1)
+			query <- suppressWarnings(query.database(user, password, sql.command))
+			system("killall ssh",wait=FALSE)
 			}
 		}
-	if(system=='unix'){
-		tasklist <- suppressWarnings(system("lsof -i -n | egrep 'ssh'",intern=T))
-		pid <- c()
-		N <- length(tasklist)
-		if(N>0){
-			for(n in 1:N){
-				x <- strsplit(tasklist[n],split=' ')[[1]]	
-				x <- x[x!='']
-				pid[n] <- as.numeric(x[2])
-				}
-			}
-		}
-		pid <- unique(pid)
-return(pid)}
-#--------------------------------------------------------------------------------------------------
-open.ssh.tunnel <- function(hostuser, hostname, keypath){
-
-	system <- .Platform$OS.type
-	if(system=='windows'){
-		cmd <- paste("plink -ssh ",hostuser,"@",hostname," -i ",keypath," -N -L 3306:",hostname,":3306",sep='')
-		system(cmd, wait=FALSE)
-		}
-	if(system=='unix'){
-		cmd <- paste("ssh ",hostuser,"@",hostname," -i ",keypath," -N -L 3306:",hostname,":3306",sep='')
-		system(cmd,wait=FALSE)
-		}
-return(NULL)}
-#--------------------------------------------------------------------------------------------------
-close.ssh.tunnel <- function(pid){
-
-	system <- .Platform$OS.type
-	if(system=='windows'){
-		cmd <- paste('taskkill /f /fi "pid eq ',pid,'"',sep='')
-		system(cmd, wait=FALSE)
-		}
-	if(system=='unix'){
-		cmd <- paste("kill -9 ",pid,sep='')
-		system(cmd,wait=FALSE)
-		}
-
-return(NULL)}
+return(query)}
 #--------------------------------------------------------------------------------------------------
 query.database <- function(user, password, sql.command){
 	require(RMySQL)
@@ -87,17 +49,14 @@ query.database <- function(user, password, sql.command){
 	for(con in cons)dbDisconnect(con)
 return(query)}
 #--------------------------------------------------------------------------------------------------
-sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh){
-
-	if(ssh) pids.before <- get.plink.pids()
-	if(ssh) open.ssh.tunnel(hostuser, hostname, keypath)
-	Sys.sleep(1)
-	query <- suppressWarnings(query.database(user, password, sql.command))
-	if(ssh) pids.after <- get.plink.pids()
-	if(ssh) pid <- pids.after[!pids.after%in%pids.before]
-	if(ssh) close.ssh.tunnel(pid)
-
-return(query)}
+encoder <- function(df){
+	if(nrow(df)==0) return(NULL)
+	if(nrow(df)>0){
+		for(n in 1:ncol(df))
+		if(class(df[,n])=="character")df[,n] <- iconv(df[,n],"utf8","utf8")
+		return(df)	
+		}
+	}
 #--------------------------------------------------------------------------------------------------
 create.markdown.for.single.table <- function(d.tables, d.cols, table.name){
 	
