@@ -58,13 +58,9 @@ close.ssh.tunnel <- function(pid){
 		system(cmd, wait=FALSE)
 		}
 	if(system=='unix'){
-#		cmd <- paste("kill -9 ",pid,sep='')
-		cmd <- 'kill -9 ssh'
-#		cmd <- kill -9 $(lsof -ti :$3306)
+		cmd <- paste("kill -9 ",pid,sep='')
 		system(cmd,wait=FALSE)
 		}
-
-
 
 return(NULL)}
 #--------------------------------------------------------------------------------------------------
@@ -78,8 +74,7 @@ query.database <- function(user, password, sql.command){
 	for(con in cons)dbDisconnect(con)
 
 	# connect locally to the database
-  con <- dbConnect(drv, user=user, pass=password, dbname='BIAD', host = "127.0.0.1", port=3306)
-	# con <- dbConnect(drv, user=user, pass=password, dbname='BIAD', host = "localhost", port=3306)
+	con <- dbConnect(drv, user=user, pass=password, dbname='BIAD', host = "127.0.0.1", port=3306)
 	dbSendQuery(con,"SET NAMES 'utf8'")
 
 	# query the database and tidy
@@ -95,7 +90,7 @@ return(query)}
 sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh){
 
 	if(ssh) pids.before <- get.plink.pids()
-	if(ssh) suppressWarnings(open.ssh.tunnel(hostuser, hostname, keypath))
+	if(ssh) open.ssh.tunnel(hostuser, hostname, keypath)
 	Sys.sleep(1)
 	query <- suppressWarnings(query.database(user, password, sql.command))
 	if(ssh) pids.after <- get.plink.pids()
