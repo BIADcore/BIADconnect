@@ -2,7 +2,6 @@
 #--------------------------------------------------------------------------------------------------
 sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh){
 
-<<<<<<< HEAD
 	system <- .Platform$OS.type
 	if(system=='windows'){
 		cmd <- paste('taskkill /f /fi "pid eq ',pid,'"',sep='')
@@ -14,7 +13,7 @@ sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh)
 		}
 
 return(NULL)}
-=======
+#--------------------------------------------------------------------------------------------------
 	if(!ssh){
 		query <- suppressWarnings(query.database(user, password, sql.command))
 		}
@@ -38,7 +37,6 @@ return(NULL)}
 			}
 		}
 return(query)}
->>>>>>> a09b5f41959066012d0536d2e1fca43ff16be602
 #--------------------------------------------------------------------------------------------------
 query.database <- function(user, password, sql.command){
 	require(RMySQL)
