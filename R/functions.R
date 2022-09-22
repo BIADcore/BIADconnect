@@ -2,18 +2,6 @@
 #--------------------------------------------------------------------------------------------------
 sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh){
 
-	system <- .Platform$OS.type
-	if(system=='windows'){
-		cmd <- paste('taskkill /f /fi "pid eq ',pid,'"',sep='')
-		system(cmd, wait=FALSE)
-		}
-	if(system=='unix'){
-		cmd <- paste("kill -9 ",pid,sep='')
-		system(cmd,wait=FALSE)
-		}
-
-return(NULL)}
-#--------------------------------------------------------------------------------------------------
 	if(!ssh){
 		query <- suppressWarnings(query.database(user, password, sql.command))
 		}
