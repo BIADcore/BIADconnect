@@ -1,42 +1,23 @@
-#------------------------------------------------------------------
-# Example R script for directly querying BIAD using the RMySQL package
-#------------------------------------------------------------------
-# First set up your .Rprofile file, in the same folder that this script is in.
-#------------------------------------------------------------------
-source('.Rprofile')
+#--------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
+# Example R script to test if R connection to BIAD is working
+#--------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
+# Requirements
+# 1. Ensure R is in the same working directory as this file. Use getwd() or list.files() to check
+# 2. Ensure you have your .Rprofile file in the same folder that this script is in. See the github readme for details.
+#--------------------------------------------------------------------------------------
+# Overheads
+source('.Rprofile') # should already have loaded if you open R from this script.
 source('functions.R')
-
-sit <- sql.wrapper("SELECT * FROM `Sites`",user,password,hostname,hostuser,keypath,ssh)
-pha <- sql.wrapper("SELECT * FROM `Phases`",user,password,hostname,hostuser,keypath,ssh)
-c14 <- sql.wrapper("SELECT * FROM `C14Samples`",user,password,hostname,hostuser,keypath,ssh)
-gra <- sql.wrapper("SELECT * FROM `Graves`",user,password,hostname,hostuser,keypath,ssh)
+#--------------------------------------------------------------------------------------
+# Pull some data from BIAD
+sql.command <- "SELECT * FROM `Sites`"
+query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 #------------------------------------------------------------------
-# loop 
+# Do something trivial
 #------------------------------------------------------------------
-N <- nrow(sit)
-cults <- c14.count <- grave.individuals <- c()
-
-for(n in 1:N){
-	
-	site <- sit$SiteID[n]
-	
-	# get c14
-	c14.count[n] <- nrow(subset(c14, SiteID==site))
-	
-	# get cultures
-	phase.info <- subset(pha, SiteID==site)
-	cultures <- c(phase.info$Culture1, phase.info$Culture2, phase.info$Culture3)
-	cultures <- cultures[!is.na(cultures)]
-	cults[n] <- paste(cultures, collapse=';')
-
-	# get grave info
-	grave.info <- subset(gra, PhaseID%in%phase.info$PhaseID)
-	grave.individuals[n] <- sum(grave.info$HumanMNI)
-	}
-
-
-df <- data.frame(SiteID=sit$SiteID, cultures=cults, indivs=grave.individuals)
+plot(table(query$Country),las=2)
 #------------------------------------------------------------------
-
 
 
