@@ -25,51 +25,8 @@ Type 'q()' to quit R.
 > # this script decides when to run which script, based on the filename.
 > #------------------------------------------------------------------
 > source('functions.R')
-> source('.Rprofile')
-> #------------------------------------------------------------------
-> run.day <- 'Mon'
-> today <- strsplit(date(),split=' ')[[1]][1]
-> 
-> files <- list.files()
-> daily.files <- files[grepl('auto.make.daily',files)]
-> weekly.files <- files[grepl('auto.make.weekly',files)]
-> 
-> ND <- length(daily.files)
-> NW <- length(weekly.files)
-> 
-> if(ND>0)for(n in 1:ND){
-+ 	file <- daily.files[n]
-+ 	print(paste('Starting to run script:',file,'at',date()))
-+ 	source(file)
-+ 	}
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Thu Sep 22 07:15:02 2022"
-Loading required package: RMySQL
-Loading required package: DBI
-Loading required package: odbc
-Linking to librsvg 2.48.4
-[1] "Starting to run script: auto.make.daily.descriptions.R at Thu Sep 22 07:15:09 2022"
-[1] "Starting to run script: auto.make.daily.map.R at Thu Sep 22 07:15:11 2022"
-Loading required package: ggplot2
-Loading required package: sf
-Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
-Loading required package: rnaturalearth
-Loading required package: rnaturalearthdata
-[1] "Starting to run script: auto.make.daily.row.counts.R at Thu Sep 22 07:15:16 2022"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Thu Sep 22 07:15:19 2022"
-[1] "Starting to run script: auto.make.daily.table.png.R at Thu Sep 22 07:15:20 2022"
-> 
-> if(NW>0 & today==run.day)for(n in 1:NW){
-+ 	file <- weekly.files[n]
-+ 	print(paste('Starting to run script:',file,'at',date()))
-+ 	source(file)
-+ 	}
-> 
-> #------------------------------------------------------------------
-> 	
-> 	
-> 	
-> 	
-> 
-> proc.time()
-   user  system elapsed 
- 11.107   0.756  28.041 
+Error in source("functions.R") : functions.R:5:1: unexpected input
+4: 
+5: <<
+   ^
+Execution halted
