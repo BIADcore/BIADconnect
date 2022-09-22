@@ -58,13 +58,9 @@ close.ssh.tunnel <- function(pid){
 		system(cmd, wait=FALSE)
 		}
 	if(system=='unix'){
-#		cmd <- paste("kill -9 ",pid,sep='')
-		cmd <- 'kill -9 ssh'
-#		cmd <- kill -9 $(lsof -ti :$3306)
+		cmd <- paste("kill -9 ",pid,sep='')
 		system(cmd,wait=FALSE)
 		}
-
-
 
 return(NULL)}
 #--------------------------------------------------------------------------------------------------
