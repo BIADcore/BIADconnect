@@ -1,6 +1,6 @@
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
-# Example R script for directly querying BIAD using the RMySQL package
+# Example R script to test if R connection to BIAD is working
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
 # Requirements
@@ -12,11 +12,12 @@ source('.Rprofile') # should already have loaded if you open R from this script.
 source('functions.R')
 #--------------------------------------------------------------------------------------
 # Pull some data from BIAD
-sit <- sql.wrapper("SELECT * FROM `Sites`",user,password,hostname,hostuser,keypath,ssh)
+sql.command <- "SELECT * FROM `Sites`"
+query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 #------------------------------------------------------------------
 # Do something trivial
 #------------------------------------------------------------------
-plot(sit$Longitude,sit$Latitude)
+plot(table(query$Country),las=2)
 #------------------------------------------------------------------
 
 
