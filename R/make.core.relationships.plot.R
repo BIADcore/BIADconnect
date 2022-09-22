@@ -1,9 +1,6 @@
 #------------------------------------------------------------------
 # Example R script for relationships used in core import
 #------------------------------------------------------------------
-# Created: 28.07.2022
-# Last modified: 29.07.2022
-
 library(DiagrammeR)
 core.import <- DiagrammeR::grViz("
 digraph {
@@ -37,3 +34,4 @@ library(DiagrammeRsvg)
 export_svg(core.import) %>%
   charToRaw %>%
   rsvg_png("../tools/plots/database.core.import.png")
+#------------------------------------------------------------------
