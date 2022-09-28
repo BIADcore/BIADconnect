@@ -22,7 +22,7 @@ text(x=0.5,y=0.7, 'Faunal n=2',col='steelblue')
 
 rect(0.8,0.6,1,0.9,border='steelblue',lwd=3)
 text(x=0.9,y=0.75, 'Early Bronze Age (EBA)')
-text(x=0.9,y=0.7, 'Faunal n=72',col='steelblue')
+text(x=0.9,y=0.7, 'Faunal n=79',col='steelblue')
 
 rect(0.05,0.1,0.65,0.4,border='firebrick',lwd=3)
 text(x=0.35,y=0.25, 'Undetermined Neolithic (UN)')
@@ -64,7 +64,7 @@ text(x=0.5,y=0.7, 'Faunal n=233',col='steelblue')
 
 rect(0.8,0.6,1,0.9,border='steelblue',lwd=3)
 text(x=0.9,y=0.75, 'Early Bronze Age (EBA)')
-text(x=0.9,y=0.7, 'Faunal n=72',col='steelblue')
+text(x=0.9,y=0.7, 'Faunal n=79',col='steelblue')
 
 rect(0.05,0.1,0.65,0.4,border='firebrick',lwd=3)
 text(x=0.35,y=0.25, 'Undetermined Neolithic (UN)')
