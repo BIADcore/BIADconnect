@@ -38,8 +38,8 @@ phases[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
 <tr><td colspan="4"><b>Phases</b></td></tr>
 <tr><td>PhaseID</td><td>Order</td><td>Period</td><td>etc...</td></tr>
-<tr><td>A</td><td>1</td><td>EBA</td><td></td></tr>
-<tr><td>B</td><td>2</td><td>UN</td><td></td></tr>
+<tr><td>A</td><td>1</td><td>UN</td><td></td></tr>
+<tr><td>B</td><td>2</td><td>EBA</td><td></td></tr>
 </table>>];
 }'
 
@@ -80,10 +80,10 @@ phases[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
 <tr><td colspan="4"><b>Phases</b></td></tr>
 <tr><td>PhaseID</td><td>Order</td><td>Period</td><td>etc...</td></tr>
-<tr><td>A</td><td>1</td><td>EBA</td><td></td></tr>
-<tr><td>B</td><td>2</td><td>MN</td><td></td></tr>
-<tr><td>C</td><td>3</td><td>EN</td><td></td></tr>
-<tr><td>D</td><td></td><td>UN</td><td></td></tr>
+<tr><td>A</td><td></td><td>UN</td><td></td></tr>
+<tr><td>B</td><td>1</td><td>EN</td><td></td></tr>
+<tr><td>C</td><td>2</td><td>MN</td><td></td></tr>
+<tr><td>D</td><td>3</td><td>EBA</td><td></td></tr>
 </table>>];
 }'
 
