@@ -42,21 +42,21 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Thu Sep 29 13:07:02 2022"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Fri Sep 30 13:07:01 2022"
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
 Linking to librsvg 2.48.4
-[1] "Starting to run script: auto.make.daily.descriptions.R at Thu Sep 29 13:07:05 2022"
-[1] "Starting to run script: auto.make.daily.map.R at Thu Sep 29 13:07:05 2022"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Fri Sep 30 13:07:04 2022"
+[1] "Starting to run script: auto.make.daily.map.R at Fri Sep 30 13:07:04 2022"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
 Loading required package: rnaturalearth
 Loading required package: rnaturalearthdata
-[1] "Starting to run script: auto.make.daily.row.counts.R at Thu Sep 29 13:07:09 2022"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Thu Sep 29 13:07:09 2022"
-[1] "Starting to run script: auto.make.daily.table.png.R at Thu Sep 29 13:07:09 2022"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Fri Sep 30 13:07:08 2022"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Fri Sep 30 13:07:08 2022"
+[1] "Starting to run script: auto.make.daily.table.png.R at Fri Sep 30 13:07:08 2022"
 > 
 > if(NW>0 & today==run.day)for(n in 1:NW){
 + 	file <- weekly.files[n]
@@ -72,4 +72,4 @@ Loading required package: rnaturalearthdata
 > 
 > proc.time()
    user  system elapsed 
- 10.512   0.645  11.863 
+ 11.112   0.771  11.876 
