@@ -8,7 +8,7 @@
 source('functions.R')
 source('.Rprofile')
 #------------------------------------------------------------------
-run.day <- 'Mon'
+run.day <- 'Tue'
 today <- strsplit(date(),split=' ')[[1]][1]
 
 files <- list.files()
