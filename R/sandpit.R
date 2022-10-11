@@ -3,6 +3,16 @@
 #-----------------------------------------------------------------------------------------
 source('functions.R')
 #-----------------------------------------------------------------------------------------
+# check whats going on with taxon codes for the materialculture
+#-----------------------------------------------------------------------------------------
+tax <- sql.wrapper("SELECT * FROM `BIAD`.`zoptions_TaxaList`",user,password,hostname,hostuser,keypath,ssh)
+mt <- sql.wrapper("SELECT * FROM `BIAD`.`MaterialCulture`",user,password,hostname,hostuser,keypath,ssh)
+x <- unique(mt$TaxonCode)
+table(mt$TaxonCode)
+bad <- x[!x%in%tax$TaxonCode]
+bad
+
+#-----------------------------------------------------------------------------------------
 # possibly amalgamate taxon tables?
 #-----------------------------------------------------------------------------------------
 fau <- sql.wrapper("SELECT * FROM BIAD.zoptions_FaunalTaxaList",user,password,hostname,hostuser,keypath,ssh)
@@ -96,14 +106,24 @@ require(dplyr)
 both <- bind_rows(ft,at)
 table(both$WildDomesticStatus)
 write.csv(both,file='toadd.csv',fileEncoding = "UTF-8",row.names=F, na='\\N')
-#-----------------------------------------------------------------------------------------
-tax <- sql.wrapper("SELECT * FROM `BIAD`.`zoptions_TaxaList`",user,password,hostname,hostuser,keypath,ssh)
-
-mt <- sql.wrapper("SELECT * FROM `BIAD`.`MaterialCulture`",user,password,hostname,hostuser,keypath,ssh)
-x <- unique(mt$TaxonCode)
-x[!x%in%tax$TaxonCode]
-table(mt$TaxonCode)
-unique(tax$TaxonCode)
 
 #-----------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------
+get.everything.from.a.phase <- function('PhaseID'){
+
+sql.command <- "SELECT TABLE_NAME, COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema='BIAD' AND COLUMN_NAME='PhaseID';"	
+tables <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+sql.command <- "SELECT TABLE_NAME, COLUMN_NAME,REFERENCED_TABLE_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
+keys <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+#-----------------------------------------------------------------------------------------
+
+
+sql.command <- "SELECT * FROM Graves WHERE PhaseID='NITR1'"
+sql.command <- "SELECT * FROM GraveIndividuals WHERE PhaseID='NITR1'"
+
+
+
+
+
+
 
