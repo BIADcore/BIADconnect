@@ -84,4 +84,20 @@ query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 sql.command <- "SELECT GraveID, Graves.PhaseID, SiteID, Period FROM Graves JOIN Phases ON Graves.PhaseID = Phases.PhaseID GROUP BY GraveID ORDER BY GraveID"
 query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 #--------------------------------------------------------------------------------------
+# Example 8: using an object from a different database to query BIAD
+#--------------------------------------------------------------------------------------
+sql.command1 <- "SELECT * FROM `Sites`"
+query1 <- sql.wrapper(sql.command1,user,password,hostname,hostuser,keypath,ssh)
+head(query1)
+RISE_query <- read.csv("C:/Users/rstan/OneDrive/post-doc/2022_COREX/RISE database/RISE_database.csv")
+head(RISE_query)
+RISE_query_sitename <- RISE_query$RISE_Sitename
+RISE_query_sitename
+test <- query1[query1$SiteName %in% c(RISE_query_sitename), ]
+View(test)
+sql.command2 <- "SELECT * FROM `Phases`"
+query2 <- sql.wrapper(sql.command2,user,password,hostname,hostuser,keypath,ssh)
+head(query2)
+complete_query <- merge(test,  query2, by = "SiteID")
+View(complete_query)
 #--------------------------------------------------------------------------------------
