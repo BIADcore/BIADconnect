@@ -1,6 +1,7 @@
 #-----------------------------------------------------------------------------------------
 # general sandpit
 #-----------------------------------------------------------------------------------------
+source('.Rprofile')
 source('functions.R')
 #-----------------------------------------------------------------------------------------
 # check whats going on with taxon codes for the materialculture
@@ -109,21 +110,98 @@ write.csv(both,file='toadd.csv',fileEncoding = "UTF-8",row.names=F, na='\\N')
 
 #-----------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------
-get.everything.from.a.phase <- function('PhaseID'){
 
-sql.command <- "SELECT TABLE_NAME, COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema='BIAD' AND COLUMN_NAME='PhaseID';"	
-tables <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
-sql.command <- "SELECT TABLE_NAME, COLUMN_NAME,REFERENCED_TABLE_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
-keys <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+
+##################################
+
+
+#----------------------------------------------------------------------------------------------------
+get.child.tables <- function(foreign, table){
+	res <- subset(foreign, REFERENCED_TABLE_NAME==table)
+return(res)}
+#----------------------------------------------------------------------------------------------------
+get.child.data <- function(table, values){
+
+	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
+	keys <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+	primary <- subset(keys, CONSTRAINT_NAME=='PRIMARY')
+	foreign <- keys[grepl('^FK_',keys$CONSTRAINT_NAME) & keys$ORDINAL_POSITION==1,]
+
+	child.tables <- get.child.tables(foreign, table)
+
+	res <- list()
+	N <- nrow(child.tables)
+	for(n in 1:N){
+		t <- child.tables$TABLE_NAME[n]
+		c <- child.tables$COLUMN_NAME[n]
+		value.command <- paste(c,"=",paste("'",values,"'",sep=''), collapse=" OR ")
+		sql.command <- paste("SELECT * FROM `BIAD`.`",t,"` WHERE ",value.command, sep='')
+		data <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+		if(!is.null(data))res[[t]] <- data
+		}
+return(res)}
+#----------------------------------------------------------------------------------------------------
+table='Phases'
+column = 'PhaseID'
+values=c('NITR1', 'NITR2')
+dd <- get.child.data(table, values)
+
+
+
+get.all.data <- function(table, column, values){
+
+	# blank list
+	data <- list()
+
+	# current table data 
+	value.command <- paste(column,"=",paste("'",values,"'",sep=''), collapse=" OR ")
+	sql.command <- paste("SELECT * FROM `BIAD`.`",table,"` WHERE ",value.command, sep='')
+	data[[table]] <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+	done <- table
+
+	# child data
+	for(n in 1:length(done)){
+		child.tables <- get.child.tables(foreign, done[n])
+
+	children <- get.child.data(table, values)
+	data[[value]] <- children
+
+
+
+	# grandchild data
+	names(children)
+	for(n in 1:length(children)){
+		child <- names(children)[n]
+		child.tables <- get.child.tables(foreign, child)
+		for(c in 1:length(child.tables)){
+			child.data <- get.child.data(child.tables$TABLE_NAME[c], value
+str(data)
+str(child)
 #-----------------------------------------------------------------------------------------
+child <- get.child.data(table='Phases', column='PhaseID', value='NITR1')
+child <- get.child.data(table='Sites', value='S10567')
+
+names(qq[[names(qq)]])
+qq[['a']]
 
 
-sql.command <- "SELECT * FROM Graves WHERE PhaseID='NITR1'"
-sql.command <- "SELECT * FROM GraveIndividuals WHERE PhaseID='NITR1'"
+qqq$
 
 
+#-----------------------------------------------------------------------------------------
+library(data.tree)
 
+acme <- Node$new("Acme Inc.")
+  accounting <- acme$AddChild("Accounting")
+    software <- accounting$AddChild("New Software")
+    standards <- accounting$AddChild("New Accounting Standards")
+  research <- acme$AddChild("Research")
+    newProductLine <- research$AddChild("New Product Line")
+    newLabs <- research$AddChild("New Labs")
+  it <- acme$AddChild("IT")
+    outsource <- it$AddChild("Outsource")
+    agile <- it$AddChild("Go agile")
+    goToR <- it$AddChild("Switch to R")
 
-
-
-
+print(acme)
+#-----------------------------------------------------------------------------------------
