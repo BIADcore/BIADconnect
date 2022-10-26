@@ -37,7 +37,10 @@ get.child.data <- function(keys, table.name, primary.value){
 
 	if(is.null(primary.value))return(NULL)
 	primary.data <- get.table.data(keys, table.name, primary.value)
+	primary.column <- get.primary.column.from.table(keys, table.name)
 	relationships <- get.child.relationships(keys, table.name)
+	relationships <- subset(relationships, REFERENCED_COLUMN_NAME==primary.column)
+
 	child.tables <- relationships$TABLE_NAME
 	child.columns <- relationships$COLUMN_NAME
 
@@ -75,6 +78,7 @@ get.parent.data <- function(foreign, table.data){
 		data <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 		data <- query.database(user, password, sql.command)
 		data <- remove.blank.columns.from.table(data)
+		print(data)
 		if(!is.null(data))res[[c]] <- data
 		}
 
@@ -96,7 +100,7 @@ child.data.wrapper <- function(keys, table.data){
 			child.data[[table.name]][[child]] <- x
 			}
 		}
-	if(length(child.data)==0)return(
+	if(length(child.data)==0)return(NULL)
 return(child.data)}
 #----------------------------------------------------------------------------------------------------
 remove.blank.columns.from.table <- function(table){
@@ -117,16 +121,29 @@ get.all.data <- function(table.name, primary.value){
 
 	# child data
 	child.data <- child.data.wrapper(keys, table.data[1])
-	xx <- Map(c,table.data,child.data)
+
 
 	# grand child data
 	grand.child.data <- c()
+	child.data.sub <- child.data[[1]][[1]]
+	N <- length(child.data.sub)
+	for(n in 1:N){
+		child.name <- names(child.data.sub)[n]
+		grand.child.data[[table.name]][[primary.value]][child.name] <- child.data.wrapper(keys, child.data.sub[n])
+		}
+		
+		
+family <- Map(c, table.data, child.data, grand.child.data)
+
+	# great grand child data
+	great.grand.child.data <- c()
 	N <- length(child.data[[1]][[1]])
 	for(n in 1:N){
 		grand.child.data[[n]] <- child.data.wrapper(keys, child.data[[1]][[1]][n])
-		}
+		}	
 
 #table.data = child.data[[1]][[1]][n]
+table.data <- table.data[1]
 
 ########
 
