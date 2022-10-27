@@ -1,6 +1,7 @@
 #-----------------------------------------------------------------------------------------
 # general sandpit
 #-----------------------------------------------------------------------------------------
+source('.Rprofile')
 source('functions.R')
 #-----------------------------------------------------------------------------------------
 # check whats going on with taxon codes for the materialculture
@@ -108,22 +109,5 @@ table(both$WildDomesticStatus)
 write.csv(both,file='toadd.csv',fileEncoding = "UTF-8",row.names=F, na='\\N')
 
 #-----------------------------------------------------------------------------------------
+
 #-----------------------------------------------------------------------------------------
-get.everything.from.a.phase <- function('PhaseID'){
-
-sql.command <- "SELECT TABLE_NAME, COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema='BIAD' AND COLUMN_NAME='PhaseID';"	
-tables <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
-sql.command <- "SELECT TABLE_NAME, COLUMN_NAME,REFERENCED_TABLE_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
-keys <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
-#-----------------------------------------------------------------------------------------
-
-
-sql.command <- "SELECT * FROM Graves WHERE PhaseID='NITR1'"
-sql.command <- "SELECT * FROM GraveIndividuals WHERE PhaseID='NITR1'"
-
-
-
-
-
-
-
