@@ -101,3 +101,10 @@ head(query2)
 complete_query <- merge(test,  query2, by = "SiteID")
 View(complete_query)
 #--------------------------------------------------------------------------------------
+# Example 9: check whether sites from a supplementary fall within the COREX spatial extent
+#--------------------------------------------------------------------------------------
+COREX <- st_read("COREX.shp")
+COREX <- st_transform(COREX, crs = 4326)
+points <- st_as_sf(, coords = c('Longitude','Latitude'), crs=4326) #insert file name you are checking
+test <- st_join(, COREX) #insert file name you are checking
+write.csv(test, file = "C:/Users/rstan/OneDrive/post-doc/2022_COREX/1_spatial_analysis//good_points.csv")
