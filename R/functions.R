@@ -132,4 +132,172 @@ get.tables.from.backup <- function(file){
 			}
 		}
 return(tables)}
+#----------------------------------------------------------------------------------------------------
+get.child.relationships <- function(keys, table.name, primary.value){
+	primary.data <- get.table.data(keys, table.name, primary.value)
+	primary.column <- get.primary.column.from.table(keys, table.name)
+	res <- subset(keys, REFERENCED_COLUMN_NAME==primary.column & REFERENCED_TABLE_NAME==table.name)
+return(res)}
+#----------------------------------------------------------------------------------------------------
+get.parent.relationships <- function(keys, table.name, primary.value){
+	primary.data <- get.table.data(keys, table.name, primary.value)
+	primary.column <- get.primary.column.from.table(keys, table.name)
+	res <- subset(keys, TABLE_NAME==table.name & grepl('FK_',CONSTRAINT_NAME))
+return(res)}
+#----------------------------------------------------------------------------------------------------
+get.primary.column.from.table <- function(keys, table.name){
+	x <- subset(keys, TABLE_NAME == table.name & CONSTRAINT_NAME %in% c('unique','PRIMARY'))$COLUMN_NAME
+	column <- x[duplicated(x)]
+	if(length(column)==0)column <- NA
+	if(length(column)>1)stop('unclear which column to use')	
+return(column)}
+#----------------------------------------------------------------------------------------------------
+get.table.data <- function(keys, table.name, primary.value){
+
+	if(length(primary.value)!=1)stop('provide a single primary value')
+	primary.column <- get.primary.column.from.table(keys, table.name)
+	sql.command <- paste("SELECT * FROM `BIAD`.`",table.name,"` WHERE ",primary.column," IN ('",primary.value,"')", sep='')
+	data <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+	data <- remove.blank.columns.from.table(data)
+return(data)}
+#----------------------------------------------------------------------------------------------------
+decendants <- function(keys, table.name, primary.value){
+
+	if(is.null(primary.value))return(NULL)
+	relationships <- get.child.relationships(keys, table.name, primary.value)
+	child.tables <- relationships$TABLE_NAME
+	child.columns <- relationships$COLUMN_NAME
+
+	res <- list()
+	N <- length(child.tables)
+	if(N==0)return(NULL)
+	for(n in 1:N){
+		child.table <- child.tables[n]
+		child.column <- child.columns[n]
+		sql.command <- paste("SELECT * FROM `BIAD`.`",child.table,"` WHERE ",child.column," = '",primary.value,"'", sep='')
+		data <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+		data <- remove.blank.columns.from.table(data)
+		res[[child.table]]$data <- data
+		}
+	if(length(res)==0)res <- NULL
+
+return(res)}
+#----------------------------------------------------------------------------------------------------
+ancestors <- function(keys, table.name, primary.value){
+
+	if(is.null(primary.value))return(NULL)
+	relationships <- get.parent.relationships(keys, table.name, primary.value)
+	
+	# whether or not to include zoptions parents? ... subset(relationships, !grepl('zoptions_',REFERENCED_TABLE_NAME))
+	parent.tables <- relationships$REFERENCED_TABLE_NAME
+	parent.columns <- relationships$REFERENCED_COLUMN_NAME
+	child.columns <- relationships$COLUMN_NAME
+	
+	table.data <- get.table.data(keys, table.name, primary.value)
+	
+	res <- list()
+	N <- length(parent.tables)
+	if(N==0)return(NULL)
+	for(n in 1:N){
+		parent.table <- parent.tables[n]
+		parent.column <- parent.columns[n]
+		child.column <- child.columns[n]
+		
+
+		# get parent data
+		if(child.column %in% names(table.data)){
+			values <- table.data[child.column]
+			values <- values[!is.na(values)]
+			values <- paste(values, collapse="','")
+			sql.command <- paste("SELECT * FROM `BIAD`.`",parent.table,"` WHERE ",parent.column," IN ('",values,"')", sep='')		
+			data <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+			data <- remove.blank.columns.from.table(data)
+			res[[parent.table]]$data <- data	
+			}	
+		}
+
+	if(length(res)==0)res <- NULL
+
+return(res)}
+#----------------------------------------------------------------------------------------------------
+wrapper <- function(keys, table.data, fnc){
+	
+	rel.data <- list()
+	N <- length(table.data)
+	for(n in 1:N){
+		rel <- table.data[n]	
+		table.name <- names(rel)
+		col <- get.primary.column.from.table(keys, table.name=table.name)
+		rel.values <- rel[[table.name]]$data[[col]]
+		for(rel in rel.values){
+			x <- fnc(keys, table.name, rel) 
+			rel.data[[table.name]][[rel]] <- x
+			}
+		}
+	if(length(rel.data)==0)return(NULL)
+return(rel.data)}
+#----------------------------------------------------------------------------------------------------
+remove.blank.columns.from.table <- function(table){
+	if(is.null(table))return(table)
+	tb <- table
+	keep.i <- colSums(!is.na(tb))!=0
+	tb <- tb[,keep.i,drop=F]
+return(tb)}
+#----------------------------------------------------------------------------------------------------
+get.related.data <- function(table.name, primary.value, fnc){
+
+	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
+	keys <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+
+	# table data
+	all.data <- list()
+	table.data <- get.table.data(keys, table.name, primary.value) 
+	if(is.null(table.data))return(NULL)
+	all.data[[table.name]]$data <- table.data
+	
+	# relative level 0 data
+	x.data <- all.data[table.name]
+	x.sub <- wrapper(keys, x.data, fnc)
+	if(!is.null(x.sub))all.data[table.name] <- Map(c, x.data,x.sub)
+
+	# relative level 1 data
+	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
+	rel.1.names <- rel.1.names[rel.1.names!='data']	
+	for(rel.1.name in rel.1.names){
+		x.data <- all.data[[table.name]][[primary.value]][rel.1.name]
+		x.sub <- wrapper(keys, x.data, fnc)
+		if(!is.null(x.sub))all.data[[table.name]][[primary.value]][rel.1.name] <- Map(c, x.data,x.sub)
+		}
+
+	# relative level 2 data
+	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
+	rel.1.names <- rel.1.names[rel.1.names!='data']	
+	for(rel.1.name in rel.1.names){
+		rel.2.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]])
+		rel.2.names <- rel.2.names[rel.2.names!='data']	
+		for(rel.2.name in rel.2.names){
+			x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][rel.2.name]
+			x.sub <- wrapper(keys, x.data, fnc)
+			if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][rel.2.name] <- Map(c, x.data,x.sub)
+			}
+		}
+
+	# relative level 3 data
+	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
+	rel.1.names <- rel.1.names[rel.1.names!='data']	
+	for(rel.1.name in rel.1.names){
+		rel.2.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]])
+		rel.2.names <- rel.2.names[rel.2.names!='data']	
+		for(rel.2.name in rel.2.names){
+			rel.3.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]])
+			rel.3.names <- rel.3.names[rel.3.names!='data']	
+			for(rel.3.name in rel.3.names){	
+				x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][rel.3.name]
+				x.sub <- wrapper(keys, x.data, fnc)
+				if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][rel.3.name] <- Map(c, x.data,x.sub)
+				}
+			}	
+		}
+
+return(all.data)}
 #--------------------------------------------------------------------------------------------------
