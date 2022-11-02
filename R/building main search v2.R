@@ -4,12 +4,16 @@ source('functions.R')
 #----------------------------------------------------------------------------------------------------
 # needs to be placed inside a larger wrapper that only opens the connection once, and closes it once, for speed.
 #----------------------------------------------------------------------------------------------------
-get.child.relationships <- function(foreign, table.name){
-	res <- subset(foreign, REFERENCED_TABLE_NAME==table.name)
+get.child.relationships <- function(keys, table.name, primary.value){
+	primary.data <- get.table.data(keys, table.name, primary.value)
+	primary.column <- get.primary.column.from.table(keys, table.name)
+	res <- subset(keys, REFERENCED_COLUMN_NAME==primary.column & REFERENCED_TABLE_NAME==table.name)
 return(res)}
 #----------------------------------------------------------------------------------------------------
-get.parent.relationships <- function(foreign, table.name){
-	res <- subset(foreign, TABLE_NAME==table.name)
+get.parent.relationships <- function(keys, table.name, primary.value){
+	primary.data <- get.table.data(keys, table.name, primary.value)
+	primary.column <- get.primary.column.from.table(keys, table.name)
+	res <- subset(keys, TABLE_NAME==table.name & grepl('FK_',CONSTRAINT_NAME))
 return(res)}
 #----------------------------------------------------------------------------------------------------
 get.primary.column.from.table <- function(keys, table.name){
@@ -30,17 +34,8 @@ return(data)}
 #----------------------------------------------------------------------------------------------------
 get.child.data <- function(keys, table.name, primary.value){
 
-	# distinguish between:
-	# table : the data.frame of 'table.name', limited to entries matching 'primary.value'
-	# child.table : obvious
-	# child.value: the single value in current table that subsets to the next child table.
-
 	if(is.null(primary.value))return(NULL)
-	primary.data <- get.table.data(keys, table.name, primary.value)
-	primary.column <- get.primary.column.from.table(keys, table.name)
-	relationships <- get.child.relationships(keys, table.name)
-	relationships <- subset(relationships, REFERENCED_COLUMN_NAME==primary.column)
-
+	relationships <- get.child.relationships(keys, table.name, primary.value)
 	child.tables <- relationships$TABLE_NAME
 	child.columns <- relationships$COLUMN_NAME
 
@@ -59,27 +54,34 @@ get.child.data <- function(keys, table.name, primary.value){
 
 return(res)}
 #----------------------------------------------------------------------------------------------------
-get.parent.data <- function(foreign, table.data){
+get.parent.data <- function(keys, table.name, primary.value){
 
-	table <- names(table.data)
-	parent.relationships <- get.parent.relationships(foreign, table)
+	if(is.null(primary.value))return(NULL)
+	relationships <- get.parent.relationships(keys, table.name, primary.value)
+	
+	# whether or not to include zoptions parents? ... subset(relationships, !grepl('zoptions_',REFERENCED_TABLE_NAME))
+	parent.tables <- relationships$REFERENCED_TABLE_NAME
+	parent.columns <- relationships$REFERENCED_COLUMN_NAME
+	child.columns <- relationships$COLUMN_NAME
+	
 	res <- list()
-	N <- nrow(parent.relationships)
+	N <- length(parent.tables)
 	if(N==0)return(NULL)
 	for(n in 1:N){
-		tr <- parent.relationships$REFERENCED_TABLE_NAME[n]
-		cr <- parent.relationships$REFERENCED_COLUMN_NAME[n]
-		c <- parent.relationships$COLUMN_NAME[n]
+		parent.table <- parent.tables[n]
+		parent.column <- parent.columns[n]
+		child.column <- child.columns[n]
+		
 
 		# get parent data
-		values <- table.data[[table]][[c]]
+		values <- table.data[[table.name]][['data']][[child.column]]
 		values <- values[!is.na(values)]
 		values <- paste(values, collapse="','")
+		sql.command <- paste("SELECT * FROM `BIAD`.`",parent.table,"` WHERE ",parent.column," IN ('",values,"')", sep='')		
+
 		data <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
-		data <- query.database(user, password, sql.command)
 		data <- remove.blank.columns.from.table(data)
-		print(data)
-		if(!is.null(data))res[[c]] <- data
+		res[[parent.table]]$data <- data		
 		}
 
 	if(length(res)==0)res <- NULL
@@ -115,54 +117,75 @@ get.all.data <- function(table.name, primary.value){
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
 	keys <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 
+
 	# table data
-	table.data <- list()
-	table.data[[table.name]]$data <- get.table.data(keys, table.name, primary.value) 
-
+	all.data <- list()
+	all.data[[table.name]]$data <- get.table.data(keys, table.name, primary.value) 
+	
 	# child data
-	child.data <- child.data.wrapper(keys, table.data[1])
-
+	x.data <- all.data[table.name]
+	x.sub <- child.data.wrapper(keys, x.data)
+	if(!is.null(x.sub))all.data[table.name] <- Map(c, x.data,x.sub)
 
 	# grand child data
-	grand.child.data <- c()
-	child.data.sub <- child.data[[1]][[1]]
-	N <- length(child.data.sub)
-	for(n in 1:N){
-		child.name <- names(child.data.sub)[n]
-		grand.child.data[[table.name]][[primary.value]][child.name] <- child.data.wrapper(keys, child.data.sub[n])
+	child.names <- names(all.data[[table.name]][[primary.value]])	
+	child.names <- child.names[child.names!='data']	
+	for(child.name in child.names){
+		x.data <- all.data[[table.name]][[primary.value]][child.name]
+		x.sub <- child.data.wrapper(keys, x.data)
+		if(!is.null(x.sub))all.data[[table.name]][[primary.value]][child.name] <- Map(c, x.data,x.sub)
 		}
-		
-		
-family <- Map(c, table.data, child.data, grand.child.data)
 
 	# great grand child data
-	great.grand.child.data <- c()
-	N <- length(child.data[[1]][[1]])
-	for(n in 1:N){
-		grand.child.data[[n]] <- child.data.wrapper(keys, child.data[[1]][[1]][n])
-		}	
+	child.names <- names(all.data[[table.name]][[primary.value]])	
+	child.names <- child.names[child.names!='data']	
+	for(child.name in child.names){
+		grand.child.names <- names(all.data[[table.name]][[primary.value]][[child.name]])
+		grand.child.names <- grand.child.names[grand.child.names!='data']	
+		for(grand.child.name in grand.child.names){
+			x.data <- all.data[[table.name]][[primary.value]][[child.name]][grand.child.name]
+			x.sub <- child.data.wrapper(keys, x.data)
+			if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[child.name]][grand.child.name] <- Map(c, x.data,x.sub)
+			}
+		}
 
-#table.data = child.data[[1]][[1]][n]
-table.data <- table.data[1]
+	# great great grand child data
+	child.names <- names(all.data[[table.name]][[primary.value]])	
+	child.names <- child.names[child.names!='data']	
+	for(child.name in child.names){
+		grand.child.names <- names(all.data[[table.name]][[primary.value]][[child.name]])
+		grand.child.names <- grand.child.names[grand.child.names!='data']	
+		for(grand.child.name in grand.child.names){
+			great.grand.child.names <- names(all.data[[table.name]][[primary.value]][[child.name]][[grand.child.name]])
+			great.grand.child.names <- great.grand.child.names[great.grand.child.names!='data']	
+			for(great.grand.child.name in great.grand.child.names){	
+				x.data <- all.data[[table.name]][[primary.value]][[child.name]][[grand.child.name]][great.grand.child.name]
+				x.sub <- child.data.wrapper(keys, x.data)
+				if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[child.name]][[grand.child.name]][great.grand.child.name] <- Map(c, x.data,x.sub)
+				}
+			}	
+		}
 
-########
+	# parent data
+	get.parent.data(keys, table.name, primary.value)
 
-#	parent.data <- get.parent.data(   , table.data)
-test <- c(table.data,child.data,grand.child.data,great.grand.child.data,great.great.grand.child.data)
-return(test)}
-#----------------------------------------------------------------------------------------------------
-str(table.data)
-str(child.data)
-rbind(table.data,child.data)
-names(table.data)
-names(child.data)
-#----------------------------------------------------------------------------------------------------
-ggc <- list(S10386 = grand.child.data)
-all <- Map(c, table.data, child.data, ggc)
+	# child data
+	x.data <- all.data[table.name]
+	x.sub <- child.data.wrapper(keys, x.data)
+	if(!is.null(x.sub))all.data[table.name] <- Map(c, x.data,x.sub)
+	
+#--------------------------
+library(data.tree)
+plot(FromListSimple(all.data))
+
+
 #----------------------------------------------------------------------------------------------------
 table.name <- 'Phases'
 primary.value <-  'TEG31'
 res <- get.all.data(table.name, primary.value)
+
+table.name <- 'Sites'
+primary.value <-  'S09209'
 
 table.name <- 'Phases'
 primary.value <-  'NITR2'
@@ -182,87 +205,9 @@ res <- get.all.data(table.name, primary.value)
 
 
 
-td <- get.table.data(keys, table.name, primary.value)
-cd <- get.child.data(keys, table.name, primary.value)
-gcd <- get.child.data(keys, names(cd)[1], 'OZER1')
-#----------------------------------------------------------------------------------------------------
-str(res)
-
-a <- data.frame(dog=1:3,cat=5:7)
-all <- list()
-all$b <- a
-all$c <- a
-all$d$e <- a
-all$d$f <- a
-
-
-b <- list(a,a)
-c <- list(a,a,a)
-d <- list(b,c)
-
-names(res[[1]][[1]])
 #----------------------------------------------------------------------------------------------------
 
-get.primary.column.from.table(keys, names(res[[3]]))
-
-unlist(res)
-
-	
-
-#####################
-	# blank lists
-	level.0 <- level.down.1 <- level.down.2 <- level.down.3 <- level.up.1 <- level.up.2 <- list()
-
-	# level.0 data 
-	value.command <- paste(column," IN ('",paste(values, collapse="','"),"')",sep='')
-	sql.command <- paste("SELECT * FROM `BIAD`.`",table,"` WHERE ",value.command, sep='')
-	level.0[[table]] <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
-
-	# level.1.down
-	children.data <- get.child.data(foreign, table, values)
-	children.relationships <- get.child.relationships(foreign, table)		
-	children.relationships <- subset(children.relationships, TABLE_NAME%in%names(children.data))
-	N <- nrow(children.relationships)
-	if(N>0){
-		for(n in 1:N){
-				table <- children.relationships$TABLE_NAME[n]
-				level.down.1[[table]] <- get.child.data(foreign, table, values)
-				}
-			}
+#----------------------------------------------------------------------------------------------------
 
 
-
-
-	# grandchild data
-	names(children)
-	for(n in 1:length(children)){
-		child <- names(children)[n]
-		child.tables <- get.child.tables(foreign, child)
-		for(c in 1:length(child.tables)){
-			child.data <- get.child.data(child.tables$TABLE_NAME[c], value
-str(data)
-str(child)
-#-----------------------------------------------------------------------------------------
-#-----------------------------------------------------------------------------------------
-# excecuting remotely on server
-#-----------------------------------------------------------------------------------------
-https://ryanhafen.com/blog/rmote/
-rmote::start_rmote()
-
-install.packages("rmote", repos = c(
-  CRAN = "http://cran.rstudio.com",
-  tessera = "http://packages.tessera.io"))
-
-
-
-library(remoter)
-remoter::client("ec2-1-2-3-4.compute-1.amazonaws.com", port=56789)
-
-cmd <- paste("plink -ssh ",hostuser,"@",hostname," -i ",keypath," -N -L 3306:",hostname,":3306",sep='')
-system(cmd, wait=FALSE)
-remoter::client("localhost", port=3306)
-
-ssh user@my.remote.machine -L 55556:localhost:55555 -N
-remoter::client("localhost", port=55556)
-#-----------------------------------------------------------------------------------------
 
