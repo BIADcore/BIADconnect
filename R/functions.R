@@ -51,9 +51,12 @@ return(query)}
 #--------------------------------------------------------------------------------------------------
 encoder <- function(df){
 	if(nrow(df)==0) return(NULL)
+	names(df) <- iconv(names(df),from="UTF-8",to="UTF-8")
 	if(nrow(df)>0){
 		for(n in 1:ncol(df))
-		if(class(df[,n])=="character")df[,n] <- iconv(df[,n],"utf8","utf8")
+		if(class(df[,n])=="character"){
+			df[,n] <- iconv(df[,n],from="UTF-8",to="UTF-8")
+			}
 		return(df)	
 		}
 	}

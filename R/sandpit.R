@@ -3,28 +3,9 @@
 #-----------------------------------------------------------------------------------------
 source('.Rprofile')
 source('functions.R')
-#-----------------------------------------------------------------------------------------
-d <- sql.wrapper("SELECT * FROM `BIAD`.`zprivate_encoding`",user,password,hostname,hostuser,keypath,ssh)
 
+#-----------------------------------------------------------------------------------------
 
-df <- data.frame(
-	ID = c(100,101),
-	characters = c('afacr','awrc'),
-	Country = c('Spain', NA),
-	notes = NA,
-	case = NA,
-	timestamp = NA
-	)
-write.csv(df,file='test.csv',row.names=F, na='NULL')
-#-----------------------------------------------------------------------------------------
-# check whats going on with taxon codes for the materialculture
-#-----------------------------------------------------------------------------------------
-tax <- sql.wrapper("SELECT * FROM `BIAD`.`zoptions_TaxaList`",user,password,hostname,hostuser,keypath,ssh)
-mt <- sql.wrapper("SELECT * FROM `BIAD`.`MaterialCulture`",user,password,hostname,hostuser,keypath,ssh)
-x <- unique(mt$TaxonCode)
-table(mt$TaxonCode)
-bad <- x[!x%in%tax$TaxonCode]
-bad
 
 #-----------------------------------------------------------------------------------------
 # possibly amalgamate taxon tables?
@@ -108,32 +89,6 @@ unique(new$GraveID[!new$GraveID%in%gra$GraveID])
 nchar(new$CitationID)
 unique(new$CitationID)
 #-----------------------------------------------------------------------------------------
-# merge faunal taxa and abot taxa into a single table
-#-----------------------------------------------------------------------------------------
-ft <- sql.wrapper("SELECT * FROM `BIAD`.`zoptions_FaunalTaxaList`",user,password,hostname,hostuser,keypath,ssh)
-at <- sql.wrapper("SELECT * FROM `BIAD`.`zoptions_ABotTaxaList`",user,password,hostname,hostuser,keypath,ssh)
-names(at)[5] <- 'WildDomesticStatus'
-ft <- ft[,1:8]
-ft <- cbind(ft, data.frame(Kingdom='Animal'))
-at <- cbind(at, data.frame(Kingdom ='Plant'))
-require(dplyr)
-both <- bind_rows(ft,at)
-table(both$WildDomesticStatus)
-write.csv(both,file='toadd.csv',fileEncoding = "UTF-8",row.names=F, na='\\N')
-
-#-----------------------------------------------------------------------------------------
-<<<<<<< Updated upstream
-rmote::start_rmote()
-=======
-# test running an R script on the server, and returning data to local
 #-----------------------------------------------------------------------------------------
 
->>>>>>> Stashed changes
 #-----------------------------------------------------------------------------------------
-library(ssh)
-
-session <- ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile='C:/Users/adrian/.ssh/BIAD.pem')
-ssh_exec_wait(session, command = "/Library/Frameworks/R.framework/Resources/bin/R CMD BATCH --no-save BIAD/sandpit/test.R")
-ssh_disconnect(session)
-
-
