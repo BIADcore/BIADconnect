@@ -1,35 +1,33 @@
 #----------------------------------------------------------------------------------------------------
 source('.Rprofile')
 source('functions.R')
-library(data.tree)
+library(ssh)
+#----------------------------------------------------------------------------------------------------
+commands <- c(
+	"cd BIAD/R",
+	"/Library/Frameworks/R.framework/Resources/bin/R CMD BATCH --no-save server.run.tree.maker.R tmp/tmp.Rout"
+	)
+#----------------------------------------------------------------------------------------------------
+tmp.path <- "BIAD/R/tmp"
+session <- ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile='C:/Users/adrian/.ssh/BIAD.pem')
+ssh_exec_wait(session, command = paste("mkdir",tmp.path))
+scp_upload(session, files = "functions.R" , to = tmp.path)
+scp_upload(session, files = ".Rprofile" , to = tmp.path)
+ssh_exec_wait(session, command = commands)
+scp_download(session, files = "tmp/tmp.Rout", to = ".")
+ssh_disconnect(session)
+
 #----------------------------------------------------------------------------------------------------
 
-table.name <- 'Phases'
-primary.value <-  'TEG31eee'
 
-table.name <- 'Sites'
-primary.value <-  'S09209'
-
-table.name <- 'Phases'
-primary.value <-  'NITR2'
-
-table.name <- 'Phases'
-primary.value <-  'SCHEV4'
-
-table.name <- 'Sites'
-primary.value <- 'S10386'
-
-table.name <- 'Sites'
-primary.value <- 'S10191'
-
-x <- get.related.data(table.name, primary.value, fnc = decendants)
-x <- get.related.data(table.name, primary.value, fnc = ancestors)
-
-
+library(data.tree)
 tree <- FromListSimple(x)
 plot(tree)
 print(tree)
 #----------------------------------------------------------------------------------------------------
+d <- read.csv('test.csv', fileEncoding='Unicode', encoding='Unicode')
+d[,2]
+
 
 #----------------------------------------------------------------------------------------------------
 
