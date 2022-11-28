@@ -51,7 +51,6 @@ query <- merge(query1, query2, by = "SiteID")
 query <- merge(query,  query3, by = "PhaseID")
 query <- merge(query,  query4, by = "GraveID")
 query <- subset(query, AgeCategorical=='infant')
-query <- subset(query, AgeCategorical=='infant')
 query <- query[order(query$IndividualID),]
 #--------------------------------------------------------------------------------------
 # Example 4: quantifying PhaseType entries in BIAD using the RMySQL package
@@ -103,8 +102,9 @@ View(complete_query)
 #--------------------------------------------------------------------------------------
 # Example 9: check whether sites from a supplementary fall within the COREX spatial extent
 #--------------------------------------------------------------------------------------
-COREX <- st_read("COREX.shp")
+COREX <- st_read("../tools/shapes/COREX.shp")
 COREX <- st_transform(COREX, crs = 4326)
 points <- st_as_sf(, coords = c('Longitude','Latitude'), crs=4326) #insert file name you are checking
 test <- st_join(, COREX) #insert file name you are checking
 write.csv(test, file = "C:/Users/rstan/OneDrive/post-doc/2022_COREX/1_spatial_analysis//good_points.csv")
+#--------------------------------------------------------------------------------------
