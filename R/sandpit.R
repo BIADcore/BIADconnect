@@ -5,8 +5,33 @@ source('.Rprofile')
 source('functions.R')
 
 #-----------------------------------------------------------------------------------------
+# old bug with phase citations and phase types
+#-----------------------------------------------------------------------------------------
+pha <- sql.wrapper("SELECT * FROM BIAD.Phases",user,password,hostname,hostuser,keypath,ssh)
+pha.typ <- sql.wrapper("SELECT PhaseID, Type FROM BIAD.PhaseTypes",user,password,hostname,hostuser,keypath,ssh)
 
+phases <- unique(pha.typ$PhaseID)
+types <- c()
+N <- length(phases)
+for(n in 1:N){
+	sub <- subset(pha.typ, PhaseID==phases[n])
+	types[n] <- paste(sub$Type, collapse='; ')
+	}
+d <- data.frame(PhaseID=phases,types=types)
 
+d1 <- merge(pha,d,by='PhaseID')
+
+bad.i <- which(d1$Type!=d1$types)
+d1[bad.i[1:5],c('PhaseID','Type','types')]
+
+check.phases <- d1[bad.i,]$PhaseID
+
+text <- c()
+for(n in 1:length(check.phases)){
+	text[n] <- paste("UPDATE `BIAD`.`Phases` SET `StartBCEestimated`=NULL WHERE `PhaseID`='",check.phases[n],"';",sep='')
+	}
+
+sql.wrapper(text,user,password,hostname,hostuser,keypath,ssh)
 #-----------------------------------------------------------------------------------------
 # possibly amalgamate taxon tables?
 #-----------------------------------------------------------------------------------------
