@@ -26,6 +26,18 @@ sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh)
 		}
 return(query)}
 #--------------------------------------------------------------------------------------------------
+sql.wrapper.new <- function(sql.command, user, password, hostname, hostuser, pempath){
+
+	require(ssh)
+	session <- ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
+	query <- suppressWarnings(query.database(user, password, sql.command))
+	ssh_disconnect(session)
+
+	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
+	keys <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+
+return(query)}
+#--------------------------------------------------------------------------------------------------
 query.database <- function(user, password, sql.command){
 	require(RMySQL)
 	require(odbc)

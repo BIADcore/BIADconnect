@@ -15,6 +15,7 @@ source('functions.R')
 #--------------------------------------------------------------------------------------
 sql.command <- "SELECT * FROM `Sites`"
 query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+query <- sql.wrapper.new(sql.command,user,password,hostname,hostuser,pempath)
 #--------------------------------------------------------------------------------------
 # The object 'query' can now be inspected
 #--------------------------------------------------------------------------------------
