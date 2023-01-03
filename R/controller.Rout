@@ -42,34 +42,29 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Mon Jan  2 02:15:03 2023"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Tue Jan  3 02:15:01 2023"
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
 Linking to librsvg 2.48.4
-[1] "Starting to run script: auto.make.daily.descriptions.R at Mon Jan  2 02:15:07 2023"
-[1] "Starting to run script: auto.make.daily.map.R at Mon Jan  2 02:15:07 2023"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Tue Jan  3 02:15:06 2023"
+[1] "Starting to run script: auto.make.daily.map.R at Tue Jan  3 02:15:06 2023"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
 Loading required package: rnaturalearth
 Loading required package: rnaturalearthdata
-[1] "Starting to run script: auto.make.daily.row.counts.R at Mon Jan  2 02:15:12 2023"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Mon Jan  2 02:15:12 2023"
-[1] "Starting to run script: auto.make.daily.table.png.R at Mon Jan  2 02:15:12 2023"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Tue Jan  3 02:15:10 2023"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Tue Jan  3 02:15:11 2023"
+[1] "Starting to run script: auto.make.daily.table.png.R at Tue Jan  3 02:15:11 2023"
 > 
 > if(NW>0 & today==run.day)for(n in 1:NW){
 + 	file <- weekly.files[n]
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-> 
-> #------------------------------------------------------------------
-> 	
-> 	
-> 	
-> 	
-> 
-> proc.time()
-   user  system elapsed 
- 11.080   0.782  13.590 
+[1] "Starting to run script: auto.make.weekly.user.citation.hygiene.R at Tue Jan  3 02:15:14 2023"
+Error: Can't get Google credentials.
+Are you running gmailr in a non-interactive session? Consider:
+  * Call `gm_auth()` directly with all necessary specifics.
+Execution halted
