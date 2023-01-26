@@ -352,8 +352,59 @@ run.server.searcher <- function(table.name,primary.value){
 
 return(list(down=down,up=up))}
 #--------------------------------------------------------------------------------------------------
+database.relationship.plotter <- function(d.tables, include.look.ups=TRUE){
 
+	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_SCHEMA = 'BIAD'"
+	d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 
+	d <- subset(d, TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
+	if(!include.look.ups){
+		d <- subset(d, REFERENCED_TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
+		d <- subset(d,!grepl('zoptions', REFERENCED_TABLE_NAME))
+		}
+	z.tables <- d$REFERENCED_TABLE_NAME[grep('zoptions',d$REFERENCED_TABLE_NAME)]
+
+	# convert foreign keys into a suitable format for DiagrammeR
+	edges <- paste(d$REFERENCED_TABLE_NAME, d$TABLE_NAME, sep=' -> ')
+	edges <- paste('edge [color = dimgray]', edges, collapse='\n ')
+
+	data.tables <- paste("
+  		node [shape = circle,
+		style = filled,
+		fillcolor = orange,
+		fixedsize = true,
+		width = 2.2,
+		fontsize = 15]", d.tables, sep='\n ')
+
+	look.ups <- paste("
+		node [shape = box,
+		style = filled,
+		fillcolor = lightblue,
+		fixedsize = true,
+		width = 3.0,
+		fontsize = 15]", z.tables, sep='\n ')
+
+	subgraph <- "
+	subgraph cluster {
+	node [shape = circle,
+ 		style = filled,
+ 		fillcolor = orange,
+ 		fixedsize = true,
+		width = 1,
+		fontsize = 10]
+		DataTable
+		node [shape = box,
+		style = filled,
+		fillcolor = lightblue,
+		fixedsize = true,
+		width = 1,
+		fontsize = 10]
+	LookUpTable}"
+
+	diagram <- paste("digraph {", data.tables, look.ups, edges, subgraph, "}")
+	image <- DiagrammeR::grViz(diagram)
+return(image)}
+#--------------------------------------------------------------------------------------------------
 
 
 
