@@ -11,7 +11,8 @@ d.tables <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 
 zprivate <- d.tables[grepl('zprivate', d.tables)]
 zoptions <- d.tables[grepl('zoptions', d.tables)]
-standard <- d.tables[!d.tables%in%c(zoptions,zprivate)]
+copy <- d.tables[grepl('copy', d.tables)]
+standard <- d.tables[!d.tables%in%c(zoptions,zprivate,copy)]
 #------------------------------------------------------------------
 # all relationships
 d.tables <- paste(standard, collapse='; ')
