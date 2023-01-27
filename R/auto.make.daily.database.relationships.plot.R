@@ -22,5 +22,5 @@ export_svg(image) %>% charToRaw %>% rsvg_png("../tools/plots/database.relationsh
 # set 1
 d.tables <- paste(c('Sites','Phases','C14Samples','Graves','FaunalIsotopes','ABotPhases','StrontiumEnvironment'), collapse='; ')
 image <- database.relationship.plotter(d.tables, FALSE)
-export_svg(image) %>% charToRaw %>% rsvg_png("../tools/plots/database.relationships.plot.sub1.png", height=500)
+export_svg(image) %>% charToRaw %>% rsvg_png("../tools/plots/database.relationships.plot.sub.1.png", height=350)
 #------------------------------------------------------------------
