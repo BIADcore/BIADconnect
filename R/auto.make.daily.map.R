@@ -90,3 +90,96 @@ points(x, y, col=res$summary$col, pch=16,cex=0.8)
 legend('topleft',res$legend,bty='n',col=res$cols,pch=16,cex=0.7)
 dev.off()
 #-----------------------------------------------------------------
+# Botanical species
+#-----------------------------------------------------------------
+sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`SampleID` FROM `Sites`
+INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
+INNER JOIN `ABotSamples` ON `Phases`.`PhaseID`=`ABotSamples`.`PhaseID`"
+
+d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+res <- summary.maker(d)
+x <- res$summary$Longitude
+y <- res$summary$Latitude
+
+svg(file = '../tools/plots/map.botanicalspecies.svg', width = 10, height = 5 )
+plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main='Botanical Species')
+map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
+points(x, y, col=res$summary$col, pch=16,cex=0.8)
+legend('topleft',res$legend,bty='n',col=res$cols,pch=16,cex=0.7)
+dev.off()
+#-----------------------------------------------------------------
+# C14
+#-----------------------------------------------------------------
+sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`C14ID` FROM `Sites`
+INNER JOIN `C14Samples` ON `Sites`.`SiteID`=`C14Samples`.`SiteID`"
+
+d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+res <- summary.maker(d)
+x <- res$summary$Longitude
+y <- res$summary$Latitude
+
+svg(file = '../tools/plots/map.C14.svg', width = 10, height = 5 )
+plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main='Radiocarbon dates')
+map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
+points(x, y, col=res$summary$col, pch=16,cex=0.8)
+legend('topleft',res$legend,bty='n',col=res$cols,pch=16,cex=0.7)
+dev.off()
+#-----------------------------------------------------------------
+# human isotopes
+#-----------------------------------------------------------------
+sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`HumanIsoID` FROM `Sites`
+INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
+INNER JOIN `Graves` ON `Phases`.`PhaseID`=`Graves`.`PhaseID`
+INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`
+INNER JOIN `HumanIsotopes` ON `HumanIsotopes`.`IndividualID`=`GraveIndividuals`.`IndividualID`"
+
+d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+res <- summary.maker(d)
+x <- res$summary$Longitude
+y <- res$summary$Latitude
+
+svg(file = '../tools/plots/map.humanisotopes.svg', width = 10, height = 5 )
+plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main='Human isotope samples')
+map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
+points(x, y, col=res$summary$col, pch=16,cex=0.8)
+legend('topleft',res$legend,bty='n',col=res$cols,pch=16,cex=0.7)
+dev.off()
+#-----------------------------------------------------------------
+# human strontium
+#-----------------------------------------------------------------
+sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`StrontiumID` FROM `Sites`
+INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
+INNER JOIN `Graves` ON `Phases`.`PhaseID`=`Graves`.`PhaseID`
+INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`
+INNER JOIN `Strontium` ON `Strontium`.`IndividualID`=`GraveIndividuals`.`IndividualID`"
+
+d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+res <- summary.maker(d)
+x <- res$summary$Longitude
+y <- res$summary$Latitude
+
+svg(file = '../tools/plots/map.humanstrontium.svg', width = 10, height = 5 )
+plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main='Human strontium samples')
+map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
+points(x, y, col=res$summary$col, pch=16,cex=0.8)
+legend('topleft',res$legend,bty='n',col=res$cols,pch=16,cex=0.7)
+dev.off()
+#-----------------------------------------------------------------
+# Faunal strontium
+#-----------------------------------------------------------------
+sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`FaunIsoID` FROM `Sites`
+INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
+INNER JOIN `FaunalIsotopes` ON `FaunalIsotopes`.`PhaseID`=`Phases`.`PhaseID`"
+
+d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+res <- summary.maker(d)
+x <- res$summary$Longitude
+y <- res$summary$Latitude
+
+svg(file = '../tools/plots/map.humanstrontium.svg', width = 10, height = 5 )
+plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main='Human strontium samples')
+map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
+points(x, y, col=res$summary$col, pch=16,cex=0.8)
+legend('topleft',res$legend,bty='n',col=res$cols,pch=16,cex=0.7)
+dev.off()
+#-----------------------------------------------------------------
