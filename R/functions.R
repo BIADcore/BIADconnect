@@ -407,7 +407,28 @@ database.relationship.plotter <- function(d.tables, include.look.ups=TRUE){
 	image <- DiagrammeR::grViz(diagram)
 return(image)}
 #--------------------------------------------------------------------------------------------------
+summary.maker <- function(d){
 
+	x <- as.data.frame(table(d$SiteID)); names(x) <- c('SiteID','count')
+	x <- merge(x,unique(d[,1:3]),by='SiteID')
+	x$code[x$count==1] <- 1
+	x$code[x$count==2] <- 2
+	posts <- floor(unique(quantile(x$count[!x$count%in%c(1,2)])))
+	N <- length(posts)-1
+	posts[N+1] <- posts[N+1]+1
+	key <- c()
+	for(n in 1:N){
+		lower <- posts[n]
+		upper <- posts[n+1]
+		key[n] <- paste(lower,upper,sep='=>')
+		i <- x$count>=lower & x$count<upper
+		x$code[i] <- n+2
+		}
+	cols <- colorRampPalette(c("red", "blue"))(N+2)
+	for(n in 1:(N+2))x$col[x$code==n] <- cols[n]
+	legend <- c(1,2,key)
+return(list(summary=x,cols=cols,legend=legend))}
+#--------------------------------------------------------------------------------------------------
 
 
 
