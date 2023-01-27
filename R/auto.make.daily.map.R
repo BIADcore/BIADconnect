@@ -14,6 +14,8 @@ d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 
 xmean <- mean(d$Longitude, na.rm=T)
 ymean <- mean(d$Latitude, na.rm=T)
+xlim <- range(d$Longitude)
+ylim <- range(d$Latitude)
 
 crs <- paste("+proj=ortho +lat_0=",ymean," + lon_0=",xmean,sep='')
 
@@ -45,8 +47,8 @@ x <- res$summary$Longitude
 y <- res$summary$Latitude
 
 svg(file = '../tools/plots/map.aDNA.svg', width = 10, height = 5 )
-plot(NULL,xlim=range(x),ylim=range(y),frame.plot=F,axes=F, xlab='',ylab='',main='Human aDNA')
-map('world',xlim=range(x),ylim=range(y),col='grey90',add=T, fill=T, border='grey')
+plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main='Human aDNA')
+map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
 points(x, y, col=res$summary$col, pch=16,cex=0.8)
 legend('topleft',res$legend,bty='n',col=res$cols,pch=16,cex=0.7)
 dev.off()
@@ -64,8 +66,26 @@ x <- res$summary$Longitude
 y <- res$summary$Latitude
 
 svg(file = '../tools/plots/map.graveindividuals.svg', width = 10, height = 5 )
-plot(NULL,xlim=range(x),ylim=range(y),frame.plot=F,axes=F, xlab='',ylab='',main='Grave individuals')
-map('world',xlim=range(x),ylim=range(y),col='grey90',add=T, fill=T, border='grey')
+plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main='Grave individuals')
+map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
+points(x, y, col=res$summary$col, pch=16,cex=0.8)
+legend('topleft',res$legend,bty='n',col=res$cols,pch=16,cex=0.7)
+dev.off()
+#-----------------------------------------------------------------
+# Faunal species
+#-----------------------------------------------------------------
+sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`FaunalSpeciesID` FROM `Sites`
+INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
+INNER JOIN `FaunalSpecies` ON `Phases`.`PhaseID`=`FaunalSpecies`.`PhaseID`"
+
+d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+res <- summary.maker(d)
+x <- res$summary$Longitude
+y <- res$summary$Latitude
+
+svg(file = '../tools/plots/map.faunalspecies.svg', width = 10, height = 5 )
+plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main='Faunal Species')
+map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
 points(x, y, col=res$summary$col, pch=16,cex=0.8)
 legend('topleft',res$legend,bty='n',col=res$cols,pch=16,cex=0.7)
 dev.off()
