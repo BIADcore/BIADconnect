@@ -176,8 +176,28 @@ res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
 
-svg(file = '../tools/plots/map.humanstrontium.svg', width = 10, height = 5 )
-plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main='Human strontium samples')
+svg(file = '../tools/plots/map.faunalisotope.svg', width = 10, height = 5 )
+plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main='Faunal Isotope samples')
+map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
+points(x, y, col=res$summary$col, pch=16,cex=0.8)
+legend('topleft',res$legend,bty='n',col=res$cols,pch=16,cex=0.7)
+dev.off()
+#-----------------------------------------------------------------
+# health
+#-----------------------------------------------------------------
+sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`Trait` FROM `Sites`
+INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
+INNER JOIN `Graves` ON `Phases`.`PhaseID`=`Graves`.`PhaseID`
+INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`
+INNER JOIN `Health` ON `Health`.`IndividualID`=`GraveIndividuals`.`IndividualID`"
+
+d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+res <- summary.maker(d)
+x <- res$summary$Longitude
+y <- res$summary$Latitude
+
+svg(file = '../tools/plots/map.health.svg', width = 10, height = 5 )
+plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main='Human disease traits')
 map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
 points(x, y, col=res$summary$col, pch=16,cex=0.8)
 legend('topleft',res$legend,bty='n',col=res$cols,pch=16,cex=0.7)
