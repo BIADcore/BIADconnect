@@ -15,8 +15,8 @@ d.cols <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 all <- d.tables$TABLE_NAME
 zprivate <- all[grepl('zprivate', all)]
 zoptions <- all[grepl('zoptions', all)]
-copy <- all[grepl('_copy', all)]
-standard <- all[!all%in%c(zprivate,zoptions,copy)]
+temp <- all[grepl('_copy|_update', all)]
+standard <- all[!all%in%c(zprivate,zoptions,temp)]
 
 # construct a single markdown file for all standard tables and zoptions
 create.markdown.for.several.tables(d.tables, d.cols, table.names = standard, file = '../../Gists/table_comments/standard/standard.md')
