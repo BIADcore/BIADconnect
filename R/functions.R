@@ -401,6 +401,8 @@ database.relationship.plotter <- function(d.tables, include.look.ups=TRUE){
 		fontsize = 10]
 	LookUpTable}"
 
+	if(!include.look.ups)subgraph <- ""
+
 	diagram <- paste("digraph {", data.tables, look.ups, edges, subgraph, "}")
 	image <- DiagrammeR::grViz(diagram)
 return(image)}
