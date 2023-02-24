@@ -42,13 +42,13 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Thu Feb 23 02:15:02 2023"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Fri Feb 24 02:15:02 2023"
 Linking to librsvg 2.48.4
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
-[1] "Starting to run script: auto.make.daily.descriptions.R at Thu Feb 23 02:15:07 2023"
-[1] "Starting to run script: auto.make.daily.map.R at Thu Feb 23 02:15:07 2023"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Fri Feb 24 02:15:07 2023"
+[1] "Starting to run script: auto.make.daily.map.R at Fri Feb 24 02:15:07 2023"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -57,22 +57,7 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.row.counts.R at Thu Feb 23 02:15:14 2023"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Thu Feb 23 02:15:14 2023"
-[1] "Starting to run script: auto.make.daily.table.png.R at Thu Feb 23 02:15:14 2023"
-> 
-> if(NW>0 & today==run.day)for(n in 1:NW){
-+ 	file <- weekly.files[n]
-+ 	print(paste('Starting to run script:',file,'at',date()))
-+ 	source(file)
-+ 	}
-> 
-> #------------------------------------------------------------------
-> 	
-> 	
-> 	
-> 	
-> 
-> proc.time()
-   user  system elapsed 
- 12.841   0.984  16.257 
+Error in CPL_geos_op2(op, x, y) : 
+  Evaluation error: IllegalArgumentException: point array must contain 0 or >1 elements.
+Calls: source ... geos_op2_df -> geos_op2_geom -> st_sfc -> CPL_geos_op2
+Execution halted
