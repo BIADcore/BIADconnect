@@ -42,13 +42,13 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Wed Mar  8 10:37:02 2023"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Thu Mar  9 02:15:02 2023"
 Linking to librsvg 2.48.4
 Loading required package: RMySQL
 Loading required package: DBI
 Loading required package: odbc
-[1] "Starting to run script: auto.make.daily.descriptions.R at Wed Mar  8 10:37:07 2023"
-[1] "Starting to run script: auto.make.daily.map.R at Wed Mar  8 10:37:07 2023"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Thu Mar  9 02:15:07 2023"
+[1] "Starting to run script: auto.make.daily.map.R at Thu Mar  9 02:15:07 2023"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -57,9 +57,9 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.row.counts.R at Wed Mar  8 10:37:14 2023"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Wed Mar  8 10:37:14 2023"
-[1] "Starting to run script: auto.make.daily.table.png.R at Wed Mar  8 10:37:14 2023"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Thu Mar  9 02:15:15 2023"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Thu Mar  9 02:15:15 2023"
+[1] "Starting to run script: auto.make.daily.table.png.R at Thu Mar  9 02:15:15 2023"
 > 
 > if(NW>0 & today==run.day)for(n in 1:NW){
 + 	file <- weekly.files[n]
@@ -75,4 +75,4 @@ Loading required package: svglite
 > 
 > proc.time()
    user  system elapsed 
- 12.495   0.878  17.398 
+ 12.619   0.849  17.770 
