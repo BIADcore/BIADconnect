@@ -29,7 +29,7 @@ text(x=0.35,y=0.25, 'Undetermined Neolithic (UN)')
 text(x=0.35,y=0.2, 'Botanical n=72',col='firebrick')
 dev.off()
 
-example.1 <- '
+example.1a <- '
 digraph cluster {
 node[ shape = none, fontname = "Arial" ]
 rankdir=LR;
@@ -37,13 +37,28 @@ rankdir=LR;
 phases[ label=<
 <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
 <tr><td colspan="4"><b>Phases</b></td></tr>
-<tr><td>PhaseID</td><td>Order</td><td>Period</td><td>etc...</td></tr>
-<tr><td>A</td><td>1</td><td>UN</td><td></td></tr>
-<tr><td>B</td><td>2</td><td>EBA</td><td></td></tr>
+<tr><td>PhaseID</td><td>SiteID</td><td>Period</td><td>etc...</td></tr>
+<tr><td>A</td><td>UN</td><td>S01</td><td></td></tr>
+<tr><td>B</td><td>EBA</td><td>S01</td><td></td></tr>
 </table>>];
 }'
 
-export_svg(grViz(diagram=example.1)) %>% charToRaw %>% rsvg_png("../tools/plots/phasing.example.1.table.png")
+export_svg(grViz(diagram=example.1a)) %>% charToRaw %>% rsvg_png("../tools/plots/phasing.example.1a.table.png")
+
+example.1b <- '
+digraph cluster {
+node[ shape = none, fontname = "Arial" ]
+rankdir=LR;
+
+phases[ label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+<tr><td colspan="4"><b>PhaseOrder</b></td></tr>
+<tr><td>SiteID</td><td>PhaseID_before</td><td>PhaseID_after</td><td>etc...</td></tr>
+<tr><td>S01</td><td>A</td><td>B</td><td></td></tr>
+</table>>];
+}'
+
+export_svg(grViz(diagram=example.1b)) %>% charToRaw %>% rsvg_png("../tools/plots/phasing.example.1b.table.png")
 #-----------------------------------------------------------------------------------------
 # Example 2
 #-----------------------------------------------------------------------------------------
