@@ -110,3 +110,35 @@ points <- st_as_sf(, coords = c('Longitude','Latitude'), crs=4326) #insert file 
 test <- st_join(, COREX) #insert file name you are checking
 write.csv(test, file = "C:/Users/rstan/OneDrive/post-doc/2022_COREX/1_spatial_analysis//good_points.csv")
 #--------------------------------------------------------------------------------------
+# Example 10: check temporal distribution of radiocarbon dating by country
+#--------------------------------------------------------------------------------------
+sql.command <- "SELECT `C14ID`, `C14.Age` AS Age, `C14.SD`, `Country` FROM `C14Samples` #SQL query
+LEFT JOIN `Sites` ON `C14Samples`.`SiteID` = `Sites`.`SiteID`"
+query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh) #run qery
+query <- na.omit(query) #remove NA's
+
+a <- ggplot(query, aes(Country)) +
+  geom_bar() +
+  coord_flip() +
+  theme_minimal()
+
+library(ggridges)
+library(ggplot2)
+
+b <- ggplot(query, aes(x = Age, y = Country)) +
+  geom_density_ridges2(
+    jittered_points = TRUE,
+    position = position_points_jitter(width = 0.05, height = 0),
+    point_shape = '|', point_size = 3, point_alpha = 1, alpha = 0.7,
+    quantile_lines = TRUE,
+    scale = 0.9) +
+  scale_x_continuous(limits = c(0, 10000),
+                     breaks = c(0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000)) +
+  ylab("") +
+  xlab("uncal BP") +
+  theme_minimal() + 
+  theme(legend.position = "none")
+
+library(gridExtra)
+
+grid.arrange(a, b, ncol = 2)
