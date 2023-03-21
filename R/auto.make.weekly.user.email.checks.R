@@ -37,7 +37,10 @@ if(length(missing)>0){
 #-----------------------------------------------------------------------------------------
 if(length(missing)>0){
 	gmailr::gm_auth_configure(path='../tools/email/gmailr.json')
-	gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret")
+# seems .secret is deleted sometimes. Try copying to different name or location?
+#	gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret")
+#	gmailr::gm_auth(email = TRUE)
+	gmailr::gm_auth(email = "BIAD.committee@gmail.com")
 	gmailr::gm_send_message(email)
 	}
 #-----------------------------------------------------------------------------------------
