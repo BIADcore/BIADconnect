@@ -43,7 +43,7 @@ for(n in 1:length(names)){
   	
     if(length(missing)!=0){
 		gmailr::gm_auth_configure(path='../tools/email/gmailr.json')
-		gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret")
+		gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret copy")
 		gmailr::gm_send_message(email)	
 		}
 	}
