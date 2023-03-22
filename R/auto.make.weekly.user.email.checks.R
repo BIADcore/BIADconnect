@@ -38,7 +38,6 @@ if(length(missing)>0){
 if(length(missing)>0){
 	gmailr::gm_auth_configure(path='../tools/email/gmailr.json')
 	gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret copy")
-	gmailr::gm_auth(email = "BIAD.committee@gmail.com")
 	gmailr::gm_send_message(email)
 	}
 #-----------------------------------------------------------------------------------------
