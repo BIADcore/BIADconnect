@@ -49,10 +49,12 @@ query.database <- function(user, password, sql.command){
 
 	# connect locally to the database
 	con <- dbConnect(drv, user=user, pass=password, dbname='BIAD', host = "127.0.0.1", port=3306)
-	dbSendQuery(con,"SET NAMES 'utf8'")
+#	dbSendQuery(con,"SET NAMES 'utf8'")
+	dbSendStatement(con,"SET NAMES 'utf8'")
 
 	# query the database and tidy
-	for(n in 1:length(sql.command)) res <- suppressWarnings(dbSendQuery(con,sql.command[n]))
+#	for(n in 1:length(sql.command)) res <- suppressWarnings(dbSendQuery(con,sql.command[n]))
+	for(n in 1:length(sql.command)) res <- suppressWarnings(dbSendStatement(con,sql.command[n]))
 	query <- fetch(res, n= -1)
 	query <- encoder(query)
 
@@ -448,10 +450,31 @@ summary.maker <- function(d){
 	legend <- c(1,2,key)
 return(list(summary=x,cols=cols,legend=legend))}
 #--------------------------------------------------------------------------------------------------
-
-
-
-
+make.trigger <- function(table,columns,type){
+	triggername <- paste('auto_trigger_padding_',type,'_',table,sep='')
+	t1 <- paste('CREATE DEFINER=`Rscripts`@`%` TRIGGER `',triggername,'` BEFORE ',type,' ON `',table,'` FOR EACH ROW BEGIN',sep='')
+	t2 <- paste('SET NEW.`',columns,'` = TRIM(NEW.`',columns,'`);',sep='')
+	t3 <- 'END'
+	txt <- c(t1,t2,t3)
+	txt <- paste(txt,collapse=' ')
+return(txt)}
+#--------------------------------------------------------------------------------------------------
+make.all.triggers <- function(x){
+	txt <- c()
+	tables <- unique(x$TABLE_NAME)
+	N <- length(tables)
+	if(N==0)return(NULL)
+	if(N>0){
+		for(n in 1:N){
+			table <- tables[n]
+			columns <- subset(x, TABLE_NAME==table)$COLUMN_NAME
+			inserts <- make.trigger(table,columns,type = 'INSERT')
+			updates <- make.trigger(table,columns,type = 'UPDATE')
+			txt <- c(txt,inserts,updates)
+			}
+		}
+return(txt)}
+#--------------------------------------------------------------------------------------------------
 
 
 
