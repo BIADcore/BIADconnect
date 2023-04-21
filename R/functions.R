@@ -453,7 +453,7 @@ return(list(summary=x,cols=cols,legend=legend))}
 make.trigger <- function(table,columns,type){
 	triggername <- paste('auto_trigger_padding_',type,'_',table,sep='')
 	t1 <- paste('CREATE DEFINER=`Rscripts`@`%` TRIGGER `',triggername,'` BEFORE ',type,' ON `',table,'` FOR EACH ROW BEGIN',sep='')
-	t2 <- paste('SET NEW.`',columns,'` = TRIM(NEW.`',columns,'`);',sep='')
+	t2 <- paste("SET NEW.`",columns,"` = TRIM(REPLACE(REPLACE(REPLACE(NEW.`",columns,"`, '\r', ' '), '\n', ' '), '\t', ' '));",sep='')
 	t3 <- 'END'
 	txt <- c(t1,t2,t3)
 	txt <- paste(txt,collapse=' ')
@@ -475,9 +475,5 @@ make.all.triggers <- function(x){
 		}
 return(txt)}
 #--------------------------------------------------------------------------------------------------
-
-
-
-
 
 
