@@ -11,18 +11,21 @@
 setwd('C:/Users/tcfasts/Github/BIADwiki/R')
 source('.Rprofile') # should already have loaded if you open R from this script.
 source('functions.R')
+
 #--------------------------------------------------------------------------------------
 # Example 1
 #--------------------------------------------------------------------------------------
 sql.command <- "SELECT * FROM `Sites`"
 query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 query <- sql.wrapper.new(sql.command,user,password,hostname,hostuser,pempath)
+
 #--------------------------------------------------------------------------------------
 # The object 'query' can now be inspected
 #--------------------------------------------------------------------------------------
 head(query)
 table(query$Country)
 plot(table(query$Country),las=2)
+
 #--------------------------------------------------------------------------------------
 # Example 2: Joins done in MySQL
 #--------------------------------------------------------------------------------------
@@ -34,6 +37,7 @@ LEFT JOIN `GraveIndividuals` ON `Graves`.`GraveID` = `GraveIndividuals`.`GraveID
 WHERE `AgeCategorical` = 'infant'
 ORDER BY `IndividualID`"
 query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+
 #--------------------------------------------------------------------------------------
 # Example 3: Exactly the same output, but joins done in R
 #--------------------------------------------------------------------------------------
@@ -54,6 +58,7 @@ query <- merge(query,  query3, by = "PhaseID")
 query <- merge(query,  query4, by = "GraveID")
 query <- subset(query, AgeCategorical=='infant')
 query <- query[order(query$IndividualID),]
+
 #--------------------------------------------------------------------------------------
 # Example 4: quantifying PhaseType entries in BIAD using the RMySQL package
 #--------------------------------------------------------------------------------------
@@ -62,6 +67,7 @@ query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 type.count <- sort(table(query$Type), decreasing = T)
 View(type.count)
 sum(type.count)
+
 #--------------------------------------------------------------------------------------
 # Example 5: updating the database directly
 #--------------------------------------------------------------------------------------
@@ -74,16 +80,19 @@ for(n in 1:nrow(old)){
 	sql.command[n] <- paste("UPDATE `BIAD`.`zprivate_encoding` SET `notes`='",new,"' WHERE `ID`='",old$ID[n],"'",sep="")
 	}
 sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+
 #--------------------------------------------------------------------------------------
 # Example 6: get LabIDs from C14Samples table
 #--------------------------------------------------------------------------------------
 sql.command <- "SELECT LabID FROM C14Samples"
 query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+
 #--------------------------------------------------------------------------------------
 # Example 7: use GraveID's to extract associated metadata for the C14Samples
 #--------------------------------------------------------------------------------------
 sql.command <- "SELECT GraveID, Graves.PhaseID, SiteID, Period FROM Graves JOIN Phases ON Graves.PhaseID = Phases.PhaseID GROUP BY GraveID ORDER BY GraveID"
 query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+
 #--------------------------------------------------------------------------------------
 # Example 8: using an object from a different database to query BIAD
 #--------------------------------------------------------------------------------------
@@ -101,6 +110,7 @@ query2 <- sql.wrapper(sql.command2,user,password,hostname,hostuser,keypath,ssh)
 head(query2)
 complete_query <- merge(test,  query2, by = "SiteID")
 View(complete_query)
+
 #--------------------------------------------------------------------------------------
 # Example 9: check whether sites from a supplementary fall within the COREX spatial extent
 #--------------------------------------------------------------------------------------
@@ -109,12 +119,13 @@ COREX <- st_transform(COREX, crs = 4326)
 points <- st_as_sf(, coords = c('Longitude','Latitude'), crs=4326) #insert file name you are checking
 test <- st_join(, COREX) #insert file name you are checking
 write.csv(test, file = "C:/Users/rstan/OneDrive/post-doc/2022_COREX/1_spatial_analysis//good_points.csv")
+
 #--------------------------------------------------------------------------------------
 # Example 10: check temporal distribution of radiocarbon dating by country
 #--------------------------------------------------------------------------------------
-sql.command <- "SELECT `C14ID`, `C14.Age` AS Age, `C14.SD`, `Country` FROM `C14Samples` #SQL query
+sql.command <- "SELECT `C14ID`, `C14.Age` AS Age, `C14.SD`, `Country` FROM `C14Samples`
 LEFT JOIN `Sites` ON `C14Samples`.`SiteID` = `Sites`.`SiteID`"
-query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh) #run qery
+query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 query <- na.omit(query) #remove NA's
 
 a <- ggplot(query, aes(Country)) +
@@ -141,4 +152,18 @@ b <- ggplot(query, aes(x = Age, y = Country)) +
 
 library(gridExtra)
 
-grid.arrange(a, b, ncol = 2)
+#--------------------------------------------------------------------------------------
+# Example 11: return all GraveIndividuals with ItemIDs and Phase based on a set of selected ID numbers
+#--------------------------------------------------------------------------------------
+sql.command <- "SELECT GraveIndividuals.IndividualID, GraveIndividuals.GraveID, GraveIndividuals.IndividualName, GraveIndividuals.ItemID, Graves.PhaseID
+FROM GraveIndividuals
+JOIN Graves ON GraveIndividuals.GraveID = Graves.GraveID"
+query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+library(readr)
+selected_ID_number <- read_csv("insert_csv_name.csv")
+query$GraveID %in% selected_ID_number$selected_column # specify which column of the query is supposed to be checked against the object with selected columns
+test <- subset(query, GraveID %in% saag_material$GraveID) # save an object with all the results which fulfill the specific condition
+View(test) # inspect the final object
+# work-in-progress example (don't delete because I am using it - 2023.04.28 RS)
+test <- subset(query, GraveID %in% saag_material$GraveID)
+View(test)
