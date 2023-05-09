@@ -160,10 +160,7 @@ FROM GraveIndividuals
 JOIN Graves ON GraveIndividuals.GraveID = Graves.GraveID"
 query <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
 library(readr)
-selected_ID_number <- read_csv("insert_csv_name.csv")
-query$GraveID %in% selected_ID_number$selected_column # specify which column of the query is supposed to be checked against the object with selected columns
-test <- subset(query, GraveID %in% saag_material$GraveID) # save an object with all the results which fulfill the specific condition
+selected_ID_number <- read_csv("saag_material.csv")
+query$GraveID %in% selected_ID_number$GraveID # specify which column of the query is supposed to be checked against the object with selected columns
+test <- subset(query, GraveID %in% selected_ID_number$GraveID) # save an object with all the results which fulfill the specific condition
 View(test) # inspect the final object
-# work-in-progress example (don't delete because I am using it - 2023.04.28 RS)
-test <- subset(query, GraveID %in% saag_material$GraveID)
-View(test)
