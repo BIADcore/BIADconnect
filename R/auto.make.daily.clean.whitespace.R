@@ -22,7 +22,7 @@ for(n in 1:length(tables)){
 			}
 		}
 	}
-sql.wrapper(sql.commands,user,password,hostname,hostuser,keypath,ssh)
+if(!is.null(sql.commands))sql.wrapper(sql.commands,user,password,hostname,hostuser,keypath,ssh)
 #--------------------------------------------------------------------------------------------------------------
 # remove any leading or trailing whitespace, or tabs, carriage returns or new lines
 #--------------------------------------------------------------------------------------------------------------
@@ -47,5 +47,5 @@ for(n in 1:length(tables)){
 		}
 	}
 sql.commands <- unique(sql.commands)
-sql.wrapper(sql.commands,user,password,hostname,hostuser,keypath,ssh)
+if(!is.null(sql.commands))sql.wrapper(sql.commands,user,password,hostname,hostuser,keypath,ssh)
 #--------------------------------------------------------------------------------------------------------------
