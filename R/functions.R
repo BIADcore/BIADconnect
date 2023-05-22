@@ -496,5 +496,28 @@ make.all.triggers <- function(x){
 		}
 return(txt)}
 #--------------------------------------------------------------------------------------------------
+data.in.polygon <- function(data,kml.path,polygons=NULL,index=NULL){
+	# returns the data in a particular polygon, use the full kml file path of the polygon
+	# alternatively, if kml.path is NULL, polygons can be used: a list of matrixes of two columns (no names): long,lat
+	# index: can be used to select particular polygons only in the kml
+	require(maptools)
+	require(splancs)
+	require(rgdal)
+	data.region <- NULL
+	if(!is.null(kml.path)&!is.null(polygons))stop('Which one do you want? the kml.path or the polygons? Make one of them NULL')
+	if(is.null(polygons))polygons <- getKMLcoordinates(kml.path,ignoreAltitude=T)
+	if(is.null(index))index <- 1:length(polygons)
+	for(n in index){
+		polygon <- polygons[[n]]
+		if(!'Longitude'%in%names(data))stop('Longitude is not in the data')		
+		if('Longitude'%in%names(data)){
+			data <- subset(data,!is.na(Longitude))
+			georefs <- pip(pts=data.frame(x=data$Longitude,y=data$Latitude),poly=polygon,bound=T)
+			index <- data$Longitude%in%georefs$x & data$Latitude%in%georefs$y
+			}
 
+		data.region <- rbind(data.region,data[index,])	
+		}	
+return(data.region)}
+#-----------------------------------------------------------------------
 
