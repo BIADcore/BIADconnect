@@ -1,14 +1,21 @@
 #--------------------------------------------------------------------------------------
 # Usual overheads
 #--------------------------------------------------------------------------------------
+library(mapdata)
 source('functions.R')
 source('.Rprofile')
 #--------------------------------------------------------------------------------------
-# get all C14 dates associated with bell beaker
+# get all sites within a polygon
 #--------------------------------------------------------------------------------------
-sql.command <- "SELECT `C14ID`,`C14Samples`.`PhaseID`,`C14Samples`.`SiteID`,`C14Samples`.`Period`,`C14.Age`,`C14.SD`,`LabID`,`Culture1` FROM `C14Samples` INNER JOIN `Phases` ON `C14Samples`.`PhaseID`=`Phases`.`PhaseID` WHERE `Culture1`='Bell Beaker'"
+sql.command <- "SELECT `Longitude`,`Latitude` FROM `BIAD`.`Sites`"
 x <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+d <- data.in.polygon(data=x,kml.path='../tools/kml/square.kml')
 #--------------------------------------------------------------------------------------
 # look at the data
 #--------------------------------------------------------------------------------------
-head(x)
+xlim <- c(-10,50)
+ylim <- c(40,60)
+plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main='square')
+map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
+points(d$Longitude, d$Latitude, pch=16)
+#--------------------------------------------------------------------------------------
