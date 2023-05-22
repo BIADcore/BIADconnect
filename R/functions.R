@@ -410,7 +410,28 @@ database.relationship.plotter <- function(d.tables, include.look.ups=TRUE){
 return(image)}
 #--------------------------------------------------------------------------------------------------
 generate.colours.for.a.numeric <- function(x){
-	posts <- floor(quantile(x[!x%in%c(0,1,2)]))
+	if(max(x,na.rm=T)<1.1)res <- generate.colours.for.zero.to.one(x)
+	if(max(x,na.rm=T)>5)res <- generate.colours.for.integers(x)
+return(res)}
+#--------------------------------------------------------------------------------------------------
+generate.colours.for.zero.to.one <- function(x){
+	posts <- round(quantile(x,na.rm=T),3)
+	N <- length(posts)-1
+	key <- code <- col <- c()
+	for(n in 1:N){
+		lower <- posts[n]
+		upper <- posts[n+1]
+		key[n] <- paste(lower,upper,sep='=>')
+		i <- x>=lower & x<upper
+		code[i] <- n
+		}
+	cols <- colorRampPalette(c("red", "blue"))(N)
+	for(n in 1:(N))col[code==n] <- cols[n]
+	legend <- data.frame(key=key,col=cols)
+return(list(col=col,legend=legend))}
+#--------------------------------------------------------------------------------------------------
+generate.colours.for.integers <- function(x){
+	posts <- floor(quantile(x[!x%in%c(0,1,2)],na.rm=T))	
 	N <- length(posts)-1
 	posts[N+1] <- posts[N+1]+1
 	key <- code <- col <- c()
