@@ -8,7 +8,6 @@
 # 2. Ensure you have your .Rprofile file in the same folder that this script is in. See the github readme for details.
 #--------------------------------------------------------------------------------------
 # Overheads
-setwd('C:/Users/tcfasts/Github/BIADwiki/R')
 source('.Rprofile') # should already have loaded if you open R from this script.
 source('functions.R')
 
