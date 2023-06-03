@@ -1,44 +1,62 @@
 
-#--------------------------------------------------------------------------------------------------
-sql.wrapper <- function(sql.command,user,password,hostname,hostuser,keypath,ssh){
-
-	if(!ssh){
-		query <- suppressWarnings(query.database(user, password, sql.command))
-		}
-
-	if(ssh){
-		system <- .Platform$OS.type
-
-		if(system=='windows'){
-			cmd <- paste("plink -ssh ",hostuser,"@",hostname," -i ",keypath," -N -L 3306:",hostname,":3306",sep='')
-			system(cmd, wait=FALSE)
-			Sys.sleep(1)
-			query <- suppressWarnings(query.database(user, password, sql.command))
-			system("taskkill /F /IM ssh-agent.exe /T", wait=FALSE)
-			}
-
-		if(system=='unix'){
-			cmd <- paste("ssh ",hostuser,"@",hostname," -i ",keypath," -N -L 3306:",hostname,":3306",sep='')
-			system(cmd, wait=FALSE)
-			Sys.sleep(1)
-			query <- suppressWarnings(query.database(user, password, sql.command))
-			system("killall ssh",wait=FALSE)
-			}
-		}
-return(query)}
-#--------------------------------------------------------------------------------------------------
-sql.wrapper.new <- function(sql.command, user, password, hostname, hostuser, pempath){
-
+#----------------------------------------------------------------------------------------------------
+run.server.query.inner <- function(user, password, hostuser, hostname, pempath){ 
 	require(ssh)
-	session <- ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
-	query <- suppressWarnings(query.database(user, password, sql.command))
-	ssh_disconnect(session)
+	tmp.path <- paste("BIAD/R/tmp",runif(1),sep='')
+	# create bash commands to be run on server
+	commands <- c(
+		paste("cd",tmp.path),
+		"/Library/Frameworks/R.framework/Resources/bin/R CMD BATCH --no-save server.script.R tmp.Rout",
+		"cd .."
+		)
 
+	# ssh onto server, copy required files to server, tell server to run R, copy results back to local 
+	session <- ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
+	ssh_exec_wait(session, command = paste("mkdir",tmp.path))
+	scp_upload(session, files = "functions.R" , to = tmp.path, verbose=FALSE)
+	scp_upload(session, files = ".Rprofile" , to = tmp.path, verbose=FALSE)
+	scp_upload(session, files = "server.script.R" , to = tmp.path, verbose=FALSE)
+	ssh_exec_wait(session, command = commands)
+	scp_download(session, files = paste(tmp.path,"tmp.RData",sep="/"), to = getwd(), verbose=FALSE)
+	ssh_exec_wait(session, command = paste("rm -r",tmp.path))
+	ssh_disconnect(session)
+	load('tmp.RData')
+	unlink('tmp.RData')
+	unlink('server.script.R')
+return(query)}
+#----------------------------------------------------------------------------------------------------
+run.server.searcher <- function(table.name,primary.value){
+	text <- c(
+		"source('functions.R')",
+		"source('.Rprofile')",
+		paste("table.name <- '",table.name,"'",sep=''),
+		paste("primary.value <- '",primary.value,"'",sep=''),
+		"down <- get.related.data(table.name, primary.value, fnc = decendants, user, password)",
+		"up <- get.related.data(table.name, primary.value, fnc = ancestors, user, password)",
+		"query <- list(down=down,up=up)",
+		"save(query, file='tmp.RData')"
+		)
+	writeLines(text,con= 'server.script.R')
+	query <- run.server.query.inner(user, password, hostuser, hostname, pempath)
+return(query)}
+#----------------------------------------------------------------------------------------------------
+run.server.query <- function(sql.command, user, password, hostuser, hostname, pempath){
+
+	# create 'server.script.R' to be run on server
+	text <- c(
+		"source('functions.R')",
+		"source('.Rprofile')",
+		paste('sql.command <- c("',paste(sql.command,collapse='","'),'")',sep=''),
+		"query <- query.database(user, password, sql.command)",
+		"save(query, file='tmp.RData')"
+		)
+	writeLines(text,con= 'server.script.R')
+
+	query <- run.server.query.inner(user, password, hostuser, hostname, pempath)
 return(query)}
 #--------------------------------------------------------------------------------------------------
-query.database <- function(user, password, sql.command){
+query.database.inner <- function(user, password, sql.command){
 	require(RMySQL)
-	require(odbc)
 	drv <- dbDriver("MySQL")
 
 	# close any connections to the database
@@ -47,18 +65,21 @@ query.database <- function(user, password, sql.command){
 
 	# connect locally to the database
 	con <- dbConnect(drv, user=user, pass=password, dbname='BIAD', host = "127.0.0.1", port=3306)
-#	dbSendQuery(con,"SET NAMES 'utf8'")
+
 	dbSendStatement(con,"SET NAMES 'utf8'")
 
 	# query the database and tidy
-#	for(n in 1:length(sql.command)) res <- suppressWarnings(dbSendQuery(con,sql.command[n]))
-	for(n in 1:length(sql.command)) res <- suppressWarnings(dbSendStatement(con,sql.command[n]))
+	for(n in 1:length(sql.command)) res <- dbSendStatement(con,sql.command[n])
 	query <- fetch(res, n= -1)
 	query <- encoder(query)
 
 	# close any connections to the database
 	cons <- dbListConnections(MySQL())
 	for(con in cons)dbDisconnect(con)
+return(query)}
+#--------------------------------------------------------------------------------------------------
+query.database <- function(user, password, sql.command){
+	query <- suppressWarnings(query.database.inner(user, password, sql.command))
 return(query)}
 #--------------------------------------------------------------------------------------------------
 encoder <- function(df){
@@ -148,14 +169,14 @@ get.tables.from.backup <- function(file){
 		}
 return(tables)}
 #----------------------------------------------------------------------------------------------------
-get.child.relationships <- function(keys, table.name, primary.value, user, password, hostname, hostuser, keypath, ssh){
-	primary.data <- get.table.data(keys, table.name, primary.value, user, password, hostname, hostuser, keypath, ssh)
+get.child.relationships <- function(keys, table.name, primary.value, user, password){
+	primary.data <- get.table.data(keys, table.name, primary.value, user, password)
 	primary.column <- get.primary.column.from.table(keys, table.name)
 	res <- subset(keys, REFERENCED_COLUMN_NAME==primary.column & REFERENCED_TABLE_NAME==table.name)
 return(res)}
 #----------------------------------------------------------------------------------------------------
-get.parent.relationships <- function(keys, table.name, primary.value, user, password, hostname, hostuser, keypath, ssh){
-	primary.data <- get.table.data(keys, table.name, primary.value, user, password, hostname, hostuser, keypath, ssh)
+get.parent.relationships <- function(keys, table.name, primary.value, user, password){
+	primary.data <- get.table.data(keys, table.name, primary.value, user, password)
 	primary.column <- get.primary.column.from.table(keys, table.name)
 	res <- subset(keys, TABLE_NAME==table.name & grepl('FK_',CONSTRAINT_NAME))
 return(res)}
@@ -167,19 +188,19 @@ get.primary.column.from.table <- function(keys, table.name){
 	if(length(column)>1)stop('unclear which column to use')	
 return(column)}
 #----------------------------------------------------------------------------------------------------
-get.table.data <- function(keys, table.name, primary.value, user, password, hostname, hostuser, keypath, ssh){
+get.table.data <- function(keys, table.name, primary.value, user, password){
 
 	if(length(primary.value)!=1)stop('provide a single primary value')
 	primary.column <- get.primary.column.from.table(keys, table.name)
 	sql.command <- paste("SELECT * FROM `BIAD`.`",table.name,"` WHERE ",primary.column," IN ('",primary.value,"')", sep='')
-	data <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+	data <- suppressWarnings(query.database(user, password, sql.command))
 	data <- remove.blank.columns.from.table(data)
 return(data)}
 #----------------------------------------------------------------------------------------------------
-decendants <- function(keys, table.name, primary.value, user, password, hostname, hostuser, keypath, ssh){
+decendants <- function(keys, table.name, primary.value, user, password){
 
 	if(is.null(primary.value))return(NULL)
-	relationships <- get.child.relationships(keys, table.name, primary.value, user, password, hostname, hostuser, keypath, ssh)
+	relationships <- get.child.relationships(keys, table.name, primary.value, user, password)
 	child.tables <- relationships$TABLE_NAME
 	child.columns <- relationships$COLUMN_NAME
 
@@ -190,7 +211,7 @@ decendants <- function(keys, table.name, primary.value, user, password, hostname
 		child.table <- child.tables[n]
 		child.column <- child.columns[n]
 		sql.command <- paste("SELECT * FROM `BIAD`.`",child.table,"` WHERE ",child.column," = '",primary.value,"'", sep='')
-		data <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+		data <- suppressWarnings(query.database(user, password, sql.command))
 		data <- remove.blank.columns.from.table(data)
 		res[[child.table]]$data <- data
 		}
@@ -198,17 +219,17 @@ decendants <- function(keys, table.name, primary.value, user, password, hostname
 
 return(res)}
 #----------------------------------------------------------------------------------------------------
-ancestors <- function(keys, table.name, primary.value, user, password, hostname, hostuser, keypath, ssh){
+ancestors <- function(keys, table.name, primary.value, user, password){
 
 	if(is.null(primary.value))return(NULL)
-	relationships <- get.parent.relationships(keys, table.name, primary.value, user, password, hostname, hostuser, keypath, ssh)
+	relationships <- get.parent.relationships(keys, table.name, primary.value, user, password)
 	
 	# whether or not to include zoptions parents? ... subset(relationships, !grepl('zoptions_',REFERENCED_TABLE_NAME))
 	parent.tables <- relationships$REFERENCED_TABLE_NAME
 	parent.columns <- relationships$REFERENCED_COLUMN_NAME
 	child.columns <- relationships$COLUMN_NAME
 	
-	table.data <- get.table.data(keys, table.name, primary.value, user, password, hostname, hostuser, keypath, ssh)
+	table.data <- get.table.data(keys, table.name, primary.value, user, password)
 	
 	res <- list()
 	N <- length(parent.tables)
@@ -225,7 +246,7 @@ ancestors <- function(keys, table.name, primary.value, user, password, hostname,
 			values <- values[!is.na(values)]
 			values <- paste(values, collapse="','")
 			sql.command <- paste("SELECT * FROM `BIAD`.`",parent.table,"` WHERE ",parent.column," IN ('",values,"')", sep='')		
-			data <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+			data <- suppressWarnings(query.database(user, password, sql.command))
 			data <- remove.blank.columns.from.table(data)
 			res[[parent.table]]$data <- data	
 			}	
@@ -235,7 +256,7 @@ ancestors <- function(keys, table.name, primary.value, user, password, hostname,
 
 return(res)}
 #----------------------------------------------------------------------------------------------------
-wrapper <- function(keys, table.data, fnc, user, password, hostname, hostuser, keypath, ssh){
+wrapper <- function(keys, table.data, fnc, user, password){
 	rel.data <- list()
 	N <- length(table.data)
 	for(n in 1:N){
@@ -245,7 +266,7 @@ wrapper <- function(keys, table.data, fnc, user, password, hostname, hostuser, k
 		rel.values <- rel[[table.name]]$data[[col]]
 		for(rel in rel.values){
 
-			x <- fnc(keys, table.name, rel, user, password, hostname, hostuser, keypath, ssh) 
+			x <- fnc(keys, table.name, rel, user, password) 
 			rel.data[[table.name]][[rel]] <- x
 			}
 		}
@@ -259,20 +280,20 @@ remove.blank.columns.from.table <- function(table){
 	tb <- tb[,keep.i,drop=F]
 return(tb)}
 #----------------------------------------------------------------------------------------------------
-get.related.data <- function(table.name, primary.value, fnc, user, password, hostname, hostuser, keypath, ssh){
+get.related.data <- function(table.name, primary.value, fnc, user, password){
 
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
-	keys <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+	keys <- query.database(user, password, sql.command)
 
 	# table data
 	all.data <- list()
-	table.data <- get.table.data(keys, table.name, primary.value, user, password, hostname, hostuser, keypath, ssh) 
+	table.data <- get.table.data(keys, table.name, primary.value, user, password) 
 	if(is.null(table.data))return(NULL)
 	all.data[[table.name]]$data <- table.data
 	
 	# relative level 0 data
 	x.data <- all.data[table.name]
-	x.sub <- wrapper(keys, table.data=x.data, fnc, user, password, hostname, hostuser, keypath, ssh)
+	x.sub <- wrapper(keys, table.data=x.data, fnc, user, password)
 	if(!is.null(x.sub))all.data[table.name] <- Map(c, x.data,x.sub)
 
 	# relative level 1 data
@@ -280,7 +301,7 @@ get.related.data <- function(table.name, primary.value, fnc, user, password, hos
 	rel.1.names <- rel.1.names[rel.1.names!='data']	
 	for(rel.1.name in rel.1.names){
 		x.data <- all.data[[table.name]][[primary.value]][rel.1.name]
-		x.sub <- wrapper(keys, x.data, fnc, user, password, hostname, hostuser, keypath, ssh)
+		x.sub <- wrapper(keys, x.data, fnc, user, password)
 		if(!is.null(x.sub))all.data[[table.name]][[primary.value]][rel.1.name] <- Map(c, x.data,x.sub)
 		}
 
@@ -292,7 +313,7 @@ get.related.data <- function(table.name, primary.value, fnc, user, password, hos
 		rel.2.names <- rel.2.names[rel.2.names!='data']	
 		for(rel.2.name in rel.2.names){
 			x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][rel.2.name]
-			x.sub <- wrapper(keys, x.data, fnc, user, password, hostname, hostuser, keypath, ssh)
+			x.sub <- wrapper(keys, x.data, fnc, user, password)
 			if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][rel.2.name] <- Map(c, x.data,x.sub)
 			}
 		}
@@ -308,7 +329,7 @@ get.related.data <- function(table.name, primary.value, fnc, user, password, hos
 			rel.3.names <- rel.3.names[rel.3.names!='data']	
 			for(rel.3.name in rel.3.names){	
 				x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][rel.3.name]
-				x.sub <- wrapper(keys, x.data, fnc, user, password, hostname, hostuser, keypath, ssh)
+				x.sub <- wrapper(keys, x.data, fnc, user, password)
 				if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][rel.3.name] <- Map(c, x.data,x.sub)
 				}
 			}	
@@ -316,47 +337,12 @@ get.related.data <- function(table.name, primary.value, fnc, user, password, hos
 
 return(all.data)}
 #----------------------------------------------------------------------------------------------------
-run.server.searcher <- function(table.name,primary.value){
-	
-	text <- c(
-		"source('tmp/functions.R')",
-		"source('tmp/.Rprofile')",
-		"ssh <- FALSE",
-		paste("table.name <- '",table.name,"'",sep=''),
-		paste("primary.value <- '",primary.value,"'",sep=''),
-		"down <- get.related.data(table.name, primary.value, fnc = decendants, user, password, hostname, hostuser, keypath, ssh)",
-		"up <- get.related.data(table.name, primary.value, fnc = ancestors, user, password, hostname, hostuser, keypath, ssh)",
-		"save(up,down, file='tmp/tmp.RData')"
-		)
+database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, user, password){
 
-	commands <- c(
-		"cd BIAD/R",
-		"/Library/Frameworks/R.framework/Resources/bin/R CMD BATCH --no-save tmp/server.script.R tmp/tmp.Rout"
-		)
-
-	tmp.path <- "BIAD/R/tmp"
-	writeLines(text,con= 'server.script.R')
-	session <- ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
-	ssh_exec_wait(session, command = paste("mkdir",tmp.path))
-	scp_upload(session, files = "functions.R" , to = tmp.path, verbose=FALSE)
-	scp_upload(session, files = ".Rprofile" , to = tmp.path, verbose=FALSE)
-	scp_upload(session, files = "server.script.R" , to = tmp.path, verbose=FALSE)
-	ssh_exec_wait(session, command = commands)
-	scp_download(session, files = paste(tmp.path,"tmp.RData",sep="/"), to = getwd(), verbose=FALSE)
-	ssh_exec_wait(session, command = paste("rm -r",tmp.path))
-	ssh_disconnect(session)
-
-	load('tmp.RData')
-	unlink('tmp.RData')
-	unlink('server.script.R')
-
-return(list(down=down,up=up))}
-#--------------------------------------------------------------------------------------------------
-database.relationship.plotter <- function(d.tables, include.look.ups=TRUE){
+	require(DiagrammeR)
 
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_SCHEMA = 'BIAD'"
-	d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
-
+	d <- suppressWarnings(query.database(user, password, sql.command))
 	d <- subset(d, TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
 	if(!include.look.ups){
 		d <- subset(d, REFERENCED_TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])

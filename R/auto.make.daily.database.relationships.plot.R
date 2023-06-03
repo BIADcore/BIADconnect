@@ -1,13 +1,12 @@
 #----------------------------------------------------------------------------------
 # script to plot database relationships
 #----------------------------------------------------------------------------------
-library(DiagrammeR)
 library(rsvg)
 library(DiagrammeRsvg)
 #----------------------------------------------------------------------------------
 # Pull all foreign keys
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='BIAD';"	
-d.tables <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)$TABLE_NAME	
+d.tables <- query.database(user, password, sql.command)$TABLE_NAME	
 
 zprivate <- d.tables[grepl('zprivate', d.tables)]
 zoptions <- d.tables[grepl('zoptions', d.tables)]
