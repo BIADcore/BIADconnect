@@ -6,7 +6,7 @@ file.1 <- '/Users/admin/../BIAD/BIAD/SQLcode/summary of all types of data by pha
 #-----------------------------------------------------------------------------------------
 # Pull all foreign keys
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_SCHEMA = 'BIAD'"
-d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+d <- query.database(user, password, sql.command)
 #-----------------------------------------------------------------------------------------
 # Fixed sections
 #-----------------------------------------------------------------------------------------

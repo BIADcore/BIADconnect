@@ -11,6 +11,6 @@ old.triggers <- trig[substr(trig, 1, 20) =='auto_trigger_padding']
 drop.triggers <- paste('DROP TRIGGER `',old.triggers,'`;',sep='')
 all.triggers <- make.all.triggers(all)
 
-sql.wrapper(drop.triggers,user,password,hostname,hostuser,keypath,ssh)
-sql.wrapper(all.triggers,user,password,hostname,hostuser,keypath,ssh)	
+query.database(user, password, drop.triggers)
+query.database(user, password, all.triggers)
 #--------------------------------------------------------------------------------------------------------------

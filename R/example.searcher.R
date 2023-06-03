@@ -1,7 +1,6 @@
 #----------------------------------------------------------------------------------------------------
 source('.Rprofile')
 source('functions.R')
-library(ssh)
 library(data.tree)
 #----------------------------------------------------------------------------------------------------
 #query the selected table for the dependenancies of a SiteID or PhaseID
@@ -20,6 +19,5 @@ print(tree.up)
 plot(tree.down)
 plot(tree.up)
 #----------------------------------------------------------------------------------------------------
-# query to access information displayed in the list or graph as 'data'
-x$down$Phases$VEDRO1$C14Samples$data
+
 #----------------------------------------------------------------------------------------------------
