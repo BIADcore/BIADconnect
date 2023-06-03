@@ -12,7 +12,7 @@ sql.commands <- c()
 for(n in 1:length(tables)){
 
 	sql.command <- paste("SELECT * FROM `BIAD`.`",tables[n],"`",sep='')
-	query <- query.database(user, password, sql.command)
+	d <- query.database(user, password, sql.command)
 	C <- ncol(d)
 	for(c in 1:C){
 		raw <- d[,c]
