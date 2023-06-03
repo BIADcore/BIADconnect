@@ -9,7 +9,6 @@ tables <- tables$TABLE_NAME
 # replace any blank entries with NULL
 #--------------------------------------------------------------------------------------------------------------
 sql.commands <- c()
-print('here 1')
 for(n in 1:length(tables)){
 
 	sql.command <- paste("SELECT * FROM `BIAD`.`",tables[n],"`",sep='')
