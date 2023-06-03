@@ -13,7 +13,6 @@ zoptions <- d.tables[grepl('zoptions', d.tables)]
 copy <- d.tables[grepl('copy', d.tables)]
 standard <- d.tables[!d.tables%in%c(zoptions,zprivate,copy)]
 #------------------------------------------------------------------
-print('here 1')
 # all relationships
 d.tables <- paste(standard, collapse='; ')
 image <- database.relationship.plotter(d.tables, TRUE, user, password)

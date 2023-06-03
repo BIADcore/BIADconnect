@@ -113,7 +113,7 @@ dev.off()
 sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`C14ID` FROM `Sites`
 INNER JOIN `C14Samples` ON `Sites`.`SiteID`=`C14Samples`.`SiteID`"
 
-d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+d <- query.database(user, password, sql.command)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
