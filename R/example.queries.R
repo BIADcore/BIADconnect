@@ -21,7 +21,7 @@ query <- run.server.query(sql.command, user, password, hostuser, hostname, pempa
 #--------------------------------------------------------------------------------------
 head(query)
 table(query$Country)
-plot(table(query$Country),las=2)
+plot(log(table(query$Country)),las=2)
 
 #--------------------------------------------------------------------------------------
 # Example 2: Joins done in MySQL
