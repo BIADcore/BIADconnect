@@ -4,8 +4,7 @@ source('functions.R')
 library(data.tree)
 #----------------------------------------------------------------------------------------------------
 #query the selected table for the dependenancies of a SiteID or PhaseID
-x <- run.server.searcher(table.name = 'Sites', primary.value = 'S02908') #use SiteID, SiteName returns Root
-x <- run.server.searcher(table.name = 'C14Samples', primary.value = 'KYNDLN-RISE 63')
+x <- run.server.searcher(table.name = 'Phases', primary.value = 'LHCMAI2') 
 
 #use the queried information to prepare the list of relationships up and down the hierarchical tree
 tree.down <- FromListSimple(x$down)
