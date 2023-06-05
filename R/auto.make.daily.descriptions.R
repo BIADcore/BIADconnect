@@ -6,10 +6,10 @@
 # Pull all table meta data
 
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='BIAD';"	
-d.tables <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)	
+d.tables <- query.database(user, password, sql.command)	
 	
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema='BIAD';"	
-d.cols <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)	
+d.cols <- query.database(user, password, sql.command)	
 
 # Group tables to put into different parts of the wiki:
 all <- d.tables$TABLE_NAME
