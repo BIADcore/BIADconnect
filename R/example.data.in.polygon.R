@@ -3,12 +3,12 @@
 #--------------------------------------------------------------------------------------
 library(mapdata)
 source('functions.R')
-source('.Rprofile')
+# source('.Rprofile') # should already have loaded if you open R from this script.
 #--------------------------------------------------------------------------------------
 # get all sites within a polygon
 #--------------------------------------------------------------------------------------
 sql.command <- "SELECT `Longitude`,`Latitude` FROM `BIAD`.`Sites`"
-x <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)
+x <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
 d <- data.in.polygon(data=x,kml.path='../tools/kml/square.kml')
 #--------------------------------------------------------------------------------------
 # look at the data

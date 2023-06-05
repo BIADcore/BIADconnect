@@ -2,7 +2,8 @@
 # It is always possible for some crap to sneak into the database,
 # For example, a column that allows a VARCHAR (such as a notes field) could be handed a blank ('') instead of a NULL
 #--------------------------------------------------------------------------------------------------------------
-tables <- sql.wrapper("SELECT `TABLE_NAME` FROM `information_schema`.`TABLES` WHERE TABLE_SCHEMA='biad' AND `TABLE_TYPE`='BASE TABLE';",user,password,hostname,hostuser,keypath,ssh)
+sql.command <- "SELECT `TABLE_NAME` FROM `information_schema`.`TABLES` WHERE TABLE_SCHEMA='biad' AND `TABLE_TYPE`='BASE TABLE';"
+tables <- query.database(user, password, sql.command)
 tables <- tables$TABLE_NAME
 #--------------------------------------------------------------------------------------------------------------
 # replace any blank entries with NULL
@@ -10,8 +11,8 @@ tables <- tables$TABLE_NAME
 sql.commands <- c()
 for(n in 1:length(tables)){
 
-	d <- sql.wrapper(paste("SELECT * FROM `BIAD`.`",tables[n],"`",sep=''),user,password,hostname,hostuser,keypath,ssh)
-
+	sql.command <- paste("SELECT * FROM `BIAD`.`",tables[n],"`",sep='')
+	d <- query.database(user, password, sql.command)
 	C <- ncol(d)
 	for(c in 1:C){
 		raw <- d[,c]
@@ -22,14 +23,14 @@ for(n in 1:length(tables)){
 			}
 		}
 	}
-if(!is.null(sql.commands))sql.wrapper(sql.commands,user,password,hostname,hostuser,keypath,ssh)
+if(!is.null(sql.commands))suppressWarnings(query.database(user, password, sql.commands))
 #--------------------------------------------------------------------------------------------------------------
 # remove any leading or trailing whitespace, or tabs, carriage returns or new lines
 #--------------------------------------------------------------------------------------------------------------
 sql.commands <- c()
 for(n in 1:length(tables)){
-
-	d <- sql.wrapper(paste("SELECT * FROM `BIAD`.`",tables[n],"`",sep=''),user,password,hostname,hostuser,keypath,ssh)
+	sql.command <- paste("SELECT * FROM `BIAD`.`",tables[n],"`",sep='')
+	d <- query.database(user, password, sql.command)
 
 	C <- ncol(d)
 	for(c in 1:C){
@@ -47,5 +48,5 @@ for(n in 1:length(tables)){
 		}
 	}
 sql.commands <- unique(sql.commands)
-if(!is.null(sql.commands))sql.wrapper(sql.commands,user,password,hostname,hostuser,keypath,ssh)
+if(!is.null(sql.commands))query.database(user, password, sql.commands)
 #--------------------------------------------------------------------------------------------------------------

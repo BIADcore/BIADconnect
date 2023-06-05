@@ -12,7 +12,7 @@ theme <- ttheme_minimal(
 for(table in tables){
 
 	sql.command <- paste("SELECT * FROM BIAD.",table,sep='')
-	d <- sql.wrapper(sql.command,user,password,hostname,hostuser,keypath,ssh)[1:5,]
+	d <- query.database(user, password, sql.command)[1:5,]
 	d[is.na(d)] <- '\\N'
 	d$time_added <- '\\N'
 	d$user_added <- '\\N'
