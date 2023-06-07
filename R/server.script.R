@@ -1,0 +1,5 @@
+source('functions.R')
+source('.Rprofile')
+sql.command <- c("SELECT `Longitude`,`Latitude` FROM `BIAD`.`Sites`")
+query <- query.database(user, password, sql.command)
+save(query, file='tmp.RData')
