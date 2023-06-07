@@ -6,11 +6,12 @@ require(rnaturalearthdata)
 require(maps)
 require(mapdata)
 require(svglite)
+source('functions.R')
 #-----------------------------------------------------------------
 # overall sites
 #-----------------------------------------------------------------
 sql.command <- "SELECT `Longitude`,`Latitude` FROM `BIAD`.`Sites`"
-d <- query.database(user, password, sql.command)
+d <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
 
 xmean <- mean(d$Longitude, na.rm=T)
 ymean <- mean(d$Latitude, na.rm=T)
@@ -41,7 +42,7 @@ INNER JOIN `Graves` ON `Phases`.`PhaseID`=`Graves`.`PhaseID`
 INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`
 WHERE `GraveIndividuals`.`aDNAID` IS NOT NULL;"
 
-d <- query.database(user, password, sql.command)
+d <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
@@ -60,7 +61,7 @@ INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
 INNER JOIN `Graves` ON `Phases`.`PhaseID`=`Graves`.`PhaseID`
 INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`"
 
-d <- query.database(user, password, sql.command)
+d <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
@@ -78,7 +79,7 @@ sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`FaunalSpeciesID`
 INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
 INNER JOIN `FaunalSpecies` ON `Phases`.`PhaseID`=`FaunalSpecies`.`PhaseID`"
 
-d <- query.database(user, password, sql.command)
+d <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
@@ -96,7 +97,7 @@ sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`SampleID` FROM `
 INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
 INNER JOIN `ABotSamples` ON `Phases`.`PhaseID`=`ABotSamples`.`PhaseID`"
 
-d <- query.database(user, password, sql.command)
+d <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
@@ -113,7 +114,7 @@ dev.off()
 sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`C14ID` FROM `Sites`
 INNER JOIN `C14Samples` ON `Sites`.`SiteID`=`C14Samples`.`SiteID`"
 
-d <- query.database(user, password, sql.command)
+d <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
@@ -133,7 +134,7 @@ INNER JOIN `Graves` ON `Phases`.`PhaseID`=`Graves`.`PhaseID`
 INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`
 INNER JOIN `HumanIsotopes` ON `HumanIsotopes`.`IndividualID`=`GraveIndividuals`.`IndividualID`"
 
-d <- query.database(user, password, sql.command)
+d <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
@@ -153,7 +154,7 @@ INNER JOIN `Graves` ON `Phases`.`PhaseID`=`Graves`.`PhaseID`
 INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`
 INNER JOIN `Strontium` ON `Strontium`.`IndividualID`=`GraveIndividuals`.`IndividualID`"
 
-d <- query.database(user, password, sql.command)
+d <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
@@ -171,7 +172,7 @@ sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`FaunIsoID` FROM 
 INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
 INNER JOIN `FaunalIsotopes` ON `FaunalIsotopes`.`PhaseID`=`Phases`.`PhaseID`"
 
-d <- query.database(user, password, sql.command)
+d <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
@@ -191,7 +192,7 @@ INNER JOIN `Graves` ON `Phases`.`PhaseID`=`Graves`.`PhaseID`
 INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`
 INNER JOIN `Health` ON `Health`.`IndividualID`=`GraveIndividuals`.`IndividualID`"
 
-d <- query.database(user, password, sql.command)
+d <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
@@ -209,7 +210,7 @@ sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`MaterialCultureI
 INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
 INNER JOIN `MaterialCulture` ON `Phases`.`PhaseID`=`MaterialCulture`.`PhaseID`"
 
-d <- query.database(user, password, sql.command)
+d <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
