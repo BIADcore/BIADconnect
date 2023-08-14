@@ -1,7 +1,9 @@
+#----------------------------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------
 run.server.query.inner <- function(user, password, hostuser, hostname, pempath){ 
 	require(ssh)
+	require(curl)
 	tmp.path <- paste("BIAD/R/tmp",runif(1),sep='')
 	# create bash commands to be run on server
 	commands <- c(
@@ -10,12 +12,18 @@ run.server.query.inner <- function(user, password, hostuser, hostname, pempath){
 		"cd .."
 		)
 
+	# download the latest github functions locally
+	download.file("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R",destfile = "functions.from.github.R", method = "curl", quiet=TRUE)
+
 	# ssh onto server, copy required files to server, tell server to run R, copy results back to local 
 	session <- ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
 	ssh_exec_wait(session, command = paste("mkdir",tmp.path))
-	scp_upload(session, files = "functions.R" , to = tmp.path, verbose=FALSE)
-	scp_upload(session, files = ".Rprofile" , to = tmp.path, verbose=FALSE)
+	scp_upload(session, files = "functions.from.github.R" , to = tmp.path, verbose=FALSE)
 	scp_upload(session, files = "server.script.R" , to = tmp.path, verbose=FALSE)
+
+	# delete the file from github
+	unlink("functions.from.github.R")
+	
 	ssh_exec_wait(session, command = commands)
 	scp_download(session, files = paste(tmp.path,"tmp.RData",sep="/"), to = getwd(), verbose=FALSE)
 	ssh_exec_wait(session, command = paste("rm -r",tmp.path))
@@ -44,8 +52,10 @@ run.server.query <- function(sql.command, user, password, hostuser, hostname, pe
 
 	# create 'server.script.R' to be run on server
 	text <- c(
-		"source('functions.R')",
-		"source('.Rprofile')",
+		paste0("user <- '",user,"'"),
+		paste0("password <- '",password,"'"),
+		paste0("hostuser <- '",hostuser,"'"),
+		"source('functions.from.github.R')",
 		paste('sql.command <- c("',paste(sql.command,collapse='","'),'")',sep=''),
 		"query <- query.database(user, password, sql.command)",
 		"save(query, file='tmp.RData')"
@@ -280,7 +290,7 @@ remove.blank.columns.from.table <- function(table){
 	tb <- tb[,keep.i,drop=F]
 return(tb)}
 #----------------------------------------------------------------------------------------------------
-get.related.data <- function(table.name, primary.value, fnc, user, password){
+get.related.data <- function(table.name, primary.value, fnc='what the hell is this argument for??', user, password){
 
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
 	keys <- query.database(user, password, sql.command)
