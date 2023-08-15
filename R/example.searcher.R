@@ -1,6 +1,11 @@
-#----------------------------------------------------------------------------------------------------
-source('.Rprofile')
-source('functions.R')
+#--------------------------------------------------------------------------------------
+# Requirements
+# You must have previously added the .Rprofile to your R_USER folder, here -> path.expand('~/') 
+# See the BIADwiki readme or BIADwiki for details about using the .Rprofile
+
+# Load some required functions
+source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
+#--------------------------------------------------------------------------------------
 library(data.tree)
 #----------------------------------------------------------------------------------------------------
 #query the selected table for the dependenancies of a SiteID or PhaseID

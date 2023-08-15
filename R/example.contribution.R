@@ -1,17 +1,23 @@
 #--------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
 # Determining the % of contribution towards data collection in BIAD
 # Example: radiocarbon dates
 #--------------------------------------------------------------------------------------
-# source('.Rprofile') # should already have loaded if you open R from this script.
-source('functions.R')
+#--------------------------------------------------------------------------------------
+# Requirements
+# You must have previously added the .Rprofile to your R_USER folder, here -> path.expand('~/') 
+# See the BIADwiki readme or BIADwiki for details about using the .Rprofile
 
+# Load some required functions
+source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
+#--------------------------------------------------------------------------------------
 # query the requested dataset
 sql.command <- "SELECT *
 FROM C14Samples
 INNER JOIN `Sites` ON `C14Samples`.`SiteID` = `Sites`.`SiteID`
 INNER JOIN `Phases` ON `C14Samples`.`PhaseID` = `Phases`.`PhaseID`
 WHERE `Phases`.`Culture1` IS NOT NULL AND `Sites`.`Country` = 'Sweden' OR `Phases`.`Culture1` IS NOT NULL AND `Sites`.`Country` = 'Denmark'"
-query <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
+query <- run.server.query(sql.command)
 
 # generate a dataframe with the added and updated information
 added <- data.frame(query$user_added, "added")

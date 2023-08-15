@@ -1,14 +1,16 @@
 #--------------------------------------------------------------------------------------
-# Usual overheads
+# Requirements
+# You must have previously added the .Rprofile to your R_USER folder, here -> path.expand('~/') 
+# See the BIADwiki readme or BIADwiki for details about using the .Rprofile
+
+# Load some required functions
+source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
 #--------------------------------------------------------------------------------------
 library(mapdata)
-source('functions.R')
-# source('.Rprofile') # should already have loaded if you open R from this script.
 #--------------------------------------------------------------------------------------
 # get all sites within a polygon
 #--------------------------------------------------------------------------------------
-sql.command <- "SELECT `Longitude`,`Latitude` FROM `BIAD`.`Sites`"
-x <- run.server.query(sql.command, user, password, hostuser, hostname, pempath)
+x <- run.server.query("SELECT `Longitude`,`Latitude` FROM `BIAD`.`Sites`")
 d <- data.in.polygon(data=x,kml.path='../tools/kml/square.kml')
 #--------------------------------------------------------------------------------------
 # look at the data
