@@ -1,10 +1,28 @@
-#----------------------------------------------------------------------------------------------------
 
+
+#----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
+run.server.query <- function(sql.command, user, password, hostuser, hostname, pempath){
+
+	# create 'server.script.R' to be run on server
+	text <- c(
+		paste0("user <- '",user,"'"),
+		paste0("password <- '",password,"'"),
+		paste0("hostuser <- '",hostuser,"'"),
+		"source('https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R')",
+		paste('sql.command <- c("',paste(sql.command,collapse='","'),'")',sep=''),
+		"query <- query.database(user, password, sql.command)",
+		"save(query, file='tmp.RData')"
+		)
+	writeLines(text,con= 'server.script.R')
+
+	query <- run.server.query.inner(user, password, hostuser, hostname, pempath)
+return(query)}
 #----------------------------------------------------------------------------------------------------
 run.server.query.inner <- function(user, password, hostuser, hostname, pempath){ 
 	require(ssh)
-	require(curl)
 	tmp.path <- paste("BIAD/R/tmp",runif(1),sep='')
+
 	# create bash commands to be run on server
 	commands <- c(
 		paste("cd",tmp.path),
@@ -12,31 +30,26 @@ run.server.query.inner <- function(user, password, hostuser, hostname, pempath){
 		"cd .."
 		)
 
-	# download the latest github functions locally
-	download.file("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R",destfile = "functions.from.github.R", method = "curl", quiet=TRUE)
-
 	# ssh onto server, copy required files to server, tell server to run R, copy results back to local 
 	session <- ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
 	ssh_exec_wait(session, command = paste("mkdir",tmp.path))
-	scp_upload(session, files = "functions.from.github.R" , to = tmp.path, verbose=FALSE)
 	scp_upload(session, files = "server.script.R" , to = tmp.path, verbose=FALSE)
-
-	# delete the file from github
-	unlink("functions.from.github.R")
-	
 	ssh_exec_wait(session, command = commands)
 	scp_download(session, files = paste(tmp.path,"tmp.RData",sep="/"), to = getwd(), verbose=FALSE)
 	ssh_exec_wait(session, command = paste("rm -r",tmp.path))
 	ssh_disconnect(session)
+
 	load('tmp.RData')
 	unlink('tmp.RData')
 	unlink('server.script.R')
 return(query)}
 #----------------------------------------------------------------------------------------------------
-run.server.searcher <- function(table.name,primary.value){
+run.server.searcher <- function(table.name,primary.value, user, password, hostuser, hostname, pempath){
 	text <- c(
-		"source('functions.R')",
-		"source('.Rprofile')",
+		paste0("user <- '",user,"'"),
+		paste0("password <- '",password,"'"),
+		paste0("hostuser <- '",hostuser,"'"),
+		"source('https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R')",
 		paste("table.name <- '",table.name,"'",sep=''),
 		paste("primary.value <- '",primary.value,"'",sep=''),
 		"down <- get.related.data(table.name, primary.value, fnc = decendants, user, password)",
@@ -47,23 +60,7 @@ run.server.searcher <- function(table.name,primary.value){
 	writeLines(text,con= 'server.script.R')
 	query <- run.server.query.inner(user, password, hostuser, hostname, pempath)
 return(query)}
-#----------------------------------------------------------------------------------------------------
-run.server.query <- function(sql.command, user, password, hostuser, hostname, pempath){
 
-	# create 'server.script.R' to be run on server
-	text <- c(
-		paste0("user <- '",user,"'"),
-		paste0("password <- '",password,"'"),
-		paste0("hostuser <- '",hostuser,"'"),
-		"source('functions.from.github.R')",
-		paste('sql.command <- c("',paste(sql.command,collapse='","'),'")',sep=''),
-		"query <- query.database(user, password, sql.command)",
-		"save(query, file='tmp.RData')"
-		)
-	writeLines(text,con= 'server.script.R')
-
-	query <- run.server.query.inner(user, password, hostuser, hostname, pempath)
-return(query)}
 #--------------------------------------------------------------------------------------------------
 query.database.inner <- function(user, password, sql.command){
 	require(RMySQL)
