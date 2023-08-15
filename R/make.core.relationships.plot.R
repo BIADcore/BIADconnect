@@ -2,6 +2,9 @@
 # Example R script for relationships used in core import
 #------------------------------------------------------------------
 library(DiagrammeR)
+library(rsvg)
+library(DiagrammeRsvg)
+#------------------------------------------------------------------
 core.import <- DiagrammeR::grViz("
 digraph {
  node [shape = record];
@@ -29,8 +32,6 @@ Phases -> PhaseType;
 }
 ")
 core.import
-library(rsvg)
-library(DiagrammeRsvg)
 export_svg(core.import) %>%
   charToRaw %>%
   rsvg_png("../tools/plots/database.core.import.png")
