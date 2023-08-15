@@ -2,7 +2,7 @@
 
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
-run.server.query <- function(sql.command, user, password, hostuser, hostname, pempath){
+run.server.query <- function(sql.command){
 	
 	user <- Sys.getenv('BIAD.user')
 	hostname <- Sys.getenv('BIAD.hostname')
