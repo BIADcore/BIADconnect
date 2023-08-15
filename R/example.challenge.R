@@ -4,12 +4,11 @@
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
 # Requirements
-# 1. Ensure R is in the same working directory as this file. Use getwd() or list.files() to check
-# 2. Ensure you have your .Rprofile file in the same folder that this script is in. See the github readme for details.
+# You must have previously (once only) added various objects to your system environmental variables
+# See the BIADwiki readme or BIADwiki for details about using Sys.setenv()
 #--------------------------------------------------------------------------------------
 # Overheads
-# source('.Rprofile') # should already have loaded if you open R from this script.
-source('functions.R')
+source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
 #--------------------------------------------------------------------------------------
 # Pull some data from BIAD
 sql.command <- "SELECT * FROM `Sites`"
@@ -19,5 +18,3 @@ query <- run.server.query(sql.command, user, password, hostuser, hostname, pempa
 #------------------------------------------------------------------
 plot(table(query$Country),las=2)
 #------------------------------------------------------------------
-
-

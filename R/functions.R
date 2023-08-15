@@ -3,6 +3,12 @@
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
 run.server.query <- function(sql.command, user, password, hostuser, hostname, pempath){
+	
+	user <- Sys.getenv('BIAD.user')
+	hostname <- Sys.getenv('BIAD.hostname')
+	hostuser <- Sys.getenv('BIAD.hostuser')
+	password <- Sys.getenv('BIAD.password')
+	pempath <- Sys.getenv('BIAD.pempath')
 
 	# create 'server.script.R' to be run on server
 	text <- c(
@@ -44,7 +50,14 @@ run.server.query.inner <- function(user, password, hostuser, hostname, pempath){
 	unlink('server.script.R')
 return(query)}
 #----------------------------------------------------------------------------------------------------
-run.server.searcher <- function(table.name,primary.value, user, password, hostuser, hostname, pempath){
+run.server.searcher <- function(table.name, primary.value){
+
+	user <- Sys.getenv('BIAD.user')
+	hostname <- Sys.getenv('BIAD.hostname')
+	hostuser <- Sys.getenv('BIAD.hostuser')
+	password <- Sys.getenv('BIAD.password')
+	pempath <- Sys.getenv('BIAD.pempath')
+
 	text <- c(
 		paste0("user <- '",user,"'"),
 		paste0("password <- '",password,"'"),
