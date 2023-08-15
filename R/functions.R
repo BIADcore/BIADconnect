@@ -2,8 +2,8 @@
 
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
-run.server.query <- function(sql.command){
-	
+run.server.query <- function(sql.command){	
+
 	# create 'server.script.R' to be run on server
 	text <- c(
 		paste0("user <- '",user,"'"),
@@ -16,7 +16,7 @@ run.server.query <- function(sql.command){
 		)
 	writeLines(text,con= 'server.script.R')
 
-	query <- run.server.query.inner(user, password, hostuser, hostname, pempath)
+	query <- run.server.query.inner(BIAD.user, BIAD.password, BIAD.hostuser, BIAD.hostname, BIAD.pempath)
 return(query)}
 #----------------------------------------------------------------------------------------------------
 run.server.query.inner <- function(user, password, hostuser, hostname, pempath){ 
@@ -59,7 +59,7 @@ run.server.searcher <- function(table.name, primary.value){
 		"save(query, file='tmp.RData')"
 		)
 	writeLines(text,con= 'server.script.R')
-	query <- run.server.query.inner(user, password, hostuser, hostname, pempath)
+	query <- run.server.query.inner(BIAD.user, BIAD.password, BIAD.hostuser, BIAD.hostname, BIAD.pempath)
 return(query)}
 
 #--------------------------------------------------------------------------------------------------
