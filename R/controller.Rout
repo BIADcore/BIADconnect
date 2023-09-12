@@ -42,14 +42,14 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Mon Sep 11 03:59:01 2023"
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Tue Sep 12 03:59:01 2023"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Mon Sep 11 03:59:24 2023"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Tue Sep 12 03:59:23 2023"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.descriptions.R at Mon Sep 11 03:59:28 2023"
-[1] "Starting to run script: auto.make.daily.map.R at Mon Sep 11 03:59:28 2023"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Tue Sep 12 03:59:28 2023"
+[1] "Starting to run script: auto.make.daily.map.R at Tue Sep 12 03:59:28 2023"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -58,10 +58,10 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.row.counts.R at Mon Sep 11 03:59:36 2023"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Mon Sep 11 03:59:36 2023"
-[1] "Starting to run script: auto.make.daily.table.png.R at Mon Sep 11 03:59:36 2023"
-[1] "Starting to run script: auto.make.daily.triggers.R at Mon Sep 11 03:59:41 2023"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Tue Sep 12 03:59:36 2023"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Tue Sep 12 03:59:36 2023"
+[1] "Starting to run script: auto.make.daily.table.png.R at Tue Sep 12 03:59:36 2023"
+[1] "Starting to run script: auto.make.daily.triggers.R at Tue Sep 12 03:59:40 2023"
 Error in .local(conn, statement, ...) : 
   could not run statement: Identifier name 'auto_trigger_padding_INSERT_zoptions_MaterialCulture_MaterialType' is too long
 Calls: source -> withVisible -> eval -> eval -> query.database
