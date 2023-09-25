@@ -34,7 +34,6 @@ LEFT JOIN `GraveIndividuals` ON `Graves`.`GraveID` = `GraveIndividuals`.`GraveID
 WHERE `AgeCategorical` = 'infant'
 ORDER BY `IndividualID`"
 query <- run.server.query(sql.command)
-
 #--------------------------------------------------------------------------------------
 # Example 3: Exactly the same output, but joins done in R
 #--------------------------------------------------------------------------------------
@@ -111,4 +110,16 @@ b <- ggplot(query, aes(x = Age, y = Country)) +
 a
 b
 #--------------------------------------------------------------------------------------
+# Example 9: get c14 for a culture and country
+
+query1 <- run.server.query("SELECT * FROM `Sites` WHERE `Country` = 'Hungary'")
+query2 <- run.server.query("SELECT * FROM `Phases` WHERE `Culture1` ='Bell Beaker'")
+query3 <- run.server.query("SELECT * FROM `C14Samples`")
+
+m1 <- merge(query1, query2, by = "SiteID")
+m2 <- merge(m1, query3, by = "PhaseID")
+
+head(m2)
+#--------------------------------------------------------------------------------------
+
 
