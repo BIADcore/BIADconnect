@@ -21,7 +21,7 @@ return(query)}
 #----------------------------------------------------------------------------------------------------
 run.server.query.inner <- function(user, password, hostuser, hostname, pempath){ 
 	require(ssh)
-	tmp.path <- paste("tmp",runif(1),sep='')
+	tmp.path <- paste("tmp/tmp",runif(1),sep='')
 
 	# create bash commands to be run on server
 	commands <- c(
