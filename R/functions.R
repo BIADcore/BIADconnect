@@ -12,7 +12,6 @@ run.server.searcher <- function(table.name, primary.value){
 		paste0("user <- '",user,"'"),
 		paste0("password <- '",password,"'"),
 		paste0("hostuser <- '",hostuser,"'"),
-		paste0("dbname <- '",dbname,"'"),
 		"source('https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R')",
 		paste("table.name <- '",table.name,"'",sep=''),
 		paste("primary.value <- '",primary.value,"'",sep=''),
