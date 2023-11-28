@@ -10,6 +10,7 @@ run.server.query <- function(sql.command){
 		paste0("user <- '",user,"'"),
 		paste0("password <- '",password,"'"),
 		paste0("hostuser <- '",hostuser,"'"),
+		paste0("dbname <- dbname"),
 		"source('https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.database.connect.R')",
 		paste('sql.command <- c("',paste(sql.command,collapse='","'),'")',sep=''),
 		"query <- query.database(user, password, sql.command)",
@@ -35,7 +36,7 @@ run.server.query.inner <- function(user, password, hostuser, hostname, pempath){
 	session <- ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
 	ssh_exec_wait(session, command = paste("mkdir",tmp.path))
 	scp_upload(session, files = "server.script.R" , to = tmp.path, verbose=FALSE)
-	unlink('server.script.R')
+#	unlink('server.script.R')
 	ssh_exec_wait(session, command = commands)
 	RData <- paste(tmp.path,"tmp.RData",sep="/")
 	scp_download(session, files = RData, to = getwd(), verbose=FALSE)
