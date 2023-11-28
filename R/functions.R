@@ -80,8 +80,8 @@ query.database.inner <- function(user, password, sql.command){
 	for(con in cons)dbDisconnect(con)
 
 	# connect locally to the database
-#	con <- dbConnect(drv, user=user, pass=password, dbname='BIAD', host = "127.0.0.1", port=3306)
-	con <- dbConnect(drv, user=user, pass=password, host = "127.0.0.1", port=3306)
+	con <- dbConnect(drv, user=user, pass=password, dbname='BIAD', host = "127.0.0.1", port=3306)
+#	con <- dbConnect(drv, user=user, pass=password, host = "127.0.0.1", port=3306)
 	dbSendStatement(con,"SET NAMES 'utf8'")
 
 	# query the database and tidy
