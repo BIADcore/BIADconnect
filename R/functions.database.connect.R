@@ -10,7 +10,7 @@ run.server.query <- function(sql.command){
 		paste0("user <- '",user,"'"),
 		paste0("password <- '",password,"'"),
 		paste0("hostuser <- '",hostuser,"'"),
-		paste0("dbname <- dbname"),
+		paste0("dbname <- '",dbname,"'"),
 		"source('https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.database.connect.R')",
 		paste('sql.command <- c("',paste(sql.command,collapse='","'),'")',sep=''),
 		"query <- query.database(user, password, sql.command)",
