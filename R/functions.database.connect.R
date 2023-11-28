@@ -13,7 +13,7 @@ run.server.query <- function(sql.command){
 		paste0("dbname <- '",dbname,"'"),
 		"source('https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.database.connect.R')",
 		paste('sql.command <- c("',paste(sql.command,collapse='","'),'")',sep=''),
-		"query <- query.database(user, password, sql.command)",
+		"query <- query.database(user, password, dbname, sql.command)",
 		"save(query, file='tmp.RData')"
 		)
 	writeLines(text,con= 'server.script.R')
