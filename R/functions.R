@@ -6,13 +6,13 @@
 dbname <<- 'BIAD'
 source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.database.connect.R")
 #----------------------------------------------------------------------------------------------------
-run.server.searcher <- function(table.name, primary.value, dbname){
+run.server.searcher <- function(table.name, primary.value){
 
 	text <- c(
 		paste0("user <- '",user,"'"),
 		paste0("password <- '",password,"'"),
 		paste0("hostuser <- '",hostuser,"'"),
-		paste0("dbname <- '",dbname,"'"),
+		paste0("dbname <<- '",dbname,"'"),
 		"source('https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R')",
 		paste("table.name <- '",table.name,"'",sep=''),
 		paste("primary.value <- '",primary.value,"'",sep=''),
