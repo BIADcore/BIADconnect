@@ -36,7 +36,7 @@ run.server.query.inner <- function(user, password, hostuser, hostname, pempath){
 	session <- ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
 	ssh_exec_wait(session, command = paste("mkdir",tmp.path))
 	scp_upload(session, files = "server.script.R" , to = tmp.path, verbose=FALSE)
-#	unlink('server.script.R')
+	unlink('server.script.R')
 	ssh_exec_wait(session, command = commands)
 	RData <- paste(tmp.path,"tmp.RData",sep="/")
 	scp_download(session, files = RData, to = getwd(), verbose=FALSE)
