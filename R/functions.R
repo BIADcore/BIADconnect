@@ -123,7 +123,7 @@ get.table.data <- function(keys, table.name, primary.value, user, password){
 	if(length(primary.value)!=1)stop('provide a single primary value')
 	primary.column <- get.primary.column.from.table(keys, table.name)
 	sql.command <- paste("SELECT * FROM `BIAD`.`",table.name,"` WHERE ",primary.column," IN ('",primary.value,"')", sep='')
-	data <- suppressWarnings(query.database(user, password, sql.command))
+	data <- suppressWarnings(query.database(user, password, dbname, sql.command))
 	data <- remove.blank.columns.from.table(data)
 return(data)}
 #----------------------------------------------------------------------------------------------------
@@ -141,7 +141,7 @@ decendants <- function(keys, table.name, primary.value, user, password){
 		child.table <- child.tables[n]
 		child.column <- child.columns[n]
 		sql.command <- paste("SELECT * FROM `BIAD`.`",child.table,"` WHERE ",child.column," = '",primary.value,"'", sep='')
-		data <- suppressWarnings(query.database(user, password, sql.command))
+		data <- suppressWarnings(query.database(user, password, dbname, sql.command))
 		data <- remove.blank.columns.from.table(data)
 		res[[child.table]]$data <- data
 		}
@@ -176,7 +176,7 @@ ancestors <- function(keys, table.name, primary.value, user, password){
 			values <- values[!is.na(values)]
 			values <- paste(values, collapse="','")
 			sql.command <- paste("SELECT * FROM `BIAD`.`",parent.table,"` WHERE ",parent.column," IN ('",values,"')", sep='')		
-			data <- suppressWarnings(query.database(user, password, sql.command))
+			data <- suppressWarnings(query.database(user, password, dbname, sql.command))
 			data <- remove.blank.columns.from.table(data)
 			res[[parent.table]]$data <- data	
 			}	
@@ -213,7 +213,7 @@ return(tb)}
 get.related.data <- function(table.name, primary.value, fnc, user, password){
 
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
-	keys <- query.database(user, password, sql.command)
+	keys <- query.database(user, password, dbname, sql.command)
 
 	# table data
 	all.data <- list()
@@ -272,7 +272,7 @@ database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, user,
 	require(DiagrammeR)
 
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_SCHEMA = 'BIAD'"
-	d <- suppressWarnings(query.database(user, password, sql.command))
+	d <- suppressWarnings(query.database(user, password, dbname, sql.command))
 	d <- subset(d, TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
 	if(!include.look.ups){
 		d <- subset(d, REFERENCED_TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
