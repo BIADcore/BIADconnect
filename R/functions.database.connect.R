@@ -54,7 +54,7 @@ run.server.query.inner <- function(user, password, hostuser, hostname, pempath){
 
 return(query)}
 #--------------------------------------------------------------------------------------------------
-query.database.inner <- function(user, password, sql.command){
+query.database.inner <- function(user, password, dbname, sql.command){
 	require(RMySQL)
 	drv <- dbDriver("MySQL")
 
@@ -76,8 +76,8 @@ query.database.inner <- function(user, password, sql.command){
 	for(con in cons)dbDisconnect(con)
 return(query)}
 #--------------------------------------------------------------------------------------------------
-query.database <- function(user, password, sql.command){
-	query <- suppressWarnings(query.database.inner(user, password, sql.command))
+query.database <- function(user, password, dbname, sql.command){
+	query <- suppressWarnings(query.database.inner(user, password, dbname, sql.command))
 return(query)}
 #--------------------------------------------------------------------------------------------------
 encoder <- function(df){
