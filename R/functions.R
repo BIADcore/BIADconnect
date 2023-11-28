@@ -34,7 +34,7 @@ run.server.query.inner <- function(user, password, hostuser, hostname, pempath){
 	session <- ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
 	ssh_exec_wait(session, command = paste("mkdir",tmp.path))
 	scp_upload(session, files = "server.script.R" , to = tmp.path, verbose=FALSE)
-#	unlink('server.script.R')
+	unlink('server.script.R')
 	ssh_exec_wait(session, command = commands)
 	RData <- paste(tmp.path,"tmp.RData",sep="/")
 	scp_download(session, files = RData, to = getwd(), verbose=FALSE)
@@ -81,7 +81,6 @@ query.database.inner <- function(user, password, sql.command){
 
 	# connect locally to the database
 	con <- dbConnect(drv, user=user, pass=password, dbname='BIAD', host = "127.0.0.1", port=3306)
-#	con <- dbConnect(drv, user=user, pass=password, host = "127.0.0.1", port=3306)
 	dbSendStatement(con,"SET NAMES 'utf8'")
 
 	# query the database and tidy
