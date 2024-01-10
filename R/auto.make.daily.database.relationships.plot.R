@@ -6,7 +6,7 @@ library(DiagrammeRsvg)
 #----------------------------------------------------------------------------------
 # Pull all foreign keys
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='BIAD';"	
-d.tables <- query.database(user, password, sql.command)$TABLE_NAME	
+d.tables <- query.database(user, password, 'biad', sql.command)$TABLE_NAME	
 
 zprivate <- d.tables[grepl('zprivate', d.tables)]
 zoptions <- d.tables[grepl('zoptions', d.tables)]

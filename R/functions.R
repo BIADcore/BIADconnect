@@ -385,8 +385,8 @@ summary.maker <- function(d){
 	legend <- c(1,2,key)
 return(list(summary=x,cols=cols,legend=legend))}
 #--------------------------------------------------------------------------------------------------
-make.trigger <- function(table,columns,type){
-	triggername <- paste('auto_trigger_padding_',type,'_',table,sep='')
+make.trigger <- function(table, columns, type, prefix){
+	triggername <- paste(prefix, type,'_',table,sep='')
 	t1 <- paste('CREATE DEFINER=`Rscripts`@`%` TRIGGER `',triggername,'` BEFORE ',type,' ON `',table,'` FOR EACH ROW BEGIN',sep='')
 	t2 <- paste("SET NEW.`",columns,"` = TRIM(REPLACE(REPLACE(REPLACE(NEW.`",columns,"`, '\r', ' '), '\n', ' '), '\t', ' '));",sep='')
 	t3 <- 'END'
@@ -394,7 +394,7 @@ make.trigger <- function(table,columns,type){
 	txt <- paste(txt,collapse=' ')
 return(txt)}
 #--------------------------------------------------------------------------------------------------
-make.all.triggers <- function(x){
+make.all.triggers <- function(x, prefix){
 	txt <- c()
 	tables <- unique(x$TABLE_NAME)
 	N <- length(tables)
@@ -403,8 +403,8 @@ make.all.triggers <- function(x){
 		for(n in 1:N){
 			table <- tables[n]
 			columns <- subset(x, TABLE_NAME==table)$COLUMN_NAME
-			inserts <- make.trigger(table,columns,type = 'INSERT')
-			updates <- make.trigger(table,columns,type = 'UPDATE')
+			inserts <- make.trigger(table,columns,type = 'INSERT', prefix)
+			updates <- make.trigger(table,columns,type = 'UPDATE', prefix)
 			txt <- c(txt,inserts,updates)
 			}
 		}
