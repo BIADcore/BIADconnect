@@ -7,8 +7,8 @@
 #-----------------------------------------------------------------------------------------
 # check for users that are missing from the zprivate_users table
 #-----------------------------------------------------------------------------------------
-d1 <- query.database(user, password, sql.command = "SELECT User FROM mysql.db WHERE Db='biad'")
-d2 <- query.database(user, password, sql.command = "SELECT * FROM BIAD.zprivate_users")
+d1 <- query.database(user, password, 'biad', sql.command = "SELECT User FROM mysql.db WHERE Db='biad'")
+d2 <- query.database(user, password, 'biad', sql.command = "SELECT * FROM BIAD.zprivate_users")
 d <- merge(d1,d2,by.x='User',by.y='user',all=T)
 d <- subset(d, !User%in%c(user,'root','user'))
 

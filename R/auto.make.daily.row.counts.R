@@ -2,10 +2,10 @@
 # Pull table summaries from the database, and update to Gists
 #-----------------------------------------------------------------------------------------
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='BIAD'"
-d <- query.database(user, password, sql.command)
+d <- query.database(user, password, 'biad', sql.command)
 
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema='BIAD';"	
-d.cols <- query.database(user, password, sql.command)	
+d.cols <- query.database(user, password, 'biad', sql.command)	
 #-----------------------------------------------------------------------------------------
 all <- d$TABLE_NAME
 zprivate <- all[grepl('zprivate', all)]

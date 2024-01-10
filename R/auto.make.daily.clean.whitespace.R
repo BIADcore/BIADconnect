@@ -3,7 +3,7 @@
 # For example, a column that allows a VARCHAR (such as a notes field) could be handed a blank ('') instead of a NULL
 #--------------------------------------------------------------------------------------------------------------
 sql.command <- "SELECT `TABLE_NAME` FROM `information_schema`.`TABLES` WHERE TABLE_SCHEMA='biad' AND `TABLE_TYPE`='BASE TABLE';"
-tables <- query.database(user, password, sql.command)
+tables <- query.database(user, password,'biad', sql.command)
 tables <- tables$TABLE_NAME
 #--------------------------------------------------------------------------------------------------------------
 # replace any blank entries with NULL
@@ -12,25 +12,25 @@ sql.commands <- c()
 for(n in 1:length(tables)){
 
 	sql.command <- paste("SELECT * FROM `BIAD`.`",tables[n],"`",sep='')
-	d <- query.database(user, password, sql.command)
+	d <- query.database(user, password,'biad', sql.command)
 	C <- ncol(d)
 	for(c in 1:C){
 		raw <- d[,c]
 		bad <- which(raw=='')
 		if(length(bad)>0){
 			sql.command <- paste("UPDATE `BIAD`.`",tables[n],"` SET `",names(d)[c],"`=NULL WHERE `",names(d)[c],"`=''",sep='')
-			sql.commands <- c(sql.commands,sql.command)
+			sql.commands <- c(sql.commands, sql.command)
 			}
 		}
 	}
-if(!is.null(sql.commands))suppressWarnings(query.database(user, password, sql.commands))
+if(!is.null(sql.commands))suppressWarnings(query.database(user, password,'biad', sql.commands))
 #--------------------------------------------------------------------------------------------------------------
 # remove any leading or trailing whitespace, or tabs, carriage returns or new lines
 #--------------------------------------------------------------------------------------------------------------
 sql.commands <- c()
 for(n in 1:length(tables)){
 	sql.command <- paste("SELECT * FROM `BIAD`.`",tables[n],"`",sep='')
-	d <- query.database(user, password, sql.command)
+	d <- query.database(user, password,'biad', sql.command)
 
 	C <- ncol(d)
 	for(c in 1:C){
@@ -48,5 +48,5 @@ for(n in 1:length(tables)){
 		}
 	}
 sql.commands <- unique(sql.commands)
-if(!is.null(sql.commands))query.database(user, password, sql.commands)
+if(!is.null(sql.commands))query.database(user, password,'biad', sql.commands)
 #--------------------------------------------------------------------------------------------------------------
