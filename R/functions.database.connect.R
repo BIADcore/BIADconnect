@@ -3,7 +3,7 @@
 # generic functions to query any database hosted at macelab
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
-run.server.query <- function(sql.command, user, password, hostuser, dbname, pempath){	
+run.server.query <- function(sql.command){	
 
 	# create 'server.script.R' to be run on server
 	text <- c(
