@@ -91,8 +91,6 @@ a <- ggplot(query, aes(Country)) +
   coord_flip() +
   theme_minimal()
 
-
-
 b <- ggplot(query, aes(x = Age, y = Country)) +
   geom_density_ridges2(
     jittered_points = TRUE,
