@@ -82,11 +82,12 @@ query <- run.server.query(sql.command)
 #--------------------------------------------------------------------------------------
 library(ggridges)
 library(ggplot2)
-sql.command <- "SELECT `C14ID`, `C14.Age` AS Age, `C14.SD`, `Country` FROM `C14Samples`
+sql.command <- "SELECT `C14ID`, `C14.Age` AS Age, `C14.SD`, `PhaseID`, `Country` FROM `C14Samples`
 LEFT JOIN `Sites` ON `C14Samples`.`SiteID` = `Sites`.`SiteID`"
 query <- run.server.query(sql.command)
+query$Phased <- with(query, ifelse(is.na(PhaseID), 'No', 'Yes'))
 
-a <- ggplot(query, aes(Country)) +
+a <- ggplot(query, aes(Country, fill = Phased)) +
   geom_bar() +
   coord_flip() +
   theme_minimal()
