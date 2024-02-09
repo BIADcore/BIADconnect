@@ -433,5 +433,102 @@ data.in.polygon <- function(data,kml.path,polygons=NULL,index=NULL){
 		data.region <- rbind(data.region,data[index,])	
 		}	
 return(data.region)}
-#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------
+summary.matrix.maker <- function(start,end,nbin,N=10000,prior=c(0.5,0.5),start.date,end.date,presence,absence,adaptive){
+	# take any count data type (LP presence/absence, or milk/non.milk, or domestic/wild)
+	# take date ranges for each sample
+	# generate summary matrices that account for chronological uncertainty, and small sample sizes
+
+	# a few data consistency checks
+	if(length(start.date)!=length(end.date))stop('E1')
+	if(length(start.date)!=length(presence))stop('E2')
+	if(length(start.date)!=length(absence))stop('E3')
+	if(sum(end.date>start.date)!=0)stop('E4')
+
+	# matrices to store various statistics
+	sample.mat <- perc.mat <- matrix(, N, nbin)
+
+	if(!adaptive)bins <- seq(start, end, length.out=nbin+1)
+	if(adaptive){
+		x <- runif(nrow(d)*100,end.date,start.date)
+		x <- x[x>end & x<start]
+		bins <- rev(round(as.numeric(quantile(x, probs = seq(0,1,length.out=nbin+1)))))
+		bins[1] <- start
+		bins[length(bins)] <- end
+		}
+
+	for(n in 1:N){
+		# random date from each phase or sample
+		dates <- runif(length(end.date), end.date, start.date)
+
+		# loop for each timeslice
+		for(b in 1:nbin){
+
+			# subset (index) of data in each timeslice
+			i <- dates<bins[b] & dates>bins[b+1]
+
+			# presence and absence
+			P <- presence[i]
+			A <- absence[i]
+
+			# if data is not phased (each row is a sample, such as LP)
+			if(!is.numeric(P)){
+				P <- sum(P)
+				A <- sum(A)
+				}
+
+			# presence percentage including the prior and small sample size uncertainty
+			raw.perc <- rbeta(length(P),P+prior[1],A+prior[2])
+	
+			# weight proportions in each phase according to sample size
+			weight <- 1 - 1/(sqrt(P+A+1))
+
+			# weighted average percentage
+			perc <- sum(raw.perc*weight)/sum(weight)
+
+			# store results
+			if(sum(i)!=0)perc.mat[n,b] <- perc
+
+			if(!is.numeric(P)){
+				# if data is not phased (each row is a sample, such as LP), we also want to include the small sample size uncertainty
+				P <- sum(P)
+				A <- sum(A)
+
+				perc.mat[n,b] <- rbeta(1,P+prior[1],A+prior[1])
+				}
+
+			# if no samples fall within a bin
+			if(length(P)==0)P <- 0
+			if(length(A)==0)A <- 0
+			sample.mat[n,b] <- sum(P)+sum(A)
+			}
+		}
+
+		NS <- colMeans(sample.mat)
+
+	# HPD and MAP
+	require(LaplacesDemon)
+	res <- data.frame(matrix(,ncol(perc.mat),7));names(res) <- c('startBP','endBP','MAP','lower95','upper95','lower50','upper50')
+	for(n in 1:ncol(perc.mat)){
+		if(NS[n]>0){
+			x <- perc.mat[,n]
+			x <- x[!is.na(x)]
+			if(length(x)>10){
+				int50 <- p.interval(x,prob=0.50,MM=F, HPD=F)
+				int95 <- p.interval(x,prob=0.95,MM=F, HPD=F)
+				res$MAP[n] <- mean(p.interval(x,prob=0.1,MM=F, HPD=F))
+				res$lower95[n] <- int95[1,1]
+				res$upper95[n] <- int95[1,2]
+				res$lower50[n] <- int50[1,1]
+				res$upper50[n] <- int50[1,2]
+				}
+			}
+		}
+
+	res$startBP <- bins[1:nbin]
+	res$endBP <- bins[2:(nbin+1)]
+
+return(res)}
+#-----------------------------------------------------------------------------------------------
+
 
