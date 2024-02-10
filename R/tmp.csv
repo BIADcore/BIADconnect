@@ -1,0 +1,244 @@
+"SiteID","SiteName","Region","Latitude","Longitude","Country","Notes","time_added","user_added","time_last_update","user_last_update"
+"S01449","Cap Ragnon cave",NA,43.35,5.27,"France",NA,NA,NA,NA,NA
+"S03348","Polling",NA,48.21,12.559,"Germany",NA,NA,NA,NA,NA
+"S04509","Hanau-Mittelbuchen",NA,50.181,8.888,"Germany",NA,NA,NA,NA,NA
+"S04511","Sondershausen",NA,51.373,10.881,"Germany",NA,NA,NA,NA,NA
+"S04512","Sondershausen-Wippertal",NA,51.371,10.884,"Germany",NA,NA,NA,NA,NA
+"S04514","Bruchstedt ""Gräberfeld""",NA,51.184,10.778,"Germany",NA,NA,NA,NA,NA
+"S04520","Prutting-Dobl",NA,47.888,12.146,"Germany",NA,NA,NA,NA,NA
+"S04523","Bargenstedt",NA,54.09,9.15,"Germany",NA,NA,NA,NA,NA
+"S04524","Kiel-Meimersdorfer Weg",NA,54.283,10.102,"Germany",NA,NA,NA,NA,NA
+"S04525","Bad Schwartau-Rensefeld",NA,53.921,10.073,"Germany",NA,NA,NA,NA,NA
+"S04526","Kiel-Wasserwerk Schulensee",NA,54.288,10.092,"Germany",NA,NA,NA,NA,NA
+"S04527","Suesel-Kesdorf ""Kiesgrube""",NA,54.069,10.655,"Germany",NA,NA,NA,NA,NA
+"S04528","Ballacottier","Isle of Man",54.15,-4.483,"Isle of Man",NA,NA,NA,"2023-07-24 14:45:56","robert@localhost"
+"S04530","Ballateare","Isle of Man",54.15,-4.483,"Isle of Man",NA,NA,NA,"2023-07-24 14:45:55","robert@localhost"
+"S04531","Ballavarry","Isle of Man",54.15,-4.483,"Isle of Man",NA,NA,NA,"2023-07-24 14:45:55","robert@localhost"
+"S04532","Glencrutchery","Isle of Man",54.15,-4.483,"Isle of Man",NA,NA,NA,"2023-07-24 14:45:54","robert@localhost"
+"S04534","Mull Hill Circle","Isle of Man",54.15,-4.483,"Isle of Man",NA,NA,NA,"2023-07-24 14:45:54","robert@localhost"
+"S04535","Ronaldsway House","Isle of Man",54.15,-4.483,"Isle of Man",NA,NA,NA,"2023-07-24 14:45:53","robert@localhost"
+"S04537","Northon",NA,57.808,-7.094,"Great Britain",NA,NA,NA,NA,NA
+"S04538","Courcelles-sur-Viosne",NA,49.07,2,"France",NA,NA,NA,NA,NA
+"S04539","Chérence",NA,49.088,1.676,"France",NA,NA,NA,NA,NA
+"S04542","Boury-en-Vexin",NA,49.24,1.73,"France",NA,NA,NA,"2023-04-20 14:05:31","Rscripts@localhost"
+"S04543","Baden",NA,48,16.23,"Austria",NA,NA,NA,NA,NA
+"S04544","Praha-Bubenec",NA,50.121,14.391,"Czechia / Czech Republic",NA,"2022-05-26 15:03:43","robert@localhost","2022-05-26 16:03:43","robert@localhost"
+"S04545","Praha-Troja",NA,50.117,14.423,"Czechia / Czech Republic",NA,"2022-05-26 15:03:45","robert@localhost","2022-05-26 16:03:45","robert@localhost"
+"S04546","Naumburg-Altendorf",NA,51.216,9.202,"Germany",NA,NA,NA,NA,NA
+"S04547","Altheim",NA,48.595,12.205,"Germany",NA,NA,NA,NA,NA
+"S04548","Werlte",NA,52.851,7.677,"Germany",NA,NA,NA,NA,NA
+"S04549","Barby",NA,51.966,11.882,"Germany",NA,NA,NA,NA,NA
+"S04550","Boehlen-Zeschwitz",NA,51.193,12.927,"Germany",NA,NA,NA,NA,NA
+"S04551","Dresden",NA,51.03,13.75,"Germany",NA,NA,NA,NA,NA
+"S04552","Wiesbaden-Schierstein",NA,50.045,8.196,"Germany",NA,NA,NA,NA,NA
+"S04553","Boitsfort",NA,50.8,4.41,"Belgium",NA,NA,NA,NA,NA
+"S04554","Frankfurt am Main-Sindlingen",NA,50.07,8.51,"Germany",NA,"2022-02-22 14:52:12","robert@localhost","2022-07-14 13:19:54","robert@localhost"
+"S04559","Aubevoye ""La Chartreuse""",NA,49.175,1.349,"France",NA,NA,NA,NA,NA
+"S04560","Sours ""Les Ouches""",NA,48.41,1.59,"France",NA,NA,NA,NA,NA
+"S04561","Bréviandes",NA,48.25,4.09,"France",NA,NA,NA,"2023-04-20 14:05:31","Rscripts@localhost"
+"S04563","Rødkilde Legeplads",NA,54.97,12.28,"Denmark",NA,NA,NA,NA,NA
+"S04565","Britz",NA,52.448,13.448,"Germany",NA,NA,NA,NA,NA
+"S04566","Werchow-Cabel (Grab 1)",NA,51.719,13.943,"Germany",NA,NA,NA,NA,NA
+"S04568","Kiekebusch",NA,51.725,14.361,"Germany",NA,NA,NA,NA,NA
+"S04569","Neuburxdorf-Wendisch Borschuetz",NA,51.447,13.287,"Germany",NA,NA,NA,NA,NA
+"S04570","Schoenermark (Siedlung)",NA,53.007,13.123,"Germany",NA,NA,NA,NA,NA
+"S04572","Bruessow Fpl. 43",NA,53.4,14.124,"Germany",NA,NA,NA,NA,NA
+"S04573","Plaue",NA,52.405,12.413,"Germany",NA,NA,NA,NA,NA
+"S04574","Alt-Toeplitz",NA,52.431,12.908,"Germany",NA,NA,NA,NA,NA
+"S04575","Muetzlitz Fpl. 2",NA,52.559,12.513,"Germany",NA,NA,NA,NA,NA
+"S04576","Muetzlitz Fpl. 5 (Grab 3)",NA,52.559,12.513,"Germany",NA,NA,NA,NA,NA
+"S04584","Sindelfingen ""Hinterweil""",NA,48.725,8.985,"Germany",NA,NA,NA,NA,NA
+"S04585","Heilbronn-Neckargartach ""Haselbuesch""",NA,49.185,9.161,"Germany",NA,NA,NA,NA,NA
+"S04586","Erbach-Ringingen",NA,48.604,8.87,"Germany",NA,NA,NA,NA,NA
+"S04592","Bruchenbruecken Aelteste LBK",NA,50.299,8.79,"Germany",NA,NA,NA,NA,NA
+"S04593","Frankfurt am Main Osthafen",NA,50.109,8.713,"Germany",NA,NA,NA,NA,NA
+"S04594","Eitzum I&II",NA,52.139,10.819,"Germany",NA,NA,NA,NA,NA
+"S04595","Gambach",NA,50.003,9.757,"Germany",NA,NA,NA,NA,NA
+"S04596","Steinfurth",NA,50.388,8.748,"Germany",NA,NA,NA,NA,NA
+"S04600","Heidelberg-Neuenheim ""Grosse Grube""",NA,49.415,8.663,"Germany",NA,NA,NA,NA,NA
+"S04601","Rossdorf ""Auf der Battent"" Grube 4",NA,49.851,8.763,"Germany",NA,NA,NA,NA,NA
+"S04604","Gatersleben Grab 1",NA,51.82,11.28,"Germany",NA,NA,NA,NA,NA
+"S04606","Schkopau ""Buna-Siedlung II""",NA,51.39,11.98,"Germany",NA,NA,NA,NA,NA
+"S04607","Uichteritz ""Fpl. 2""",NA,51.2,11.92,"Germany",NA,NA,NA,NA,NA
+"S05082","Weideroda-Zauschwitz ""Fpl. 2"" ""Neue Lehmgrube""",NA,51.168,12.248,"Germany",NA,NA,NA,NA,NA
+"S05083","Zwochau ""Sandgrube"" Grab 2",NA,51.466,12.274,"Germany",NA,NA,NA,NA,NA
+"S05084","Kloster Gröningen ""Fpl. 4"" ""östlich der Holtemme""",NA,51.937,11.204,"Germany",NA,NA,NA,NA,NA
+"S05085","Thornhill",NA,55.036,-7.28,"Ireland",NA,NA,NA,NA,NA
+"S05088","Drummeny Lower",NA,54.652,-8.082,"Ireland",NA,NA,NA,NA,NA
+"S05089","Enagh Townland",NA,55.025,-7.27,"Ireland",NA,NA,NA,NA,NA
+"S05090","Coolfore",NA,54.004,-6.76,"Ireland",NA,NA,NA,"2023-04-20 14:05:31","Rscripts@localhost"
+"S05092","Bönnigheim ""Hirschel""",NA,49.041,9.096,"Germany",NA,NA,NA,NA,NA
+"S05093","Goldberg",NA,48.86,10.423,"Germany",NA,NA,NA,"2023-04-20 14:05:31","Rscripts@localhost"
+"S05097","Lengfeld-Dantschermühle",NA,48.924,12.014,"Germany",NA,NA,NA,NA,NA
+"S05098","Straubing ""Lehmgrube Dendl"" Grube I",NA,48.874,12.582,"Germany",NA,NA,NA,NA,NA
+"S05099","Piesenkofen",NA,48.962,12.145,"Germany",NA,NA,NA,"2023-04-20 14:05:31","Rscripts@localhost"
+"S05100","Geisenhausen-Eiselsdorf",NA,48.479,12.274,"Germany",NA,NA,NA,NA,NA
+"S05102","Büraberg",NA,51.122,9.241,"Germany",NA,NA,NA,NA,NA
+"S05103","Schönningstedt LA 115-117",NA,53.549,10.306,"Germany",NA,NA,NA,NA,NA
+"S05104","Brunstorf LA42/43",NA,53.486,10.411,"Germany",NA,NA,NA,NA,NA
+"S05105","Lauenburg-Elbkamp LA8",NA,53.374,10.522,"Germany",NA,NA,NA,NA,NA
+"S05106","Schnackenbek (Gruenhof LA 6)",NA,53.378,10.496,"Germany",NA,NA,NA,NA,NA
+"S05109","Swifterbant S2",NA,52.584,5.58,"Netherlands",NA,NA,NA,NA,NA
+"S05110","Bílovice",NA,49.071,17.587,"Czechia / Czech Republic",NA,NA,NA,NA,NA
+"S05111","Božice",NA,48.837,16.289,"Czechia / Czech Republic",NA,NA,NA,NA,NA
+"S05112","Hostim",NA,49.26,14.394,"Czechia / Czech Republic",NA,NA,NA,NA,NA
+"S05115","Střelice u Jevišovic - Starý Zámek",NA,48.991,15.991,"Czechia / Czech Republic","known also as Jevišovice - Starý Zámek or Starý Zámek u Jevišovic",NA,NA,"2023-03-01 11:03:34","jan@localhost"
+"S05116","Krepice ""Hradisko""",NA,48.987,16.097,"Czechia / Czech Republic",NA,NA,NA,NA,NA
+"S05117","Ohrozim ""Horka Hügelgrab 1""",NA,49.488,17.021,"Czechia / Czech Republic",NA,NA,NA,NA,NA
+"S05118","Barleben ""Fpl.5""",NA,52.206,11.619,"Germany",NA,NA,NA,NA,NA
+"S05121","Miel",NA,50.667,6.914,"Germany",NA,NA,NA,NA,NA
+"S05122","Einbeck",NA,51.817,9.867,"Germany",NA,NA,NA,NA,NA
+"S05123","Noyen",NA,48.46,3.33,"France",NA,NA,NA,NA,NA
+"S05124","Zwyndrecht",NA,51.82,4.616,"Netherlands",NA,NA,NA,NA,NA
+"S05126","Coesfeld-Harle",NA,51.933,7.212,"Germany",NA,NA,NA,NA,NA
+"S05127","Osterwick",NA,51.968,10.707,"Germany",NA,NA,NA,NA,NA
+"S05129","Mayen ""Brandgrube""",NA,50.32,7.22,"Germany",NA,NA,NA,NA,NA
+"S05130","Spiennes ""Siedlung mit Gruben""",NA,50.42,3.986,"Belgium",NA,NA,NA,NA,NA
+"S05131","Lingolsheim ""MK""",NA,48.557,7.682,"France",NA,NA,NA,NA,NA
+"S05133","Rosheim ""MK""",NA,48.494,7.473,"France",NA,NA,NA,NA,NA
+"S05134","Achenheim ""1925'1""",NA,48.574,7.625,"France",NA,NA,NA,NA,NA
+"S05137","Cronenbourg",NA,48.597,7.723,"France",NA,NA,NA,NA,NA
+"S05138","Untergrombach ""Michelsberg""",NA,49.088,8.564,"Germany",NA,NA,NA,NA,NA
+"S05140","Sulzbach a. T.",NA,49.302,7.053,"Germany",NA,NA,NA,NA,NA
+"S05142","Urmitz",NA,50.414,7.516,"Germany",NA,NA,NA,NA,NA
+"S05143","Burkheim",NA,48.101,7.598,"Germany",NA,NA,NA,NA,NA
+"S05144","Hoenheim",NA,48.621,7.755,"France",NA,NA,NA,NA,NA
+"S05145","Bolanden",NA,49.637,8.013,"Germany",NA,NA,NA,NA,NA
+"S05146","Lienheim ""3,1""",NA,47.574,8.378,"Germany",NA,NA,NA,NA,NA
+"S05147","Mundolsheim",NA,48.642,7.715,"France",NA,NA,NA,NA,NA
+"S05150","Munzingen",NA,47.97,7.702,"Germany",NA,NA,NA,NA,NA
+"S05151","Endingen",NA,48.142,7.707,"Germany",NA,NA,NA,NA,NA
+"S05152","Wörrstadt",NA,49.842,8.129,"Germany",NA,NA,NA,NA,NA
+"S05153","Riedisheim ""B.S.2""",NA,47.746,7.358,"France",NA,NA,NA,NA,NA
+"S05154","Spechbach",NA,47.675,7.221,"France",NA,NA,NA,NA,NA
+"S05155","Finthen",NA,49.99,8.181,"Germany",NA,NA,NA,NA,NA
+"S05156","Leonberg",NA,48.802,9.016,"Germany",NA,NA,NA,NA,NA
+"S05157","Novéant-s-Moselle",NA,49.022,6.05,"France",NA,NA,NA,NA,NA
+"S05159","Mainz-Hechtsheim ""Grube 2""",NA,49.96,8.28,"Germany",NA,NA,NA,NA,NA
+"S05160","Stuttgart-Münster",NA,48.823,9.215,"Germany",NA,NA,NA,NA,NA
+"S05161","Ludwigsburg-Hoheneck",NA,48.9,9.21,"Germany",NA,NA,NA,NA,NA
+"S05162","Mörzheim",NA,49.169,8.075,"Germany",NA,NA,NA,NA,NA
+"S05163","Eddersheim",NA,50.041,8.47,"Germany",NA,NA,NA,NA,NA
+"S05164","Bad Kreuznach 2",NA,49.846,7.86,"Germany",NA,NA,NA,NA,NA
+"S06067","Bracht",NA,50.919,8.848,"Germany",NA,NA,NA,NA,NA
+"S06127","Heiningen",NA,52.069,10.553,"Germany",NA,NA,NA,NA,NA
+"S06636","Stepleton",NA,50.909,-2.209,"Great Britain",NA,NA,NA,NA,NA
+"S06677","Upper Delphs Terrace",NA,52.339,0.071,"Great Britain",NA,NA,NA,NA,NA
+"S06996","Edenagarry",NA,54.162,-6.113,"Ireland",NA,NA,NA,NA,NA
+"S07286","Barbirey-sur-Ouche ""Roche-Chèvre""",NA,47.253,4.755,"France",NA,NA,NA,NA,NA
+"S07287","Bellerive ""Salavaux""",NA,46.92,7.02,"Switzerland",NA,NA,NA,NA,NA
+"S07288","Besançon ""Roche-d'Or""",NA,47.238,6.024,"France",NA,NA,NA,NA,NA
+"S07291","Chassey-le-Camp",NA,46.89,4.7,"France",NA,NA,NA,NA,NA
+"S07292","Chavannes-le-Chêne ""Vallon-des-Vaux""",NA,46.78,6.78,"Switzerland",NA,NA,NA,NA,NA
+"S07293","Cravanche",NA,47.65,6.83,"France",NA,NA,NA,NA,NA
+"S07294","Fontaine ""Glos""",NA,45.193,5.688,"France",NA,NA,NA,NA,NA
+"S07295","Injoux-Génissiat ""La Bressane""",NA,46.031,5.78,"France",NA,NA,NA,NA,NA
+"S07296","Lavans-lès-Dole ""Moulin-Rouge""",NA,47.157,5.627,"France",NA,NA,NA,NA,NA
+"S07297","Onnens",NA,46.838,6.688,"Switzerland",NA,NA,NA,NA,NA
+"S07298","Saint-Aubin-Sauges ""Tivoli""",NA,46.889,6.768,"Switzerland",NA,NA,NA,NA,NA
+"S07299","Lusigny-sur-Ouche ""Peuh-Trou""",NA,47.09,4.674,"France",NA,NA,NA,NA,NA
+"S07300","Lac Chalain",NA,46.67,5.792,"France",NA,NA,NA,NA,NA
+"S07301","Port",NA,47.116,7.255,"Switzerland",NA,NA,NA,NA,NA
+"S07302","Thonon",NA,46.374,6.478,"France",NA,NA,NA,NA,NA
+"S07303","Vif ""Saint-Loup""",NA,45.055,5.669,"France",NA,NA,NA,NA,NA
+"S07345","Kalefeld ""72""",NA,51.798,10.036,"Germany",NA,NA,NA,NA,NA
+"S07351","Ditzingen ""Halden""",NA,48.833,9.069,"Germany",NA,NA,NA,NA,NA
+"S07353","Heilbronn ""Dammstrasse 14""",NA,49.147,9.221,"Germany",NA,NA,NA,NA,NA
+"S07354","Weilbach ""Flörsheimerstrasse""",NA,49.665,9.216,"Germany",NA,NA,NA,NA,NA
+"S07356","Albig ""Am Sumborn Fst. 1""",NA,49.773,8.121,"Germany",NA,NA,NA,NA,NA
+"S07357","Bad Kreuznach ""Martinsberg""",NA,49.85,7.86,"Germany",NA,NA,NA,NA,NA
+"S07359","Worms ""Rheingewann""",NA,49.639,8.371,"Germany",NA,NA,NA,NA,NA
+"S07362","Worms ""Rheindürkheim""",NA,49.704,8.359,"Germany",NA,NA,NA,NA,NA
+"S07367","Lingolsheim ""Sandgrube Schott / Fischer""",NA,48.543,7.694,"France",NA,NA,NA,NA,NA
+"S07368","Erstein ""Chef-lieu d'Ar""",NA,48.416,7.663,"France",NA,NA,NA,NA,NA
+"S07370","Litzendorf-Tiefenellern ""Jungfernhöhle""",NA,49.92,11.088,"Germany",NA,NA,NA,NA,NA
+"S07371","Straßkirchen - Irlbach IV",NA,48.842,12.752,"Germany",NA,NA,NA,NA,NA
+"S07374","Pfeffenhausen-Oberlauterbach",NA,48.703,11.946,"Germany",NA,NA,NA,NA,NA
+"S07375","Obertraubling - Obertraubling III",NA,48.969,12.165,"Germany",NA,NA,NA,NA,NA
+"S07377","Nierstein ""Wiesengewann""",NA,49.869,8.337,"Germany",NA,NA,NA,NA,NA
+"S07569","Kirchheim am Neckar (Kr. HN) ""Ghäu""",NA,49.055,9.129,"Germany",NA,NA,NA,NA,NA
+"S07726","Lembarg 95",NA,53.333,19.2,"Poland",NA,NA,NA,NA,NA
+"S08130","Sejerø",NA,55.89,11.146,"Denmark",NA,NA,NA,NA,NA
+"S08209","Veksö mose",NA,55.749,12.261,"Denmark",NA,NA,NA,NA,NA
+"S10276","Mala Triglavca 8",NA,45.676,13.96,"Slovenia",NA,"2022-01-25 12:22:59","jelena@localhost","2022-01-25 12:22:59","jelena@localhost"
+"S10297","Sânandrei","Timiş County",45.855,21.165,"Romania",NA,"2022-01-25 12:22:59","jelena@localhost","2023-07-26 06:49:30","jelena@localhost"
+"S10300","Špila",NA,42.493,18.712,"Montenegro",NA,"2022-01-25 12:22:59","jelena@localhost","2022-01-25 12:22:59","jelena@localhost"
+"S10302","Trhlovca",NA,45.673,13.946,"Slovenia",NA,"2022-01-25 12:22:59","jelena@localhost","2022-01-25 12:22:59","jelena@localhost"
+"S10352","Cova dels Bous",NA,39.432,3.188,"Spain","situated in the Cúber mountains, on the side of the separation of Son torrella and Cúber plain; on a height of 92m (heighest point)","2022-02-08 15:12:02","maria@localhost","2022-02-08 15:12:02","maria@localhost"
+"S10353","Coval Simó; Coval Simo",NA,39.79,2.805,"Spain","4km from village Valldemosa","2022-02-08 15:15:33","maria@localhost","2022-02-08 15:15:33","maria@localhost"
+"S10366","Vruća Pećina; Vruća",NA,42.509,19.318,"Montenegro",NA,"2022-03-17 12:32:59","jelena@localhost","2023-04-20 14:44:09","Rscripts@localhost"
+"S10367","Vrbićka Pećina; Vrbićka",NA,42.891,18.871,"Montenegro",NA,"2022-03-17 12:33:49","jelena@localhost","2023-04-20 14:44:09","Rscripts@localhost"
+"S10450","Cheny",NA,47.955,3.536,"France","Google Earth: +/- 5km radius","2022-04-12 11:31:59","robert@localhost","2022-04-12 12:31:59","robert@localhost"
+"S10540","Ripač",NA,44.765,15.955,"Bosnia and Herzegovina",NA,"2022-03-28 10:11:34","jelena@macelab-server.biochem.ucl.ac.uk","2022-03-28 11:11:34","jelena@macelab-server.biochem.ucl.ac.uk"
+"S10541","Pod; Pod Gradina; Pod Bugojno",NA,44.054,17.424,"Bosnia and Herzegovina",NA,"2022-03-28 10:53:42","jelena@macelab-server.biochem.ucl.ac.uk","2022-03-28 11:53:42","jelena@macelab-server.biochem.ucl.ac.uk"
+"S10543","Novo Selo-Bijeljina",NA,44.772,19.255,"Bosnia and Herzegovina",NA,"2022-03-28 11:25:45","jelena@macelab-server.biochem.ucl.ac.uk","2022-03-28 12:25:45","jelena@macelab-server.biochem.ucl.ac.uk"
+"S10602","Becsehely-Bükkalji dűlő",NA,46.44,16.78,"Hungary",NA,"2022-04-06 10:53:21","claudia@localhost","2022-04-06 11:53:21","claudia@localhost"
+"S10615","Balevullin",NA,56.517,-6.952,"Great Britain",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10616","Ballyalton",NA,54.578,-5.741,"Great Britain",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10617","Ballyedmond",NA,52.86,-7.6,"Great Britain",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10622","Bolkilde",NA,55.054,9.705,"Denmark","only a few kilometres from the classical locality of Hjortspring ","2022-04-08 13:50:10","maria@localhost","2022-10-17 12:23:05","robert@localhost"
+"S10623","Broadsands",NA,50.407,-3.554,"Great Britain",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10628","Casa da Moura",NA,39.37,-9.15,"Portugal",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10632","Chudleigh Cave",NA,50.596,-3.607,"Great Britain",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10638","Dillingen",NA,48.58,10.494,"Germany",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10639","Eckernförde LA29",NA,54.473,9.84,"Germany",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10642","Endröd Varnyai-ranya",NA,46.929,20.77,"Hungary",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10643","Eton Rowing Lake",NA,51.487,-0.608,"Great Britain",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10647","Gop Cave",NA,53.31,-3.372,"Great Britain",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10650","Gruta do Caldeirão",NA,39.65,-8.42,"Portugal",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10651","Härlingstorp",NA,58.389,13.586,"Sweden",NA,"2022-04-08 13:50:10","maria@localhost","2022-10-17 12:24:24","robert@localhost"
+"S10653","Hesselbjerggårds mose",NA,56.9,12.17,"Denmark",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10654","Holm of Papa Westrey",NA,59.34,-2.89,"Great Britain",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10655","Holm of Papa Westrey North",NA,59.34,-2.89,"Great Britain",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10657","Hove å",NA,55.728,12.232,"Denmark",NA,"2022-04-08 13:50:10","maria@localhost","2022-10-17 12:24:17","robert@localhost"
+"S10663","Knowe of Rowiegar",NA,59.149,-3.02,"Great Britain",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10668","Le Déhus","Guernsey",49.814,-3.627,"Guernsey",NA,"2022-04-08 13:50:10","maria@localhost","2023-07-24 14:46:17","robert@localhost"
+"S10670","Masseria Maselli",NA,41.12,16.77,"Italy",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10673","Millin Bay",NA,54.368,-5.487,"Great Britain",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10674","Nagykörü",NA,47.275,20.447,"Hungary",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10677","Øgårde boat III",NA,55.59,11.54,"Denmark",NA,"2022-04-08 13:50:10","maria@localhost","2022-10-17 12:23:26","robert@localhost"
+"S10678","Palata",NA,41.89,14.785,"Italy",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10680","Point of Cott",NA,59.313,-2.967,"Great Britain",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10686","Rødhals",NA,55.92,11.08,"Denmark",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10687","Samari",NA,40.056,17.993,"Italy",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10695","Szarvas 23",NA,46.867,20.563,"Hungary",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10697","Tagmosegård",NA,56.1,12.29,"Denmark",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10702","Torre Castelluccia",NA,40.38,17.35,"Italy",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10703","Totty Pot",NA,51.278,-2.715,"Great Britain",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10704","Undløse (Åmose)",NA,55.6,11.59,"Denmark",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10705","Vængegård",NA,55.534,11.765,"Denmark",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10706","Vaskút",NA,46.109,18.986,"Hungary",NA,"2022-04-08 13:50:10","maria@localhost","2022-04-08 14:50:10","maria@localhost"
+"S10854","Tiszalök Hajnalos",NA,47.999,21.414,"Hungary",NA,"2022-05-02 11:31:41","sam@localhost","2023-04-20 14:56:47","Rscripts@localhost"
+"S10920","Spaha; Spaha nad Brezovico pri Predgradu",NA,45.55,15.028,"Slovenia",NA,"2022-05-11 13:51:07","jelena@localhost","2022-05-11 14:51:07","jelena@localhost"
+"S10921","Ciganska Jama",NA,45.655,14.893,"Slovenia","cave system Željnske Jame","2022-05-11 14:05:41","jelena@localhost","2022-05-11 15:05:41","jelena@localhost"
+"S10922","Resnikov Prekop",NA,45.963,14.543,"Slovenia","within 1 km","2022-05-11 14:48:23","jelena@localhost","2022-05-11 15:48:23","jelena@localhost"
+"S10923","Barutnica; Барутница",NA,41.41,21.416,"North Macedonia",NA,"2022-05-12 09:20:16","claudia@localhost","2022-05-12 10:20:16","claudia@localhost"
+"S10925","Zamedvedica; Zamedvedica pri Plešivici; Zamedvedca; Zamedvednica; Zamedvejca",NA,45.967,14.373,"Slovenia","within 3 km","2022-05-12 12:54:43","jelena@localhost","2022-05-12 13:54:43","jelena@localhost"
+"S10926","Gradec pri Blečjem vrhu",NA,45.99,14.722,"Slovenia","within 500 m","2022-05-12 12:56:00","jelena@localhost","2022-05-12 13:56:00","jelena@localhost"
+"S10927","Čatež-Sredno Polje",NA,45.892,15.61,"Slovenia",NA,"2022-05-12 12:57:14","jelena@localhost","2022-05-12 13:57:14","jelena@localhost"
+"S10928","Lubniška Jama",NA,46.165,14.263,"Slovenia",NA,"2022-05-12 12:58:13","jelena@localhost","2022-05-12 13:58:13","jelena@localhost"
+"S10929","Kostel",NA,45.508,14.91,"Slovenia",NA,"2022-05-12 12:59:07","jelena@localhost","2022-05-12 13:59:07","jelena@localhost"
+"S10930","Gradišće nad Dešnom",NA,46.118,14.783,"Slovenia","within 1 km","2022-05-12 13:00:12","jelena@localhost","2022-05-12 14:00:12","jelena@localhost"
+"S10931","Zgornje Radvanje",NA,46.54,15.605,"Slovenia","within 1 km","2022-05-12 13:01:13","jelena@localhost","2022-05-12 14:01:13","jelena@localhost"
+"S11001","Grumăzeşti-Deleni",NA,47.155,26.412,"Romania",NA,"2022-05-17 14:40:22","jelena@localhost","2022-05-17 15:40:22","jelena@localhost"
+"S11002","Bacea-Sărături",NA,45.956,22.668,"Romania",NA,"2022-05-17 14:40:22","jelena@localhost","2022-05-17 15:40:22","jelena@localhost"
+"S11003","Hărău",NA,45.9,22.959,"Romania","within 1 km","2022-05-17 14:40:22","jelena@localhost","2022-05-17 15:40:22","jelena@localhost"
+"S11005","Ceamurlia de Jos",NA,44.733,28.717,"Romania","within 1 km","2022-05-17 14:40:22","jelena@localhost","2022-05-17 15:40:22","jelena@localhost"
+"S11052","Glinjeni-La Şanţ; Hlinjeni-La Şanţ",NA,47.599,27.89,"Moldova",NA,"2022-06-05 06:25:58","jelena@localhost","2022-06-05 07:25:58","jelena@localhost"
+"S11129","Altdorf",NA,48.564,12.085,"Germany",NA,NA,NA,"2022-07-05 14:54:04","sam@localhost"
+"S11231","Östra Karaby",NA,55.873,13.188,"Sweden","within 2 km","2022-09-23 09:44:52","jelena@localhost","2022-09-23 09:44:52","jelena@localhost"
+"S11234","Södra Sallerup",NA,55.586,13.119,"Sweden","within 2 km","2022-09-23 10:28:51","jelena@localhost","2022-09-23 10:28:51","jelena@localhost"
+"S11239","Myklebust gnr. 3",NA,58.946,5.581,"Norway",NA,"2022-09-28 16:10:14","claudia@localhost","2022-09-28 16:10:14","claudia@localhost"
+"S11244","Skadberg",NA,58.885,5.671,"Norway",NA,"2022-09-28 16:44:58","claudia@localhost","2022-09-28 16:44:58","claudia@localhost"
+"S11250","Tjemslandsmarka",NA,58.619,5.664,"Norway",NA,"2022-09-29 09:46:53","claudia@localhost","2022-09-29 09:46:53","claudia@localhost"
+"S11259","Stiurhelleren",NA,66.278,14.078,"Norway","within 10 km","2022-10-05 11:48:09","claudia@localhost","2022-10-05 11:48:09","claudia@localhost"
+"S11294","Havnø",NA,56.709,10.171,"Denmark",NA,"2022-11-25 13:18:51","robert@localhost","2022-11-25 13:18:51","robert@localhost"
+"S11377","Голямо Делчево; Golyamo Delchevo; Goljamo Delčevo",NA,43.223,27.818,"Bulgaria","position asumed (approximate location) by maps/figures in publications","2023-01-11 12:29:46","jelena@localhost","2023-01-11 12:29:46","jelena@localhost"
+"S11381","Ракитово; Rakitovo",NA,41.989,24.087,"Bulgaria","location of the town","2023-01-11 12:29:46","jelena@localhost","2023-01-11 12:29:46","jelena@localhost"
+"S11382","Драма; Drama; Драма-Герена; Drama-Gerena",NA,42.245,26.438,"Bulgaria","location of the village","2023-01-11 12:29:46","jelena@localhost","2023-01-11 12:29:46","jelena@localhost"
+"S11385","Ваксево; Vaksevo",NA,42.167,22.867,"Bulgaria","location of the town","2023-01-11 12:29:46","jelena@localhost","2023-01-11 12:29:46","jelena@localhost"
+"S11388","Градешница; Gradeshnitsa",NA,43.484,23.48,"Bulgaria","location of the village","2023-01-11 12:29:46","jelena@localhost","2023-01-11 12:29:46","jelena@localhost"
+"S11391","Подгорица; Podgoritsa",NA,43.324,26.451,"Bulgaria","position asumed (approximate location) by maps/figures in publications","2023-01-11 12:29:46","jelena@localhost","2023-01-11 12:29:46","jelena@localhost"
+"S11394","Копривец; Koprivec; Koprivets",NA,43.409,25.879,"Bulgaria","location of the village","2023-01-11 12:29:46","jelena@localhost","2023-01-11 12:29:46","jelena@localhost"
+"S11703","Tilla Bulak",NA,37.576,66.565,"Uzbekistan","Site location to town with GoogleMaps; within 10 km guesstimate","2023-02-23 12:22:31","sam@localhost","2023-02-23 12:22:31","sam@localhost"
+"S11714","Měšice u Prahy",NA,50.199,14.52,"Czechia / Czech Republic",NA,"2023-02-27 14:06:04","jan@localhost","2023-07-24 14:43:57","robert@localhost"
