@@ -529,6 +529,16 @@ summary.matrix.maker <- function(start,end,nbin,N=10000,prior=c(0.5,0.5),start.d
 	res$endBP <- bins[2:(nbin+1)]
 
 return(res)}
+#-----------------------------------------------------------------------------------------
+write.csv.utf8.BOM <- function(df, filename){
+	 con <- file(filename, "w")
+	tryCatch({
+	for (i in 1:ncol(df))
+ 	df[,i] = iconv(df[,i], to = "UTF-8") 
+	writeChar(iconv("\ufeff", to = "UTF-8"), con, eos = NULL, nchar=1)
+	write.csv(df, file = con, na='NULL', row.names=FALSE)
+	},finally = {close(con)})
+	}
 #-----------------------------------------------------------------------------------------------
 
 

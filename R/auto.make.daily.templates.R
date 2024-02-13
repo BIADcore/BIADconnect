@@ -1,16 +1,6 @@
 #-----------------------------------------------------------------------------------------
 # Pull table summaries from the database, and update github
 #-----------------------------------------------------------------------------------------
-write.csv.utf8.BOM <- function(df, filename){
-	 con <- file(filename, "w")
-	tryCatch({
-	for (i in 1:ncol(df))
- 	df[,i] = iconv(df[,i], to = "UTF-8") 
-	writeChar(iconv("\ufeff", to = "UTF-8"), con, eos = NULL, nchar=1)
-	write.csv(df, file = con, na='NULL', row.names=FALSE)
-	},finally = {close(con)})
-	}
-#-----------------------------------------------------------------------------------------
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='BIAD'"
 d <- query.database(user, password, 'biad', sql.command)
 
