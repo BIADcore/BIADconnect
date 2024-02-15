@@ -540,5 +540,12 @@ write.csv.utf8.BOM <- function(df, filename){
 	},finally = {close(con)})
 	}
 #-----------------------------------------------------------------------------------------------
-
+getKMLnames <- function(file){
+	names <- readLines(file)
+	names <- names(grep('\t\t\t<name>',names)]
+	names <- gsub('\t\t\t<name>','',names)
+	names <- gsub('</name>','',names)
+	names <- gsub(&amp;','&',names.fixed=T)
+return(names)}
+#--------------------------------------------------------------
 
