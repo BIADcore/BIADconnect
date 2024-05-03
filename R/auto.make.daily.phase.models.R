@@ -21,7 +21,7 @@ colnames(prior.matrix) <- seq(min(sigma.range),max(sigma.range),length.out=ncol(
 # prioritise by those without a date estimate yet
 # do later
 
-N <- 5
+N <- 100
 for(n in 1:N){
 
 	# pick a random phase
