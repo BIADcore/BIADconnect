@@ -18,10 +18,7 @@ prior.matrix <- matrix(1,200,200); prior.matrix <- prior.matrix/sum(prior.matrix
 row.names(prior.matrix) <- seq(min(mu.range),max(mu.range),length.out=nrow(prior.matrix))
 colnames(prior.matrix) <- seq(min(sigma.range),max(sigma.range),length.out=ncol(prior.matrix))
 
-# prioritise by those without a date estimate yet
-# do later
-
-N <- 100
+N <- 1000
 for(n in 1:N){
 
 	# pick a random phase
@@ -74,6 +71,5 @@ for(n in 1:N){
 		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `gaussianModelMu`=",mod$mean.mu,", `gaussianModelSigma`=",mod$mean.sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
 		query.database(user, password, 'biad',sql.command)
 		}
-	print(paste(phase$PhaseID, nrow(near.phases), n,'of',N))
 	}
 #-----------------------------------------------------------------------------------------
