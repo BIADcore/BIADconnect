@@ -21,7 +21,7 @@ colnames(prior.matrix) <- seq(min(sigma.range),max(sigma.range),length.out=ncol(
 # prioritise by those without a date estimate yet
 # do later
 
-N <- 200
+N <- 5
 for(n in 1:N){
 
 	# pick a random phase
@@ -50,7 +50,13 @@ for(n in 1:N){
 	# reduce to informative phases (that have a phase estimate already)
 	near.phases <- subset(near.phases, !is.na(gaussianModelMu))
 
-	# sort out the code to include near phase probabilities later
+	# generate the new prior from the posteriors of the near phases
+	NP <- nrow(near.phases)
+	if(NP>0)for(np in 1:NP){
+		load(paste(model.folder,paste(near.phases$PhaseID[np],'RData',sep='.'),sep='/'))
+		prior.matrix <- prior.matrix + mod$posterior
+		}
+	prior.matrix <- prior.matrix/sum(prior.matrix)
 
 	# get phase c14 dates
 	d <- subset(c14, PhaseID==phase$PhaseID)
