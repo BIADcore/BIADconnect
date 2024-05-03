@@ -42,14 +42,14 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Fri May  3 14:59:02 2024"
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Fri May  3 15:02:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Fri May  3 14:59:25 2024"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Fri May  3 15:02:24 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.descriptions.R at Fri May  3 14:59:28 2024"
-[1] "Starting to run script: auto.make.daily.map.R at Fri May  3 14:59:28 2024"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Fri May  3 15:02:27 2024"
+[1] "Starting to run script: auto.make.daily.map.R at Fri May  3 15:02:28 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -58,10 +58,30 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.phase.models.R at Fri May  3 14:59:35 2024"
-Error in source(file) : 
-  auto.make.daily.phase.models.R:74:1: unexpected '}'
-73: #-----------------------------------------------------------------------------------------
-74: }
-    ^
-Execution halted
+[1] "Starting to run script: auto.make.daily.phase.models.R at Fri May  3 15:02:34 2024"
+[1] "BIS1 1 1 of 5"
+[1] "AMZ3 0 2 of 5"
+[1] "VAY 1 3 of 5"
+[1] "POWE12 0 4 of 5"
+[1] "DROUZK2 1 5 of 5"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Fri May  3 15:02:40 2024"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Fri May  3 15:02:40 2024"
+[1] "Starting to run script: auto.make.daily.table.png.R at Fri May  3 15:02:40 2024"
+[1] "Starting to run script: auto.make.daily.templates.R at Fri May  3 15:02:44 2024"
+[1] "Starting to run script: auto.make.daily.triggers.R at Fri May  3 15:02:46 2024"
+> 
+> if(NW>0 & today==run.day)for(n in 1:NW){
++ 	file <- weekly.files[n]
++ 	print(paste('Starting to run script:',file,'at',date()))
++ 	source(file)
++ 	}
+> 
+> #------------------------------------------------------------------
+> 	
+> 	
+> 	
+> 	
+> 
+> proc.time()
+   user  system elapsed 
+ 41.828   2.091  49.176 
