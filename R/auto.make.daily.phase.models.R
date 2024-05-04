@@ -64,7 +64,7 @@ for(n in 1:N){
 
 	# save the model in folder 
 	save(mod, file=paste(model.folder,paste(phase$PhaseID,'RData',sep='.'),sep='/'))
-
+print(phase$PhaseID)
 	# add point estimates to the database if the posterior is reasonably tight
 	cond <- max(mod$posterior)/mean(mod$posterior)>10
 	if(cond){
