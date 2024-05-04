@@ -42,14 +42,14 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Sat May  4 13:08:02 2024"
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Sat May  4 13:15:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Sat May  4 13:08:24 2024"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Sat May  4 13:15:25 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.descriptions.R at Sat May  4 13:08:27 2024"
-[1] "Starting to run script: auto.make.daily.map.R at Sat May  4 13:08:28 2024"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Sat May  4 13:15:29 2024"
+[1] "Starting to run script: auto.make.daily.map.R at Sat May  4 13:15:29 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -58,9 +58,9 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.phase.models.R at Sat May  4 13:08:34 2024"
-[1] "POST2"
-[1] "UPDATE `BIAD`.`Phases` SET `gaussianModelMuBP`=13988, `gaussianModelSigmaBP`=507 WHERE `PhaseID`='POST2';"
+[1] "Starting to run script: auto.make.daily.phase.models.R at Sat May  4 13:15:38 2024"
+[1] "HEIDI1"
+[1] "UPDATE `BIAD`.`Phases` SET `gaussianModelMuBP`=13804, `gaussianModelSigmaBP`=532 WHERE `PhaseID`='HEIDI1';"
 Error in .local(conn, statement, ...) : 
   could not run statement: Unknown column 'gaussianModelMu' in 'NEW'
 Calls: source -> withVisible -> eval -> eval -> query.database
