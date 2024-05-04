@@ -45,7 +45,7 @@ for(n in 1:N){
 		}
 
 	# reduce to informative phases (that have a phase estimate already)
-	near.phases <- subset(near.phases, !is.na(gaussianModelMu))
+	near.phases <- subset(near.phases, !is.na(gaussianModelMuBP))
 
 	# generate the new prior from the posteriors of the near phases
 	NP <- nrow(near.phases)
@@ -68,7 +68,7 @@ for(n in 1:N){
 	# add point estimates to the database if the posterior is reasonably tight
 	cond <- max(mod$posterior)/mean(mod$posterior)>10
 	if(cond){
-		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `gaussianModelMu`=",mod$mean.mu,", `gaussianModelSigma`=",mod$mean.sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
+		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `gaussianModelMuBP`=",mod$mean.mu,", `gaussianModelSigmaBP`=",mod$mean.sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
 		query.database(user, password, 'biad',sql.command)
 		}
 	}
