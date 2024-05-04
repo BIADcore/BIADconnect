@@ -69,6 +69,7 @@ print(phase$PhaseID)
 	cond <- max(mod$posterior)/mean(mod$posterior)>10
 	if(cond){
 		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `gaussianModelMuBP`=",mod$mean.mu,", `gaussianModelSigmaBP`=",mod$mean.sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
+print(sql.command)
 		query.database(user, password, 'biad',sql.command)
 		}
 	}
