@@ -59,6 +59,24 @@ Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
 [1] "Starting to run script: auto.make.daily.phase.models.R at Sun May  5 18:19:35 2024"
-Error in if (cond) { : missing value where TRUE/FALSE needed
-Calls: source -> withVisible -> eval -> eval
-Execution halted
+[1] "Starting to run script: auto.make.daily.row.counts.R at Sun May  5 18:35:51 2024"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Sun May  5 18:35:52 2024"
+[1] "Starting to run script: auto.make.daily.table.png.R at Sun May  5 18:35:52 2024"
+[1] "Starting to run script: auto.make.daily.templates.R at Sun May  5 18:35:56 2024"
+[1] "Starting to run script: auto.make.daily.triggers.R at Sun May  5 18:35:58 2024"
+> 
+> if(NW>0 & today==run.day)for(n in 1:NW){
++ 	file <- weekly.files[n]
++ 	print(paste('Starting to run script:',file,'at',date()))
++ 	source(file)
++ 	}
+> 
+> #------------------------------------------------------------------
+> 	
+> 	
+> 	
+> 	
+> 
+> proc.time()
+    user   system  elapsed 
+2411.200  396.856 2820.654 
