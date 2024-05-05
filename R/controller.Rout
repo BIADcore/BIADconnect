@@ -59,8 +59,10 @@ Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
 [1] "Starting to run script: auto.make.daily.phase.models.R at Sun May  5 06:19:35 2024"
-[1] "Starting to run script: auto.make.daily.row.counts.R at Sun May  5 06:26:50 2024"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Sun May  5 06:26:50 2024"
+Error in if (cond) { : missing value where TRUE/FALSE needed
+Calls: source -> withVisible -> eval -> eval
+Execution halted
+ke.daily.sql.examples.R at Sun May  5 06:26:50 2024"
 [1] "Starting to run script: auto.make.daily.table.png.R at Sun May  5 06:26:50 2024"
 [1] "Starting to run script: auto.make.daily.templates.R at Sun May  5 06:26:54 2024"
 [1] "Starting to run script: auto.make.daily.triggers.R at Sun May  5 06:26:56 2024"
