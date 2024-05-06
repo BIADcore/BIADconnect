@@ -23,7 +23,7 @@ d <- d[!is.na(d$date),]
 
 # plot sizes
 pwidth <- 1600
-pheight <- 700
+pheight <- 600
 #--------------------------------------------------------------------------------------------------
 # design the universal limits
 #--------------------------------------------------------------------------------------------------
@@ -206,10 +206,7 @@ INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`
 WHERE `GraveIndividuals`.`aDNAID` IS NOT NULL;"
 
 tmp <- query.database(user, password, 'biad', sql.command)
-print(names(tmp))
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
-print(names(d))
-print(names(dd))
 
 table <- 'aDNA'
 png(file = paste('../tools/plots/time.phases',table,'png',sep='.'), width = pwidth, height = pheight )
