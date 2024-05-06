@@ -72,11 +72,13 @@ run.server.query(sql.command)
 # Example 6: get LabIDs from C14Samples table
 #--------------------------------------------------------------------------------------
 query <- run.server.query("SELECT LabID FROM C14Samples")
+
 #--------------------------------------------------------------------------------------
 # Example 7: use GraveID's to extract associated metadata for the C14Samples
 #--------------------------------------------------------------------------------------
 sql.command <- "SELECT GraveID, Graves.PhaseID, SiteID, Period FROM Graves JOIN Phases ON Graves.PhaseID = Phases.PhaseID GROUP BY GraveID ORDER BY GraveID"
 query <- run.server.query(sql.command)
+
 #--------------------------------------------------------------------------------------
 # Example 8: check temporal distribution of radiocarbon dating by country
 #--------------------------------------------------------------------------------------
@@ -121,4 +123,13 @@ m2 <- merge(m1, query3, by = "PhaseID")
 head(m2)
 #--------------------------------------------------------------------------------------
 
-
+#--------------------------------------------------------------------------------------
+# Example 10: country-based distribution of aDNA samples per country
+#--------------------------------------------------------------------------------------
+query <- run.server.query("SELECT Country, Count(aDNAID) AS Frequency FROM Sites LEFT JOIN Phases on Sites.SiteID = Phases.SiteID LEFT JOIN Graves ON Phases.PhaseID = Graves.PhaseID LEFT JOIN GraveIndividuals ON Graves.GraveID = GraveIndividuals.GraveID WHERE aDNAID IS NOT NULL GROUP BY Country;")
+library(ggplot2)
+ggplot(query, aes(x = Country, y = Frequency)) +
+  geom_bar(stat="identity") +
+  labs(title = "aDNA samples in BIAD [n=2045") +
+  coord_flip()
+#--------------------------------------------------------------------------------------
