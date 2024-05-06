@@ -1,0 +1,107 @@
+
+R version 3.6.3 (2020-02-29) -- "Holding the Windsock"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> #------------------------------------------------------------------
+> # Runs all R scripts beginning with 'auto.make.'
+> # This script is invoked by a regular CRON schedule (Admin),
+> # However, some scripts need not be run so frequently.
+> # Rather than specifying a CRON schedule for each script, 
+> # this script decides when to run which script, based on the filename.
+> #------------------------------------------------------------------
+> source('functions.R')
+> source('.Rprofile')
+> #------------------------------------------------------------------
+> run.day <- 'Tue'
+> today <- strsplit(date(),split=' ')[[1]][1]
+> 
+> files <- list.files()
+> daily.files <- files[grepl('auto.make.daily',files)]
+> weekly.files <- files[grepl('auto.make.weekly',files)]
+> 
+> ND <- length(daily.files)
+> NW <- length(weekly.files)
+> 
+> if(ND>0)for(n in 1:ND){
++ 	file <- daily.files[n]
++ 	print(paste('Starting to run script:',file,'at',date()))
++ 	source(file)
++ 	}
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Mon May  6 20:44:02 2024"
+Loading required package: RMySQL
+Loading required package: DBI
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Mon May  6 20:44:24 2024"
+Linking to librsvg 2.48.4
+Loading required package: DiagrammeR
+[1] "Starting to run script: auto.make.daily.descriptions.R at Mon May  6 20:44:27 2024"
+[1] "Starting to run script: auto.make.daily.map.R at Mon May  6 20:44:28 2024"
+Loading required package: ggplot2
+Loading required package: sf
+Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
+Loading required package: rnaturalearth
+Loading required package: rnaturalearthdata
+Loading required package: maps
+Loading required package: mapdata
+Loading required package: svglite
+[1] "Starting to run script: auto.make.daily.phase.models.R at Mon May  6 20:44:34 2024"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Mon May  6 20:44:51 2024"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Mon May  6 20:44:51 2024"
+[1] "Starting to run script: auto.make.daily.table.png.R at Mon May  6 20:44:52 2024"
+[1] "Starting to run script: auto.make.daily.templates.R at Mon May  6 20:44:56 2024"
+[1] "Starting to run script: auto.make.daily.temporal.plots.R at Mon May  6 20:44:57 2024"
+[1] "SiteID"    "Longitude" "Latitude"  "aDNAID"   
+ [1] "SiteID"             "PhaseID"            "Culture1"          
+ [4] "Culture2"           "Culture3"           "Subculture"        
+ [7] "Period"             "PeriodNotes"        "Citations"         
+[10] "Type"               "StartBCEreported"   "EndBCEreported"    
+[13] "gaussianModelMu"    "gaussianModelSigma" "time_added.x"      
+[16] "user_added.x"       "time_last_update.x" "user_last_update.x"
+[19] "SiteName"           "Region"             "Latitude"          
+[22] "Longitude"          "Country"            "Notes"             
+[25] "time_added.y"       "user_added.y"       "time_last_update.y"
+[28] "user_last_update.y" "reportedMidBP"      "date"              
+ [1] "SiteID"             "PhaseID"            "Culture1"          
+ [4] "Culture2"           "Culture3"           "Subculture"        
+ [7] "Period"             "PeriodNotes"        "Citations"         
+[10] "Type"               "StartBCEreported"   "EndBCEreported"    
+[13] "gaussianModelMu"    "gaussianModelSigma" "time_added.x"      
+[16] "user_added.x"       "time_last_update.x" "user_last_update.x"
+[19] "SiteName"           "Region"             "Latitude"          
+[22] "Longitude"          "Country"            "Notes"             
+[25] "time_added.y"       "user_added.y"       "time_last_update.y"
+[28] "user_last_update.y" "reportedMidBP"      "date"              
+[1] "Starting to run script: auto.make.daily.triggers.R at Mon May  6 20:45:06 2024"
+Warning message:
+In merge.data.frame(tmp, t1, by = "GraveID") :
+  column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
+> 
+> if(NW>0 & today==run.day)for(n in 1:NW){
++ 	file <- weekly.files[n]
++ 	print(paste('Starting to run script:',file,'at',date()))
++ 	source(file)
++ 	}
+> 
+> #------------------------------------------------------------------
+> 	
+> 	
+> 	
+> 	
+> 
+> proc.time()
+   user  system elapsed 
+ 58.666   4.648  69.151 
