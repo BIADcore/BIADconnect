@@ -42,14 +42,14 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Mon May  6 11:49:02 2024"
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Mon May  6 12:19:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Mon May  6 11:49:25 2024"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Mon May  6 12:19:24 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.descriptions.R at Mon May  6 11:49:28 2024"
-[1] "Starting to run script: auto.make.daily.map.R at Mon May  6 11:49:28 2024"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Mon May  6 12:19:28 2024"
+[1] "Starting to run script: auto.make.daily.map.R at Mon May  6 12:19:28 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -58,10 +58,25 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.phase.models.R at Mon May  6 11:49:35 2024"
-Error in if (cond) { : missing value where TRUE/FALSE needed
-Calls: source -> withVisible -> eval -> eval
-In addition: Warning message:
-In max(calcurve$cal[calcurve$max < min.c14]) :
-  no non-missing arguments to max; returning -Inf
-Execution halted
+[1] "Starting to run script: auto.make.daily.phase.models.R at Mon May  6 12:19:34 2024"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Mon May  6 12:24:07 2024"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Mon May  6 12:24:07 2024"
+[1] "Starting to run script: auto.make.daily.table.png.R at Mon May  6 12:24:07 2024"
+[1] "Starting to run script: auto.make.daily.templates.R at Mon May  6 12:24:11 2024"
+[1] "Starting to run script: auto.make.daily.triggers.R at Mon May  6 12:24:13 2024"
+> 
+> if(NW>0 & today==run.day)for(n in 1:NW){
++ 	file <- weekly.files[n]
++ 	print(paste('Starting to run script:',file,'at',date()))
++ 	source(file)
++ 	}
+> 
+> #------------------------------------------------------------------
+> 	
+> 	
+> 	
+> 	
+> 
+> proc.time()
+    user   system  elapsed 
+1816.283  286.279 2115.657 
