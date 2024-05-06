@@ -61,7 +61,8 @@ Loading required package: svglite
 [1] "Starting to run script: auto.make.daily.phase.models.R at Mon May  6 07:49:36 2024"
 Error in if (cond) { : missing value where TRUE/FALSE needed
 Calls: source -> withVisible -> eval -> eval
-In addition: Warning message:
+Execution halted
+ing message:
 In max(calcurve$cal[calcurve$max < min.c14]) :
   no non-missing arguments to max; returning -Inf
 Execution halted
