@@ -199,7 +199,7 @@ for(n in 1:N){
 	}
 dev.off()
 #--------------------------------------------------------------------------------------------------
-sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`aDNAID`,`PhaseID` FROM `Sites`
+sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`aDNAID`,`Phases`.`PhaseID` FROM `Sites`
 INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
 INNER JOIN `Graves` ON `Phases`.`PhaseID`=`Graves`.`PhaseID`
 INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`
