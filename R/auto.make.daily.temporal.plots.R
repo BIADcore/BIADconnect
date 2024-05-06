@@ -35,7 +35,7 @@ zposts <- round(rev(quantile(d$date, prob=seq(0,1,length.out=N+1))),-2)
 # all phases
 #--------------------------------------------------------------------------------------------------
 table <- 'all'
-svg(file = paste('../tools/plots/time.phases',table,'svg',sep='.'), width = pwidth, height = pheight )
+png(file = paste('../tools/plots/time.phases',table,'png',sep='.'), width = pwidth, height = pheight )
 par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- d$date<=zposts[n] & d$date>zposts[n+1]
@@ -57,7 +57,7 @@ for(t in 1:length(tables)){
 	dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
 
 	table <- tables[t]
-	svg(file = paste('../tools/plots/time.phases',table,'svg',sep='.'), width = pwidth, height = pheight )
+	png(file = paste('../tools/plots/time.phases',table,'png',sep='.'), width = pwidth, height = pheight )
 	par(mfrow=c(2,5))
 	for(n in 1:N){
 		i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
@@ -80,7 +80,7 @@ tmp <- merge(t2, t1, by='SampleID') # this is fucked!! Foreign key is missing!!
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
 
 table <- 'FaunalIsotopeSequences'
-svg(file = paste('../tools/plots/time.phases',table,'svg',sep='.'), width = pwidth, height = pheight )
+png(file = paste('../tools/plots/time.phases',table,'png',sep='.'), width = pwidth, height = pheight )
 par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
@@ -100,7 +100,7 @@ tmp <- merge(t2, t1, by='GraveID')
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
 
 table <- 'GraveIndividuals'
-svg(file = paste('../tools/plots/time.phases',table,'svg',sep='.'), width = pwidth, height = pheight )
+png(file = paste('../tools/plots/time.phases',table,'png',sep='.'), width = pwidth, height = pheight )
 par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
@@ -121,7 +121,7 @@ tmp <- merge(tmp, t1, by='GraveID')
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
 
 table <- 'HumanIsotopes'
-svg(file = paste('../tools/plots/time.phases',table,'svg',sep='.'), width = pwidth, height = pheight )
+png(file = paste('../tools/plots/time.phases',table,'png',sep='.'), width = pwidth, height = pheight )
 par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
@@ -142,7 +142,7 @@ tmp <- merge(tmp, t1, by='GraveID')
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
 
 table <- 'Rites'
-svg(file = paste('../tools/plots/time.phases',table,'svg',sep='.'), width = pwidth, height = pheight )
+png(file = paste('../tools/plots/time.phases',table,'png',sep='.'), width = pwidth, height = pheight )
 par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
@@ -163,7 +163,7 @@ tmp <- merge(tmp, t1, by='GraveID')
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
 
 table <- 'Strontium'
-svg(file = paste('../tools/plots/time.phases',table,'svg',sep='.'), width = pwidth, height = pheight )
+png(file = paste('../tools/plots/time.phases',table,'png',sep='.'), width = pwidth, height = pheight )
 par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
@@ -186,7 +186,7 @@ tmp <- merge(tmp, t1, by='GraveID')
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
 
 table <- 'StrontiumSequences'
-svg(file = paste('../tools/plots/time.phases',table,'svg',sep='.'), width = pwidth, height = pheight )
+png(file = paste('../tools/plots/time.phases',table,'png',sep='.'), width = pwidth, height = pheight )
 par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
@@ -209,7 +209,7 @@ tmp <- query.database(user, password, 'biad', sql.command)
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
 
 table <- 'aDNA'
-svg(file = paste('../tools/plots/time.phases',table,'svg',sep='.'), width = pwidth, height = pheight )
+png(file = paste('../tools/plots/time.phases',table,'png',sep='.'), width = pwidth, height = pheight )
 par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
