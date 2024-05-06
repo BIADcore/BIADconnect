@@ -9,7 +9,7 @@ source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
 library(data.tree)
 #----------------------------------------------------------------------------------------------------
 #query the selected table for the dependenancies of a SiteID or PhaseID
-x <- run.server.searcher(table.name = 'Sites', primary.value = 'S03277') 
+x <- run.server.searcher(table.name = 'GraveIndividuals', primary.value = 'C03440') 
 
 #use the queried information to prepare the list of relationships up and down the hierarchical tree
 tree.down <- FromListSimple(x$down)
