@@ -22,7 +22,7 @@ d$date[i] <- d$reportedMidBP[i]
 d <- d[!is.na(d$date),]
 
 # plot sizes
-pwidth <- 2000
+pwidth <- 1600
 pheight <- 700
 #--------------------------------------------------------------------------------------------------
 # design the universal limits
@@ -40,7 +40,7 @@ par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- d$date<=zposts[n] & d$date>zposts[n+1]
 	data <- d[i,]
-	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],'BP (',zposts[n]-zposts[n+1],' span)',sep='')
+	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],' BP (',zposts[n]-zposts[n+1],' span)',sep='')
 	plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main=main)
 	map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
 	points(data$Longitude, data$Latitude, col='steelblue', pch=16,cex=1)
@@ -62,7 +62,7 @@ for(t in 1:length(tables)){
 	for(n in 1:N){
 		i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
 		data <- dd[i,]
-		main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],'BP (',zposts[n]-zposts[n+1],' span)',sep='')
+		main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],' BP (',zposts[n]-zposts[n+1],' span)',sep='')
 		plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main=main)
 		map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
 		points(data$Longitude, data$Latitude, col='steelblue', pch=16,cex=1)
@@ -85,7 +85,7 @@ par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
 	data <- dd[i,]
-	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],'BP (',zposts[n]-zposts[n+1],' span)',sep='')
+	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],' BP (',zposts[n]-zposts[n+1],' span)',sep='')
 	plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main=main)
 	map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
 	points(data$Longitude, data$Latitude, col='steelblue', pch=16,cex=1)
@@ -105,7 +105,7 @@ par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
 	data <- dd[i,]
-	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],'BP (',zposts[n]-zposts[n+1],' span)',sep='')
+	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],' BP (',zposts[n]-zposts[n+1],' span)',sep='')
 	plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main=main)
 	map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
 	points(data$Longitude, data$Latitude, col='steelblue', pch=16,cex=1)
@@ -126,7 +126,7 @@ par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
 	data <- dd[i,]
-	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],'BP (',zposts[n]-zposts[n+1],' span)',sep='')
+	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],' BP (',zposts[n]-zposts[n+1],' span)',sep='')
 	plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main=main)
 	map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
 	points(data$Longitude, data$Latitude, col='steelblue', pch=16,cex=1)
@@ -147,7 +147,7 @@ par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
 	data <- dd[i,]
-	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],'BP (',zposts[n]-zposts[n+1],' span)',sep='')
+	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],' BP (',zposts[n]-zposts[n+1],' span)',sep='')
 	plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main=main)
 	map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
 	points(data$Longitude, data$Latitude, col='steelblue', pch=16,cex=1)
@@ -191,7 +191,7 @@ par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
 	data <- dd[i,]
-	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],'BP (',zposts[n]-zposts[n+1],' span)',sep='')
+	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],' BP (',zposts[n]-zposts[n+1],' span)',sep='')
 	plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main=main)
 	map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
 	points(data$Longitude, data$Latitude, col='steelblue', pch=16,cex=1)
@@ -214,7 +214,7 @@ par(mfrow=c(2,5))
 for(n in 1:N){
 	i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
 	data <- dd[i,]
-	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],'BP (',zposts[n]-zposts[n+1],' span)',sep='')
+	main <- paste(n,': ',table,': ',zposts[n],' to ',zposts[n+1],' BP (',zposts[n]-zposts[n+1],' span)',sep='')
 	plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main=main)
 	map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
 	points(data$Longitude, data$Latitude, col='steelblue', pch=16,cex=1)
