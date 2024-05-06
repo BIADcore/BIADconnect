@@ -59,20 +59,28 @@ Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
 [1] "Starting to run script: auto.make.daily.phase.models.R at Mon May  6 04:49:35 2024"
-[1] "Starting to run script: auto.make.daily.row.counts.R at Mon May  6 04:56:53 2024"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Mon May  6 04:56:53 2024"
-[1] "Starting to run script: auto.make.daily.table.png.R at Mon May  6 04:56:53 2024"
-[1] "Starting to run script: auto.make.daily.templates.R at Mon May  6 04:56:57 2024"
-[1] "Starting to run script: auto.make.daily.triggers.R at Mon May  6 04:56:59 2024"
-Warning messages:
-1: In max(calcurve$cal[calcurve$max < min.c14]) :
-  no non-missing arguments to max; returning -Inf
-2: In max(calcurve$cal[calcurve$max < min.c14]) :
-  no non-missing arguments to max; returning -Inf
+[1] "Starting to run script: auto.make.daily.row.counts.R at Mon May  6 04:58:28 2024"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Mon May  6 04:58:28 2024"
+[1] "Starting to run script: auto.make.daily.table.png.R at Mon May  6 04:58:28 2024"
+[1] "Starting to run script: auto.make.daily.templates.R at Mon May  6 04:58:32 2024"
+[1] "Starting to run script: auto.make.daily.triggers.R at Mon May  6 04:58:34 2024"
 > 
 > if(NW>0 & today==run.day)for(n in 1:NW){
 + 	file <- weekly.files[n]
 + 	print(paste('Starting to run script:',file,'at',date()))
++ 	source(file)
++ 	}
+> 
+> #------------------------------------------------------------------
+> 	
+> 	
+> 	
+> 	
+> 
+> proc.time()
+    user   system  elapsed 
+2044.917  317.485 2376.916 
+to run script:',file,'at',date()))
 + 	source(file)
 + 	}
 > 
