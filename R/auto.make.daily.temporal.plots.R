@@ -57,7 +57,7 @@ for(t in 1:length(tables)){
 	dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
 
 	table <- tables[t]
-	#svg(file = paste('../tools/plots/time.phases',table,'svg',sep='.'), width = pwidth, height = pheight )
+	svg(file = paste('../tools/plots/time.phases',table,'svg',sep='.'), width = pwidth, height = pheight )
 	par(mfrow=c(2,5))
 	for(n in 1:N){
 		i <- dd$date<=zposts[n] & dd$date>zposts[n+1]
@@ -68,7 +68,7 @@ for(t in 1:length(tables)){
 		points(data$Longitude, data$Latitude, col='steelblue', pch=16,cex=1)
 		#legend('topleft',res$legend,bty='n',col=res$cols,pch=16,cex=0.7)
 		}
-	#dev.off()
+	dev.off()
 	}
 #--------------------------------------------------------------------------------------------------
 # More complicated relationships indirectly linked to Phases
