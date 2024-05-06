@@ -59,13 +59,15 @@ Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
 [1] "Starting to run script: auto.make.daily.phase.models.R at Mon May  6 15:14:37 2024"
-Error in if (cond) { : missing value where TRUE/FALSE needed
-Calls: source -> withVisible -> eval -> eval
-Execution halted
-ke.daily.sql.examples.R at Mon May  6 15:34:07 2024"
-[1] "Starting to run script: auto.make.daily.table.png.R at Mon May  6 15:34:08 2024"
-[1] "Starting to run script: auto.make.daily.templates.R at Mon May  6 15:34:12 2024"
-[1] "Starting to run script: auto.make.daily.triggers.R at Mon May  6 15:34:14 2024"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Mon May  6 16:02:56 2024"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Mon May  6 16:02:56 2024"
+[1] "Starting to run script: auto.make.daily.table.png.R at Mon May  6 16:02:56 2024"
+[1] "Starting to run script: auto.make.daily.templates.R at Mon May  6 16:03:00 2024"
+[1] "Starting to run script: auto.make.daily.temporal.plots.R at Mon May  6 16:03:02 2024"
+[1] "Starting to run script: auto.make.daily.triggers.R at Mon May  6 16:03:12 2024"
+Warning message:
+In merge.data.frame(tmp, t1, by = "GraveID") :
+  column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
 > 
 > if(NW>0 & today==run.day)for(n in 1:NW){
 + 	file <- weekly.files[n]
@@ -81,4 +83,4 @@ ke.daily.sql.examples.R at Mon May  6 15:34:07 2024"
 > 
 > proc.time()
     user   system  elapsed 
-2334.886  368.935 2716.589 
+2539.821  401.472 2953.610 
