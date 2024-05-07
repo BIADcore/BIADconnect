@@ -42,14 +42,14 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Tue May  7 09:53:02 2024"
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Tue May  7 10:53:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Tue May  7 09:53:24 2024"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Tue May  7 10:53:24 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.descriptions.R at Tue May  7 09:53:28 2024"
-[1] "Starting to run script: auto.make.daily.map.R at Tue May  7 09:53:28 2024"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Tue May  7 10:53:28 2024"
+[1] "Starting to run script: auto.make.daily.map.R at Tue May  7 10:53:28 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -58,13 +58,13 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.phase.models.R at Tue May  7 09:53:34 2024"
-[1] "Starting to run script: auto.make.daily.row.counts.R at Tue May  7 09:54:18 2024"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Tue May  7 09:54:18 2024"
-[1] "Starting to run script: auto.make.daily.table.png.R at Tue May  7 09:54:18 2024"
-[1] "Starting to run script: auto.make.daily.templates.R at Tue May  7 09:54:22 2024"
-[1] "Starting to run script: auto.make.daily.temporal.plots.R at Tue May  7 09:54:24 2024"
-[1] "Starting to run script: auto.make.daily.triggers.R at Tue May  7 09:54:32 2024"
+[1] "Starting to run script: auto.make.daily.phase.models.R at Tue May  7 10:53:34 2024"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Tue May  7 10:53:47 2024"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Tue May  7 10:53:47 2024"
+[1] "Starting to run script: auto.make.daily.table.png.R at Tue May  7 10:53:47 2024"
+[1] "Starting to run script: auto.make.daily.templates.R at Tue May  7 10:53:51 2024"
+[1] "Starting to run script: auto.make.daily.temporal.plots.R at Tue May  7 10:53:53 2024"
+[1] "Starting to run script: auto.make.daily.triggers.R at Tue May  7 10:54:01 2024"
 Warning message:
 In merge.data.frame(tmp, t1, by = "GraveID") :
   column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
@@ -74,7 +74,7 @@ In merge.data.frame(tmp, t1, by = "GraveID") :
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.weekly.user.citation.hygiene.R at Tue May  7 09:54:36 2024"
+[1] "Starting to run script: auto.make.weekly.user.citation.hygiene.R at Tue May  7 10:54:05 2024"
 Error: Can't get Google credentials.
 Are you running gmailr in a non-interactive session? Consider:
   * Call `gm_auth()` directly with all necessary specifics.
