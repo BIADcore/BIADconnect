@@ -42,14 +42,14 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Sat May 11 02:53:01 2024"
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Sat May 11 03:53:01 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Sat May 11 02:53:24 2024"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Sat May 11 03:53:24 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.descriptions.R at Sat May 11 02:53:29 2024"
-[1] "Starting to run script: auto.make.daily.map.R at Sat May 11 02:53:29 2024"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Sat May 11 03:53:27 2024"
+[1] "Starting to run script: auto.make.daily.map.R at Sat May 11 03:53:27 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -58,17 +58,15 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.phase.models.R at Sat May 11 02:53:37 2024"
-[1] "Starting to run script: auto.make.daily.row.counts.R at Sat May 11 02:56:10 2024"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Sat May 11 02:56:11 2024"
-[1] "Starting to run script: auto.make.daily.table.png.R at Sat May 11 02:56:11 2024"
-[1] "Starting to run script: auto.make.daily.templates.R at Sat May 11 02:56:15 2024"
-[1] "Starting to run script: auto.make.daily.temporal.plots.R at Sat May 11 02:56:17 2024"
-[1] "Starting to run script: auto.make.daily.triggers.R at Sat May 11 02:56:25 2024"
-Warning messages:
-1: In max(calcurve$cal[calcurve$max < min.c14]) :
-  no non-missing arguments to max; returning -Inf
-2: In merge.data.frame(tmp, t1, by = "GraveID") :
+[1] "Starting to run script: auto.make.daily.phase.models.R at Sat May 11 03:53:34 2024"
+[1] "Starting to run script: auto.make.daily.row.counts.R at Sat May 11 03:54:17 2024"
+[1] "Starting to run script: auto.make.daily.sql.examples.R at Sat May 11 03:54:17 2024"
+[1] "Starting to run script: auto.make.daily.table.png.R at Sat May 11 03:54:17 2024"
+[1] "Starting to run script: auto.make.daily.templates.R at Sat May 11 03:54:21 2024"
+[1] "Starting to run script: auto.make.daily.temporal.plots.R at Sat May 11 03:54:23 2024"
+[1] "Starting to run script: auto.make.daily.triggers.R at Sat May 11 03:54:31 2024"
+Warning message:
+In merge.data.frame(tmp, t1, by = "GraveID") :
   column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
 > 
 > if(NW>0 & today==run.day)for(n in 1:NW){
@@ -85,4 +83,4 @@ Warning messages:
 > 
 > proc.time()
    user  system elapsed 
-180.458  17.636 208.061 
+ 81.053   6.876  94.376 
