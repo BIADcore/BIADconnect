@@ -42,14 +42,14 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Thu May 16 15:53:01 2024"
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Thu May 16 16:53:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Thu May 16 15:53:24 2024"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Thu May 16 16:53:25 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.descriptions.R at Thu May 16 15:53:27 2024"
-[1] "Starting to run script: auto.make.daily.map.R at Thu May 16 15:53:27 2024"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Thu May 16 16:53:28 2024"
+[1] "Starting to run script: auto.make.daily.map.R at Thu May 16 16:53:28 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -58,29 +58,10 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.phase.models.R at Thu May 16 15:53:34 2024"
-[1] "Starting to run script: auto.make.daily.row.counts.R at Thu May 16 15:54:09 2024"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Thu May 16 15:54:09 2024"
-[1] "Starting to run script: auto.make.daily.table.png.R at Thu May 16 15:54:09 2024"
-[1] "Starting to run script: auto.make.daily.templates.R at Thu May 16 15:54:13 2024"
-[1] "Starting to run script: auto.make.daily.temporal.plots.R at Thu May 16 15:54:15 2024"
-[1] "Starting to run script: auto.make.daily.triggers.R at Thu May 16 15:54:23 2024"
-Warning message:
-In merge.data.frame(tmp, t1, by = "GraveID") :
-  column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
-> 
-> if(NW>0 & today==run.day)for(n in 1:NW){
-+ 	file <- weekly.files[n]
-+ 	print(paste('Starting to run script:',file,'at',date()))
-+ 	source(file)
-+ 	}
-> 
-> #------------------------------------------------------------------
-> 	
-> 	
-> 	
-> 	
-> 
-> proc.time()
-   user  system elapsed 
- 73.619   6.139  86.107 
+[1] "Starting to run script: auto.make.daily.phase.models.R at Thu May 16 16:53:35 2024"
+Error in readChar(con, 5L, useBytes = TRUE) : cannot open the connection
+Calls: source -> withVisible -> eval -> eval -> load -> readChar
+In addition: Warning message:
+In readChar(con, 5L, useBytes = TRUE) :
+  cannot open compressed file '../../phase model posteriors/gaussian/PRNBU7.RData', probable reason 'No such file or directory'
+Execution halted
