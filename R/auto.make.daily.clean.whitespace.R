@@ -13,13 +13,15 @@ for(n in 1:length(tables)){
 
 	sql.command <- paste("SELECT * FROM `BIAD`.`",tables[n],"`",sep='')
 	d <- query.database(user, password,'biad', sql.command)
-	C <- ncol(d)
-	for(c in 1:C){
-		raw <- d[,c]
-		bad <- which(raw=='')
-		if(length(bad)>0){
-			sql.command <- paste("UPDATE `BIAD`.`",tables[n],"` SET `",names(d)[c],"`=NULL WHERE `",names(d)[c],"`=''",sep='')
-			sql.commands <- c(sql.commands, sql.command)
+	if(!is.null(d)){
+		C <- ncol(d)
+		for(c in 1:C){
+			raw <- d[,c]
+			bad <- which(raw=='')
+			if(length(bad)>0){
+				sql.command <- paste("UPDATE `BIAD`.`",tables[n],"` SET `",names(d)[c],"`=NULL WHERE `",names(d)[c],"`=''",sep='')
+				sql.commands <- c(sql.commands, sql.command)
+				}
 			}
 		}
 	}
@@ -31,18 +33,19 @@ sql.commands <- c()
 for(n in 1:length(tables)){
 	sql.command <- paste("SELECT * FROM `BIAD`.`",tables[n],"`",sep='')
 	d <- query.database(user, password,'biad', sql.command)
-
-	C <- ncol(d)
-	for(c in 1:C){
-		raw <- d[,c]
-		clean <- gsub('\t|\n|\r',' ',trimws(raw))
-		bad <- which(raw!=clean)
-		if(length(bad)>0){
-			for(b in 1:length(bad)){
-				to <- clean[bad[b]]
-				from <- raw[bad[b]]
-				sql.command <- paste("UPDATE `BIAD`.`",tables[n],"` SET `",names(d)[c],"`=\"",to,"\" WHERE  `",names(d)[c],"`=\"",from,"\"",sep='')
-				sql.commands <- c(sql.commands,sql.command)
+	if(!is.null(d)){
+		C <- ncol(d)
+		for(c in 1:C){
+			raw <- d[,c]
+			clean <- gsub('\t|\n|\r',' ',trimws(raw))
+			bad <- which(raw!=clean)
+			if(length(bad)>0){
+				for(b in 1:length(bad)){
+					to <- clean[bad[b]]
+					from <- raw[bad[b]]
+					sql.command <- paste("UPDATE `BIAD`.`",tables[n],"` SET `",names(d)[c],"`=\"",to,"\" WHERE  `",names(d)[c],"`=\"",from,"\"",sep='')
+					sql.commands <- c(sql.commands,sql.command)
+					}
 				}
 			}
 		}
