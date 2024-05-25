@@ -44,8 +44,9 @@ for(n in 1:N){
 			}
 		}
 
-	# reduce to informative phases (that have a phase estimate already)
-	near.phases <- subset(near.phases, !is.na(gaussianModelMu))
+	# reduce to informative phases (that have a posterior model already)
+	already <- gsub('.RData','',list.files(model.folder))
+	near.phases <- near.phases[near.phases$PhaseID%in%already,]
 
 	# generate the new prior from the posteriors of the near phases
 	NP <- nrow(near.phases)
