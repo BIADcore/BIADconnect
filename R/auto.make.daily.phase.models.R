@@ -2,6 +2,13 @@
 #--------------------------------------------------------------------------------------
 # chronology on all phases
 #--------------------------------------------------------------------------------------
+# To do:
+# Prioritise phases that haven't been done yet
+# Change loop structure so it can process norm and ellipsoid models together
+# Structure prior(s) in a Bayesian chain, using parameters derived empirically from the entire database
+# Ensure resolution and range of prior is compatible with different resolution and range of previous posteriors
+
+#--------------------------------------------------------------------------------------
 model.folder <- '../../phase model posteriors/gaussian'
 library(ADMUR)
 #--------------------------------------------------------------------------------------
@@ -18,7 +25,7 @@ prior.matrix <- matrix(1,200,200); prior.matrix <- prior.matrix/sum(prior.matrix
 row.names(prior.matrix) <- seq(min(mu.range),max(mu.range),length.out=nrow(prior.matrix))
 colnames(prior.matrix) <- seq(min(sigma.range),max(sigma.range),length.out=ncol(prior.matrix))
 
-N <- 1000
+N <- 500
 for(n in 1:N){
 
 	# pick a random phase
@@ -61,15 +68,27 @@ for(n in 1:N){
 	data <- data.frame(age=d$C14.Age, sd=d$C14.SD)
 
 	# generate the phase model
-	mod <- phaseModel(data, calcurve=intcal20, prior.matrix, plot = FALSE)
+	mod <- phaseModel(data, calcurve=intcal20, prior.matrix, model='norm', plot = FALSE)
 
 	# save the model in folder 
 	save(mod, file=paste(model.folder,paste(phase$PhaseID,'RData',sep='.'),sep='/'))
 	# add point estimates to the database if the posterior is reasonably tight
 	cond <- max(mod$posterior)/mean(mod$posterior)>10
 	if(cond){
-		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `gaussianModelMu`=",mod$mean.mu,", `gaussianModelSigma`=",mod$mean.sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
+		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `gaussianModelMu`=",mod$mu,", `gaussianModelSigma`=",mod$sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
 		query.database(user, password, 'biad',sql.command)
 		}
 	}
 #-----------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
