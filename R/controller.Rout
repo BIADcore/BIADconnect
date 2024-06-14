@@ -42,14 +42,14 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Fri Jun 14 03:46:03 2024"
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Fri Jun 14 15:10:01 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Fri Jun 14 03:46:26 2024"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Fri Jun 14 15:10:25 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.descriptions.R at Fri Jun 14 03:46:32 2024"
-[1] "Starting to run script: auto.make.daily.map.R at Fri Jun 14 03:46:32 2024"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Fri Jun 14 15:10:28 2024"
+[1] "Starting to run script: auto.make.daily.map.R at Fri Jun 14 15:10:29 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -58,7 +58,764 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.phase.models.R at Fri Jun 14 03:46:44 2024"
+[1] "Starting to run script: auto.make.daily.phase.models.R at Fri Jun 14 15:10:35 2024"
+     SiteID PhaseID     Culture1 Culture2 Culture3           Subculture Period
+3601 S10278  MIERC4 Vin<U+010D>a     <NA>     <NA> Vin<U+010D>a A2 - A3     LN
+     PeriodNotes Citations       Type StartBCEreported EndBCEreported
+3601        <NA>      <NA> settlement               NA             NA
+     gaussianModelMu gaussianModelSigma        time_added.x     user_added.x
+3601            6793                142 2022-06-15 13:24:16 jelena@localhost
+      time_last_update.x user_last_update.x
+3601 2024-05-24 03:48:07 Rscripts@localhost
+                                                 SiteName        Region
+3601 Miercurea Sibiului; Miercurea Sibiului-Petri<U+015F> Sibiu Country
+     Latitude Longitude Country Notes        time_added.y     user_added.y
+3601   45.898    23.759 Romania   \\N 2022-01-25 12:22:59 jelena@localhost
+      time_last_update.y user_last_update.y
+3601 2023-07-25 08:51:36   jelena@localhost
+     SiteID PhaseID    Culture1 Culture2 Culture3   Subculture Period
+2851 S08941   PWOID Corded Ware     <NA>     <NA> Single Grave     LN
+     PeriodNotes Citations       Type StartBCEreported EndBCEreported
+2851        <NA>      <NA> settlement               NA           SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+1007 S03505   ROCN1     <NA>     <NA>     <NA>       <NA>     UM        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+1007      <NA> <NA>               NA             NA            9521
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+1007                365         <NA>         <NA> 2024-05-06 16:00:53
+     user_last_update.x        SiteName Region Latitude Longitude Country Notes
+1007 Rscripts@localhost Roc den Bertran   <NA>    42.87      2.43  France  <NA>
+     time_added.y user_added.y time_last_update.y user_last_update.y
+1007         <NA>         <NA>               <NA>               <NA>
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+3334 S10151    VSP5     <NA>     <NA>     <NA>       <NA>   LMEN        <NA>
+             Citations Type StartBCEreported EndBCEreported gaussianModelMu
+3334 radi<U+0107>2005a cave               NA             NA            4897
+     gaussianModelSigma        time_added.x     user_added.x
+3334                121 2022-04-27 10:09:25 robert@localhost
+      time_last_update.x user_last_update.x
+3334 2024-05-08 23:53:40 Rscripts@localhost
+                                                 SiteName         Region
+3334 Vela <U+0161>pilja; Vela Spila; Vela Spila-Vela Luka Kor<U+010D>ula
+     Latitude Longitude Country Notes        time_added.y
+3334   42.967    16.707 Croatia  <NA> 2022-04-08 18:00:47
+                                user_added.y  time_last_update.y
+3334 jelena@macelab-server.biochem.ucl.ac.uk 2023-09-20 10:08:01
+     user_last_update.y
+3334      jan@localhost
+     SiteID PhaseID    Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+2133 S07707    KRJW Corded Ware     <NA>     <NA>       <NA>     LN        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+2133      <NA> <NA>               NA             NA            4357
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+2133                 84         <NA>         <NA> 2024-05-06 15:36:47
+     user_last_update.x           SiteName Region Latitude Longitude Country
+2133 Rscripts@localhost Krajowice kurgan I   <NA>   49.778    21.415  Poland
+     Notes time_added.y user_added.y time_last_update.y user_last_update.y
+2133  <NA>         <NA>         <NA>               <NA>               <NA>
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+5561 S11596    BYC1     <NA>     <NA>     <NA>       <NA>     UE        <NA>
+                  Citations                            Type StartBCEreported
+5561 svobo2007a; svobo2006a cave/rockshelter: cave painting               NA
+     EndBCEreported gaussianModelMu gaussianModelSigma        time_added.x
+5561             NA            4125                986 2023-03-07 15:20:55
+      user_added.x  time_last_update.x user_last_update.x
+5561 jan@localhost 2024-05-06 14:51:22 Rscripts@localhost
+                                                                 SiteName
+5561 Habr<U+016F>vka <U+2013> B<U+00FD><U+010D><U+00ED> sk<U+00E1>la cave
+      Region Latitude Longitude                  Country Notes
+5561 Blansko   49.307    16.695 Czechia / Czech Republic  <NA>
+            time_added.y  user_added.y  time_last_update.y user_last_update.y
+5561 2023-02-22 13:05:24 jan@localhost 2023-03-07 14:45:25      jan@localhost
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+5435 S11484 BACHKUR Tripolye     <NA>     <NA> Tripolye B    EME        <NA>
+                                        Citations       Type StartBCEreported
+5435 <U+044F><U+043D><U+0443><U+0448>1986<U+0430> settlement               NA
+     EndBCEreported gaussianModelMu gaussianModelSigma        time_added.x
+5435             NA            5844                309 2023-02-06 13:09:22
+          user_added.x  time_last_update.x user_last_update.x
+5435 natalya@localhost 2024-06-14 03:47:35 Rscripts@localhost
+                                                                                 SiteName
+5435 <U+0411><U+0430><U+0447><U+043A><U+0443><U+0440><U+0438><U+043D><U+043E>; Bachkurino
+                                                                                                                                                 Region
+5435 Cherkasy region(<U+0427><U+0435><U+0440><U+043A><U+0430><U+0441><U+044C><U+043A><U+0430> <U+043E><U+0431><U+043B><U+0430><U+0441><U+0442><U+044C>)
+     Latitude Longitude Country                Notes        time_added.y
+5435   48.956    29.856 Ukraine Approximate location 2023-02-06 12:55:20
+          user_added.y  time_last_update.y user_last_update.y
+5435 natalya@localhost 2023-02-06 12:55:20  natalya@localhost
+     SiteID PhaseID           Culture1 Culture2 Culture3 Subculture Period
+6412 S12513  GUDAB1 Kura<U+2013>Araxes     <NA>     <NA>       <NA>    EBA
+     PeriodNotes  Citations       Type StartBCEreported EndBCEreported
+6412        <NA> marti2021b settlement               NA             NA
+     gaussianModelMu gaussianModelSigma        time_added.x      user_added.x
+6412            3077                330 2023-06-02 16:50:21 natalya@localhost
+      time_last_update.x user_last_update.x   SiteName       Region Latitude
+6412 2024-05-26 03:46:50 Rscripts@localhost Gudabertka Shida Kartli   42.026
+     Longitude Country                Notes        time_added.y
+6412    44.175 Georgia Approximate location 2023-06-01 16:50:35
+          user_added.y  time_last_update.y user_last_update.y
+6412 natalya@localhost 2023-06-02 15:45:25  natalya@localhost
+     SiteID PhaseID      Culture1 Culture2 Culture3            Subculture
+4608 S11011   BILI3 Knov<U+00ED>z     <NA>     <NA> <U+0160>t<U+00ED>tary
+     Period PeriodNotes  Citations Type StartBCEreported EndBCEreported
+4608    LBA        <NA> patte2021a <NA>               NA             NA
+     gaussianModelMu gaussianModelSigma        time_added.x     user_added.x
+4608            5867                187 2024-04-15 21:02:10 robert@localhost
+      time_last_update.x user_last_update.x      SiteName Region Latitude
+4608 2024-05-09 09:53:36 Rscripts@localhost B<U+00ED>lina   <NA>   50.553
+     Longitude                  Country Notes        time_added.y
+4608    13.787 Czechia / Czech Republic  <NA> 2022-05-27 09:33:05
+         user_added.y  time_last_update.y user_last_update.y
+4608 robert@localhost 2022-05-27 10:33:05   robert@localhost
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+6414 S12514  SOSHU2     <NA>     <NA>     <NA>       <NA>   MLBA        <NA>
+      Citations       Type StartBCEreported EndBCEreported gaussianModelMu
+6414 marti2021b settlement             2000           1500            3120
+     gaussianModelSigma        time_added.x      user_added.x
+6414                504 2023-06-02 16:50:21 natalya@localhost
+      time_last_update.x user_last_update.x
+6414 2024-05-10 08:53:35 Rscripts@localhost
+                                             SiteName  Region Latitude
+6414 Sos H<U+00F6>y<U+00FC>k; Sos H<U+00FC>y<U+00FC>k Erzurum   39.927
+     Longitude        Country                Notes        time_added.y
+6414    41.417 T<U+00FC>rkiye Approximate location 2023-06-01 16:50:35
+          user_added.y  time_last_update.y user_last_update.y
+6414 natalya@localhost 2023-07-23 13:13:58   robert@localhost
+    SiteID PhaseID      Culture1 Culture2 Culture3 Subculture Period
+163 S01342   BOSL1 R<U+00F6>ssen     <NA>     <NA>       <NA>     MN
+    PeriodNotes Citations Type StartBCEreported EndBCEreported gaussianModelMu
+163        <NA>      <NA> <NA>               NA             NA            6035
+    gaussianModelSigma time_added.x user_added.x  time_last_update.x
+163                186         <NA>         <NA> 2024-05-29 03:46:49
+    user_last_update.x          SiteName Region Latitude Longitude Country
+163 Rscripts@localhost Bosse de la Tombe   <NA>    50.38      4.03 Belgium
+    Notes time_added.y user_added.y time_last_update.y user_last_update.y
+163  <NA>         <NA>         <NA>               <NA>               <NA>
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+6690 S12710  ALSOR2  Lengyel     <NA>     <NA>       <NA>     LN        <NA>
+      Citations       Type StartBCEreported EndBCEreported gaussianModelMu
+6690 barto2010a settlement             4970           4380           13001
+     gaussianModelSigma        time_added.x     user_added.x
+6690                393 2023-07-20 16:11:02 jelena@localhost
+      time_last_update.x user_last_update.x
+6690 2024-05-12 15:53:34 Rscripts@localhost
+                                     SiteName                      Region
+6690 Karancss<U+00E1>g-Als<U+00F3>-r<U+00E9>t N<U+00F3>gr<U+00E1>d county
+     Latitude Longitude Country                   Notes        time_added.y
+6690    48.13    19.669 Hungary location of the village 2023-07-20 11:25:01
+         user_added.y  time_last_update.y user_last_update.y
+6690 jelena@localhost 2023-07-20 11:25:01   jelena@localhost
+     SiteID PhaseID Culture1 Culture2 Culture3      Subculture Period
+6593 S12624  VRCEV1     <NA>     <NA>     <NA> Proto-Liburnian   MLBA
+     PeriodNotes                     Citations
+6593        <NA> gr_sr2021a; <U+010D>elha2012a
+                                                      Type StartBCEreported
+6593 settlement: hillfort; fire: hearth; habitation: floor               NA
+     EndBCEreported gaussianModelMu gaussianModelSigma        time_added.x
+6593             NA            5918                254 2023-07-11 13:07:12
+         user_added.x  time_last_update.x user_last_update.x
+6593 jelena@localhost 2024-05-23 17:53:32 Rscripts@localhost
+                                                              SiteName Region
+6593 Vr<U+010D>evo; Vr<U+010D>evo-Gorica; Gradina Vr<U+010D>evo-Gorica   <NA>
+     Latitude Longitude Country
+6593   44.042    15.385 Croatia
+                                                      Notes        time_added.y
+6593 assumed location based on the map in <U+010D>elha2012a 2023-06-27 10:43:15
+         user_added.y  time_last_update.y user_last_update.y
+6593 jelena@localhost 2023-06-27 10:43:15   jelena@localhost
+     SiteID PhaseID     Culture1 Culture2 Culture3
+3626 S10289  ORAST1 Vin<U+010D>a     <NA>     <NA>
+                         Subculture Period PeriodNotes              Citations
+3626 Turda<U+0219> (Vin<U+010D>a C)     LN        <NA> draso2014a; harpe2016a
+                       Type StartBCEreported EndBCEreported gaussianModelMu
+3626 settlement; settlement               NA             NA            6677
+     gaussianModelSigma        time_added.x     user_added.x
+3626                138 2022-04-25 18:24:46 jelena@localhost
+      time_last_update.x user_last_update.x
+3626 2024-06-12 03:52:45 Rscripts@localhost
+                                 SiteName Region Latitude Longitude Country
+3626 Or<U+0103><U+015F>tie-Dealul Pemilor   <NA>   45.861    23.219 Romania
+     Notes        time_added.y     user_added.y  time_last_update.y
+3626  <NA> 2022-01-25 12:22:59 jelena@localhost 2023-07-11 09:33:10
+     user_last_update.y
+3626   jelena@localhost
+    SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+943 S03324   TMBQ1     Carn     <NA>     <NA>       <NA>     MN        <NA>
+    Citations Type StartBCEreported EndBCEreported gaussianModelMu
+943      <NA> <NA>               NA             NA            6290
+    gaussianModelSigma time_added.x user_added.x  time_last_update.x
+943                271         <NA>         <NA> 2024-06-05 03:48:01
+    user_last_update.x                      SiteName Region Latitude Longitude
+943 Rscripts@localhost Tombe de Quelarn, Plobannalec   <NA>   47.821     -4.23
+    Country Notes time_added.y user_added.y time_last_update.y
+943  France  <NA>         <NA>         <NA>               <NA>
+    user_last_update.y
+943               <NA>
+     SiteID PhaseID          Culture1 Culture2 Culture3 Subculture Period
+1744 S05062     WEI Linearbandkeramik     <NA>     <NA>       <NA>     EN
+     PeriodNotes Citations            Type StartBCEreported EndBCEreported
+1744        <NA>      <NA> pit; settlement               NA             NA
+     gaussianModelMu gaussianModelSigma time_added.x user_added.x
+1744            6736                289         <NA>         <NA>
+      time_last_update.x user_last_update.x           SiteName Region Latitude
+1744 2024-05-06 14:05:22 Rscripts@localhost Weimar-Ehringsdorf   <NA>    50.96
+     Longitude Country Notes time_added.y user_added.y time_last_update.y
+1744     11.35 Germany  <NA>         <NA>         <NA>               <NA>
+     user_last_update.y
+1744               <NA>
+     SiteID PhaseID          Culture1 Culture2 Culture3  Subculture Period
+4533 S10947  GHELA1 Cucuteni-Tripolye     <NA>     <NA> Cucuteni B1     EE
+     PeriodNotes  Citation     SiteID PhaseID       Culture1 Culture2 Culture3 Subculture Period
+2378 S07979    HVJE Trichterbecher     <NA>     <NA>       <NA>    EMN
+     PeriodNotes Citations Type StartBCEreported EndBCEreported gaussianModelMu
+2378        <NA>      <NA> <NA>               NA             NA            5241
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+2378                121         <NA>         <NA> 2024-06-14 13:33:11
+     user_last_update.x                                   SiteName  Region
+2378   helene@localhost Hvalsh<U+00F8>je (Igls<U+00F8>); 130104-82 Jutland
+     Latitude Longitude Country Notes time_added.y user_added.y
+2378   56.494     9.079 Denmark  <NA>         <NA>         <NA>
+      time_last_update.y user_last_update.y
+2378 2024-03-19 14:07:58   helene@localhost
+     SiteID PhaseID         Culture1 Culture2 Culture3 Subculture Period
+4690 S11029  PLONL1 Stichbandkeramik     <NA>     <NA>       <NA>     UN
+     PeriodNotes  Citations                           Type StartBCEreported
+4690        <NA> papac2021a funerary: cemetery; settlement             5000
+     EndBCEreported gaussianModelMu gaussianModelSigma        time_added.x
+4690           4300            5725                374 2022-05-27 10:22:00
+         user_added.x  time_last_update.x user_last_update.x
+4690 robert@localhost 2024-05-06 14:12:50 Rscripts@localhost
+                                                                 SiteName
+4690 Ploti<U+0161>t<U+011B> nad Labem - Na p<U+0159><U+00ED>msk<U+00FD>ch
+                           Region Latitude Longitude                  Country
+4690 Hradec Kr<U+00E1>lov<U+00E9>    50.25    15.811 Czechia / Czech Republic
+                                                                   Notes
+4690 Includes P<U+0159>edm<U+011B><U+0159>ice nad Labem <U+2013> cihelna
+            time_added.y     user_added.y  time_last_update.y
+4690 2022-05-27 09:33:05 robert@localhost 2023-01-19 14:36:28
+     user_last_update.y
+4690      jan@localhost
+    SiteID PhaseID          Culture1 Culture2 Culture3 Subculture Period
+890 S03196      OL Linearbandkeramik     <NA>     <NA>       <NA>     EN
+    PeriodNotes Citations            Type StartBCEreported EndBCEreported
+890        <NA>      <NA> fire: oven; pit               NA             NA
+    gaussianModelMu gaussianModelSigma time_added.x user_added.x
+890            6852                367         <NA>         <NA>
+     time_last_update.x user_last_update.x  SiteName Region Latitude Longitude
+890 2024-05-06 15:00:23 Rscripts@localhost Olszanica   <NA>   50.067    19.833
+    Country
+890  Poland
+                                                                                                                                                                                                                                                             Notes
+890 taxa identified from charred remains (Ford) and impressions in pottery/daub (Litynska; App G); samples (including daub) taken from pit fills some described as oven pits; nos and ubiquity refer to samples of charred remains - presence only for impressions
+    time_added.y user_added.y time_last_update.y user_last_update.y
+890         <NA>         <NA>               <NA>               <NA>
+    SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+836 S03061     ML1     <NA>     <NA>     <NA>       <NA>     LM        <NA>
+    Citations       Type StartBCEreported EndBCEreported gaussianModelMu
+836      <NA> settlement               NA             NA            6941
+    gaussianModelSigma        time_added.x     user_added.x  time_last_update.x
+836                428 2021-12-14 15:38:17 adrian@localhost 2024-05-06 15:07:58
+    user_last_update.x      SiteName Region Latitude Longitude Country Notes
+836 Rscripts@localhost Moynagh Lough   <NA>    53.82     -6.76 Ireland  <NA>
+    time_added.y user_added.y time_last_update.y user_last_update.y
+836         <NA>         <NA>               <NA>               <NA>
+    SiteID PhaseID       Culture1 Culture2 Culture3 Subculture Period
+874 S03158    NYM2 Trichterbecher     <NA>     <NA>       <NA>    LIA
+    PeriodNotes Citations Type StartBCEreported EndBCEreported gaussianModelMu
+874        <NA>      <NA> <NA>               NA             NA            4440
+    gaussianModelSigma time_added.x user_added.x  time_last_update.x
+874                503         <NA>         <NA> 2024-05-29 03:55:09
+    user_last_update.x         SiteName Region Latitude Longitude Country Notes
+874 Rscripts@localhost Nym<U+00F6>lla I   <NA>    56.03     14.47  Sweden  <NA>
+    time_added.y user_added.y time_last_update.y user_last_update.y
+874         <NA>         <NA>               <NA>               <NA>
+    SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+717 S02772 LGDPER1     <NA>     <NA>     <NA>       <NA>     EM        <NA>
+                 Citations Type StartBCEreported EndBCEreported gaussianModelMu
+717 brune2020a; gomez1995a <NA>               NA             NA            8912
+    gaussianModelSigma time_added.x user_added.x  time_last_update.x
+717                776         <NA>         <NA> 2024-05-06 15:06:26
+    user_last_update.x              SiteName          Region Latitude Longitude
+717 Rscripts@localhost La Grotte des Perrats Agris, Charente    45.77      0.33
+    Country                         Notes time_added.y user_added.y
+717  France coordinates after: brune2020a         <NA>         <NA>
+     time_last_update.y user_last_update.y
+717 2023-04-21 14:26:13   robert@localhost
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+5640 S11661    VEL1     <NA>     <NA>     <NA>       <NA>    UBA        <NA>
+      Citations                 Type StartBCEreported EndBCEreported
+5640 hardi2007a settlement: hillfort               NA             NA
+     gaussianModelMu gaussianModelSigma        time_added.x  user_added.x
+5640            3443                192 2023-03-07 15:20:55 jan@localhost
+      time_last_update.x user_last_update.x              SiteName       Region
+5640 2024-05-06 14:30:49 Rscripts@localhost Velim <U+2013> Skalka Kol<U+00ED>n
+     Latitude Longitude                  Country Notes        time_added.y
+5640   50.063    15.126 Czechia / Czech Republic  <NA> 2023-02-22 14:26:44
+      user_added.y  time_last_update.y user_last_update.y
+5640 jan@localhost 2023-03-07 14:45:25      jan@localhost
+     SiteID PhaseID         Culture1 Culture2 Culture3 Subculture Period
+1981 S07513  ROSEF2 Erteb<U+00F8>lle     <NA>     <NA>       <NA>     LM
+     PeriodNotes Citations Type StartBCEreported EndBCEreported gaussianModelMu
+1981        <NA>      <NA> <NA>               NA             NA            6653
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+1981                199         <NA>         <NA> 2024-05-06 12:50:39
+     user_last_update.x       SiteName Region Latitude Longitude Country Notes
+1981 Rscripts@localhost Rosenhof LA 58   <NA>   54.252     11.05 Germany  <NA>
+     time_added.y user_added.y time_last_update.y user_last_update.y
+1981         <NA>         <NA>               <NA>               <NA>
 Error in if (cond) { : missing value where TRUE/FALSE needed
 Calls: source -> withVisible -> eval -> eval
 Execution halted
+igma        time_added.x      user_added.x
+4496                117 2022-05-13 10:10:12 claudia@localhost
+      time_last_update.x user_last_update.x
+4496 2024-05-06 15:20:20 Rscripts@localhost
+                                                                     SiteName
+4496 Vrshnik; <U+0412><U+0440><U+0448><U+043D><U+0438><U+043A>; Vr<U+0161>nik
+     Region Latitude Longitude         Country        Notes        time_added.y
+4496   <NA>   41.997    21.422 North Macedonia closest city 2022-05-12 11:06:53
+          user_added.y  time_last_update.y user_last_update.y
+4496 claudia@localhost 2022-05-12 12:06:53  claudia@localhost
+     SiteID PhaseID                       Culture1 Culture2 Culture3 Subculture
+7129 S13137   GALC1 Krivodol-S<U+0103>lcu<U+0163>a     <NA>     <NA>       <NA>
+     Period PeriodNotes  Citations             Type StartBCEreported
+7129     LE        <NA> gorsd1996a settlement: tell               NA
+     EndBCEreported gaussianModelMu gaussianModelSigma        time_added.x
+7129             NA            5439                675 2024-02-14 10:47:21
+      user_added.x  time_last_update.x user_last_update.x              SiteName
+7129 jan@localhost 2024-05-12 05:53:51 Rscripts@localhost Galatin-<U+010C>ukata
+     Region Latitude Longitude  Country Notes        time_added.y  user_added.y
+7129   <NA>   43.417    23.533 Bulgaria  <NA> 2024-02-14 10:42:23 jan@localhost
+      time_last_update.y user_last_update.y
+7129 2024-02-14 10:42:23      jan@localhost
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+5912 S11876  KUMYS5     <NA>     <NA>     <NA>       <NA>    UBA        <NA>
+      Citations Type StartBCEreported EndBCEreported gaussianModelMu
+5912 allen2022a cave               NA             NA            5007
+     gaussianModelSigma        time_added.x     user_added.x
+5912                163 2023-04-20 13:24:56 robert@localhost
+      time_last_update.x user_last_update.x
+5912 2024-05-29 03:59:31 Rscripts@localhost
+                                                                                                                                                          SiteName
+5912 Kumushynskaya cave; <U+041A><U+0443><U+043C><U+044B><U+0448><U+0430><U+043D><U+0441><U+043A><U+043E><U+044F> <U+043F><U+0435><U+0449><U+0435><U+0440><U+0430>
+                                                                                                      Region
+5912 Middle Ural (<U+0421><U+0440><U+0435><U+0434><U+043D><U+0438><U+0439> <U+0423><U+0440><U+0430><U+043B>)
+     Latitude Longitude Country                Notes        time_added.y
+5912    57.58      58.2  Russia Given in publication 2023-03-22 13:23:53
+         user_added.y  time_last_update.y user_last_update.y
+5912 robert@localhost 2023-03-22 13:29:42   robert@localhost
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+4943 S11172  ABGAN3 Srubnaya     <NA>     <NA>       <NA>    LBA        <NA>
+      Citations               Type StartBCEreported EndBCEreported
+4943 iacum2004a funerary: cemetery               NA             NA
+     gaussianModelMu gaussianModelSigma time_added.x user_added.x
+4943            7689                536         <NA>         <NA>
+      time_last_update.x user_last_update.x
+4943 2024-05-06 14:04:36 Rscripts@localhost
+                                                                                         SiteName
+4943 <U+0410><U+0431><U+0433><U+0430><U+043D><U+0435><U+0440><U+043E><U+0432><U+043E>; Abganerovo
+     Region Latitude Longitude Country
+4943   <NA>   48.067    44.167  Russia
+                                                                            Notes
+4943 location of the<U+00A0>village<U+00A0>(Oktyabrsky district,Volgograd oblast)
+     time_added.y user_added.y  time_last_update.y user_last_update.y
+4943         <NA>         <NA> 2022-07-27 10:01:52   jelena@localhost
+     SiteID PhaseID     Culture1 Culture2 Culture3 Subculture Period
+1002 S03486   RIGA2 Chalcolithic     <NA>     <NA>       <NA>     UE
+     PeriodNotes  Citations        Type StartBCEreported EndBCEreported
+1002        <NA> bagol1990a rockshelter               NA             NA
+     gaussianModelMu gaussianModelSigma        time_added.x
+1002            4625                128 2024-02-13 16:29:11
+                user_added.x  time_last_update.x user_last_update.x
+1002 georgi_dankov@localhost 2024-06-13 15:16:37 Rscripts@localhost
+         SiteName Region Latitude Longitude Country                       Notes
+1002 Riparo Gaban   <NA>     46.3     11.18   Italy coordinates from kappe2014a
+            time_added.y            user_added.y  time_last_update.y
+1002 2024-02-12 15:43:30 georgi_dankov@localhost 2024-02-12 15:43:30
+          user_last_update.y
+1002 georgi_dankov@localhost
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+1061 S03617   STPG1  St Pons     <NA>     <NA>       <NA>     LN        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+1061      <NA> <NA>               NA             NA            4787
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+1061                222         <NA>         <NA> 2024-05-13 03:54:54
+     user_last_update.x                       SiteName Region Latitude
+1061 Rscripts@localhost Saint Pons grotte du Resplandy   <NA>    43.49
+     Longitude Country Notes time_added.y user_added.y time_last_update.y
+1061      2.76  France  <NA>         <NA>         <NA>               <NA>
+     user_last_update.y
+1061               <NA>
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+1449 S04451     RHB     <NA>     <NA>     <NA>       <NA>     EN        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+1449      <NA>  pit               NA             NA            5454
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+1449                125         <NA>         <NA> 2024-05-11 11:53:38
+     user_last_update.x          SiteName Region Latitude Longitude
+1449 Rscripts@localhost Robin Hood's Ball   <NA>    51.21     -1.86
+           Country
+1449 Great Britain
+                                                                                                                                                                                                                                                      Notes
+1449 samples from W83: a +/- circular cluster of pits within a defined artefact scatter (p61); C (p250-3) records that 102 l from pits (nos not given) were processed - residues also sorted; a single list of taxa in table 133 (nos of samples not given)
+     time_added.y user_added.y time_last_update.y user_last_update.y
+1449         <NA>         <NA>               <NA>               <NA>
+    SiteID PhaseID Culture1    Culture2 Culture3 Subculture Period PeriodNotes
+983 S03431   RAPP1   Horgen Corded Ware     <NA>       <NA>     LN        <NA>
+    Citations Type StartBCEreported EndBCEreported gaussianModelMu
+983      <NA> <NA>               NA             NA            4717
+    gaussianModelSigma time_added.x user_added.x  time_last_update.x
+983                106         <NA>         <NA> 2024-05-06 14:23:26
+    user_last_update.x               SiteName Region Latitude Longitude
+983 Rscripts@localhost Rapperswil - Kempraten   <NA>   47.224     8.819
+        Country Notes time_added.y user_added.y time_last_update.y
+983 Switzerland  <NA>         <NA>         <NA>               <NA>
+    user_last_update.y
+983               <NA>
+     SiteID PhaseID    Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+4488 S10915   OLSU1 Corded Ware     <NA>     <NA>       <NA>     MN        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+4488      <NA> <NA>               NA             NA            4321
+     gaussianModelSigma        time_added.x     user_added.x
+4488                161 2022-05-09 13:58:08 robert@localhost
+      time_last_update.x user_last_update.x      SiteName Region Latitude
+4488 2024-05-14 16:54:24 Rscripts@localhost <U+00D6>lsund   <NA>   61.658
+     Longitude Country Notes        time_added.y     user_added.y
+4488    17.004  Sweden  <NA> 2022-05-09 13:47:23 robert@localhost
+      time_last_update.y user_last_update.y
+4488 2022-05-09 14:47:23   robert@localhost
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+4873 S11133   BAVN1     <NA>     <NA>     <NA>       <NA>    LBA        <NA>
+      Citations       Type StartBCEreported EndBCEreported gaussianModelMu
+4873 kanst2014a settlement               NA             NA            2881
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+4873                 22         <NA>         <NA> 2024-06-12 03:52:31
+     user_last_update.x         SiteName Region Latitude Longitude Country
+4873 Rscripts@localhost Bavneh<U+00F8>je   <NA>   56.669     9.856 Denmark
+     Notes time_added.y user_added.y  time_last_update.y user_last_update.y
+4873  <NA>         <NA>         <NA> 2022-07-05 17:27:08  claudia@localhost
+     SiteID PhaseID           Culture1 Culture2 Culture3 Subculture Period
+4683 S11027  NERAT1 Jordansm<U+00FC>hl     <NA>     <NA>       <NA>   PEEE
+     PeriodNotes  Citations            Type StartBCEreported EndBCEreported
+4683        <NA> papac2021a funerary: grave               NA             NA
+     gaussianModelMu gaussianModelSigma        time_added.x     user_added.x
+4683            6061                 74 2022-05-27 10:22:00 robert@localhost
+      time_last_update.x user_last_update.x   SiteName               Region
+4683 2024-05-06 07:12:58 Rscripts@localhost Neratovice M<U+011B>ln<U+00ED>k
+     Latitude Longitude                  Country Notes        time_added.y
+4683   50.268    14.523 Czechia / Czech Republic  <NA> 2022-05-27 09:33:05
+         user_added.y  time_last_update.y user_last_update.y
+4683 robert@localhost 2023-01-19 14:36:28      jan@localhost
+     SiteID PhaseID       Culture1 Culture2 Culture3 Subculture Period
+2158 S07730   MALCZ Trichterbecher     <NA>     <NA>       <NA>     MN
+     PeriodNotes Citations Type StartBCEreported EndBCEreported gaussianModelMu
+2158        <NA>      <NA> <NA>               NA             NA            5373
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+2158                164         <NA>         <NA> 2024-05-06 11:37:26
+     user_last_update.x       SiteName Region Latitude Longitude Country Notes
+2158 Rscripts@localhost Male Czyste 20   <NA>     53.3      18.5  Poland  <NA>
+     time_added.y user_added.y time_last_update.y user_last_update.y
+2158         <NA>         <NA>               <NA>               <NA>
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+4126 S10701   TOPB2    Baden Kostolac     <NA>       <NA>     UE        <NA>
+      Citations Type StartBCEreported EndBCEreported gaussianModelMu
+4126 gelab2023a  pit               NA             NA            6520
+     gaussianModelSigma        time_added.x     user_added.x
+4126                169 2023-11-21 18:07:54 robert@localhost
+      time_last_update.x user_last_update.x
+4126 2024-05-31 03:48:28 Rscripts@localhost
+                                                                                                             SiteName
+4126 Topole-Ba<U+010D>; <U+0422><U+043E><U+043F><U+043E><U+043B><U+0435>-<U+0411><U+0430><U+0447>; Ba<U+010D>, Topole
+     Region Latitude Longitude Country Notes        time_added.y
+4126   <NA>   45.384    19.233  Serbia  <NA> 2022-04-08 16:26:55
+                                user_added.y  time_last_update.y
+4126 jelena@macelab-server.biochem.ucl.ac.uk 2024-01-10 16:40:32
+     user_last_update.y
+4126      jan@localhost
+     SiteID PhaseID          Culture1 Culture2 Culture3 Subculture Period
+3773 S10396 SEESPO1 Linearbandkeramik     <NA>     <NA>       <NA>     EN
+     PeriodNotes Citations            Type StartBCEreported EndBCEreported
+3773        <NA> veit1996a funerary: grave               NA             NA
+     gaussianModelMu gaussianModelSigma        time_added.x     user_added.x
+3773            6612                266 2022-03-14 18:38:38 robert@localhost
+      time_last_update.x user_last_update.x
+3773 2024-05-16 05:54:38 Rscripts@localhost
+                                        SiteName Region Latitude Longitude
+3773 Seehausen "Sportplatz", "Nordstra<U+00DF>e"   <NA>    52.89    11.752
+     Country                Notes        time_added.y     user_added.y
+3773 Germany location: bickl2013a 2022-03-14 17:35:51 robert@localhost
+      time_last_update.y user_last_update.y
+3773 2022-03-14 17:35:51   robert@localhost
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+4028 S10598  VREBS1 Iapodian     <NA>     <NA>       <NA>    EIA        <NA>
+                  Citations                 Type StartBCEreported
+4028 zavod2017a; zavod2019a settlement: hillfort              785
+     EndBCEreported gaussianModelMu gaussianModelSigma        time_added.x
+4028            550            5406                296 2022-04-19 09:13:52
+         user_added.x  time_last_update.x user_last_update.x
+4028 jelena@localhost 2024-05-06 09:25:52 Rscripts@localhost
+                                          SiteName Region Latitude Longitude
+4028 Vrebac-Stra<U+017E>benica; Stra<U+017E>benica   <NA>   44.525    15.504
+     Country Notes        time_added.y                            user_added.y
+4028 Croatia  <NA> 2022-04-18 18:56:20 jelena@macelab-server.biochem.ucl.ac.uk
+      time_last_update.y                      user_last_update.y
+4028 2022-04-18 19:56:20 jelena@macelab-server.biochem.ucl.ac.uk
+     SiteID PhaseID         Culture1 Culture2 Culture3 Subculture Period
+2821 S08908     OLY Erteb<U+00F8>lle     <NA>     <NA>       <NA>     LM
+     PeriodNotes Citations       Type StartBCEreported EndBCEreported
+2821        <NA>      <NA> settlement               NA             NA
+     gaussianModelMu gaussianModelSigma time_added.x user_added.x
+2821            6698                293         <NA>         <NA>
+      time_last_update.x user_last_update.x         SiteName Region Latitude
+2821 2024-05-24 03:51:03 Rscripts@localhost <U+00D8>lby Lyng   <NA>    55.48
+     Longitude Country Notes time_added.y user_added.y  time_last_update.y
+2821     12.18 Denmark  <NA>         <NA>         <NA> 2024-03-19 15:24:38
+     user_last_update.y
+2821   helene@localhost
+     SiteID PhaseID    Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+2286 S07837    ZLT2 Corded Ware     <NA>     <NA>       <NA>     LN        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+2286      <NA> <NA>               NA             NA            4341
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+2286                 85         <NA>         <NA> 2024-05-06 10:27:38
+     user_last_update.x                                        SiteName Region
+2286 Rscripts@localhost Z<U+0142>ota "Grodzisko II"; Zlota Grodzisko II   <NA>
+     Latitude Longitude Country Notes time_added.y user_added.y
+2286   50.381    20.592  Poland  <NA>         <NA>         <NA>
+      time_last_update.y user_last_update.y
+2286 2023-09-14 16:21:05   robert@localhost
+     SiteID PhaseID                                        Culture1 Culture2
+4330 S10839 HODMKEN Star<U+010D>evo-K<U+00F6>r<U+00F6>s-Cri<U+015F>     <NA>
+     Culture3          Subculture Period PeriodNotes  Citations            Type
+4330     <NA> K<U+00F6>r<U+00F6>s     EN        <NA> depae2020b funerary: grave
+     StartBCEreported EndBCEreported gaussianModelMu gaussianModelSigma
+4330               NA             NA            7646                101
+            time_added.x  user_added.x  time_last_update.x user_last_update.x
+4330 2022-05-03 11:59:53 sam@localhost 2024-05-06 10:39:28 Rscripts@localhost
+                                                   SiteName Region Latitude
+4330 H<U+00F3>dmez<U+0151>v<U+00E1>s<U+00E1>rhely Kotacpart   <NA>   46.372
+     Longitude Country       Notes        time_added.y  user_added.y
+4330    20.424 Hungary Within 1 km 2022-05-02 11:31:41 sam@localhost
+      time_last_update.y user_last_update.y
+4330 2023-04-20 14:44:15 Rscripts@localhost
+     SiteID PhaseID       Culture1 Culture2 Culture3 Subculture Period
+5687 S11687    HEJ1 Trichterbecher     <NA>     <NA>       <NA> PEEEME
+     PeriodNotes               Citations               Type StartBCEreported
+5687        <NA> <U+0161>m<U+00ED>d2017a funerary: cemetery               NA
+     EndBCEreported gaussianModelMu gaussianModelSigma        time_added.x
+5687             NA            5652                 37 2023-03-07 15:20:55
+      user_added.x  time_last_update.x user_last_update.x
+5687 jan@localhost 2024-05-06 13:13:33 Rscripts@localhost
+                                                                               SiteName
+5687 Hej<U+010D><U+00ED>n <U+2013> Mr<U+0161>t<U+00ED>kovo n<U+00E1>m<U+011B>st<U+00ED>
+      Region Latitude Longitude                  Country Notes
+5687 Olomouc   49.606    17.242 Czechia / Czech Republic  <NA>
+            time_added.y  user_added.y  time_last_update.y user_last_update.y
+5687 2023-02-22 15:53:26 jan@localhost 2023-03-07 14:45:25      jan@localhost
+     SiteID PhaseID    Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+1658 S04882     MP1 Bell Beaker     <NA>     <NA>       <NA>     LN        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+1658      <NA> <NA>               NA             NA            4742
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+1658                187         <NA>         <NA> 2024-05-08 20:53:51
+     user_last_update.x       SiteName Region Latitude Longitude       Country
+1658 Rscripts@localhost Mount Pleasant   <NA>   50.709    -2.412 Great Britain
+     Notes time_added.y user_added.y time_last_update.y user_last_update.y
+1658  <NA>         <NA>         <NA>               <NA>               <NA>
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+6636 S12661  VALYO1    Tisza     <NA>     <NA>       <NA>     LN        <NA>
+           Citations       Type StartBCEreported EndBCEreported gaussianModelMu
+6636 g<U+00E1>l2005a settlement               NA             NA            5802
+     gaussianModelSigma        time_added.x     user_added.x
+6636                221 2023-07-20 16:11:02 jelena@localhost
+      time_last_update.x user_last_update.x                        SiteName
+6636 2024-05-06 15:37:20 Rscripts@localhost Tiszal<U+00FA>c-V<U+00E1>lyogos
+                                        Region Latitude Longitude Country
+6636 Borsod-Aba<U+00FA>j-Zempl<U+00E9>n county   48.038     21.07 Hungary
+                       Notes        time_added.y     user_added.y
+6636 location of the village 2023-07-18 12:12:49 jelena@localhost
+      time_last_update.y user_last_update.y
+6636 2023-07-18 12:12:49   jelena@localhost
+     SiteID PhaseID         Culture1 Culture2 Culture3          Subculture
+4547 S10956  CERNA4 Cernavod<U+0103>     <NA>     <NA> Cernavod<U+0103> II
+     Period PeriodNotes  Citations       Type StartBCEreported EndBCEreported
+4547     LE        <NA> el_su2001a settlement               NA             NA
+     gaussianModelMu gaussianModelSigma        time_added.x     user_added.x
+4547            5368                201 2023-08-01 13:13:19 jelena@localhost
+      time_last_update.x user_last_update.x
+4547 2024-05-06 15:45:34 Rscripts@localhost
+                                            SiteName                  Region
+4547 Cernavod<U+0103>; Cernavod<U+0103>-Dealul Sofia Constan<U+021B>a County
+     Latitude Longitude Country Notes        time_added.y     user_added.y
+4547   44.331    28.027 Romania  <NA> 2022-05-13 19:12:19 jelena@localhost
+      time_last_update.y user_last_update.y
+4547 2023-08-02 08:25:55   jelena@localhost
+     SiteID PhaseID  Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+1098 S03697   SCLM1 Bischheim     <NA>     <NA>       <NA>     MN        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+1098      <NA> <NA>               NA             NA            6443
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+1098                152         <NA>         <NA> 2024-05-08 05:53:39
+     user_last_update.x   SiteName Region Latitude Longitude Country Notes
+1098 Rscripts@localhost Schwalheim   <NA>    50.35      8.75 Germany  <NA>
+     time_added.y user_added.y time_last_update.y user_last_update.y
+1098         <NA>         <NA>               <NA>               <NA>
+     SiteID PhaseID          Culture1 Culture2 Culture3           Subculture
+4522 S10941  FRAMU1 Cucuteni-Tripolye     <NA>     <NA> Cucuteni; Cucuteni A
+     Period PeriodNotes  Citations Type StartBCEreported EndBCEreported
+4522     EE        <NA> carci1996a <NA>               NA             NA
+     gaussianModelMu gaussianModelSigma        time_added.x     user_added.x
+4522            6017                216 2022-05-16 11:39:23 jelena@localhost
+      time_last_update.x user_last_update.x
+4522 2024-06-12 03:52:14 Rscripts@localhost
+                                              SiteName              Region
+4522 Frumu<U+015F>ica; Frumu<U+015F>ica-Bode<U+0219>ti Neam<U+021B> County
+     Latitude Longitude Country Notes        time_added.y     user_added.y
+4522   47.026    26.425 Romania  <NA> 2022-05-13 19:12:19 jelena@localhost
+      time_last_update.y user_last_update.y
+4522 2023-07-26 06:47:18   jelena@localhost
+     SiteID PhaseID   Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+2718 S08803    SCC2 Cortaillod     <NA>     <NA>       <NA>     MN        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+2718      <NA> <NA>               NA             NA            6069
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+2718                151         <NA>         <NA> 2024-06-12 03:50:32
+     user_last_update.x                   SiteName Region Latitude Longitude
+2718 Rscripts@localhost Sion - Chemin des Collines   <NA>   46.232     7.352
+         Country Notes time_added.y user_added.y time_last_update.y
+2718 Switzerland  <NA>         <NA>         <NA>               <NA>
+     user_last_update.y
+2718               <NA>
+    SiteID PhaseID             Culture1 Culture2 Culture3 Subculture Period
+211 S01421    CRN2 Neolithique moyen II     <NA>     <NA>       <NA>     MN
+    PeriodNotes Citations Type StartBCEreported EndBCEreported gaussianModelMu
+211        <NA>      <NA> <NA>               NA             NA            5856
+    gaussianModelSigma time_added.x user_added.x  time_last_update.x
+211                334         <NA>         <NA> 2024-05-06 15:28:45
+    user_last_update.x                       SiteName Region Latitude Longitude
+211 Rscripts@localhost Cairon - La Pierre Tourneresse   <NA>   49.235    -0.441
+    Country
+211  France
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Notes
+211 the dolmen of Pierre Tourneresse or Pierre Tourniresse is located a short distance from the village Cairon-Le-Vieux, 15km north of Caen; it is situated in the valley of Vey, a tributary on the right bank of the Mue - the last tributary on the right bank of the Seulles; knowledge of/work at the site dates back to the 19th century; in 1996 (following an initial survey in 1992) the first authorization to excavate was granted and work was carried out in August by 20 volunteers (authorization over three years from 1997 to 1999 was then issued so as to complete the excavation of the site); the excavation was undertaken with the aims of investigating the architecture of the monument and the palaeosol upon which the dolmen was constructed; chronology: 14C dates/artefact typology are consistent with the proposed dating to the extreme end of the middle Neolithic I or the very beginning of middle Neolithic II, in the second half of the 5th millennium; archaeobotany - there was a systematic policy of sampling implemented during the excavation of the palaeosol at the site; D-S reports in her study the analysis of seeds and fruits in 44(?not sure how this total was calculated - doesn't seem to be in agreement with tables) small samples of sediment from the palaeosol underlying the dolmen (n=38, table 15) and associated excavated structures (n=3, table 17) all samples (of 2L) were collected by the excavation team; samples were wet-sieved by the excavators on a column of two sieves with meshes of 2 mm mesh and 0.5 mm -  total volume sediment processed from the palaeosol: 86L and from the associated structures: 18L; hand-picked samples only of hazelnutshell fragments are also reported in table 16 - I haven't entered these in the db - my records refer to tables 15 and 17 in which taxa from a total of 41 samples are listed
+    time_added.y user_added.y time_last_update.y user_last_update.y
+211         <NA>         <NA>               <NA>               <NA>
+     SiteID PhaseID  Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+6391 S12501  LTDLZ3 Munzingen     <NA>     <NA>       <NA>     LN        <NA>
+      Citations                    Type StartBCEreported EndBCEreported
+6391 denai2014a settlement: storage pit               NA             NA
+     gaussianModelMu gaussianModelSigma        time_added.x     user_added.x
+6391            5661                 38 2023-05-09 16:06:20 robert@localhost
+      time_last_update.x user_last_update.x                 SiteName   Region
+6391 2024-05-06 12:15:38 Rscripts@localhost Les terrasses de la Zorn Bas-Rhin
+     Latitude Longitude Country Notes        time_added.y     user_added.y
+6391   48.756       7.6  France  <NA> 2023-05-09 16:04:13 robert@localhost
+      time_last_update.y user_last_update.y
+6391 2023-05-09 16:04:13   robert@localhost
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+6898 S12959 CZEWIE1  Tumulus     <NA>     <NA>       <NA>    MBA        <NA>
+      Citations       Type StartBCEreported EndBCEreported gaussianModelMu
+6898 roman2023a settlement               NA             NA            3718
+     gaussianModelSigma        time_added.x     user_added.x
+6898                405 2023-09-14 17:44:31 robert@localhost
+      time_last_update.x user_last_update.x              SiteName        Region
+6898 2024-05-06 15:27:54 Rscripts@localhost Czelad<U+017A> Wielka Lower Silesia
+     Latitude Longitude Country Notes        time_added.y     user_added.y
+6898   51.561    16.645  Poland  <NA> 2023-09-14 17:44:08 robert@localhost
+      time_last_update.y user_last_update.y
+6898 2023-09-14 18:23:46   robert@localhost
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+4997 S11196 BORSTA7     <NA>     <NA>     <NA>          V    LBA        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+4997      <NA> <NA>             1000            600            2882
+     gaussianModelSigma        time_added.x      user_added.x
+4997                114 2022-08-17 17:55:01 claudia@localhost
+      time_last_update.x user_last_update.x
+4997 2024-05-06 15:05:26 Rscripts@localhost
+                                             SiteName Region Latitude Longitude
+4997 Borstahusen 1:1, L1986:6687, L2019:64, L1985:686   <NA>   55.905    12.817
+     Country
+4997  Sweden
+                                                                                Notes
+4997 Central point between the trenches (the area is not more then 0.7 sqkm in total)
+            time_added.y      user_added.y  time_last_update.y
+4997 2022-08-17 15:23:32 claudia@localhost 2022-08-17 15:38:22
+     user_last_update.y
+4997  claudia@localhost
+  SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+5 S01015   ARDB1     <NA>     <NA>     <NA>       <NA>     EM        <NA>
+  Citations Type StartBCEreported EndBCEreported gaussianModelMu
+5      <NA> <NA>               NA             NA            7723
+  gaussianModelSigma time_added.x user_added.x  time_last_update.x
+5                383         <NA>         <NA> 2024-05-23 17:50:44
+  user_last_update.x        SiteName Region Latitude Longitude Country Notes
+5 Rscripts@localhost Abri des Boeufs   <NA>   43.519     5.314  France  <NA>
+  time_added.y user_added.y time_last_update.y user_last_update.y
+5         <NA>         <NA>               <NA>               <NA>
+     SiteID PhaseID          Culture1 Culture2 Culture3 Subculture Period
+3895 S10490   FRON1 Linearbandkeramik     <NA>     <NA>       <NA>     EN
+     PeriodNotes Citations
+3895        <NA> veit1996a
+                                                                Type
+3895 cave/rockshelter; cultural layer; funerary: grave; fire: hearth
+     StartBCEreported EndBCEreported gaussianModelMu gaussianModelSigma
+3895               NA             NA            6785                168
+            time_added.x     user_added.x  time_last_update.x
+3895 2022-03-14 18:38:38 robert@localhost 2024-05-06 13:17:10
+     user_last_update.x                  SiteName Region Latitude Longitude
+3895 Rscripts@localhost Fronhofen "Hanseles Hohl"   <NA>   48.736    10.564
+     Country                                     Notes        time_added.y
+3895 Germany Google Earth: precise location - landmark 2022-04-12 11:32:07
+         user_added.y  time_last_update.y user_last_update.y
+3895 robert@localhost 2022-04-12 12:32:07   robert@localhost
+     SiteID PhaseID    Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+1270 S04173  VILLC1 Fontbouisse     <NA>     <NA>       <NA>     LN        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+1270      <NA> <NA>               NA             NA            4489
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+1270                114         <NA>         <NA> 2024-05-29 04:00:21
+     user_last_update.x               SiteName Region Latitude Longitude
+1270 Rscripts@localhost Voils en Laval Cambous   <NA>    43.76      3.73
+     Country Notes time_added.y user_added.y time_last_update.y
+1270  France  <NA>         <NA>         <NA>               <NA>
+     user_last_update.y
+1270               <NA>
+     SiteID  PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+4797 S11075 SARLEEBA  Yamnaya     <NA>     <NA>       <NA>  LEEBA        <NA>
+      Citations                    Type StartBCEreported EndBCEreported
+4797 gerli2012a funerary: barrow: mound               NA             NA
+     gaussianModelMu gaussianModelSigma        time_added.x  user_added.x
+4797            4845                296 2022-06-08 09:42:13 sam@localhost
+      time_last_update.x user_last_update.x
+4797 2024-05-06 09:57:19 Rscripts@localhost
+                                      SiteName Region Latitude Longitude
+4797 S<U+00E1>rr<U+00E9>tudvari-<U+0150>rhalom   <NA>   48.076    19.411
+     Country         Notes        time_added.y  user_added.y
+4797 Hungary Within 0.5 km 2022-06-08 09:27:02 sam@localhost
+      time_last_update.y user_last_update.y
+4797 2022-06-08 10:27:02      sam@localhost
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+1642 S04850    LEO2  Lengyel     <NA>     <NA>       <NA>     MN        <NA>
+     Citations       Type StartBCEreported EndBCEreported gaussianModelMu
+1642      <NA> settlement               NA             NA            6638
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+1642                 75         <NA>         <NA> 2024-06-12 03:46:41
+     user_last_update.x                     SiteName Region Latitude Longitude
+1642 Rscripts@localhost Leonding-"Gendarmerieposten"   <NA>    48.28     14.25
+     Country Notes time_added.y user_added.y time_last_update.y
+1642 Austria  <NA>         <NA>         <NA>               <NA>
+     user_last_update.y
+1642               <NA>
+     SiteID PhaseID               Culture1 Culture2 Culture3       Subculture
+5012 S11205    TBME Bodrogkereszt<U+00FA>r     <NA>     <NA> Toarte Pastilate
+     Period PeriodNotes  Citations               Type StartBCEreported
+5012     ME        <NA> gibli2013a funerary: cemetery             4037
+     EndBCEreported gaussianModelMu gaussianModelSigma        time_added.x
+5012           3523            5631                241 2023-08-22 09:51:47
+      user_added.x  time_last_update.x user_last_update.x
+5012 sam@localhost 2024-05-24 03:46:40 Rscripts@localhost
+                                                       SiteName Region Latitude
+5012 Tiszapolg<U+00E1>r-Basatanya; Tiszapolg<U+00E1>r Basatanya   <NA>    47.82
+     Longitude Country                               Notes        time_added.y
+5012      21.1 Hungary Found with googlemaps to place name 2022-08-25 12:53:55
+      user_added.y  time_last_update.y user_last_update.y
+5012 sam@localhost 2022-08-25 12:54:11      sam@localhost
