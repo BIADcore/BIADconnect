@@ -25,13 +25,15 @@ prior.matrix <- matrix(1,200,200); prior.matrix <- prior.matrix/sum(prior.matrix
 row.names(prior.matrix) <- seq(min(mu.range),max(mu.range),length.out=nrow(prior.matrix))
 colnames(prior.matrix) <- seq(min(sigma.range),max(sigma.range),length.out=ncol(prior.matrix))
 
-N <- 500
+N <- 250
 for(n in 1:N){
 
 	# pick a random phase
 	# change to the prioritisation order
 	i <- sample(1:nrow(pha),size=1)
 	phase <- pha[i,]
+
+	print(phase)
 
 	# get other phases with same culture and period, within 100km
 	cultures <- phase[,c('Culture1','Culture2','Culture3')]
