@@ -819,3 +819,136 @@ igma        time_added.x      user_added.x
 5012      21.1 Hungary Found with googlemaps to place name 2022-08-25 12:53:55
       user_added.y  time_last_update.y user_last_update.y
 5012 sam@localhost 2022-08-25 12:54:11      sam@localhost
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+1789 S06088     SI1   Horgen     <NA>     <NA>       <NA>     LN        <NA>
+     Citations       Type StartBCEreported EndBCEreported gaussianModelMu
+1789      <NA> settlement             3300           2800            4696
+     gaussianModelSigma        time_added.x    user_added.x  time_last_update.x
+1789                209 2022-04-24 17:30:31 maria@localhost 2024-05-06 15:37:16
+     user_last_update.x   SiteName Region Latitude Longitude Country
+1789 Rscripts@localhost Sipplingen   <NA>   47.792     9.102 Germany
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Notes
+1789 Si2: the pile dwelling construction Sipplingen at Uberlingen Lake is one of the standard Neusiedel stations on Lake Constance (all refs from Riehl online publication); the samples described were taken during under-water excavations (dir: Monuments Office of Baden-Wuerttemberg) in the years 1998 and 1999; all samples described here are from the Pfyn culture layers (Jacomet has published Horgen dated layers); to investigate the Pfyn settlement an area of 38 m2 was excavated; the upper cultural layer (layer 9, findings 2.1-2.5) dates back to 3700 BC - sampling was carried in m2 over the entire excavation area; layer 9 contained a burnt layer (finding 2.4) - the focus of archaeobotanical studies; below this: (layers 7 and 8, findings 4.1-4.4.6 / 5) dated by dendro to 38C BC - only partially excavated and sampled to a lesser extent (detailed information on layers sampled given in translation); archaeobotany: the basis of archaeobotanical investigations were 18 columns taken from profiles (location of profiles in the excavation area, see Figure 4-6, Appendix 6); additional samples were examined from the 9cm thick burnt layer (find 2.4; see translation for full description); different size fractions were sorted: > 0.2 mm > 0.5 mm > 1mm > 2mm and > 5 mm, all of which were processed: > 5 mm > 2 mm and most of the > 1 mm were fully processed but only 10% of the fraction > 0.2 mm was processed due to time constraints; mean total density of the Pfyn remains (charred and uncharred) is more than 4,400 items per litre; [full descriptions of taxa given in the pdf - also results of analyses including CA]\vSi1: Horgan dated levels were uncovered in the eastern harbour area (Jacomet analysed the plant remains from this period); a profile column sample was taken through the 1m thick cultural deposits - 5 major cultural levels (levels 11-15) were defined (subdivisions within these are listed on p300); dendro dates indicated that the Horgen settlement lasted nearly 500 years; 19 samples (coincidental with the 19 stratigraphic subdivisions) were taken from the profile column (sample volumes varied between 200-3000cm3); plant remains were recovered by wet sieving using meshes of 8,4,2,1,0.5mm; samples contained charred and uncharred/waterlogged specimens - a majority of taxa were waterlogged (sample 10 is equivalent to the burnt layer 10 and has the highest numbers of charred specimens); the later Horgen (upper levels from layer 11 and above) has a more diverse range of species; together with the taxa previously identified by Bertsch (1932) the total number of species/genera/families represented is 163; quantititative data entered in db are from tables 4-7 - several 'economic' taxa are not listed in these tables but are noted in table 3 and for these presence only is entered in db\vNote: a majority of taxa not preserved by charring are wet-loving species (e.g. non economic plants); in the d/base I've been consistent with other sites & entered all charred remains + waterlogged taxa (e.g. fruits&nuts etc.) which had obviously been deliberately collected & brought to the site (e.g. Corylus, Fragaria, Malus, etc.); if a taxon is preserved by charring & waterlogging the ubiquity & total no relate to the former
+     time_added.y user_added.y time_last_update.y user_last_update.y
+1789         <NA>         <NA>               <NA>               <NA>
+    SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+532 S02256    HOHO     Pfyn     <NA>     <NA>       <NA>     LN        <NA>
+    Citations
+532      <NA>
+                                                                                                        Type
+532 cultural layer; fire: burnt area; occupation deposit: external; occupation deposit: internal; settlement
+    StartBCEreported EndBCEreported gaussianModelMu gaussianModelSigma
+532             3918           3902            5661                135
+           time_added.x    user_added.x  time_last_update.x user_last_update.x
+532 2022-04-24 17:29:06 maria@localhost 2024-05-14 11:54:24 Rscripts@localhost
+                      SiteName Region Latitude Longitude Country
+532 Hornstaad, H<U+00F6>rnle I   <NA>   47.691     8.999 Germany
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Notes
+532 Hornle I covers the remnants of 2 late Neolithic settlements (separated by c.350 years); HHIA (older settlement) was occupied from 3917-3905 BC; the cultural layer ascribed to IA (c.3900m2) is divided into 3 levels: AH1 - base of the cultural layer (0.2-1cm thick) contains the remains of the 1st settlement phase; AH2 - remains of a fire when possibly the whole village was burned (up to 20cm thick); AH3 - remains of the village rebuilt after the fire (up to 25cm thick); house plans clearly showed up in AH2 (c.3.5m x 8-9.0m long); the botanical recovery programme took place between 1987-1993 & consisted of 5 different sampling strategies (all described by Maier); from culture layer IA 6516 samples were taken (only charred remains are considered in the d/base); AH1: M states that the charred remains in this layer probably derive from AH2; AH3: M states that charred components are rare in this layer (89% was uncharred); charred remains from AH1/3 are not listed here; AH2: nearly the entire settlement area was covered by the fire horizon (in addition to the debris of the burned houses) & comprised charred harvesting stores of grain; the layer was examined using the Rohrchenprogramm** (tube programe) but also many single samples were taken; from all the samples over 150,000 charred remains were identified: 149,532 cereal remains; 4,416 weeds; 550 flax seeds & capsules (+325 capsules from 2 stores); 609 seeds/1 capsule of opium poppy; 3 peas; 289 seeds/fruits of other wild plants; it was suggested (on the basis of the fruits/fruiting times) that the fire must have taken place during September & October - thus destroying the havested crops (it was proposed also that the inhabitants tried to compensate for this loss by gathering large quantities of hazelnuts - a 'remarkable' hazelnut layer was directly above the fire layer); the cereal stores in AH2: in the 299 samples from the Rohrchenprogramm there were approximately 150,000 remains of naked wheat, barley, einkorn & emmer (loose grains, fragments of rachis, spikelets, whole ears, fragments of culm); on the basis of grains alone the proportions are as follows: naked wheat: 55%, barley: 16%, einkorn: 6%, emmer: 0.5% (%s are different if just chaff is considered in the calculations); 14 different harvesting stores could be identified: 7 of naked wheat, 4 of barley, 3 of hulled wheat, & different stores were associated with different houses [the finds from the stores are listed separately (e.g. for each house) in the publication]; I've decided to use the figures in tables 1 (wild taxa) & 2 (economic taxa) - these present the average numbers of finds per 1000cm3 & the ubiquity (%) per 299(?) samples** (possibly other tables would have been more suitable) - I've entered ubiquity scores only [I haven't recorded taxa for which '0' scores are listed]
+    time_added.y user_added.y time_last_update.y user_last_update.y
+532         <NA>         <NA>               <NA>               <NA>
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+1039 S03589  STDID1     <NA>     <NA>     <NA>       <NA>    EBA        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+1039      <NA> <NA>               NA             NA            4609
+     gaussianModelSigma        time_added.x     user_added.x
+1039                136 2021-12-14 15:35:02 adrian@localhost
+      time_last_update.x user_last_update.x                 SiteName Region
+1039 2024-05-15 04:53:46 Rscripts@localhost Saint Didier La Rambaude   <NA>
+     Latitude Longitude Country Notes time_added.y user_added.y
+1039   44.009     5.102  France  <NA>         <NA>         <NA>
+     time_last_update.y user_last_update.y
+1039               <NA>               <NA>
+     SiteID PhaseID    Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+1206 S04013    TORS Pitted Ware     <NA>     <NA>       <NA>    EMN        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+1206      <NA> <NA>               NA             NA            4741
+     gaussianModelSigma time_added.x user_added.x  time_last_update.x
+1206                329         <NA>         <NA> 2024-06-12 03:46:40
+     user_last_update.x  SiteName Region Latitude Longitude Country Notes
+1206 Rscripts@localhost Torslunda   <NA>   56.633      16.5  Sweden  <NA>
+     time_added.y user_added.y time_last_update.y user_last_update.y
+1206         <NA>         <NA>               <NA>               <NA>
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+5433 S11482  KLESCH Tripolye     <NA>     <NA> Tripolye B    EME        <NA>
+                                        Citations       Type StartBCEreported
+5433 <U+044F><U+043D><U+0443><U+0448>1986<U+0430> settlement               NA
+     EndBCEreported gaussianModelMu gaussianModelSigma        time_added.x
+5433             NA            5822                285 2023-02-06 13:09:22
+          user_added.x  time_last_update.x user_last_update.x
+5433 natalya@localhost 2024-05-06 11:15:12 Rscripts@localhost
+                                                                                                         SiteName
+5433 <U+041A><U+043B><U+0435><U+0449><U+043E><U+0432>; <U+041A><U+043B><U+0456><U+0449><U+0456><U+0432>; Kleschov
+                                                                                                                                                   Region
+5433 Vinnytsia region (<U+0412><U+0456><U+043D><U+043D><U+0438><U+0446><U+044C><U+043A><U+0430> <U+043E><U+0431><U+043B><U+0430><U+0441><U+0442><U+044C>)
+     Latitude Longitude Country                Notes        time_added.y
+5433   49.013     28.56 Ukraine Approximate location 2023-02-06 12:55:20
+          user_added.y  time_last_update.y user_last_update.y
+5433 natalya@localhost 2023-02-06 12:55:20  natalya@localhost
+    SiteID PhaseID             Culture1 Culture2 Culture3 Subculture Period
+622 S02465     CLB Neolithique moyen II     <NA>     <NA>       <NA>     MN
+    PeriodNotes Citations       Type StartBCEreported EndBCEreported
+622        <NA>      <NA> settlement               NA             NA
+    gaussianModelMu gaussianModelSigma time_added.x user_added.x
+622            6026                261         <NA>         <NA>
+     time_last_update.x user_last_update.x   SiteName Region Latitude Longitude
+622 2024-05-06 13:57:21 Rscripts@localhost LA BACHERE   <NA>    48.43       3.1
+    Country Notes time_added.y user_added.y time_last_update.y
+622  France  <NA>         <NA>         <NA>               <NA>
+    user_last_update.y
+622               <NA>
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+1836 S07030   GOT1E     <NA>     <NA>     <NA>       <NA>    EBA        <NA>
+     Citations Type StartBCEreported EndBCEreported gaussianModelMu
+1836      <NA>  pit               NA             NA            5939
+     gaussianModelSigma        time_added.x     user_added.x
+1836                236 2021-12-14 15:35:18 adrian@localhost
+      time_last_update.x user_last_update.x  SiteName Region Latitude Longitude
+1836 2024-05-06 15:19:24 Rscripts@localhost Gortore 1   <NA>   52.167    -8.266
+     Country
+1836 Ireland
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   Notes
+1836 Site 1 contained an Early Bronze Age pit and stake-hole; an Early Neolithic rectangular structure and post-medieval activity were also present nearby; excavation licence number: E2119, A014/003.; Archaeobotany EBA: three soil samples from the pit were found to contain charred plant remains; the deposits were washed/processed with water, using a sieve of 0.25 mm mesh size. Small quantities of cereal remains (including emmer wheat and barley), possible flax, hazelnut shell, possible crab-apple and weed remains were recorded.; EN: eight soil samples from deposits associated with the house were found to contain charred plant remains; the deposits were washed/processed with water, using a sieve of 0.25 mm mesh size; small quantities of cereal remains (including emmer wheat and barley), hazelnut shell, crab-apple and weed remains were recorded; exact counts of crab-apple endocarp fragments were not provided.
+     time_added.y user_added.y time_last_update.y user_last_update.y
+1836         <NA>         <NA>               <NA>               <NA>
+     SiteID PhaseID Culture1 Culture2 Culture3 Subculture Period PeriodNotes
+5447 S11496  BILSKE Scythian     <NA>     <NA>       <NA>    EIA        <NA>
+                                        Citations
+5447 <U+044F><U+043D><U+0443><U+0448>1986<U+0430>
+                                   Type StartBCEreported EndBCEreported
+5447 settlement: hillfort; pit: storage              700            600
+     gaussianModelMu gaussianModelSigma        time_added.x      user_added.x
+5447            5840                264 2023-02-09 10:45:48 natalya@localhost
+      time_last_update.x user_last_update.x
+5447 2024-05-13 07:53:44 Rscripts@localhost
+                                                                                                                                                                                                                 SiteName
+5447 <U+0411><U+0435><U+043B><U+044C><U+0441><U+043A><U+043E><U+0435>; <U+0411><U+0456><U+043B><U+044C><U+0441><U+044C><U+043A><U+0435> <U+0433><U+043E><U+0440><U+043E><U+0434><U+0438><U+0449><U+0435>; Bilske hillfort
+                                                                                                                                                         Region
+5447 Poltava region (<U+041F><U+043E><U+043B><U+0442><U+0430><U+0432><U+0441><U+044C><U+043A><U+0430> <U+043E><U+0431><U+043B><U+0430><U+0441><U+0442><U+044C>)
+     Latitude Longitude Country Notes        time_added.y      user_added.y
+5447   50.075    34.668 Ukraine  <NA> 2023-02-07 17:18:42 natalya@localhost
+      time_last_update.y user_last_update.y
+5447 2023-04-20 15:03:04 Rscripts@localhost
+     SiteID PhaseID              Culture1 Culture2 Culture3 Subculture Period
+3118 S10035  PRKOB3 <U+00DA>n<U+011B>tice     <NA>     <NA>       <NA>    EBA
+     PeriodNotes              Citations
+3118        <NA> olald2018a; papac2021a
+                                         Type StartBCEreported EndBCEreported
+3118 funerary: cemetery; funerary: reused pit               NA             NA
+     gaussianModelMu gaussianModelSigma        time_added.x     user_added.x
+3118            3862                108 2022-05-26 15:35:00 robert@localhost
+      time_last_update.x user_last_update.x
+3118 2024-05-06 05:57:18 Rscripts@localhost
+                                       SiteName
+3118 Praha - Kobylisy - Ke St<U+00ED>rce street
+                               Region Latitude Longitude
+3118 Hlavn<U+00ED> m<U+011B>sto Praha   50.122    14.457
+                      Country                            Notes
+3118 Czechia / Czech Republic Includes Ke St<U+00ED>rce Street
+            time_added.y     user_added.y  time_last_update.y
+3118 2022-05-25 11:07:55 robert@localhost 2023-01-19 14:36:28
+     user_last_update.y
+3118      jan@localhost
+Error in if (cond) { : missing value where TRUE/FALSE needed
+Calls: source -> withVisible -> eval -> eval
+Execution halted
