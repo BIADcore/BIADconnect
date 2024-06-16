@@ -21,9 +21,9 @@ c14 <- subset(c14, !is.na(PhaseID))
 # create a prior probability surface
 mu.range <- c(500,40000)
 sigma.range <- c(10,1000)
-prior.matrix <- matrix(1,200,200); prior.matrix <- prior.matrix/sum(prior.matrix)
-row.names(prior.matrix) <- seq(min(mu.range),max(mu.range),length.out=nrow(prior.matrix))
-colnames(prior.matrix) <- seq(min(sigma.range),max(sigma.range),length.out=ncol(prior.matrix))
+prior.matrix.initial <- matrix(1,200,200); prior.matrix.initial <- prior.matrix.initial/sum(prior.matrix.initial)
+row.names(prior.matrix.initial) <- seq(min(mu.range),max(mu.range),length.out=nrow(prior.matrix.initial))
+colnames(prior.matrix.initial) <- seq(min(sigma.range),max(sigma.range),length.out=ncol(prior.matrix.initial))
 
 N <- 250
 for(n in 1:N){
@@ -59,6 +59,7 @@ for(n in 1:N){
 
 	# generate the new prior from the posteriors of the near phases
 	NP <- nrow(near.phases)
+	prior.matrix <- prior.matrix.initial
 	if(NP>0)for(np in 1:NP){
 		load(paste(model.folder,paste(near.phases$PhaseID[np],'RData',sep='.'),sep='/'))
 		prior.matrix <- prior.matrix + mod$posterior
@@ -83,9 +84,12 @@ for(n in 1:N){
 	}
 #-----------------------------------------------------------------------------------------
 
-
-
-
+files <- list.files('Z:/Users/admin/Github/phase model posteriors/gaussian', full.names=TRUE)
+N <- length(files)
+for(n in 1:N){
+	load(files[n])
+	if(is.nan(sum(mod$posterior)))print(files[n])
+	}
 
 
 
