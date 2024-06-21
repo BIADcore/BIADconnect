@@ -62,7 +62,7 @@ for(n in 1:N){
 	prior.matrix <- prior.matrix.initial
 	if(NP>0)for(np in 1:NP){
 		load(paste(model.folder,paste(near.phases$PhaseID[np],'RData',sep='.'),sep='/'))
-		prior.matrix <- prior.matrix + mod$posterior
+		if(!is.nan(sum(mod$posterior)))prior.matrix <- prior.matrix + mod$posterior
 		}
 	prior.matrix <- prior.matrix/sum(prior.matrix)
 
