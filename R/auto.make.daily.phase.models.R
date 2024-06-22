@@ -33,8 +33,6 @@ for(n in 1:N){
 	i <- sample(1:nrow(pha),size=1)
 	phase <- pha[i,]
 
-	print(phase)
-
 	# get other phases with same culture and period, within 100km
 	cultures <- phase[,c('Culture1','Culture2','Culture3')]
 	cultures <- cultures[!is.na(cultures)]
@@ -83,13 +81,6 @@ for(n in 1:N){
 		}
 	}
 #-----------------------------------------------------------------------------------------
-
-files <- list.files('Z:/Users/admin/Github/phase model posteriors/gaussian', full.names=TRUE)
-N <- length(files)
-for(n in 1:N){
-	load(files[n])
-	if(is.nan(sum(mod$posterior)))print(files[n])
-	}
 
 
 
