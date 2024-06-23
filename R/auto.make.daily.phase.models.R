@@ -36,7 +36,11 @@ prior.matrix.ellipsoid.initial <- prior.matrix.initial
 row.names(prior.matrix.ellipsoid.initial) <- seq(min(min.range),max(min.range),length.out=nrow(prior.matrix.ellipsoid.initial))
 colnames(prior.matrix.ellipsoid.initial) <- seq(min(duration.range),max(duration.range),length.out=ncol(prior.matrix.ellipsoid.initial))
 
+<<<<<<< HEAD
 N <- 400
+=======
+N <- 2000
+>>>>>>> 9311e348f0155be141f961a747d4cfaa22f98290
 for(n in 1:N){
 
 	i <- sample(1:nrow(pha),size=1)
