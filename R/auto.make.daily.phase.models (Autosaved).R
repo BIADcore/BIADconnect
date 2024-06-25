@@ -21,6 +21,7 @@ c14 <- subset(c14, !is.na(PhaseID))
 
 # create a prior probability surface
 prior.matrix.initial <- matrix(1,200,200); prior.matrix.initial <- prior.matrix.initial/sum(prior.matrix.initial)
+prior.matrix.initial <- matrix(1,230,166); prior.matrix.initial <- prior.matrix.initial/sum(prior.matrix.initial)
 
 # gaussian
 mu.range <- c(500,40000)
