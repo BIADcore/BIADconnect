@@ -1,23 +1,96 @@
 
 #--------------------------------------------------------------------------------------
-# chronology on all phases
+# testing new approach
 #--------------------------------------------------------------------------------------
-# To do:
-# Prioritise phases that haven't been done yet
-# Change loop structure so it can process norm and ellipsoid models together
-# Structure prior(s) in a Bayesian chain, using parameters derived empirically from the entire database
-# Ensure resolution and range of prior is compatible with different resolution and range of previous posteriors
-
-#--------------------------------------------------------------------------------------
-model.folder.gaussian <- '../../phase model posteriors/gaussian'
-model.folder.ellipsoid <- '../../phase model posteriors/ellipsoid'
 library(ADMUR)
-#--------------------------------------------------------------------------------------
+
 sit <- query.database(user, password, 'biad',"SELECT * FROM `Sites`;")
 pha <- query.database(user, password, 'biad',"SELECT * FROM `Phases`;")
 c14 <- query.database(user, password, 'biad',"SELECT `PhaseID`,`SiteID`,`C14.Age`,`C14.SD` FROM `C14Samples`;")
 pha <- merge(pha,sit,by='SiteID', all.y=FALSE)
 c14 <- subset(c14, !is.na(PhaseID))
+#--------------------------------------------------------------------------------------
+# resolution and domain of parameter estimates
+# note, log parameters, as both mean and sig cannot be negative 
+res <- 50
+gaus.mean.mu.vector <- seq(5,12,length.out=res)
+gaus.mean.sig.vector <- seq(0,3,length.out=res)
+gaus.sd.mu.vector <- seq(2,9,length.out=res)
+gaus.sd.sig.vector <- seq(0,3,length.out=res)
+
+# prior parameters for the gaussian 
+gaus.mean.prior <- matrix(1/(res^2),res,res)
+gaus.sd.prior <- matrix(1/(res^2),res,res)
+
+# loop through a bunch of phases
+
+	i <- sample(1:nrow(pha),size=1)
+	phase <- pha[i,]
+
+	# get other phases with same culture and period, within 100km
+	cultures <- phase[,c('Culture1','Culture2','Culture3')]
+	cultures <- cultures[!is.na(cultures)]
+	near.phases <- subset(pha, Culture1%in%cultures & Period%in%phase$Period & PhaseID!=phase$PhaseID)
+	if(nrow(near.phases)>0){
+		near.phases$dist <- slc(x=phase$Longitude, y=phase$Latitude, ax=near.phases$Longitude, ay=near.phases$Latitude, input='deg') * 6378.1
+		near.phases <- subset(near.phases,dist<100)
+		}
+
+	# if no other phases available, get phases with same period within 100km
+	if(nrow(near.phases)==0){
+		near.phases <- subset(pha, Period%in%phase$Period & PhaseID!=phase$PhaseID)
+		if(nrow(near.phases)>0){
+			near.phases$dist <- slc(x=phase$Longitude, y=phase$Latitude, ax=near.phases$Longitude, ay=near.phases$Latitude, input='deg') * 6378.1
+			near.phases <- subset(near.phases,dist<100)
+			}
+		}
+
+	# log probabilities updated by local phases
+	local.mu <- near.phases$GMM
+	local.mu <- local.mu[!is.na(local.mu)]
+	local.sig <- near.phases$GMS
+	local.sig <- local.sig[!is.na(local.sig)]
+	gaus.mean.lik <- matrix(0,res,res)
+	gaus.sd.lik <- matrix(0,res,res)
+	
+	if(length(local.mu)>0){
+		for(r in 1:res){
+			for(c in 1:res){
+				gaus.mean.lik[r,c] <- sum(dnorm(log(local.mu), gaus.mean.mu.vector[r], gaus.mean.sig.vector[c], log=TRUE),na.rm=TRUE)
+				gaus.sd.lik[r,c] <- sum(dnorm(log(local.sig), gaus.sd.mu.vector[r], gaus.sd.sig.vector[c], log=TRUE),na.rm=TRUE)
+				}
+			}
+		}
+
+	# combine prior and likelihood, and normalise to posterior
+	gaus.mean.posterior <- exp(log(gaus.mean.prior) + gaus.mean.lik)
+	gaus.mean.posterior <- gaus.mean.posterior/sum(gaus.mean.posterior)
+	gaus.sd.posterior <- exp(log(gaus.sd.prior) + gaus.sd.lik)
+	gaus.sd.posterior <- gaus.sd.posterior/sum(gaus.sd.posterior)
+
+	# posterior becomes new prior, to be updated by target phase data
+	gaus.mean.prior <- gaus.mean.posterior
+	gaus.sd.prior <- gaus.sd.posterior
+
+	# get phase c14 dates
+	d <- subset(c14, PhaseID==phase$PhaseID)
+	data <- data.frame(age=d$C14.Age, sd=d$C14.SD)
+
+	# generate the phase model
+	# phaseModel needs rebuilding as there are two independent prior matrices: the mean and the sd
+	mod.gaussian <- phaseModel(data, calcurve=intcal20, prior.matrix=prior.matrix.gaussian, model='norm', plot = FALSE)
+
+
+	# should probably output marginal 99 CI, to better inform domain
+
+
+
+
+
+
+
+
+##################
 
 # create a prior probability surface
 prior.matrix.initial <- matrix(1,200,200); prior.matrix.initial <- prior.matrix.initial/sum(prior.matrix.initial)
