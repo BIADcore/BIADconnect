@@ -10,17 +10,13 @@ c14 <- query.database(user, password, 'biad',"SELECT `PhaseID`,`SiteID`,`C14.Age
 pha <- merge(pha,sit,by='SiteID', all.y=FALSE)
 c14 <- subset(c14, !is.na(PhaseID))
 #--------------------------------------------------------------------------------------
-# resolution and domain of parameter estimates
+# prior parameters on phase modelled as Gaussian
 # note, log parameters, as both mean and sig cannot be negative 
-res <- 50
-gaus.mean.mu.vector <- seq(5,12,length.out=res)
-gaus.mean.sig.vector <- seq(0,3,length.out=res)
-gaus.sd.mu.vector <- seq(2,9,length.out=res)
-gaus.sd.sig.vector <- seq(0,3,length.out=res)
 
-# prior parameters for the gaussian 
-gaus.mean.prior <- matrix(1/(res^2),res,res)
-gaus.sd.prior <- matrix(1/(res^2),res,res)
+res <- 50
+mu <- seq(5,11,length.out=res)
+sigma <- seq(2,9,length.out=res)
+
 
 # loop through a bunch of phases
 
@@ -45,11 +41,21 @@ gaus.sd.prior <- matrix(1/(res^2),res,res)
 			}
 		}
 
-	# log probabilities updated by local phases
 	local.mu <- near.phases$GMM
 	local.mu <- local.mu[!is.na(local.mu)]
-	local.sig <- near.phases$GMS
-	local.sig <- local.sig[!is.na(local.sig)]
+	local.sigma <- near.phases$GMS
+	local.sigma <- local.sigma[!is.na(local.sigma)]
+
+	# likelihoods of local phases
+	# the problem here is the mean of local phases informs on the mean of the target phase
+	# but the SD of local phases is irrelevant - each phase has a SD. This is not the uncertainty, but the genuine spread!
+	# So maybe we should have independent parameters?
+	# start with two independent priors...
+	# if local phases are available, update prior, such that the uncertainty on mean and separately the sd are dealt with
+
+
+	# log probabilities updated by local phases
+
 	gaus.mean.lik <- matrix(0,res,res)
 	gaus.sd.lik <- matrix(0,res,res)
 	
