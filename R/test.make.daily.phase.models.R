@@ -14,11 +14,12 @@ c14 <- subset(c14, !is.na(PhaseID))
 # note, log parameters, as both mean and sig cannot be negative 
 
 res <- 50
-mu <- seq(5,11,length.out=res)
-sigma <- seq(2,9,length.out=res)
+prior <- data.frame(mu=seq(5,11,length.out=res),
+	mu.prob = rep(1,res)/res,
+	sigma = seq(2,9,length.out=res),
+	sigma.prob = rep(1,res)/res)
 
-
-# loop through a bunch of phases
+# extract info from local phases
 
 	i <- sample(1:nrow(pha),size=1)
 	phase <- pha[i,]
