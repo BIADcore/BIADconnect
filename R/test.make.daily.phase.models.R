@@ -10,13 +10,19 @@ c14 <- query.database(user, password, 'biad',"SELECT `PhaseID`,`SiteID`,`C14.Age
 pha <- merge(pha,sit,by='SiteID', all.y=FALSE)
 c14 <- subset(c14, !is.na(PhaseID))
 #--------------------------------------------------------------------------------------
-# prior parameters on phase modelled as Gaussian
+# parameters domain and prior probabilities for phase modelled as Gaussian
 # note, log parameters, as both mean and sig cannot be negative 
 
 res <- 50
-prior <- data.frame(mu=seq(5,11,length.out=res),
+
+mu <- seq(5,11,length.out=res)
+sigma <- seq(3,9,length.out=res)
+mu.error <- seq(2,8,length.out=res)
+sigma.error <- seq(2,8, length.out=res)
+
+prior <- data.frame(mu=mu,
 	mu.prob = rep(1,res)/res,
-	sigma = seq(2,9,length.out=res),
+	sigma = sigma,
 	sigma.prob = rep(1,res)/res)
 
 # extract info from local phases
@@ -47,7 +53,12 @@ prior <- data.frame(mu=seq(5,11,length.out=res),
 	local.sigma <- near.phases$GMS
 	local.sigma <- local.sigma[!is.na(local.sigma)]
 
-	# likelihoods of local phases
+	# likelihoods from local phases
+	# i.e., if we have one local phase, we can only improve our prior a tiny bit
+
+
+
+
 	# the problem here is the mean of local phases informs on the mean of the target phase
 	# but the SD of local phases is irrelevant - each phase has a SD. This is not the uncertainty, but the genuine spread!
 	# So maybe we should have independent parameters?
