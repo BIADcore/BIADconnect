@@ -53,10 +53,22 @@ sigma.prob <- rep(1/res,res)
 	
 	# If there are any local estimates, use them to update prior non-parameterically, using kernel density
 	# Note, mu and sigma are independent at this stage
-	# If there is only one local phase, bandwidth cannot be calculated automatically from data, so for now use 200yrs for mu, and 50yrs for sigma
+	# If there is only one local phase, bandwidth cannot be calculated automatically from data, so for now use 0.1 for mu and sigma
+	local.mu <- c(5000, 5400, 7200)
+	local.sigma <- c(300, 400, 350)
 
-	plot(density(0,bw=1))
+	if(length(local.mu)==1)d.mu <- density(log(local.mu),bw=0.1)
+	if(length(local.sigma)==1)d.sigma <- density(log(local.sigma),bw=0.1)
+	if(length(local.mu)>1)d.mu <- density(log(local.mu))
+	if(length(local.sigma)>1)d.sigma <- density(log(local.sigma))
 	
+	
+	# get phase c14 dates
+	d <- subset(c14, PhaseID==phase$PhaseID)
+	data <- data.frame(age=d$C14.Age, sd=d$C14.SD)
+	
+	# estimate date domain of taget phase
+	data.range <- estimateDataDomain(data, calcurve=intcal20)
 	
 	# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
 
