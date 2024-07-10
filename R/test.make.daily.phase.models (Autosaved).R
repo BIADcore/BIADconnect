@@ -17,11 +17,11 @@ c14 <- subset(c14, !is.na(PhaseID))
 #--------------------------------------------------------------------------------------
 
 # start with a uniform prior, using log mean and log sigma, as neither can be negative
-res <- 50
-mu <- seq(5,11,length.out=res)
-sigma <- seq(3,9,length.out=res)
-mu.prob <- rep(1/res,res)
-sigma.prob <- rep(1/res,res)
+		res <- 100
+		mu <- seq(5,11,length.out=res)
+		sigma <- seq(3,9,length.out=res)
+		mu.prob <- rep(1/res,res)
+		sigma.prob <- rep(1/res,res)
 
 # extract info from local phases
 
@@ -53,14 +53,34 @@ sigma.prob <- rep(1/res,res)
 	
 	# If there are any local estimates, use them to update prior non-parameterically, using kernel density
 	# Note, mu and sigma are independent at this stage
-	# If there is only one local phase, bandwidth cannot be calculated automatically from data, so for now use 200yrs for mu, and 50yrs for sigma
-	local.mu <- c(5000,5400, 5200)
-	local.sigma <- c(300,400,350)
-	d <- density(log(local.mu), from=min(mu), t=max(mu) )
-	plot(density(0,bw=1))
-	
+	# If there is only one local phase, bandwidth cannot be calculated automatically from data, so for now use 0.1 for mu and sigma
+#	local.mu <- c(5000, 5400, 7200)
+#	local.sigma <- c(300, 400, 350)
+	NL <- length(local.mu)
+
+	# get phase c14 dates
+	d <- subset(c14, PhaseID==phase$PhaseID)
+	data <- data.frame(age=d$C14.Age, sd=d$C14.SD)
+	data
 	
 	# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
+	cond <- nrow(data)==0 & NL<3
+	
+	if(!cond){
+		
+		# estimate mu domain of target phase
+		target.mu.range <- log(estimateDataDomain(data, calcurve=intcal20))
+	
+	# estimate mu domain of local phases
+	if(length(local.mu)==0){
+		local.mu.range <- 
+		}
+	if(length(local.mu)==1)d.mu <- density(log(local.mu),bw=0.1)
+	if(length(local.sigma)==1)d.sigma <- density(log(local.sigma),bw=0.1)
+	if(length(local.mu)>1)d.mu <- density(log(local.mu))
+	if(length(local.sigma)>1)d.sigma <- density(log(local.sigma))
+	
+
 
 
 ###########################################################
