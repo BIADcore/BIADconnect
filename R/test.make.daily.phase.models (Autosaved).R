@@ -61,20 +61,31 @@ c14 <- subset(c14, !is.na(PhaseID))
 	# get phase c14 dates
 	d <- subset(c14, PhaseID==phase$PhaseID)
 	data <- data.frame(age=d$C14.Age, sd=d$C14.SD)
-	data
-	
-	# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
-	cond <- nrow(data)==0 & NL<3
-	
-	if(!cond){
-		
-		# estimate mu domain of target phase
-		target.mu.range <- log(estimateDataDomain(data, calcurve=intcal20))
-	
-	# estimate mu domain of local phases
-	if(length(local.mu)==0){
-		local.mu.range <- 
+
+	if(nrow(data)==0 & NL<3){
+		# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
+		mu.range <- NA
 		}
+	if(nrow(data)==0) & NL>=3){
+		mu.range <- range(local.mu) + c(-0.5,0.5)
+		sigma.range <- range(local.sigma) + c(-0.5,0.5)	
+		d.mu <- density(log(local.mu),bw=0.1)		
+		}
+	if(nrow(data)>0 & NL==0){
+		mu.range <- log(estimateDataDomain(data, calcurve=intcal20)) + c(-0.5,0.5)
+		}
+	if(nrow(data)>0 & NL>1){
+		m1 <- range(local.mu) 
+		m2 <- log(estimateDataDomain(data, calcurve=intcal20))
+		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2])) + c(-0.5,0.5)
+		}
+		
+
+	if(NL==1)bw <- "nrd0"
+	if(NL>1)bw <- 0.1
+mu.range
+		
+
 	if(length(local.mu)==1)d.mu <- density(log(local.mu),bw=0.1)
 	if(length(local.sigma)==1)d.sigma <- density(log(local.sigma),bw=0.1)
 	if(length(local.mu)>1)d.mu <- density(log(local.mu))
