@@ -17,11 +17,11 @@ c14 <- subset(c14, !is.na(PhaseID))
 #--------------------------------------------------------------------------------------
 
 # start with a uniform prior, using log mean and log sigma, as neither can be negative
-res <- 50
-mu <- seq(5,11,length.out=res)
-sigma <- seq(3,9,length.out=res)
-mu.prob <- rep(1/res,res)
-sigma.prob <- rep(1/res,res)
+		res <- 100
+		mu <- seq(5,11,length.out=res)
+		sigma <- seq(3,9,length.out=res)
+		mu.prob <- rep(1/res,res)
+		sigma.prob <- rep(1/res,res)
 
 # extract info from local phases
 
@@ -54,23 +54,43 @@ sigma.prob <- rep(1/res,res)
 	# If there are any local estimates, use them to update prior non-parameterically, using kernel density
 	# Note, mu and sigma are independent at this stage
 	# If there is only one local phase, bandwidth cannot be calculated automatically from data, so for now use 0.1 for mu and sigma
-	local.mu <- c(5000, 5400, 7200)
-	local.sigma <- c(300, 400, 350)
+#	local.mu <- c(5000, 5400, 7200)
+#	local.sigma <- c(300, 400, 350)
+	NL <- length(local.mu)
+
+	# get phase c14 dates
+	d <- subset(c14, PhaseID==phase$PhaseID)
+	data <- data.frame(age=d$C14.Age, sd=d$C14.SD)
+
+	if(nrow(data)==0 & NL<3){
+		# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
+		mu.range <- NA
+		}
+	if(nrow(data)==0) & NL>=3){
+		mu.range <- range(local.mu) + c(-0.5,0.5)
+		sigma.range <- range(local.sigma) + c(-0.5,0.5)		
+		}
+	if(nrow(data)>0 & NL==0){
+		mu.range <- log(estimateDataDomain(data, calcurve=intcal20)) + c(-0.5,0.5)
+		}
+	if(nrow(data)>0 & NL>1){
+		m1 <- range(local.mu) 
+		m2 <- log(estimateDataDomain(data, calcurve=intcal20))
+		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2])) + c(-0.5,0.5)
+		}
+		
+
+	if(NL==1)bw <- "nrd0"
+	if(NL>1)bw <- 0.1
+mu.range
+		
 
 	if(length(local.mu)==1)d.mu <- density(log(local.mu),bw=0.1)
 	if(length(local.sigma)==1)d.sigma <- density(log(local.sigma),bw=0.1)
 	if(length(local.mu)>1)d.mu <- density(log(local.mu))
 	if(length(local.sigma)>1)d.sigma <- density(log(local.sigma))
 	
-	
-	# get phase c14 dates
-	d <- subset(c14, PhaseID==phase$PhaseID)
-	data <- data.frame(age=d$C14.Age, sd=d$C14.SD)
-	
-	# estimate date domain of taget phase
-	data.range <- estimateDataDomain(data, calcurve=intcal20)
-	
-	# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
+
 
 
 ###########################################################
