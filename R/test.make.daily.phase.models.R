@@ -10,6 +10,57 @@ c14 <- query.database(user, password, 'biad',"SELECT `PhaseID`,`SiteID`,`C14.Age
 pha <- merge(pha,sit,by='SiteID', all.y=FALSE)
 c14 <- subset(c14, !is.na(PhaseID))
 #--------------------------------------------------------------------------------------
+# estimate bandwidth for later
+
+
+
+#--------------------------------------------------------------------------------------
+
+# start with a uniform prior, using log mean and log sigma, as neither can be negative
+res <- 50
+mu <- seq(5,11,length.out=res)
+sigma <- seq(3,9,length.out=res)
+mu.prob <- rep(1/res,res)
+sigma.prob <- rep(1/res,res)
+
+# extract info from local phases
+
+	i <- sample(1:nrow(pha),size=1)
+	phase <- pha[i,]
+
+	# get other phases with same culture and period, within 100km
+	cultures <- phase[,c('Culture1','Culture2','Culture3')]
+	cultures <- cultures[!is.na(cultures)]
+	near.phases <- subset(pha, Culture1%in%cultures & Period%in%phase$Period & PhaseID!=phase$PhaseID)
+	if(nrow(near.phases)>0){
+		near.phases$dist <- slc(x=phase$Longitude, y=phase$Latitude, ax=near.phases$Longitude, ay=near.phases$Latitude, input='deg') * 6378.1
+		near.phases <- subset(near.phases,dist<100)
+		}
+
+	# if no other phases available, get phases with same period within 100km
+	if(nrow(near.phases)==0){
+		near.phases <- subset(pha, Period%in%phase$Period & PhaseID!=phase$PhaseID)
+		if(nrow(near.phases)>0){
+			near.phases$dist <- slc(x=phase$Longitude, y=phase$Latitude, ax=near.phases$Longitude, ay=near.phases$Latitude, input='deg') * 6378.1
+			near.phases <- subset(near.phases,dist<100)
+			}
+		}
+
+	local.mu <- near.phases$GMM
+	local.mu <- local.mu[!is.na(local.mu)]
+	local.sigma <- near.phases$GMS
+	local.sigma <- local.sigma[!is.na(local.sigma)]
+	
+	# If there are any local estimates, use them to update prior non-parameterically, using kernel density
+	# Note, mu and sigma are independent at this stage
+	# If there is only one local phase, bandwidth cannot be calculated automatically from data, so for now use 200yrs for mu, and 50yrs for sigma
+	plot(density(0,bw=1))
+	
+	
+	# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
+
+
+###########################################################
 # parameters domain and prior probabilities for phase modelled as Gaussian
 # note, log parameters, as both mean and sig cannot be negative 
 
