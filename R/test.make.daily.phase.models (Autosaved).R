@@ -54,7 +54,9 @@ sigma.prob <- rep(1/res,res)
 	# If there are any local estimates, use them to update prior non-parameterically, using kernel density
 	# Note, mu and sigma are independent at this stage
 	# If there is only one local phase, bandwidth cannot be calculated automatically from data, so for now use 200yrs for mu, and 50yrs for sigma
-
+	local.mu <- c(5000,5400, 5200)
+	local.sigma <- c(300,400,350)
+	d <- density(log(local.mu), from=min(mu), t=max(mu) )
 	plot(density(0,bw=1))
 	
 	
