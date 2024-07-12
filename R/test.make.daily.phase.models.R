@@ -68,7 +68,9 @@ c14 <- subset(c14, !is.na(PhaseID))
 		}
 	if(nrow(data)==0) & NL>=3){
 		mu.range <- range(local.mu) + c(-0.5,0.5)
-		sigma.range <- range(local.sigma) + c(-0.5,0.5)		
+		sigma.range <- range(local.sigma) + c(-0.5,0.5)	
+		d.mu <- density(log(local.mu),from=mu.range[1],to=mu.range[2],n=res)
+		d.sigma <- density(log(local.mu),from=mu.sigma[1],to=mu.sigma[2],n=res)		
 		}
 	if(nrow(data)>0 & NL==0){
 		mu.range <- log(estimateDataDomain(data, calcurve=intcal20)) + c(-0.5,0.5)
