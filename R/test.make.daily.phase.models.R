@@ -1,8 +1,10 @@
 
 #--------------------------------------------------------------------------------------
 # testing new approach
+# revise::: using log mean and log sigma, as neither can be negative
 #--------------------------------------------------------------------------------------
 library(ADMUR)
+res <- 100
 
 sit <- query.database(user, password, 'biad',"SELECT * FROM `Sites`;")
 pha <- query.database(user, password, 'biad',"SELECT * FROM `Phases`;")
@@ -12,16 +14,16 @@ c14 <- subset(c14, !is.na(PhaseID))
 #--------------------------------------------------------------------------------------
 # estimate bandwidth for later
 
-
+		
+#		mu <- seq(5,11,length.out=res)
+#		sigma <- seq(3,9,length.out=res)
+#		mu.prob <- rep(1/res,res)
+#		sigma.prob <- rep(1/res,res)
 
 #--------------------------------------------------------------------------------------
 
-# start with a uniform prior, using log mean and log sigma, as neither can be negative
-		res <- 100
-		mu <- seq(5,11,length.out=res)
-		sigma <- seq(3,9,length.out=res)
-		mu.prob <- rep(1/res,res)
-		sigma.prob <- rep(1/res,res)
+
+
 
 # extract info from local phases
 
@@ -62,28 +64,33 @@ c14 <- subset(c14, !is.na(PhaseID))
 	d <- subset(c14, PhaseID==phase$PhaseID)
 	data <- data.frame(age=d$C14.Age, sd=d$C14.SD)
 
-	if(nrow(data)==0 & NL<3){
-		# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
-		??
-		}
-	if(nrow(data)==0) & NL>=3){
-		mu <- mean(local.mu)
-		mu.error <- sd(local.mu)
-		sigma <- mean(local.sigma)
-		sigma.error <- sd(local.sigma)
+	# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
+	
 
-		mu.range <- range(local.mu) + c(-0.5,0.5)
-		sigma.range <- range(local.sigma) + c(-0.5,0.5)	
-		d.mu <- density(log(local.mu),from=mu.range[1],to=mu.range[2],n=res)
-		d.sigma <- density(log(local.sigma),from=sigma.range[1],to=sigma.range[2],n=res)			
+	if(nrow(data)==0) & NL>=3){
+		# no local 14C, so just use the mean estimates from the local phases
+		mu <- mean(local.mu)
+		sigma <- mean(local.sigma)	
+		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
+		query.database(user, password, 'biad',sql.command)	
 		}
+
 	if(nrow(data)>0 & NL==0){
-		est <- estimateDataDomain(data, calcurve=intcal20)
-		mu.range <- log(est) + c(-0.5,0.5)
-		sigma.range <- c(3,log(diff(est))+0.5)
+		# no local phases available, so use a uniform prior across a wider range than the 14c data, to account for low number of samples
+		mu.range <- estimateDataDomain(data, calcurve=intcal20) + c(-500,500)
+		sigma.range <- c(diff(mu.range)/10, diff(mu.range)/3)
+		prior.matrix <- matrix(1/(res^2),res,res)
+		row.names(prior.matrix) <- seq(min(mu.range),max(mu.range),length.out=res)
+		colnames(prior.matrix) <- seq(min(sigma.range),max(sigma.range),length.out=res)
+		mod.gaussian <- phaseModel(data, calcurve=intcal20, prior.matrix=prior.matrix, model='norm', plot = FALSE)
+		mu <- mod.gaussian$mu
+		sigma <- mod.gaussian$sigma
+		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
+		query.database(user, password, 'biad',sql.command)
 		}
+
 	if(nrow(data)>0 & N==1){
-		est <- estimateDataDomain(data, calcurve=intcal20)		
+		est <- estimateDataDomain(data, calcurve=intcal20) + c(-500,500)		
 
 
 	if(nrow(data)>0 & NL>1){
@@ -96,12 +103,26 @@ c14 <- subset(c14, !is.na(PhaseID))
 		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2])) + c(-0.5,0.5)
 		}
 		
+
+		mu.range <- range(local.mu) + c(-0.5,0.5)
+		sigma.range <- range(local.sigma) + c(-0.5,0.5)	
+		d.mu <- density(log(local.mu),from=mu.range[1],to=mu.range[2],n=res)
+		d.sigma <- density(log(local.sigma),from=sigma.range[1],to=sigma.range[2],n=res)	
+
 	d.mu <- density(log(local.mu),from=mu.range[1],to=mu.range[2],n=res)
 	d.sigma <- density(log(local.mu),from=sigma.range[1],to=sigma.range[2],n=res)	
 	if(NL==1)bw <- "nrd0"
 	if(NL>1)bw <- 0.1
 mu.range
-		
+ # create a prior probability surface
+prior.matrix.initial <- matrix(1,200,200); prior.matrix.initial <- prior.matrix.initial/sum(prior.matrix.initial)
+
+# gaussian
+mu.range <- c(500,40000)
+sigma.range <- c(10,1000)
+prior.matrix.gaussian.initial <- prior.matrix.initial
+row.names(prior.matrix.gaussian.initial) <- seq(min(mu.range),max(mu.range),length.out=nrow(prior.matrix.gaussian.initial))
+colnames(prior.matrix.gaussian.initial) <- seq(min(sigma.range),max(sigma.range),length.out=ncol(prior.matrix.gaussian.initial))		
 
 	if(length(local.mu)==1)d.mu <- density(log(local.mu),bw=0.1)
 	if(length(local.sigma)==1)d.sigma <- density(log(local.sigma),bw=0.1)
