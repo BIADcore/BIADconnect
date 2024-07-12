@@ -54,8 +54,8 @@ c14 <- subset(c14, !is.na(PhaseID))
 	# If there are any local estimates, use them to update prior non-parameterically, using kernel density
 	# Note, mu and sigma are independent at this stage
 	# If there is only one local phase, bandwidth cannot be calculated automatically from data, so for now use 0.1 for mu and sigma
-#	local.mu <- c(5000, 5400, 7200)
-#	local.sigma <- c(300, 400, 350)
+	local.mu <- c(5000, 5400, 7200)
+	local.sigma <- c(300, 400, 350)
 	NL <- length(local.mu)
 
 	# get phase c14 dates
@@ -64,24 +64,40 @@ c14 <- subset(c14, !is.na(PhaseID))
 
 	if(nrow(data)==0 & NL<3){
 		# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
-		mu.range <- NA
+		??
 		}
 	if(nrow(data)==0) & NL>=3){
+		mu <- mean(local.mu)
+		mu.error <- sd(local.mu)
+		sigma <- mean(local.sigma)
+		sigma.error <- sd(local.sigma)
+
 		mu.range <- range(local.mu) + c(-0.5,0.5)
 		sigma.range <- range(local.sigma) + c(-0.5,0.5)	
 		d.mu <- density(log(local.mu),from=mu.range[1],to=mu.range[2],n=res)
-		d.sigma <- density(log(local.mu),from=mu.sigma[1],to=mu.sigma[2],n=res)		
+		d.sigma <- density(log(local.sigma),from=sigma.range[1],to=sigma.range[2],n=res)			
 		}
 	if(nrow(data)>0 & NL==0){
-		mu.range <- log(estimateDataDomain(data, calcurve=intcal20)) + c(-0.5,0.5)
+		est <- estimateDataDomain(data, calcurve=intcal20)
+		mu.range <- log(est) + c(-0.5,0.5)
+		sigma.range <- c(3,log(diff(est))+0.5)
 		}
+	if(nrow(data)>0 & N==1){
+		est <- estimateDataDomain(data, calcurve=intcal20)		
+
+
 	if(nrow(data)>0 & NL>1){
-		m1 <- range(local.mu) 
-		m2 <- log(estimateDataDomain(data, calcurve=intcal20))
+		est <- estimateDataDomain(data, calcurve=intcal20)
+		m1 <- log(est)
+		m2 <- range(local.mu) 
 		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2])) + c(-0.5,0.5)
+		s1 <- c(3,log(diff(est)))
+		s2 <- range(local.sigma)
+		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2])) + c(-0.5,0.5)
 		}
 		
-
+	d.mu <- density(log(local.mu),from=mu.range[1],to=mu.range[2],n=res)
+	d.sigma <- density(log(local.mu),from=sigma.range[1],to=sigma.range[2],n=res)	
 	if(NL==1)bw <- "nrd0"
 	if(NL>1)bw <- 0.1
 mu.range
