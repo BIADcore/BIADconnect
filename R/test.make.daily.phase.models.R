@@ -90,8 +90,16 @@ c14 <- subset(c14, !is.na(PhaseID))
 		}
 
 	if(nrow(data)>0 & N==1){
-		est <- estimateDataDomain(data, calcurve=intcal20) + c(-500,500)		
-
+		# only one local phase available, bandwidth cannot be calculated automatically
+		m1 <- estimateDataDomain(data, calcurve=intcal20) + c(-500,500)		
+		m2 <- range(local.mu) 
+		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2]))	
+		s1 <- c(diff(m1)/10, diff(m2)/3)	
+		s2 <- range(local.sigma)
+		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2]))
+		d.mu <- density(log(local.mu),from=mu.range[1],to=mu.range[2],n=res, bw=0.1)
+		d.sigma <- density(log(local.sigma),from=sigma.range[1],to=sigma.range[2],n=res, bw=0.1)			
+		prior.matrix <- matrix(####
 
 	if(nrow(data)>0 & NL>1){
 		est <- estimateDataDomain(data, calcurve=intcal20)
