@@ -108,8 +108,8 @@ for(n in 1:N){
 		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2]))
 		d.mu <- density(local.mu,from=mu.range[1],to=mu.range[2],n=res)
 		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res)
-		print(paste('mu bw:',round(d.mu$bw)))
-		print(paste('sigma bw:',round(d.sigma$bw)))
+		print(paste('mu bw:',round(d.mu$bw),2))
+		print(paste('sigma bw:',round(d.sigma$bw,2)))
 		prior.matrix <- matrix(d.mu,res,res) * t(matrix(d.sigma,res,res))
 		prior.matrix <- prior.matrix/sum(prior.matrix)
 		row.names(prior.matrix) <- d.mu$x
