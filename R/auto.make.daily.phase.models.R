@@ -1,41 +1,20 @@
 
 #--------------------------------------------------------------------------------------
-# chronology on all phases
+# testing new approach
+# use log mean and log sigma, as neither can be negative
+# add ellipsoid model
+# slightly prioritise phases with no data yet
+# increase resolution
 #--------------------------------------------------------------------------------------
-# To do:
-# Prioritise phases that haven't been done yet
-# Change loop structure so it can process norm and ellipsoid models together
-# Structure prior(s) in a Bayesian chain, using parameters derived empirically from the entire database
-# Ensure resolution and range of prior is compatible with different resolution and range of previous posteriors
-
-#--------------------------------------------------------------------------------------
-model.folder.gaussian <- '../../phase model posteriors/gaussian'
-model.folder.ellipsoid <- '../../phase model posteriors/ellipsoid'
 library(ADMUR)
-#--------------------------------------------------------------------------------------
+res <- 100
+
 sit <- query.database(user, password, 'biad',"SELECT * FROM `Sites`;")
 pha <- query.database(user, password, 'biad',"SELECT * FROM `Phases`;")
 c14 <- query.database(user, password, 'biad',"SELECT `PhaseID`,`SiteID`,`C14.Age`,`C14.SD` FROM `C14Samples`;")
 pha <- merge(pha,sit,by='SiteID', all.y=FALSE)
 c14 <- subset(c14, !is.na(PhaseID))
-
-# create a prior probability surface
-prior.matrix.initial <- matrix(1,200,200); prior.matrix.initial <- prior.matrix.initial/sum(prior.matrix.initial)
-
-# gaussian
-mu.range <- c(500,40000)
-sigma.range <- c(10,1000)
-prior.matrix.gaussian.initial <- prior.matrix.initial
-row.names(prior.matrix.gaussian.initial) <- seq(min(mu.range),max(mu.range),length.out=nrow(prior.matrix.gaussian.initial))
-colnames(prior.matrix.gaussian.initial) <- seq(min(sigma.range),max(sigma.range),length.out=ncol(prior.matrix.gaussian.initial))
-
-# ellipsoid
-min.range <- c(500,40000)
-duration.range <- c(10,4000)
-prior.matrix.ellipsoid.initial <- prior.matrix.initial
-row.names(prior.matrix.ellipsoid.initial) <- seq(min(min.range),max(min.range),length.out=nrow(prior.matrix.ellipsoid.initial))
-colnames(prior.matrix.ellipsoid.initial) <- seq(min(duration.range),max(duration.range),length.out=ncol(prior.matrix.ellipsoid.initial))
-
+#--------------------------------------------------------------------------------------
 N <- 500
 for(n in 1:N){
 
@@ -60,61 +39,87 @@ for(n in 1:N){
 			}
 		}
 
-	# reduce to informative phases (that have a posterior model already)
-	already.gaussian <- gsub('.RData','',list.files(model.folder.gaussian))
-	near.phases.gaussian <- near.phases[near.phases$PhaseID%in%already.gaussian,]
-
-	already.ellipsoid <- gsub('.RData','',list.files(model.folder.ellipsoid))
-	near.phases.ellipsoid <- near.phases[near.phases$PhaseID%in%already.ellipsoid,]
-
-	# generate the new prior from the posteriors of the near phases
-	# gaussian
-	NP <- nrow(near.phases.gaussian)
-	prior.matrix <- prior.matrix.gaussian.initial
-	if(NP>0)for(np in 1:NP){
-		load(paste(model.folder.gaussian,paste(near.phases.gaussian$PhaseID[np],'RData',sep='.'),sep='/'))
-		if(!is.nan(sum(mod$posterior)))prior.matrix <- prior.matrix + mod$posterior
-		}
-	prior.matrix.gaussian <- prior.matrix/sum(prior.matrix)
-
-	# ellipsoid
-	NP <- nrow(near.phases.ellipsoid)
-	prior.matrix <- prior.matrix.ellipsoid.initial
-	if(NP>0)for(np in 1:NP){
-		load(paste(model.folder.ellipsoid,paste(near.phases.ellipsoid$PhaseID[np],'RData',sep='.'),sep='/'))
-		if(!is.nan(sum(mod$posterior)))prior.matrix <- prior.matrix + mod$posterior
-		}
-	prior.matrix.ellipsoid <- prior.matrix/sum(prior.matrix)
+	local.mu <- near.phases$GMM
+	local.mu <- local.mu[!is.na(local.mu)]
+	local.sigma <- near.phases$GMS
+	local.sigma <- local.sigma[!is.na(local.sigma)]
+	NL <- length(local.mu)
 
 	# get phase c14 dates
 	d <- subset(c14, PhaseID==phase$PhaseID)
 	data <- data.frame(age=d$C14.Age, sd=d$C14.SD)
 
-	# generate the phase model
-	mod.gaussian <- phaseModel(data, calcurve=intcal20, prior.matrix=prior.matrix.gaussian, model='norm', plot = FALSE)
-	mod.ellipsoid <- phaseModel(data, calcurve=intcal20, prior.matrix=prior.matrix.ellipsoid, model='ellipse', plot = FALSE)
+	# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
+	# If there are any local estimates, use them to update prior non-parameterically (kernel density)
+	# Bandwidth calculated automatically from the data, except if there is only one local phase
+	# Note mu and sigma are independent in the prior. 
 
-	# save the models
-	mod <- mod.gaussian
-	save(mod, file=paste(model.folder.gaussian,paste(phase$PhaseID,'RData',sep='.'),sep='/'))
-	mod <- mod.ellipsoid
-	save(mod, file=paste(model.folder.ellipsoid,paste(phase$PhaseID,'RData',sep='.'),sep='/'))
+	if(nrow(data)==0) & NL>=3){
+		# no local 14C, so just use the mean estimates from the local phases
+		mu <- mean(local.mu)
+		sigma <- mean(local.sigma)	
+		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
+		query.database(user, password, 'biad',sql.command)	
+		}
 
-	# add point estimates to the database if the posterior is reasonably tight	
-	# gaussian
-	cond <- max(mod.gaussian$posterior)/mean(mod.gaussian$posterior)>10
-	if(cond){
-		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `gaussianModelMu`=",mod.gaussian$mu,", `gaussianModelSigma`=",mod.gaussian$sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
+	if(nrow(data)>0 & NL==0){
+		# no local phases available, so use a uniform prior across a wider range than the 14c data, to account for low number of samples
+		mu.range <- estimateDataDomain(data, calcurve=intcal20) + c(-500,500)
+		sigma.range <- c(diff(mu.range)/10, diff(mu.range)/3)
+		prior.matrix <- matrix(1/(res^2),res,res)
+		row.names(prior.matrix) <- seq(min(mu.range),max(mu.range),length.out=res)
+		colnames(prior.matrix) <- seq(min(sigma.range),max(sigma.range),length.out=res)
+		mod.gaussian <- phaseModel(data, calcurve=intcal20, prior.matrix=prior.matrix, model='norm', plot = FALSE)
+		mu <- mod.gaussian$mu
+		sigma <- mod.gaussian$sigma
+		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
 		query.database(user, password, 'biad',sql.command)
 		}
 
-	# ellipsoid
-	cond <- max(mod.ellipsoid$posterior)/mean(mod.ellipsoid$posterior)>10
-	if(cond){
-		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `ellipsoidModelMin`=",mod.ellipsoid$min,", `ellipsoidModelDuration`=",mod.ellipsoid$duration," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
+	if(nrow(data)>0 & NL==1){
+		# only one local phase available, bandwidth cannot be calculated automatically, use 100, 30 0.1
+		m1 <- estimateDataDomain(data, calcurve=intcal20) + c(-500,500)		
+		m2 <- range(local.mu) 
+		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2]))	
+		s1 <- c(diff(m1)/10, diff(m2)/3)	
+		s2 <- range(local.sigma)
+		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2]))
+		d.mu <- density(local.mu,from=mu.range[1],to=mu.range[2],n=res, bw=100)
+		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res, bw=30)			
+		prior.matrix <- matrix(d.mu,res,res) * t(matrix(d.sigma,res,res))
+		prior.matrix <- prior.matrix/sum(prior.matrix)
+		row.names(prior.matrix) <- d.mu$x
+		colnames(prior.matrix) <- d.sigma$x
+		mod.gaussian <- phaseModel(data, calcurve=intcal20, prior.matrix=prior.matrix, model='norm', plot = FALSE)
+		mu <- mod.gaussian$mu
+		sigma <- mod.gaussian$sigma
+		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
+		query.database(user, password, 'biad',sql.command)
+		}
+
+	if(nrow(data)>0 & NL>1){
+		# bandwidth be calculated automatically. Print, to assist choosing a bandwdith for previous codeblock		
+		est <- estimateDataDomain(data, calcurve=intcal20)
+		m1 <- est
+		m2 <- range(local.mu) 
+		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2])) + c(-500,500)
+		s1 <- c(diff(m1)/10, diff(m2)/3)	
+		s2 <- range(local.sigma)
+		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2]))
+		d.mu <- density(local.mu,from=mu.range[1],to=mu.range[2],n=res)
+		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res)
+		print(paste('mu bw:',round(d.mu$bw)))
+		print(paste('sigma bw:',round(d.sigma$bw)))
+		prior.matrix <- matrix(d.mu,res,res) * t(matrix(d.sigma,res,res))
+		prior.matrix <- prior.matrix/sum(prior.matrix)
+		row.names(prior.matrix) <- d.mu$x
+		colnames(prior.matrix) <- d.sigma$x
+		mod.gaussian <- phaseModel(data, calcurve=intcal20, prior.matrix=prior.matrix, model='norm', plot = FALSE)
+		mu <- mod.gaussian$mu
+		sigma <- mod.gaussian$sigma
+		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
 		query.database(user, password, 'biad',sql.command)
 		}
 	}
-#-----------------------------------------------------------------------------------------
-
+	
 
