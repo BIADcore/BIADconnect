@@ -53,11 +53,9 @@ c14 <- subset(c14, !is.na(PhaseID))
 	local.sigma <- near.phases$GMS
 	local.sigma <- local.sigma[!is.na(local.sigma)]
 	
-	# If there are any local estimates, use them to update prior non-parameterically, using kernel density
-	# Note, mu and sigma are independent at this stage
-	# If there is only one local phase, bandwidth cannot be calculated automatically from data, so for now use 0.1 for mu and sigma
-	local.mu <- c(5000, 5400, 7200)
-	local.sigma <- c(300, 400, 350)
+
+	local.mu <- c(5000)
+	local.sigma <- c(300)
 	NL <- length(local.mu)
 
 	# get phase c14 dates
@@ -65,7 +63,9 @@ c14 <- subset(c14, !is.na(PhaseID))
 	data <- data.frame(age=d$C14.Age, sd=d$C14.SD)
 
 	# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
-	
+	# If there are any local estimates, use them to update prior non-parameterically (kernel density)
+	# Bandwidth calculated automatically from the data, except if there is only one local phase
+	# Note mu and sigma are independent in the prior. 
 
 	if(nrow(data)==0) & NL>=3){
 		# no local 14C, so just use the mean estimates from the local phases
@@ -89,26 +89,37 @@ c14 <- subset(c14, !is.na(PhaseID))
 		query.database(user, password, 'biad',sql.command)
 		}
 
-	if(nrow(data)>0 & N==1){
-		# only one local phase available, bandwidth cannot be calculated automatically
+	if(nrow(data)>0 & NL==1){
+		# only one local phase available, bandwidth cannot be calculated automatically, use 100, 30 0.1
 		m1 <- estimateDataDomain(data, calcurve=intcal20) + c(-500,500)		
 		m2 <- range(local.mu) 
 		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2]))	
 		s1 <- c(diff(m1)/10, diff(m2)/3)	
 		s2 <- range(local.sigma)
 		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2]))
-		d.mu <- density(log(local.mu),from=mu.range[1],to=mu.range[2],n=res, bw=0.1)
-		d.sigma <- density(log(local.sigma),from=sigma.range[1],to=sigma.range[2],n=res, bw=0.1)			
-		prior.matrix <- matrix(####
+		d.mu <- density(local.mu,from=mu.range[1],to=mu.range[2],n=res, bw=100)
+		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res, bw=30)			
+		prior.matrix <- matrix(d.mu,res,res) * t(matrix(d.sigma,res,res))
+		prior.matrix <- prior.matrix/sum(prior.matrix)
+		row.names(prior.matrix) <- d.mu$x
+		colnames(prior.matrix) <- d.sigma$x
+		mod.gaussian <- phaseModel(data, calcurve=intcal20, prior.matrix=prior.matrix, model='norm', plot = FALSE)
+		mu <- mod.gaussian$mu
+		sigma <- mod.gaussian$sigma
+		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
+		query.database(user, password, 'biad',sql.command)
+		}
 
 	if(nrow(data)>0 & NL>1){
+		# bandwidth be calculated automatically. Print, to assist choosing a bandwdith for previous codeblock		
 		est <- estimateDataDomain(data, calcurve=intcal20)
-		m1 <- log(est)
+		m1 <- est
 		m2 <- range(local.mu) 
-		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2])) + c(-0.5,0.5)
-		s1 <- c(3,log(diff(est)))
+		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2])) + c(-500,500)
+		s1 <- c(diff(m1)/10, diff(m2)/3)	
 		s2 <- range(local.sigma)
-		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2])) + c(-0.5,0.5)
+		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2]))
+		#######
 		}
 		
 
