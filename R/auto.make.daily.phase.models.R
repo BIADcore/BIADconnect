@@ -54,7 +54,7 @@ for(n in 1:N){
 	# Bandwidth calculated automatically from the data, except if there is only one local phase
 	# Note mu and sigma are independent in the prior. 
 
-	if(nrow(data)==0) & NL>=3){
+	if(nrow(data)==0 & NL>=3){
 		# no local 14C, so just use the mean estimates from the local phases
 		mu <- mean(local.mu)
 		sigma <- mean(local.sigma)	
