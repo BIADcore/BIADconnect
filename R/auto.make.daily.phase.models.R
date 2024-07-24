@@ -7,7 +7,7 @@
 # increase resolution
 #--------------------------------------------------------------------------------------
 library(ADMUR)
-res <- 100
+res <- 200
 
 sit <- query.database(user, password, 'biad',"SELECT * FROM `Sites`;")
 pha <- query.database(user, password, 'biad',"SELECT * FROM `Phases`;")
@@ -15,7 +15,7 @@ c14 <- query.database(user, password, 'biad',"SELECT `PhaseID`,`SiteID`,`C14.Age
 pha <- merge(pha,sit,by='SiteID', all.y=FALSE)
 c14 <- subset(c14, !is.na(PhaseID))
 #--------------------------------------------------------------------------------------
-N <- 500
+N <- 1000
 for(n in 1:N){
 
 	i <- sample(1:nrow(pha),size=1)
