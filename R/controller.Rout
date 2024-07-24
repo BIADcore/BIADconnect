@@ -42,14 +42,14 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Wed Jul 24 13:51:02 2024"
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Wed Jul 24 14:08:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Wed Jul 24 13:51:26 2024"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Wed Jul 24 14:08:25 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.descriptions.R at Wed Jul 24 13:51:29 2024"
-[1] "Starting to run script: auto.make.daily.map.R at Wed Jul 24 13:51:29 2024"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Wed Jul 24 14:08:29 2024"
+[1] "Starting to run script: auto.make.daily.map.R at Wed Jul 24 14:08:29 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -58,7 +58,1182 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.phase.models.R at Wed Jul 24 13:51:36 2024"
+[1] "Starting to run script: auto.make.daily.phase.models.R at Wed Jul 24 14:08:35 2024"
+[1] "BEBI"
+[1] "BZW3"
+[1] "HHT1"
+[1] "MINS1"
+[1] "DBE2"
+[1] "ORLA1"
+[1] "BERNO1"
+[1] "KOLI22"
+[1] "RDVE1"
+[1] "GUPALOV"
+[1] "SOMTBB"
+[1] "POTO1"
+[1] "BEALP2"
+[1] "CSERO2"
+[1] "KOLN1"
+[1] 6285 8075
+[1]  79 384
+[1] "LPJE2"
+[1] "STRALI1"
+[1] "TROB2"
+[1] "GUDC"
+[1] "ERNO"
+[1] "BOC1"
+[1] 5210 8295
+[1] 208.5 384.0
+[1] "VELZ1"
+[1] "KREMN"
+[1] "VESSEL"
+[1] "HAG1"
+[1] "DALI3"
+[1] "HG155"
+[1] "FLACK1"
+[1] 4319 6535
+[1] 121.6 376.0
+[1] "MP2"
+[1] "SHAR1"
+[1] "HNDY1"
+[1] "ANND"
+[1] 3650 5357
+[1] 170.7 405.0
+[1] "MOOW1"
+[1] "BAIHERC1"
+[1] "SANDO1"
+[1] "MANN2"
+[1] "ETY"
+[1] "OVEBA"
+[1] "QUIZQ3"
+[1] "LUZH1"
+[1] 3915 5805
+[1] 189 375
+[1] "VALEA3"
+[1] "JONSP1"
+[1] 3575 5961
+[1] 122 445
+[1] "TAN"
+[1] 3350 5204
+[1]  61.5 321.0
+[1] "ZAMORS"
+[1] "PRSN25EIA"
+[1] "VISUN"
+[1] "ERKT"
+[1] "GKOSI1"
+[1] "SJECK1"
+[1] "SEED2"
+[1] "KHRII"
+[1] "BDFON3"
+[1] "RDVE18"
+[1] "KO791"
+[1] "KARAN5"
+[1] "YTEPELN"
+[1] "LO"
+[1] "SAMOVO-EN"
+[1] "PRJIN8"
+[1] "SEBON"
+[1] "NIJME2"
+[1] "BEL2"
+[1] "GRAV1"
+[1]  7774 11265
+[1] 136 587
+[1] "EVMO3"
+[1] "AMRE3"
+[1] "WTZL"
+[1] 5350 7770
+[1] 242 302
+[1] "VAR"
+[1] 3466 6100
+[1] 163.4 488.0
+[1] "PRODRO-EN"
+[1] "MOOW1"
+[1] "ROQ"
+[1] "GRRT3"
+[1] 6930 9384
+[1]  78.5 454.0
+[1] "TIELM1"
+[1] "CM1"
+[1] "FERM1"
+[1] 4965 7185
+[1] 222 474
+[1] "HUL3"
+[1] "VAUMED"
+[1] "SVE1"
+[1]  8095 10890
+[1] 179.5 427.0
+[1] "PRNBU2"
+[1] "VALD1"
+[1] 4810 7000
+[1] 119 439
+[1] "LUM1"
+[1] "GRMIBB6"
+[1] "GKOSI1"
+[1] "JEZV1"
+[1] 4710 6520
+[1] 181 350
+[1] "OO"
+[1] 3076 5985
+[1] 193 193
+[1] "BAVA"
+[1] "GOV3"
+[1] "TRONUMED"
+[1] "PIETR4"
+[1] "KOLST1"
+[1] "BRYMED"
+[1] "ORMOZ1"
+[1] "BRESMA1"
+[1] "PFHUN1"
+[1] "PIDHIII1"
+[1] "GAMME1"
+[1] "Z<U+00DC>R04"
+[1] "PSSLHDL2"
+[1] "NORJES2"
+[1] "ABRICD-EN"
+[1] "HOLN"
+[1] "LACSLN"
+[1] "VANI1"
+[1] "VID"
+[1] "VLA7"
+[1] "LTRI2"
+[1] "LIPTO1"
+[1] "CF4"
+[1] 3559 6785
+[1] 222.6 505.0
+[1] "GARAUN1"
+[1] "ANNELBA"
+[1] "LMX1"
+[1] "DROUZK3"
+[1] "SLC02"
+[1] "POPO1"
+[1] "AERO"
+[1] "SEED4"
+[1] 5785 8530
+[1] 174 341
+[1] "WEILBAEIA"
+[1] "DEIPR1"
+[1] "GRRIVEM"
+[1] "SPZALA3"
+[1] "RORK"
+[1] 4024 5815
+[1]  79.1 386.0
+[1] "SOUC1"
+[1] "OLSU1"
+[1] "PERBB11"
+[1] "SIF"
+[1] 2964 5815
+[1] 254 254
+[1] "CUINAEP"
+[1] "SURSKII1"
+[1] "KOTK1"
+[1] "KREP1"
+[1] 1853 7153
+[1] 163.6 343.0
+[1] "BF"
+[1] "SZCZ6-3"
+[1] "BOLSHN1"
+[1] "SS"
+[1] "BILRUMG1"
+[1] "NORJES4"
+[1] "MRQL1"
+[1] "AZMA5"
+[1] "ENGL"
+[1] 3350 5825
+[1] 118 345
+[1] "KRZL"
+[1] 5230 7390
+[1] 216 453
+[1] "TED3"
+[1] "SODR"
+[1] 3350 5393
+[1] 101.7 345.0
+[1] "HETZBB"
+[1] "BILRUMG4"
+[1] "KXIVEBA"
+[1] "BY5"
+[1] 4815 8470
+[1] 343 343
+[1] "KIJKD1"
+[1] "MRQL1"
+[1] "OPAEI15"
+[1] "DSM1a"
+[1] 6915 9095
+[1] 218 317
+[1] "BAJBBA2"
+[1] "FALBO1"
+[1] "MUZHR1"
+[1] "BOSL1"
+[1] "CURM1"
+[1] "BERSZEKO1"
+[1] "OS1"
+[1] 4930 7760
+[1] 283 453
+[1] "VORON1"
+[1] "PETKO2"
+[1] "BY3"
+[1] "BLMD1"
+[1] "SHFEEBAY"
+[1] "HARSO2"
+[1] "RATZE1"
+[1] "OROSH1"
+[1] 6915 8885
+[1] 197 517
+[1] "OBE"
+[1] "BUCY1"
+[1] 5785 7765
+[1] 198 362
+[1] "KICN"
+[1] 3840 5825
+[1] 198.5 340.0
+[1] "ELTORR-EN"
+[1] "RIGA1"
+[1] "TISSOE1"
+[1] 4676 6498
+[1]  60.5 550.0
+[1] "PILG"
+[1] 3647 5820
+[1] 117.3 345.0
+[1] "PDG"
+[1] "AMPO"
+[1] "NOJGLBA3"
+[1] 2245 3896
+[1] 165.1 364.0
+[1] "JELS3"
+[1] "MYBT"
+[1] 4785 6270
+[1] 148.5 523.0
+[1] "SARRA1"
+[1] "BEVZ1"
+[1] "RAYMED"
+[1] "VAU"
+[1] "TED2"
+[1] "ROTHO1"
+[1] "TYSMOS1"
+[1] 4807 6498
+[1]  49 550
+[1] "SKMT"
+[1] 4540 6795
+[1] 225.5 272.0
+[1] "BESTA5"
+[1] "SND100LIA"
+[1] "BATLNEE"
+[1] "KGSD1"
+[1] 4775 6381
+[1]  33 393
+[1] "MURG1"
+[1] "TISZAF2"
+[1] "PESTE2"
+[1] "KOLI62"
+[1] 3642 5028
+[1] 138.6 301.0
+[1] "GRTT1"
+[1] "KRA-M85-4"
+[1] "EABEMED"
+[1] "LEHT"
+[1] "OSTP2"
+[1] 4017 6095
+[1] 107.8 448.0
+[1] "SLON4"
+[1] "SVE23UM"
+[1] "HELLELN"
+[1] "SADZ"
+[1] "KUTH09"
+[1] "UGU-IV"
+[1] "SVE4B1"
+[1] "SALP1"
+[1] 6730 8244
+[1]  28.5 256.0
+[1] "SNRMED"
+[1] "BERNI1"
+[1] "TYGEL2"
+[1] 3576 5545
+[1]  196.9 1252.0
+[1] "EASMED"
+[1] "DEVBLEEBA"
+[1] "GUDN3"
+[1] "KRIVA1"
+[1] "ROC541"
+[1] "OCO6"
+[1] "STRAL2"
+[1] "POST2"
+[1] "MGRN"
+[1] 4710 6800
+[1] 209 488
+[1] "NLIII"
+[1] "BBE3"
+[1] "SZIGUBB"
+[1] "TUCHO1"
+[1] "PATIN1"
+[1] "MEC1"
+[1] "MAGDEIA"
+[1] "CND1"
+[1] "Z<U+00DC>R04"
+[1] "MCK50LIA"
+[1] "TEM1"
+[1] 4206 6610
+[1]  56 468
+[1] "OARBUL2"
+[1] "VILLE2"
+[1] "POLIV1"
+[1] "BUNNI1"
+[1] "BERSZEKO3"
+[1] "MLDG"
+[1] "CACSBB"
+[1] "LEIUMED"
+[1] "SERVIA-EN"
+[1] "JONSP1"
+[1] 3575 5961
+[1] 122 445
+[1] "FLORES1"
+[1] "DEBDLEEBA"
+[1] "BSPBBII5"
+[1] "KUNKE1"
+[1] "DEHE01"
+[1] "GRI1"
+[1] 6866 9025
+[1]  94.5 275.0
+[1] "GOMOL9"
+[1] "GROMAN3"
+[1] 3576 5619
+[1]  78 509
+[1] "PSSLHDL3"
+[1] "AUW2"
+[1] "MARB"
+[1] "MEER5"
+[1]  6699 11080
+[1]  301 1028
+[1] "RDVE8"
+[1] "ESPT5"
+[1] "PODC"
+[1] "ANTRE1"
+[1] "SADO2"
+[1] "MUTTE1"
+[1] "STRALI1"
+[1] "WET4"
+[1] "ACHIU1"
+[1] "CACHOV2"
+[1] "JNGT1"
+[1] 6145 7925
+[1] 178 529
+[1] "CIULN3"
+[1] "RUSLE"
+[1] "RAKBAGF2"
+[1] "BBP1"
+[1] "HARA1"
+[1] "E2"
+[1] "SGMUMED"
+[1] "VINB1"
+[1] 7084 8700
+[1]  53.5 366.0
+[1] "ST2"
+[1] 6175 8340
+[1] 216.5 362.0
+[1] "PDC"
+[1] "ALSOR1"
+[1] "DP"
+[1] "DH3"
+[1] "JEZ2"
+[1] "ZUIU1"
+[1] 3908 5470
+[1] 156.2 404.0
+[1] "GAI01"
+[1] "PRIS1"
+[1] 6175 8075
+[1] 190 403
+[1] "TANGE1"
+[1] "OP33A"
+[1] "GINDEBA"
+[1] "PIERRE1"
+[1] "BARX"
+[1] "SEBBEBA"
+[1] "ALSONY-EN"
+[1] "EDE01"
+[1] "GRZG1"
+[1] 3914 5565
+[1] 165.1 369.0
+[1] "KAUFE2"
+[1] "JUVC1"
+[1] "SIDIBB"
+[1] "COLM1"
+[1] 4805 7005
+[1] 120 511
+[1] "COL3"
+[1] "RING1"
+[1] 4785 7765
+[1] 198 340
+[1] "GUEE1"
+[1] "J127"
+[1] "RDVE23"
+[1] "V44"
+[1] "MEDURE1"
+[1] 6866 8850
+[1]  51 673
+[1] "BR1"
+[1] 6100 8475
+[1] 237.5 445.0
+[1] "ORUB1"
+[1] "LOS1"
+[1] "CORM"
+[1] 4535 6387
+[1] 170 577
+[1] "RAKBAGF6"
+[1] "COSLO1"
+[1] "WH1"
+[1] 4314 6440
+[1] 112.6 591.0
+[1] "TORO01"
+[1] "PRRUZP1"
+[1] "CCC"
+[1] 3742 7245
+[1] 250.3 748.0
+[1] "MAST1"
+[1] 5376 7505
+[1] 151.5 350.0
+[1] "KIRVU1"
+[1] "TURLO1"
+[1] "RODHA2"
+[1] 5175 6520
+[1]  29 550
+[1] "VARFO1"
+[1] "IRE"
+[1] "AUVRN1"
+[1] 3071 5985
+[1] 291.4 399.0
+[1] "CAS1"
+[1] 5795 7660
+[1] 186.5 429.0
+[1] "PRMIS3"
+[1] 2939 5053
+[1]  49 320
+[1] "TISMC1"
+[1] "PCS"
+[1] 4330 6705
+[1] 237.5 463.0
+[1] "VADAS1"
+[1] "LLAMED"
+[1] "AULPS"
+[1] "ALVLN"
+[1] "ARENE1-EN"
+[1] "SMD1LIA"
+[1] "RIXZAC1"
+[1] "STWK1"
+[1] "FRNU"
+[1] "HJH7"
+[1] 4945 6498
+[1]  46.5 550.0
+[1] "PRIN2"
+[1]  7685 11747
+[1] 130 653
+[1] "PIS3"
+[1]  454 2318
+[1] 122.4 363.0
+[1] "TUCHO2"
+[1] "TARPANC"
+[1] "ALDEN1"
+[1] "ZM"
+[1] "DROS1"
+[1] "BAPSKA2"
+[1] "BSGMBB"
+[1] "HOD1"
+[1] "BORLNEBA"
+[1] 2952 4654
+[1] 170.2 323.0
+[1] "MEDUN1"
+[1] "GRRIVM4"
+[1]  7014 10940
+[1] 180.5 590.0
+[1] "ALE1"
+[1] "ZAND1"
+[1] 3559 5360
+[1]  80.1 536.0
+[1] "HALD"
+[1] 3192 5378
+[1] 118.6 345.0
+[1] "VOLBAEIA"
+[1] "GROM1"
+[1] "KOB-RUB1"
+[1] "DEREIVK"
+[1] "BANJI1"
+[1] 5400 7665
+[1] 226.5 276.0
+[1] "PREP1"
+[1] "ZEM2"
+[1] "BLC3"
+[1] 3072 4686
+[1]  61.4 314.0
+[1] "SMYUE"
+[1] "GOLD2"
+[1] "MAASZ1"
+[1] "VIBA1"
+[1] "DOU1"
+[1] "TRIGL2"
+[1] "GURNOU1"
+[1] "BOULPNBB1"
+[1] "MORDN1"
+[1]  6699 10783
+[1]   54.5 1028.0
+[1] "MKL6"
+[1] "Z<U+00DC>R02"
+[1] "VSR1"
+[1] 2460 5339
+[1] 187.9 345.0
+[1] "ANG2"
+[1] "ASS2"
+[1] "SCMABBT18"
+[1] "PRIK1"
+[1] "ROCG1"
+[1] "ULKG"
+[1] 4340 6790
+[1] 145 550
+[1] "VARVA1"
+[1] "SZURC2"
+[1] 3922 5366
+[1] 144.4 321.0
+[1] "SKAS1"
+[1] "KONYUN5"
+[1] "PETNI1"
+[1] 5994 7675
+[1]  57.5 441.0
+[1] "RDVE24"
+[1] "MENFO1"
+[1] "HJLB"
+[1] 4456 6245
+[1] 178.9 272.0
+[1] "PLO01"
+[1] "NORJES3"
+[1] "DACO"
+[1] "KOTKLD3"
+[1] "VITAN1a"
+[1] "MYROPYL"
+[1] "MJSP2"
+[1] 3140 5170
+[1] 101.2 509.0
+[1] "MEZCET8"
+[1] "T16LNEBA"
+[1] 2980 4653
+[1]  67.3 332.0
+[1] "HEDG"
+[1] "OSTR2"
+[1] "ALD4"
+[1] "KLOKK"
+[1] "ROTB2"
+[1] "ADT1"
+[1] "EDER2"
+[1] "MYTISH1"
+[1] "ZIJDE2"
+[1] "EVMO2"
+[1] "DEFE01"
+[1] "ELKENO2"
+[1] "OKOPY"
+[1] "BODAL3"
+[1] 4807 6790
+[1]  73 550
+[1] "DDT"
+[1] "RODHA2"
+[1] 5175 6520
+[1]  29 550
+[1] "SOBY1"
+[1] "VINTR2"
+[1] "SOSNY"
+[1] "AMZ4"
+[1] "TWD"
+[1] "HUSV"
+[1] "CHENCH3"
+[1] "ISACC1"
+[1] "VALMA4"
+[1] "REKM1"
+[1]  5070 10000
+[1] 312 572
+[1] "MSS"
+[1] "NISS"
+[1] 4807 7675
+[1]  62 550
+[1] "GRABOV2"
+[1] 6866 8370
+[1]  31.5 340.0
+[1] "HOM2"
+[1] 2254 5413
+[1] 207.7 409.0
+[1] "PALAT1"
+[1] "POGRA1"
+[1] "CAMPBB"
+[1] "SPI01"
+[1] "HOLM4"
+[1] "WAH"
+[1] "TURZI1"
+[1] "MOLN2"
+[1] "GAB1FN"
+[1] "SAVE2"
+[1] 4336 6085
+[1] 174.9 365.0
+[1] "AUG1"
+[1] 3741 5354
+[1] 161.3 369.0
+[1] "KROP1"
+[1] 4341 6095
+[1]  75.4 318.0
+[1] "BJENG"
+[1] "LASI1"
+[1] "GRMM1"
+[1] 3185 5595
+[1] 241 326
+[1] "SOEUMED"
+[1] "TAUBKI"
+[1] "ENSI1"
+[1] 6235 7815
+[1] 158 368
+[1] "TART1"
+[1] "HMF"
+[1] 3649 6110
+[1] 146.1 591.0
+[1] "CULZS1"
+[1] 7014 9283
+[1]  97 590
+[1] "VTOL2"
+[1] 3649 5820
+[1] 217.1 557.0
+[1] "MODLABB"
+[1] "SINI5"
+[1] "KOBA1"
+[1] "GRRAT5"
+[1] "RDVE22"
+[1] "RUHE"
+[1] "ZELE1"
+[1] "PEPFAD3"
+[1] "ZAMO25"
+[1] "LIVEN1"
+[1] "ZALE"
+[1] "STO2"
+[1] 5060 6805
+[1] 174.5 494.0
+[1] "CHAM01"
+[1] "BOUGT1"
+[1] 4815 6530
+[1] 171.5 469.0
+[1] "ROTHO1"
+[1] "EV"
+[1] "TN3"
+[1] "NEVMOS1"
+[1] 4350 6498
+[1]  64.5 550.0
+[1] "RMKW1"
+[1] 3466 7065
+[1] 256 407
+[1] "BBM2"
+[1] "CE"
+[1] "ZURGR2"
+[1] "HORZA1"
+[1] "ABGAN1"
+[1] "STNEMED"
+[1] "BERN1"
+[1] 3178 4594
+[1] 141.6 304.0
+[1] "KEMEN2"
+[1] "KONO6"
+[1] "GYUME"
+[1] "PRT1"
+[1] "GA"
+[1] 5795 8075
+[1] 228 479
+[1] "KRAH"
+[1] "ILIMA1"
+[1] "HRA1"
+[1] "GURLNOI1"
+[1] 5390 7480
+[1] 209 286
+[1] "MLS4"
+[1] "PFHUN"
+[1] "SHFEEBAY"
+[1] "VANI1"
+[1] "MIEC2"
+[1] "HOROD2"
+[1] "GDF"
+[1] 3725 5810
+[1] 208.5 557.0
+[1] "MOKRI1"
+[1] "HEDEGA1"
+[1] "LIBU"
+[1] "STDID1"
+[1] 3376 5835
+[1] 245.9 531.0
+[1] "LEIG1"
+[1] "KRZL"
+[1] 5230 7390
+[1] 216 453
+[1] "VRAB1"
+[1] "LAUV1"
+[1] 4948 7005
+[1]  85.5 439.0
+[1] "NIEWP"
+[1] "SAVEN1"
+[1] "LTSN"
+[1] "BRK1"
+[1] 4930 9940
+[1] 362 362
+[1] "SAXEN"
+[1] "GAHRIA"
+[1] "U31LR1"
+[1] "TURN1"
+[1] "ELMALBB"
+[1] "REUT"
+[1] "CCZ"
+[1] "HG155"
+[1] "PETNI5"
+[1] "LIVSM1"
+[1] "LAUV1"
+[1] 4948 7005
+[1]  85.5 439.0
+[1] "VLADI2b"
+[1] "VUC2"
+[1] 3738 6410
+[1] 267.2 418.0
+[1] "VERSEN1"
+[1] "ALSO4"
+[1] "FAMPR1"
+[1] "CRMAK1"
+[1] "HIJK1"
+[1] "PODUR3"
+[1] 5485 7930
+[1] 244.5 437.0
+[1] "BPNL1"
+[1] "KOPRI1"
+[1] "ELND"
+[1] 4525 7665
+[1] 314 318
+[1] "NADKLE2"
+[1] "CENTBB"
+[1] "BISMUE3"
+[1] "DRKOIA"
+[1] "RILF"
+[1] 4344 6790
+[1] 144.6 511.0
+[1] "JANGA1"
+[1] "GABL"
+[1] 3339 5795
+[1] 145.6 295.0
+[1] "KLMF1"
+[1] 4930 6520
+[1]  37.5 393.0
+[1] "BEL7"
+[1] "RDVE17"
+[1] "TUR-APO1"
+[1] "GPOLJE1"
+[1] "MAKOT3"
+[1] "OBRS1"
+[1] 4463 6270
+[1] 180.7 256.0
+[1] "PDC"
+[1] "MKKR"
+[1] 3904 5371
+[1]  46.7 536.0
+[1] "CUCUT2"
+[1] "KONI1"
+[1] "PIETR2"
+[1] "VOR-MAR5"
+[1] "VRAB1"
+[1] "TRIGL1"
+[1] "BORGI"
+[1] "MOKRANJ4"
+[1] "MAN1"
+[1] "KAPNJ1"
+[1] "RETFA1"
+[1] "YUN1"
+[1] "PAULE2"
+[1] "FALK"
+[1] "GRADI1"
+[1] "VOLL2"
+[1] "SLPTCP5"
+[1] "TFUM3"
+[1] 3104 5204
+[1]  68.8000 366.6667
+[1] "BOVEN2"
+[1] "BERSZEKO3"
+[1] "SVEN11"
+[1] "UNGHOE1"
+[1] "HEBA3"
+[1] "JANKO1"
+[1] "ALS"
+[1] 4453 6440
+[1] 198.7 290.0
+[1] "GNZD"
+[1] 5430 7185
+[1]  75.5 511.0
+[1] "BUBAN5"
+[1] "TISSOE3"
+[1] "MIKOBRO"
+[1] "ISTM2"
+[1] "KOLI28"
+[1] "SZIG3MBA"
+[1] "CASG1"
+[1] "AKNKS2"
+[1] "ARMNARP"
+[1] "BARIN1"
+[1] "OP35"
+[1] 3343 5670
+[1] 120.2 339.0
+[1] "RTSB"
+[1] "SVD2"
+[1] "VBRG2"
+[1] "DUNA1"
+[1] "PLONL8"
+[1] "BISMUE2"
+[1] "VRUBL1"
+[1] "VPISTRA2"
+[1] "REFD"
+[1] 3350 5484
+[1]  64.4 345.0
+[1] "MSS"
+[1] "BAW"
+[1] "ABRL2"
+[1]  6765 10205
+[1] 244 454
+[1] "K71LNEBA"
+[1] 2835 4602
+[1] 176.7 323.0
+[1] "NM6"
+[1] 4337 7355
+[1] 301.8 340.0
+[1] "BALTG"
+[1] "PRRUZ4"
+[1] "DIET1"
+[1] 1014 6425
+[1] 407 407
+[1] "FOEC2"
+[1] "SINI2"
+[1] "LNG1"
+[1] "TEUCH2"
+[1] "KOL-LIN1"
+[1] "RIEG1"
+[1] "PUPIC4"
+[1] "Z<U+00DC>R11"
+[1] "BOUD2"
+[1] "GRMUNC"
+[1] "SV4"
+[1] 6155 7670
+[1] 151.5 853.0
+[1] "OPAEI13"
+[1] "KUCR1"
+[1] 2886 4254
+[1]  34.8 307.0
+[1] "ARNHE1"
+[1] "GO"
+[1] "BILZ1"
+[1] 3134 5038
+[1]  90.4 367.0
+[1] "NAGYK1"
+[1] "LATR3"
+[1] "SOP2"
+[1] "MALNA1"
+[1] "OFFMED"
+[1] "MASZ1"
+[1] "MNTZ1"
+[1] "KELEB1"
+[1] "KRUIS"
+[1] "PUPIC8"
+[1] "SLAT1"
+[1] "HORZA2"
+[1] "KRSTA1"
+[1] "HEEK1"
+[1] "HOHN1"
+[1] 3179 4745
+[1] 156.6 304.0
+[1] "AT99"
+[1] "POKRO1"
+[1] "HESU"
+[1] "YUN2"
+[1] "PRZ6"
+[1] "BATAV1"
+[1] "THAY"
+[1] "ZVEJN3"
+[1] "URGULU-EN"
+[1] "URAORE1"
+[1] "HJLB"
+[1] 4456 6245
+[1] 178.9 272.0
+[1] "CHISH3"
+[1] "MUTTE1"
+[1] "LSMS1"
+[1] 4338 7525
+[1] 318.7 577.0
+[1] "KAMG1"
+[1] "HOT"
+[1] "MIR24FN"
+[1] "PEIS1"
+[1] 4017 6415
+[1] 139.8 598.0
+[1] "BMAL1"
+[1] "RIT1"
+[1] "RAV1"
+[1] "CARRAS-EN"
+[1] "SCMABBT16"
+[1] "OLSU1"
+[1] "SHILOV1"
+[1] "NYMB1"
+[1] 4063 6495
+[1] 143.2 351.0
+[1] "MNVLDV1"
+[1] "BEVZ4"
+[1] "BAUDE5"
+[1] 6280 8280
+[1] 100 479
+[1] "HU1"
+[1] "PUPIC7"
+[1] "MAKOT3"
+[1] "MOK2"
+[1] 5765 7185
+[1]  42 343
+[1] "KRGJ1"
+[1] "SZIGUBB"
+[1] "ZIC"
+[1] "STRADO5"
+[1] "GRA"
+[1] "IW1"
+[1] "MNZR1"
+[1] "OCO3"
+[1] "FRANCH-EN"
+[1] "FTF3"
+[1] "EDF"
+[1] "CLNAP2"
+[1] "JEZ1"
+[1] "VOROSH"
+[1] "LUM1"
+[1] "GENER1"
+[1] "NERK2"
+[1] "STW2"
+[1] 5890 8375
+[1] 248.5 415.0
+[1] "ISTERBB"
+[1] "HORDC1"
+[1] "HBGT"
+[1] "NYBEBA"
+[1] "RMNS1"
+[1]  8005 10205
+[1] 220 664
+[1] "BERN3"
+[1] 3329 4922
+[1] 159.3 304.0
+[1] "ABRIJE-EN"
+[1] "VC1"
+[1] "BANJI1"
+[1] 5400 7665
+[1] 226.5 276.0
+[1] "VLLP1"
+[1] 5085 7755
+[1] 267 577
+[1] "LAHDE1"
+[1] "ZAHAJ"
+[1] "BJOER3"
+[1] 3977 5795
+[1]  77 379
+[1] "CEGILN"
+[1] "BALLLR"
+[1] "ZEMT1"
+[1] 3914 5805
+[1] 189.1 365.0
+[1] "GRIM"
+[1] 4343 6085
+[1] 174.2 323.0
+[1] "LUDW"
+[1] "RDVE21"
+[1] "VRBIC1"
+[1] "PLOC1"
+[1] "ASK-PPN3"
+[1] "NITRML1"
+[1] "CMP2"
+[1] "FLKS51LIA"
+[1] "BRYMED"
+[1] "MARO01"
+[1] "VSK07"
+[1] "VLSJ"
+[1] "TARP3"
+[1] "BAIKLBA"
+[1] "MIDEL1"
+[1] "PFHUN2"
+[1] "PAR"
+[1] 2898 4916
+[1]  59.2 370.0
+[1] "SCHELA-EN"
+[1] "LSGR1"
+[1] "BREZC1"
+[1] 5785 7250
+[1]  46.5 343.0
+[1] "NITRML1"
+[1] "KOSTE4"
+[1] "BOC1"
+[1] 5210 8295
+[1] 208.5 384.0
+[1] "MIERC1"
+[1] "LMML1"
+[1]  7660 10000
+[1] 213 572
+[1] "LUIK1"
+[1]  9380 11770
+[1] 239 572
+[1] "DONK1"
+[1] 4362 6710
+[1] 234.8 474.0
+[1] "RAKBAGF9"
+[1] "USSEN3"
+[1] "OHO1"
+[1] "VNLZ1"
+[1] 2849 6455
+[1] 360.6 451.0
+[1] "BUTZ1"
+[1] 6108 8515
+[1]   55 1815
+[1] "WHMA"
+[1] 3350 5481
+[1] 108.2 345.0
+[1] "BAIHERC2"
+[1] "HAGN"
+[1] "KONNU1"
+[1] "JATT"
+[1] 4581 6820
+[1]  72.5 406.0
+[1] "GROE1"
+[1] "SANTI2"
+[1] "LASTBB"
+[1] "REVAR1"
+[1] "JANOW1"
+[1] "OS1"
+[1] 4930 7760
+[1] 283 453
+[1] "LATR1"
+[1] "POBM1"
+[1] "WSPLR"
+[1] "OPF1"
+[1] "MBU1"
+[1] "PRNZ1"
+[1] "CONC02"
+[1] "ANDRE2"
+[1] "CAL"
+[1] 4710 6535
+[1] 182.5 297.0
+[1] "LINGO1"
+[1] "CORM"
+[1] 4535 6387
+[1] 170 577
+[1] "ESPT2"
+[1] 4992 6700
+[1]  63.5 425.0
+[1] "NEBKN"
+[1] "GWE1"
+[1] "SUPLA1"
+[1] "PRELO1"
+[1] "NOEBA"
+[1] "VLIN7"
+[1] 3481 4945
+[1] 146.4 301.0
+[1] "JRTM1"
+[1] 4280 7450
+[1] 317 853
+[1] "TDSLBA"
+[1] "STU"
+[1] "KREM1"
+[1] 6920 8550
+[1] 163 275
+[1] "DRENOV3"
+[1] "<U+00C4>NGDA1"
+[1] 4807 6700
+[1]  88.5 422.0
+[1] "ACHM"
+[1] "GALB1"
+[1] "VERUS1"
+[1] "YERG1"
+[1] "NM6"
+[1] 4337 7355
+[1] 301.8 340.0
+[1] "DFM"
+[1] "LAGEB1"
+[1] "SURSKIV1"
+[1] "RNN31LIA"
+[1] "QUALZ"
+[1] 2981 5464
+[1] 148.3 326.0
+[1] "LECBBEQ"
+[1] "KRANGEN"
+[1] "HK3"
+[1] "NIEMZ2"
+[1] "DAGS17MNB"
+[1] "ORLKAR1"
+[1] "RANSD"
+[1] "HOEJMUN"
+[1] 3579 5353
+[1] 177.4 366.0
+[1] "LECBBFMI"
+[1] "WET4"
+[1] "ORMA1"
+[1] 7165 8875
+[1]  71 275
+[1] "LRIJN1"
+[1] "PRGX1"
+[1] 4785 7065
+[1] 228 577
+[1] "MR"
+[1] 5795 7737
+[1]  66.5 384.0
+[1] "PYEU1"
+[1] "OLMR3"
+[1] "TJSP"
+[1] 4810 6790
+[1] 198 272
+[1] "BARC1"
+[1] "BSM"
+[1] "KAPIT1-2"
+[1] "RDVE8"
+[1] "BALUN1"
+[1] "HIG"
+[1] "MEDT1"
+[1]  8643 10680
+[1]  91 427
+[1] "BDBS1"
+[1] "ROVUMED"
+[1] "KLESCH"
+[1] "MAASZ2"
+[1] "YASTE2"
+[1] "SAMR1"
+[1]  8135 10498
+[1]  85 427
+[1] "VASCOR171"
+[1] "HOVA"
+[1] "KREMN"
+[1] "CAVD1"
+[1] "VRBIC1"
+[1] "KOTB1"
+[1] "LUND814"
+[1] "TABO2"
+[1] "BALGN"
+[1] "STMB1"
+[1] "GBL2"
+[1] 3585 5990
+[1] 140.5 557.0
+[1] "MER1"
+[1] "VAS31"
+[1] "CEPL1"
+[1] "OO"
+[1] 3076 5985
+[1] 193 193
+[1] "PFOL2"
+[1] "KONAR1"
+[1] "HOG"
+[1] "LCKF1"
+[1] 3337 5359
+[1] 202.2 367.0
+[1] "JEZV1"
+[1] 4710 6520
+[1] 181 350
+[1] "BOLJ01"
+[1] "OPAEI3"
+[1] "NASBY1"
+[1] "BREDG1"
+[1] "V105"
+[1] "BHIL3"
+[1] "PLGL2"
+[1] "ABGAN4"
+[1] "ROSEN3"
+[1] "SCWZ"
+[1] -Inf 5668
+[1] 345 598
 Error in density.default(local.mu, from = mu.range[1], to = mu.range[2],  : 
   non-finite 'from'
 Calls: source ... withVisible -> eval -> eval -> density -> density.default
