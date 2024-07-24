@@ -77,7 +77,7 @@ for(n in 1:N){
 		}
 
 	if(nrow(data)>0 & NL==1){
-		# only one local phase available, bandwidth cannot be calculated automatically, use 100, 30 0.1
+		# only one local phase available, bandwidth cannot be calculated automatically
 		m1 <- estimateDataDomain(data, calcurve=intcal20) + c(-500,500)		
 		m2 <- range(local.mu) 
 		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2]))	
@@ -86,7 +86,7 @@ for(n in 1:N){
 		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2]))
 		d.mu <- density(local.mu,from=mu.range[1],to=mu.range[2],n=res, bw=100)
 		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res, bw=30)			
-		prior.matrix <- matrix(d.mu,res,res) * t(matrix(d.sigma,res,res))
+		prior.matrix <- matrix(d.mu$y,res,res) * t(matrix(d.sigma$y,res,res))
 		prior.matrix <- prior.matrix/sum(prior.matrix)
 		row.names(prior.matrix) <- d.mu$x
 		colnames(prior.matrix) <- d.sigma$x
@@ -110,7 +110,7 @@ for(n in 1:N){
 		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res)
 		print(paste('mu bw:',round(d.mu$bw),2))
 		print(paste('sigma bw:',round(d.sigma$bw,2)))
-		prior.matrix <- matrix(d.mu,res,res) * t(matrix(d.sigma,res,res))
+		prior.matrix <- matrix(d.mu$y,res,res) * t(matrix(d.sigma$y,res,res))
 		prior.matrix <- prior.matrix/sum(prior.matrix)
 		row.names(prior.matrix) <- d.mu$x
 		colnames(prior.matrix) <- d.sigma$x
