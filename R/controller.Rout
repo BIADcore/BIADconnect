@@ -42,14 +42,14 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Thu Jul 25 14:08:02 2024"
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Thu Jul 25 15:08:01 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Thu Jul 25 14:08:25 2024"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Thu Jul 25 15:08:26 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.descriptions.R at Thu Jul 25 14:08:29 2024"
-[1] "Starting to run script: auto.make.daily.map.R at Thu Jul 25 14:08:29 2024"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Thu Jul 25 15:08:29 2024"
+[1] "Starting to run script: auto.make.daily.map.R at Thu Jul 25 15:08:29 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -58,33 +58,10 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.phase.models.R at Thu Jul 25 14:08:36 2024"
-[1] "COZIA1"
-[1] "GINNEBA"
-[1] "SB"
-[1] "RAYMED"
-[1] "STLEO1"
-[1] 4349 6586
-[1]  30.1 391.0
-[1] "RMKW1"
-[1] 3466 6200
-[1] 173.4 399.0
-[1] "PILBLALN"
-[1] 3479 5192
-[1]  47.2 283.0
-[1] "DUFA1"
-[1]  8814 10710
-[1]  83 501
-[1] "DAKCIG1"
-[1] "AFONT1"
-[1] "ABRL2"
-[1]  6765 10882
-[1]  140.5 1029.0
-[1] "AMPPEBA"
-[1] "GCHK1"
-[1] "MGE"
-[1] 4535 5841
-[1] -37.5 321.0
+[1] "Starting to run script: auto.make.daily.phase.models.R at Thu Jul 25 15:08:36 2024"
+[1] "GRMM1"
+[1] 4589 5626
+[1] -163  313
 Error in .local(conn, statement, ...) : 
   could not run statement: Unknown column 'NaN' in 'field list'
 Calls: source -> withVisible -> eval -> eval -> query.database
