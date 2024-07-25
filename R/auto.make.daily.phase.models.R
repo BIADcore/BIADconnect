@@ -106,8 +106,7 @@ for(n in 1:N){
 
 	if(nrow(data)>0 & NL>1){
 		# bandwidth be calculated automatically. Print, to assist choosing a bandwdith for previous codeblock		
-		est <- estimateDataDomain(data, calcurve=intcal20)
-		m1 <- est
+		m1 <- estimateDataDomain(data, calcurve=intcal20)
 		m2 <- range(local.mu) 
 		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2])) + c(-500,500)
 		s1 <- c(diff(m1)/10, diff(m2)/3)	
