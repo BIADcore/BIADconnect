@@ -42,14 +42,14 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Thu Jul 25 23:08:02 2024"
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Fri Jul 26 00:08:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Thu Jul 25 23:08:25 2024"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Fri Jul 26 00:08:25 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.descriptions.R at Thu Jul 25 23:08:28 2024"
-[1] "Starting to run script: auto.make.daily.map.R at Thu Jul 25 23:08:28 2024"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Fri Jul 26 00:08:28 2024"
+[1] "Starting to run script: auto.make.daily.map.R at Fri Jul 26 00:08:29 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -58,8 +58,15 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.phase.models.R at Thu Jul 25 23:08:35 2024"
-[1] "KARAS1"
+[1] "Starting to run script: auto.make.daily.phase.models.R at Fri Jul 26 00:08:35 2024"
+[1] "LENKI1"
+[1] "MEDGU1"
+[1] "MOLDVE1"
+[1] "NAVOD1"
+[1] "SWI6"
+[1] "MIERC3"
+[1] 6838 8117
+[1] -144  498
 Error in .local(conn, statement, ...) : 
   could not run statement: Unknown column 'NaN' in 'field list'
 Calls: source -> withVisible -> eval -> eval -> query.database
