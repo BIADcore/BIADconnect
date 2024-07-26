@@ -42,14 +42,14 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Fri Jul 26 10:08:02 2024"
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Fri Jul 26 10:19:01 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Fri Jul 26 10:08:25 2024"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Fri Jul 26 10:19:25 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.descriptions.R at Fri Jul 26 10:08:28 2024"
-[1] "Starting to run script: auto.make.daily.map.R at Fri Jul 26 10:08:29 2024"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Fri Jul 26 10:19:28 2024"
+[1] "Starting to run script: auto.make.daily.map.R at Fri Jul 26 10:19:28 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -58,14 +58,195 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.phase.models.R at Fri Jul 26 10:08:35 2024"
-[1] "FOFAN1"
-[1] "GROM1"
-[1] "EGSE"
-[1] 4609 5820
-[1] -107  399
+[1] "Starting to run script: auto.make.daily.phase.models.R at Fri Jul 26 10:19:37 2024"
+[1] "VAUGL1"
+[1] 3338 5815
+[1] 147.7 498.0
+[1] "POTTEN1"
+[1] "FAILBA"
+[1] "CAUSEV1"
+[1] "GORZLN"
+[1] "WSX1"
+[1] 3815 6235
+[1] 142 418
+[1] "SFX1"
+[1] 3908 8670
+[1] 233 406
+[1] "TOPL"
+[1] 3979 6028
+[1]  78.6 404.0
+[1] "KENYE1"
+[1] "CAIS1"
+[1] 3524 5805
+[1] 128.1 492.0
+[1] "MSM"
+[1] 3919 6495
+[1] 157.6 523.0
+[1] "UOB2"
+[1] 1125 4039
+[1]  30.3000 558.6667
+[1] "SATAR22EB"
+[1] 2744 4343
+[1]  19.7 326.0
+[1] "VESPI-EN"
+[1] 6998 8510
+[1]  13.5 291.0
+[1] "NICUL1"
+[1] "LUND814"
+[1] "HEDEGA1"
+[1] "STADN1"
+[1] 4098 5373
+[1]  25.1 297.0
+[1] "HRU1"
+[1] "KUMYS6"
+[1] "VALRG2"
+[1] "FRUNT1"
+[1] "HVOUM"
+[1] "ESC-SACA1"
+[1] "ROSTL1"
+[1] "DALS1"
+[1] "JEZV2"
+[1]  7656 10775
+[1] 163.0000 690.6667
+[1] "ULLS"
+[1] 3222 5330
+[1] 110.8 442.0
+[1] "BISMUE1"
+[1] 3221 4843
+[1]  25.9 304.0
+[1] "ZMALIV2"
+[1] 5996 7740
+[1]  21.5 325.0
+[1] "AUVER2"
+[1] "BAIF1"
+[1] "PARTELL2"
+[1] "KHRIII"
+[1] 5085 6775
+[1]  69 357
+[1] "ABCABB"
+[1] "DRG3"
+[1] "ROSS2"
+[1] 2680 6405
+[1] 272.5 310.0
+[1] "RAKBAGF7"
+[1] "ROUC1"
+[1]  6670 11170
+[1] 167.5 931.0
+[1] "KAPL1"
+[1]  5895 10882
+[1]  126.000 1204.333
+[1] "MOK1"
+[1] 2985 4479
+[1]  49.4 314.0
+[1] "CVA8"
+[1] 5790 7925
+[1] 113.5 377.0
+[1] "SEVP1"
+[1]  334 1746
+[1]  41.2 170.0
+[1] "BICSUN1"
+[1] "DUBS1"
+[1] 3803 5940
+[1] 113.7 321.0
+[1] "LUND812"
+[1] 2577 4322
+[1] 174.5 308.0
+[1] "STRD"
+[1] 3477 5500
+[1]  39.3 341.0
+[1] "MEYR1"
+[1] 3917 5775
+[1]  85.8 438.0
+[1] "LISE1"
+[1] "SPTV2"
+[1] 6462 7920
+[1]  25.5 367.0
+[1] "MANNN1"
+[1]  7034 10035
+[1] 165.5 341.0
+[1] "FRNB1"
+[1] 3910 5445
+[1]  53.5 364.0
+[1] "VEMETA1"
+[1] "PLGL1"
+[1] 4975 7275
+[1] 130 553
+[1] "PEL6-4"
+[1] "KOLOMII1"
+[1] "BOST"
+[1] "SKE34"
+[1] 4079 5815
+[1]  73.6 392.0
+[1] "RSNF1"
+[1] 5822 7450
+[1]  27.5 334.0
+[1] "ROTBB2"
+[1] "STUB1"
+[1] "TISZBUN"
+[1] "VINCA2D"
+[1] 5410 7930
+[1] 152 348
+[1] "DLA"
+[1] "OP35"
+[1] 3477 5670
+[1]  98.1 323.0
+[1] "LIND1"
+[1] 2577 4390
+[1]  81.3 311.0
+[1] "BOYAN3"
+[1] "FAJUN"
+[1] "ZUKP1"
+[1] 5945 7930
+[1]  16 741
+[1] "TRIM1"
+[1] "BERPLO2"
+[1] "PEN-JIS1"
+[1] 6305 7655
+[1]  35 744
+[1] "FL"
+[1] 4134 7165
+[1]  35.5 368.0
+[1] "YVR1"
+[1] 3601 6080
+[1] 147.9 397.0
+[1] "DAGS17MNB"
+[1] "UHO1"
+[1] 4124 5362
+[1]  23.8 337.0
+[1] "BAMOIA"
+[1] "WEG12"
+[1] 4460 7735
+[1]  95 377
+[1] "HORNS01"
+[1] "NOERHBA"
+[1] 2265 3902
+[1]  57.3 289.0
+[1] "HG155"
+[1] 4329 6075
+[1] 174.6 414.0
+[1] "BERET1"
+[1] "PONTO"
+[1] "BAIHERC3"
+[1] "ZU1"
+[1] 2383 7160
+[1] 308.0000 397.6667
+[1] "OSTP"
+[1] "MNTI1"
+[1]  6525 10456
+[1] 140.0000 621.3333
+[1] "MARO01"
+[1] "MET1"
+[1] "TLMV1"
+[1] 3604 6511
+[1] 154.1 535.0
+[1] "CSAC"
+[1] 3492 6100
+[1] 160.8 376.0
+[1] "COT3"
+[1] "MIKUL4"
+[1]  2957 42800
+[1] 111 181
 Error in .local(conn, statement, ...) : 
   could not run statement: Unknown column 'NaN' in 'field list'
 Calls: source -> withVisible -> eval -> eval -> query.database
-In addition: There were 50 or more warnings (use warnings() to see the first 50)
 Execution halted
