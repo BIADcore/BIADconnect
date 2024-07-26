@@ -52,11 +52,15 @@ for(n in 1:N){
 	d <- subset(c14, PhaseID==phase$PhaseID)
 	data <- data.frame(age=d$C14.Age, sd=d$C14.SD)
 
-	# remove outlier dates: either mathematically estimated or archaeologically informed.
-	# remove outlier C14 dates retaining dates within a range 50% wider than the 90% quantiles
-	x <- c(5000,5100,5050,15000)
-	quantile(x,prob=c(0.05,0.5,0.95))
-	
+	# remove outlier dates: either mathematically estimated or archaeologically informed using the 'Flag' column.
+	# remove outlier C14 dates retaining dates 3x the width of the 50% quantile
+	if(nrow(data)>1){
+		q <- quantile(data$age,prob=c(0.25,0.5,0.75))
+		h <- (q[3]-q[1])*1.5
+		r <- q[2] + c(-h,h)
+		i <- data$age>r[1] & data$age<r[2]
+		data <- data[i,]
+		}		
 
 	# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
 	# If there are any local estimates, use them to update prior non-parameterically (kernel density)
