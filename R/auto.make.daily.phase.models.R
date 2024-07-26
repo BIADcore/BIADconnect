@@ -15,7 +15,7 @@ c14 <- query.database(user, password, 'biad',"SELECT `PhaseID`,`SiteID`,`C14.Age
 pha <- merge(pha,sit,by='SiteID', all.y=FALSE)
 c14 <- subset(c14, !is.na(PhaseID))
 #--------------------------------------------------------------------------------------
-N <- 1000
+N <- 1500
 mu.bw <- sigma.bw <- c()
 for(n in 1:N){
 
@@ -97,12 +97,8 @@ for(n in 1:N){
 		s1 <- c(diff(m1)/10, diff(m2)/3)	
 		s2 <- range(local.sigma)
 		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2]))
-
-		print(mu.range)
-		print(sigma.range)
-		
-		d.mu <- density(local.mu,from=mu.range[1],to=mu.range[2],n=res, bw=100)
-		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res, bw=30)			
+		d.mu <- density(local.mu,from=mu.range[1],to=mu.range[2],n=res, bw=60)
+		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res, bw=10)			
 		prior.matrix <- matrix(d.mu$y,res,res) * t(matrix(d.sigma$y,res,res))
 		prior.matrix <- prior.matrix/sum(prior.matrix)
 		row.names(prior.matrix) <- d.mu$x
@@ -122,12 +118,6 @@ for(n in 1:N){
 		s1 <- c(diff(m1)/10, diff(m2)/3)	
 		s2 <- range(local.sigma)
 		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2]))
-
-
-		print(mu.range)
-		print(sigma.range)
-		
-
 		d.mu <- density(local.mu,from=mu.range[1],to=mu.range[2],n=res)
 		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res)
 		mu.bw <- c(mu.bw,d.mu$bw)
@@ -144,8 +134,10 @@ for(n in 1:N){
 		}
 	}
 #--------------------------------------------------------------------------------------
-print(mean(mu.bw,na.rm=T))
-print(mean(sigma.bw,na.rm=T))
+print(paste('mu.bw mean:',mean(mu.bw,na.rm=T)))
+print(paste('mu.bw SD:',sd(mu.bw,na.rm=T)))
+print(paste('sigma.bw mean:',mean(sigma.bw,na.rm=T)))
+print(paste('sigma.bw SD:',sd(sigma.bw,na.rm=T)))
 #--------------------------------------------------------------------------------------
 
 
