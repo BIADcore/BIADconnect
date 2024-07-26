@@ -5,6 +5,8 @@
 # add ellipsoid model
 # slightly prioritise phases with no data yet
 # increase resolution
+# include all phases as local, weighted by distance. Upgrade to friction distance
+# adjust for sequential phases
 #--------------------------------------------------------------------------------------
 library(ADMUR)
 res <- 200
@@ -21,8 +23,6 @@ for(n in 1:N){
 
 	i <- sample(1:nrow(pha),size=1)
 	phase <- pha[i,]
-
-	print(phase$PhaseID)
 
 	# get other phases with same culture and period, within 100km
 	cultures <- phase[,c('Culture1','Culture2','Culture3')]
@@ -97,8 +97,8 @@ for(n in 1:N){
 		s1 <- c(diff(m1)/10, diff(m2)/3)	
 		s2 <- range(local.sigma)
 		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2]))
-		d.mu <- density(local.mu,from=mu.range[1],to=mu.range[2],n=res, bw=60)
-		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res, bw=10)			
+		d.mu <- density(local.mu,from=mu.range[1],to=mu.range[2],n=res, bw=100)
+		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res, bw=20)			
 		prior.matrix <- matrix(d.mu$y,res,res) * t(matrix(d.sigma$y,res,res))
 		prior.matrix <- prior.matrix/sum(prior.matrix)
 		row.names(prior.matrix) <- d.mu$x
