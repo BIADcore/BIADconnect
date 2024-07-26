@@ -52,6 +52,10 @@ for(n in 1:N){
 	d <- subset(c14, PhaseID==phase$PhaseID)
 	data <- data.frame(age=d$C14.Age, sd=d$C14.SD)
 
+	# remove outlier C14 dates retaining dates within a range 50% wider than the 90% quantiles
+	
+	
+
 	# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
 	# If there are any local estimates, use them to update prior non-parameterically (kernel density)
 	# Bandwidth calculated automatically from the data, except if there is only one local phase
@@ -76,7 +80,7 @@ for(n in 1:N){
 		mu <- mod.gaussian$mu
 		sigma <- mod.gaussian$sigma
 		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
-		query.database(user, password, 'biad',sql.command)
+		if(!is.nan(mu) & !is.nan(sigma))query.database(user, password, 'biad',sql.command)
 		}
 
 	if(nrow(data)>0 & NL==1){
@@ -101,7 +105,7 @@ for(n in 1:N){
 		mu <- mod.gaussian$mu
 		sigma <- mod.gaussian$sigma
 		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
-		query.database(user, password, 'biad',sql.command)
+		if(!is.nan(mu) & !is.nan(sigma))query.database(user, password, 'biad',sql.command)
 		}
 
 	if(nrow(data)>0 & NL>1){
@@ -130,7 +134,7 @@ for(n in 1:N){
 		mu <- mod.gaussian$mu
 		sigma <- mod.gaussian$sigma
 		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
-		query.database(user, password, 'biad',sql.command)
+		if(!is.nan(mu) & !is.nan(sigma))query.database(user, password, 'biad',sql.command)
 		}
 	}
 #--------------------------------------------------------------------------------------
