@@ -1,11 +1,15 @@
 
 #--------------------------------------------------------------------------------------
-# testing new approach
+# Currently implemented:
+# local phases inform on a prior
+# include all phases with same culture/period as local, weighted by distance. 
+
+# Still to implement:
 # use log mean and log sigma, as neither can be negative
 # add ellipsoid model
 # slightly prioritise phases with no data yet
 # increase resolution
-# include all phases as local, weighted by distance. Upgrade to friction distance
+# Upgrade distance weighting to include friction surface distance
 # adjust for sequential phases
 #--------------------------------------------------------------------------------------
 library(ADMUR)
@@ -24,29 +28,33 @@ for(n in 1:N){
 	i <- sample(1:nrow(pha),size=1)
 	phase <- pha[i,]
 
-	# get other phases with same culture and period, within 100km
+	# get other phases with same culture and period
 	cultures <- phase[,c('Culture1','Culture2','Culture3')]
 	cultures <- cultures[!is.na(cultures)]
 	near.phases <- subset(pha, Culture1%in%cultures & Period%in%phase$Period & PhaseID!=phase$PhaseID)
 	if(nrow(near.phases)>0){
 		near.phases$dist <- slc(x=phase$Longitude, y=phase$Latitude, ax=near.phases$Longitude, ay=near.phases$Latitude, input='deg') * 6378.1
-		near.phases <- subset(near.phases,dist<100)
 		}
 
-	# if no other phases available, get phases with same period within 100km
+	# if no other phases available, get phases with same period
 	if(nrow(near.phases)==0){
 		near.phases <- subset(pha, Period%in%phase$Period & PhaseID!=phase$PhaseID)
 		if(nrow(near.phases)>0){
 			near.phases$dist <- slc(x=phase$Longitude, y=phase$Latitude, ax=near.phases$Longitude, ay=near.phases$Latitude, input='deg') * 6378.1
-			near.phases <- subset(near.phases,dist<100)
 			}
 		}
 
+	# weighting by distance from target site using a Gaussian, requires a parameter
+	weights <- dnorm(near.phases$dist, 0 , 25)
+	
 	local.mu <- near.phases$GMM
-	local.mu <- local.mu[!is.na(local.mu)]
 	local.sigma <- near.phases$GMS
-	local.sigma <- local.sigma[!is.na(local.sigma)]
-	NL <- length(local.mu)
+	i <- !is.na(local.mu)
+	local.mu <- local.mu[i]
+	local.sigma <- local.sigma[i]
+	weights <- weights[i]
+	weights <- weights/sum(weights)
+	NL <- length(weights)
 
 	# get phase c14 dates
 	d <- subset(c14, PhaseID==phase$PhaseID)
@@ -68,9 +76,9 @@ for(n in 1:N){
 	# Note mu and sigma are independent in the prior. 
 
 	if(nrow(data)==0 & NL>=3){
-		# no local 14C, so just use the mean estimates from the local phases
-		mu <- mean(local.mu)
-		sigma <- mean(local.sigma)	
+		# no local 14C, so just use the weighted mean estimates from the local phases
+		mu <- round(sum(local.mu * weights))
+		sigma <- round(sum(local.sigma * weights))	
 		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
 		query.database(user, password, 'biad',sql.command)	
 		}
@@ -118,8 +126,8 @@ for(n in 1:N){
 		s1 <- c(diff(m1)/10, diff(m2)/3)	
 		s2 <- range(local.sigma)
 		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2]))
-		d.mu <- density(local.mu,from=mu.range[1],to=mu.range[2],n=res)
-		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res)
+		d.mu <- density(local.mu,from=mu.range[1],to=mu.range[2],n=res, weights=weights)
+		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res, weights=weights)
 		mu.bw <- c(mu.bw,d.mu$bw)
 		sigma.bw <- c(sigma.bw,d.sigma$bw)
 		prior.matrix <- matrix(d.mu$y,res,res) * t(matrix(d.sigma$y,res,res))
