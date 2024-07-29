@@ -50,7 +50,7 @@ for(n in 1:N){
 	
 	local.mu <- near.phases$GMM
 	local.sigma <- near.phases$GMS
-	i <- !is.na(local.mu)
+	i <- !is.na(local.mu) & weights!=0
 	local.mu <- local.mu[i]
 	local.sigma <- local.sigma[i]
 	weights <- weights[i]
