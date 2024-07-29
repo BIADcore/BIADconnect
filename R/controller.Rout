@@ -42,14 +42,14 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Mon Jul 29 14:50:03 2024"
+[1] "Starting to run script: auto.make.daily.clean.whitespace.R at Mon Jul 29 14:53:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Mon Jul 29 14:50:26 2024"
+[1] "Starting to run script: auto.make.daily.database.relationships.plot.R at Mon Jul 29 14:53:25 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.descriptions.R at Mon Jul 29 14:50:29 2024"
-[1] "Starting to run script: auto.make.daily.map.R at Mon Jul 29 14:50:30 2024"
+[1] "Starting to run script: auto.make.daily.descriptions.R at Mon Jul 29 14:53:29 2024"
+[1] "Starting to run script: auto.make.daily.map.R at Mon Jul 29 14:53:29 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -58,28 +58,93 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.row.counts.R at Mon Jul 29 14:50:36 2024"
-[1] "Starting to run script: auto.make.daily.sql.examples.R at Mon Jul 29 14:50:36 2024"
-[1] "Starting to run script: auto.make.daily.table.png.R at Mon Jul 29 14:50:36 2024"
-[1] "Starting to run script: auto.make.daily.templates.R at Mon Jul 29 14:50:41 2024"
-[1] "Starting to run script: auto.make.daily.temporal.plots.R at Mon Jul 29 14:50:43 2024"
-[1] "Starting to run script: auto.make.daily.triggers.R at Mon Jul 29 14:50:51 2024"
-Warning message:
-In merge.data.frame(tmp, t1, by = "GraveID") :
-  column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
-> 
-> if(NW>0 & today==run.day)for(n in 1:NW){
-+ 	file <- weekly.files[n]
-+ 	print(paste('Starting to run script:',file,'at',date()))
-+ 	source(file)
-+ 	}
-> 
-> #------------------------------------------------------------------
-> 	
-> 	
-> 	
-> 	
-> 
-> proc.time()
-   user  system elapsed 
- 45.022   2.514  53.814 
+[1] "Starting to run script: auto.make.daily.phase.models.R at Mon Jul 29 14:53:35 2024"
+[1] "TARAS1"
+[1] "SB"
+[1] "PESTE5"
+[1] "QUEDLEH1"
+[1] "ZIMNO"
+[1] "KLOKK"
+[1] "BOGUSL1"
+[1] "MOLD"
+[1] "ROSEF1"
+[1] "LEPRS1"
+[1] "KAZ2TAG"
+[1] "MAU"
+[1] "POIC1"
+[1] "BJBK"
+[1] "SZRB"
+[1] "BLUC1"
+[1] "UEGULU-MN"
+[1] "JAVP1"
+[1] "GOMOL1A"
+[1] "GORCA1"
+[1] "RDVE19"
+[1] "OMUR1"
+[1] "VIRBR1"
+[1] "HALSON2"
+[1] "VOV2"
+[1] "SINI3"
+[1] "BERUMED4"
+[1] "MNTR2"
+[1] "HARSA1"
+[1] "MAST2"
+[1] "GRMIBB5"
+[1] "GDUP"
+[1] "MLS9"
+[1] "LJSM"
+[1] "SAJ3"
+[1] "KAME"
+[1] "FART1"
+[1] "IGK1"
+[1] "EZING3"
+[1] "SISU"
+[1] "BAUMR3"
+[1] "KLMAMO"
+[1] "PLONL3"
+[1] "MALZ1"
+[1] "VELIKE3EB"
+[1] "PAR02"
+[1] "PSK"
+[1] "BORLNEBA"
+[1] "STEP1"
+[1] "MLS8"
+[1] "TRIGL5"
+[1] "KIFEEBA"
+[1] "ALL1"
+[1] "RING3"
+[1] "JANW1"
+[1] "PON"
+[1] "KORS"
+[1] "BREDE1"
+[1] "BRO1"
+[1] "HARA1"
+[1] "WKLB"
+[1] "KREM1"
+[1] "SURSKII1"
+[1] "CHLE1"
+[1] "KLNU1"
+[1] "VVA2"
+[1] "MNTN1"
+[1] "MIKUL2"
+[1] "YUN4"
+[1] "HOLUB5"
+[1] "KRNHC1"
+[1] "REMIE"
+[1] "BOS301"
+[1] "RIT2"
+[1] "SKREBA"
+[1] "WNGZ1"
+[1] "VEDBO1"
+[1] "OKANUE"
+[1] "SADO2"
+[1] "BERUN1"
+[1] "LUDOS1"
+[1] "BBM2"
+[1] "LAMEI"
+[1] "LAP1"
+[1] "KEBABB"
+Error in .local(conn, statement, ...) : 
+  could not run statement: Unknown column 'NaN' in 'field list'
+Calls: source -> withVisible -> eval -> eval -> query.database
+Execution halted
