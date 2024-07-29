@@ -27,6 +27,7 @@ for(n in 1:N){
 
 	i <- sample(1:nrow(pha),size=1)
 	phase <- pha[i,]
+	print(phase$PhaseID)
 
 	# get other phases with same culture and period
 	cultures <- phase[,c('Culture1','Culture2','Culture3')]
