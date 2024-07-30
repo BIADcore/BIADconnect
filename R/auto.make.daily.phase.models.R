@@ -27,7 +27,6 @@ for(n in 1:N){
 
 	i <- sample(1:nrow(pha),size=1)
 	phase <- pha[i,]
-	print(phase$PhaseID)
 
 	# get other phases with same culture and period
 	cultures <- phase[,c('Culture1','Culture2','Culture3')]
@@ -107,7 +106,7 @@ for(n in 1:N){
 		s2 <- range(local.sigma)
 		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2]))
 		d.mu <- density(local.mu,from=mu.range[1],to=mu.range[2],n=res, bw=100)
-		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res, bw=20)			
+		d.sigma <- density(local.sigma,from=sigma.range[1],to=sigma.range[2],n=res, bw=25)			
 		prior.matrix <- matrix(d.mu$y,res,res) * t(matrix(d.sigma$y,res,res))
 		prior.matrix <- prior.matrix/sum(prior.matrix)
 		row.names(prior.matrix) <- d.mu$x
