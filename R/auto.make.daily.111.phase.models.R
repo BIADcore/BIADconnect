@@ -38,7 +38,7 @@ for(n in 1:N){
 		}
 
 	# if almost no other phases available, get phases with same period
-	if(nrow(near.phases)>=1){
+	if(nrow(near.phases)<=1){
 		near.phases <- subset(pha, Period%in%phase$Period & PhaseID!=phase$PhaseID)
 		if(nrow(near.phases)>0){
 			near.phases$dist <- slc(x=phase$Longitude, y=phase$Latitude, ax=near.phases$Longitude, ay=near.phases$Latitude, input='deg') * 6378.1
@@ -46,16 +46,18 @@ for(n in 1:N){
 		}
 
 	# weighting by distance from target site using a Gaussian, requires a parameter
-	weights <- dnorm(near.phases$dist, 0 , 25)
-	
-	local.mu <- near.phases$GMM
-	local.sigma <- near.phases$GMS
-	i <- !is.na(local.mu) & weights!=0
-	local.mu <- local.mu[i]
-	local.sigma <- local.sigma[i]
-	weights <- weights[i]
-	weights <- weights/sum(weights)
-	NL <- length(weights)
+	if(nrow(near.phases)!=0){
+		weights <- dnorm(near.phases$dist, 0 , 25)
+		local.mu <- near.phases$GMM
+		local.sigma <- near.phases$GMS
+		i <- !is.na(local.mu) & weights!=0
+		local.mu <- local.mu[i]
+		local.sigma <- local.sigma[i]
+		weights <- weights[i]
+		weights <- weights/sum(weights)
+		NL <- length(weights)
+		}
+	if(nrow(near.phases)==0)NL <- 0
 
 	# get phase c14 dates
 	d <- subset(c14, PhaseID==phase$PhaseID)
