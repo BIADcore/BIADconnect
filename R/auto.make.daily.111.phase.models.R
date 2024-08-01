@@ -28,10 +28,11 @@ for(n in 1:N){
 	i <- sample(1:nrow(pha),size=1)
 	phase <- pha[i,]
 
-	# get other phases with same culture and period
+	# get other phases with same culture and period, and have a model estimate
 	cultures <- phase[,c('Culture1','Culture2','Culture3')]
 	cultures <- cultures[!is.na(cultures)]
 	near.phases <- subset(pha, Culture1%in%cultures & Period%in%phase$Period & PhaseID!=phase$PhaseID)
+	near.phases <- subset(near.phases, !is.na(GMM))
 	if(nrow(near.phases)>0){
 		near.phases$dist <- slc(x=phase$Longitude, y=phase$Latitude, ax=near.phases$Longitude, ay=near.phases$Latitude, input='deg') * 6378.1
 		}
@@ -39,6 +40,7 @@ for(n in 1:N){
 	# if almost no other phases available, get phases with same period
 	if(nrow(near.phases)<=1){
 		near.phases <- subset(pha, Period%in%phase$Period & PhaseID!=phase$PhaseID)
+		near.phases <- subset(near.phases, !is.na(GMM))
 		if(nrow(near.phases)>0){
 			near.phases$dist <- slc(x=phase$Longitude, y=phase$Latitude, ax=near.phases$Longitude, ay=near.phases$Latitude, input='deg') * 6378.1
 			}
