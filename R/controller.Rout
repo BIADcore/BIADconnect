@@ -42,12 +42,12 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.101.triggers.R at Thu Aug  1 19:12:01 2024"
+[1] "Starting to run script: auto.make.daily.101.triggers.R at Thu Aug  1 20:12:01 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Thu Aug  1 19:12:06 2024"
-[1] "Starting to run script: auto.make.daily.103.descriptions.R at Thu Aug  1 19:12:29 2024"
-[1] "Starting to run script: auto.make.daily.104.map.R at Thu Aug  1 19:12:29 2024"
+[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Thu Aug  1 20:12:06 2024"
+[1] "Starting to run script: auto.make.daily.103.descriptions.R at Thu Aug  1 20:12:29 2024"
+[1] "Starting to run script: auto.make.daily.104.map.R at Thu Aug  1 20:12:29 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -56,19 +56,19 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Thu Aug  1 19:12:36 2024"
+[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Thu Aug  1 20:12:36 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.106.row.counts.R at Thu Aug  1 19:12:39 2024"
-[1] "Starting to run script: auto.make.daily.107.sql.examples.R at Thu Aug  1 19:12:39 2024"
-[1] "Starting to run script: auto.make.daily.108.table.png.R at Thu Aug  1 19:12:39 2024"
-[1] "Starting to run script: auto.make.daily.109.templates.R at Thu Aug  1 19:12:43 2024"
-[1] "Starting to run script: auto.make.daily.110.temporal.plots.R at Thu Aug  1 19:12:45 2024"
-[1] "Starting to run script: auto.make.daily.111.phase.models.R at Thu Aug  1 19:12:53 2024"
-[1] "mu.bw mean: 87.5259866503232"
-[1] "mu.bw SD: 146.085617495907"
-[1] "sigma.bw mean: 20.9091314840503"
-[1] "sigma.bw SD: 30.2950155276957"
+[1] "Starting to run script: auto.make.daily.106.row.counts.R at Thu Aug  1 20:12:39 2024"
+[1] "Starting to run script: auto.make.daily.107.sql.examples.R at Thu Aug  1 20:12:39 2024"
+[1] "Starting to run script: auto.make.daily.108.table.png.R at Thu Aug  1 20:12:39 2024"
+[1] "Starting to run script: auto.make.daily.109.templates.R at Thu Aug  1 20:12:43 2024"
+[1] "Starting to run script: auto.make.daily.110.temporal.plots.R at Thu Aug  1 20:12:45 2024"
+[1] "Starting to run script: auto.make.daily.111.phase.models.R at Thu Aug  1 20:12:53 2024"
+[1] "mu.bw mean: 100.768711147969"
+[1] "mu.bw SD: 290.047311972935"
+[1] "sigma.bw mean: 20.9655422177549"
+[1] "sigma.bw SD: 32.3414133476589"
 Warning message:
 In merge.data.frame(tmp, t1, by = "GraveID") :
   column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
@@ -87,4 +87,4 @@ In merge.data.frame(tmp, t1, by = "GraveID") :
 > 
 > proc.time()
    user  system elapsed 
-749.241 149.187 909.098 
+729.870 156.229 896.781 
