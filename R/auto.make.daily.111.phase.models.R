@@ -21,7 +21,7 @@ c14 <- query.database(user, password, 'biad',"SELECT `PhaseID`,`SiteID`,`C14.Age
 pha <- merge(pha,sit,by='SiteID', all.y=FALSE)
 c14 <- subset(c14, !is.na(PhaseID))
 #--------------------------------------------------------------------------------------
-N <- 1500
+N <- 2000
 mu.bw <- sigma.bw <- c()
 for(n in 1:N){
 
