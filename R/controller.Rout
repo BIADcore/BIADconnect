@@ -42,12 +42,12 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.101.triggers.R at Tue Aug  6 01:12:02 2024"
+[1] "Starting to run script: auto.make.daily.101.triggers.R at Tue Aug  6 02:12:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Tue Aug  6 01:12:06 2024"
-[1] "Starting to run script: auto.make.daily.103.descriptions.R at Tue Aug  6 01:12:29 2024"
-[1] "Starting to run script: auto.make.daily.104.map.R at Tue Aug  6 01:12:30 2024"
+[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Tue Aug  6 02:12:07 2024"
+[1] "Starting to run script: auto.make.daily.103.descriptions.R at Tue Aug  6 02:12:30 2024"
+[1] "Starting to run script: auto.make.daily.104.map.R at Tue Aug  6 02:12:31 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -56,19 +56,19 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Tue Aug  6 01:12:36 2024"
+[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Tue Aug  6 02:12:39 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.106.row.counts.R at Tue Aug  6 01:12:39 2024"
-[1] "Starting to run script: auto.make.daily.107.sql.examples.R at Tue Aug  6 01:12:40 2024"
-[1] "Starting to run script: auto.make.daily.108.table.png.R at Tue Aug  6 01:12:40 2024"
-[1] "Starting to run script: auto.make.daily.109.templates.R at Tue Aug  6 01:12:44 2024"
-[1] "Starting to run script: auto.make.daily.110.temporal.plots.R at Tue Aug  6 01:12:46 2024"
-[1] "Starting to run script: auto.make.daily.111.phase.models.R at Tue Aug  6 01:12:54 2024"
-[1] "mu.bw mean: 95.9083665827161"
-[1] "mu.bw SD: 286.667653199049"
-[1] "sigma.bw mean: 19.943667426057"
-[1] "sigma.bw SD: 27.0157750137987"
+[1] "Starting to run script: auto.make.daily.106.row.counts.R at Tue Aug  6 02:12:43 2024"
+[1] "Starting to run script: auto.make.daily.107.sql.examples.R at Tue Aug  6 02:12:44 2024"
+[1] "Starting to run script: auto.make.daily.108.table.png.R at Tue Aug  6 02:12:44 2024"
+[1] "Starting to run script: auto.make.daily.109.templates.R at Tue Aug  6 02:12:48 2024"
+[1] "Starting to run script: auto.make.daily.110.temporal.plots.R at Tue Aug  6 02:12:50 2024"
+[1] "Starting to run script: auto.make.daily.111.phase.models.R at Tue Aug  6 02:12:59 2024"
+[1] "mu.bw mean: 94.0691919693385"
+[1] "mu.bw SD: 284.590035756619"
+[1] "sigma.bw mean: 19.122428948199"
+[1] "sigma.bw SD: 30.1916601546517"
 Warning message:
 In merge.data.frame(tmp, t1, by = "GraveID") :
   column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
@@ -78,7 +78,7 @@ In merge.data.frame(tmp, t1, by = "GraveID") :
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.weekly.user.citation.hygiene.R at Tue Aug  6 01:25:59 2024"
+[1] "Starting to run script: auto.make.weekly.user.citation.hygiene.R at Tue Aug  6 02:26:46 2024"
 ! Using an auto-discovered, cached token.
   To suppress this message, modify your code or options to clearly consent to
   the use of a cached token.
@@ -134,7 +134,7 @@ i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
   See gargle's "Non-interactive auth" vignette for more details:
   <https://gargle.r-lib.org/articles/non-interactive-auth.html>
 i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
-[1] "Starting to run script: auto.make.weekly.user.email.checks.R at Tue Aug  6 01:26:03 2024"
+[1] "Starting to run script: auto.make.weekly.user.email.checks.R at Tue Aug  6 02:26:51 2024"
 ! Using an auto-discovered, cached token.
   To suppress this message, modify your code or options to clearly consent to
   the use of a cached token.
@@ -150,4 +150,4 @@ i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
 > 
 > proc.time()
    user  system elapsed 
-702.425 126.863 843.221 
+740.450 130.878 890.156 
