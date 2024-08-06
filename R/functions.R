@@ -324,30 +324,43 @@ database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, user,
 	image <- DiagrammeR::grViz(diagram)
 return(image)}
 #--------------------------------------------------------------------------------------------------
-make.trigger <- function(table, columns, type, prefix){
-	triggername <- paste(prefix, type,'_',table,sep='')
-	t1 <- paste('CREATE DEFINER=`Rscripts`@`%` TRIGGER `',triggername,'` BEFORE ',type,' ON `',table,'` FOR EACH ROW BEGIN',sep='')
-	t2 <- paste("SET NEW.`",columns,"` = TRIM(REPLACE(REPLACE(REPLACE(NEW.`",columns,"`, '\r', ' '), '\n', ' '), '\t', ' '));",sep='')
-	t3 <- 'END'
-	txt <- c(t1,t2,t3)
-	txt <- paste(txt,collapse=' ')
+make.autopad.trigger <- function(table, columns, type, prefix){
+        triggername <- paste(prefix, type,'_',table,sep='')
+        t1 <- paste('CREATE DEFINER=`Rscripts`@`%` TRIGGER `',triggername,'` BEFORE ',type,' ON `',table,'` FOR EACH ROW BEGIN',sep='')
+        t2 <- paste("SET NEW.`",columns,"` = TRIM(REPLACE(REPLACE(REPLACE(NEW.`",columns,"`, '\r', ' '), '\n', ' '), '\t', ' '));",sep='')
+        t3 <- 'END'
+        txt <- c(t1,t2,t3)
+        txt <- paste(txt,collapse=' ')
 return(txt)}
 #--------------------------------------------------------------------------------------------------
-make.all.triggers <- function(x, prefix){
-	txt <- c()
-	tables <- unique(x$TABLE_NAME)
-	N <- length(tables)
-	if(N==0)return(NULL)
-	if(N>0){
-		for(n in 1:N){
-			table <- tables[n]
-			columns <- subset(x, TABLE_NAME==table)$COLUMN_NAME
-			inserts <- make.trigger(table,columns,type = 'INSERT', prefix)
-			updates <- make.trigger(table,columns,type = 'UPDATE', prefix)
-			txt <- c(txt,inserts,updates)
-			}
-		}
+make.stamp.trigger <- function(table, columns, type, prefix){
+        triggername <- paste(prefix, type,'_',table,sep='')
+        t1 <- paste('CREATE DEFINER=`Rscripts`@`%` TRIGGER `',triggername,'` BEFORE ',type,' ON `',table,'` FOR EACH ROW BEGIN',sep='')
+        if(type=='INSERT')t2 <- c('SET NEW.user_added = SYSTEM_USER();','SET NEW.time_added = CURRENT_TIMESTAMP;','SET NEW.user_last_update = SYSTEM_USER();','SET NEW.time_last_update = CURRENT_TIMESTAMP;')
+        if(type=='UPDATE')t2 <- c('SET NEW.user_last_update = SYSTEM_USER();','SET NEW.time_last_update = CURRENT_TIMESTAMP;')
+        t3 <- 'END'
+        txt <- c(t1,t2,t3)
+        txt <- paste(txt,collapse=' ')
 return(txt)}
 #--------------------------------------------------------------------------------------------------
+make.all.triggers <- function(x, prefix, trigger){
+        txt <- c()
+        tables <- unique(x$TABLE_NAME)
+        N <- length(tables)
+        if(N==0)return(NULL)
+        if(N>0){
+                for(n in 1:N){
+                        table <- tables[n]
+                        columns <- subset(x, TABLE_NAME==table)$COLUMN_NAME
+                        inserts <- trigger(table,columns,type = 'INSERT', prefix)
+                        updates <- trigger(table,columns,type = 'UPDATE', prefix)
+                        txt <- c(txt,inserts,updates)
+                        }
+                }
+return(txt)}
+#--------------------------------------------------------------------------------------------------
+
+
+
 
 
