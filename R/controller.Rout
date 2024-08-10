@@ -42,12 +42,12 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.101.triggers.R at Fri Aug  9 13:45:03 2024"
+[1] "Starting to run script: auto.make.daily.101.triggers.R at Sat Aug 10 13:45:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Fri Aug  9 13:45:10 2024"
-[1] "Starting to run script: auto.make.daily.103.descriptions.R at Fri Aug  9 13:45:34 2024"
-[1] "Starting to run script: auto.make.daily.104.map.R at Fri Aug  9 13:45:34 2024"
+[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Sat Aug 10 13:45:10 2024"
+[1] "Starting to run script: auto.make.daily.103.descriptions.R at Sat Aug 10 13:45:34 2024"
+[1] "Starting to run script: auto.make.daily.104.map.R at Sat Aug 10 13:45:34 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -56,19 +56,19 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Fri Aug  9 13:45:45 2024"
+[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Sat Aug 10 13:45:43 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.106.row.counts.R at Fri Aug  9 13:45:49 2024"
-[1] "Starting to run script: auto.make.daily.107.sql.examples.R at Fri Aug  9 13:45:49 2024"
-[1] "Starting to run script: auto.make.daily.108.table.png.R at Fri Aug  9 13:45:49 2024"
-[1] "Starting to run script: auto.make.daily.109.templates.R at Fri Aug  9 13:45:55 2024"
-[1] "Starting to run script: auto.make.daily.110.temporal.plots.R at Fri Aug  9 13:45:57 2024"
-[1] "Starting to run script: auto.make.daily.111.phase.models.R at Fri Aug  9 13:46:05 2024"
-[1] "mu.bw mean: 90.7350465917186"
-[1] "mu.bw SD: 239.665329131799"
-[1] "sigma.bw mean: 20.2632624210095"
-[1] "sigma.bw SD: 31.2916495745803"
+[1] "Starting to run script: auto.make.daily.106.row.counts.R at Sat Aug 10 13:45:47 2024"
+[1] "Starting to run script: auto.make.daily.107.sql.examples.R at Sat Aug 10 13:45:47 2024"
+[1] "Starting to run script: auto.make.daily.108.table.png.R at Sat Aug 10 13:45:47 2024"
+[1] "Starting to run script: auto.make.daily.109.templates.R at Sat Aug 10 13:45:52 2024"
+[1] "Starting to run script: auto.make.daily.110.temporal.plots.R at Sat Aug 10 13:45:53 2024"
+[1] "Starting to run script: auto.make.daily.111.phase.models.R at Sat Aug 10 13:46:02 2024"
+[1] "mu.bw mean: 75.6471534602501"
+[1] "mu.bw SD: 140.287080426988"
+[1] "sigma.bw mean: 19.4732398075017"
+[1] "sigma.bw SD: 26.6260164418703"
 Warning message:
 In merge.data.frame(tmp, t1, by = "GraveID") :
   column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
@@ -78,19 +78,13 @@ In merge.data.frame(tmp, t1, by = "GraveID") :
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.weekly.user.citation.hygiene.R at Fri Aug  9 14:06:24 2024"
-! Using an auto-discovered, cached token.
-  To suppress this message, modify your code or options to clearly consent to
-  the use of a cached token.
-  See gargle's "Non-interactive auth" vignette for more details:
-  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
-i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
-Auto-refreshing stale OAuth token.
-Error in gmailr_POST(c("messages", "send"), user_id, class = "gmail_message",  : 
-  Gmail API error: 401
-  Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
-Calls: source ... eval -> eval -> <Anonymous> -> gmailr_POST -> gmailr_query
-In addition: Warning message:
-Unable to refresh token: invalid_grant
-* Token has been expired or revoked. 
-Execution halted
+> 
+> #------------------------------------------------------------------
+> 	
+> 	
+> 	
+> 	
+> 
+> proc.time()
+    user   system  elapsed 
+ 957.545  184.634 1161.317 
