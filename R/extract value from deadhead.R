@@ -22,11 +22,14 @@ biad <- merge(m1, pha, by='PhaseID', all.x=TRUE)
 
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
-# explore matching LabID between biad and deadhead
+# Match by labcode, explore importing 'Material'
 d <- merge(c14,dead,by='LabID',both=FALSE)
 d <- subset(d, is.na(Material.x) & !is.na(Material.y))
 sort(table(d$Material.y),decreasing=T)
 
 sort(table(c14$Material),decreasing=T)
+
+sum(sort(table(dead$Material),decreasing=T)<5)
+sum(sort(table(dead$Material),decreasing=T)>50)
 #--------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------
