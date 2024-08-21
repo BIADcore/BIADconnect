@@ -11,8 +11,9 @@ c14 <- run.server.query("SELECT * FROM `C14Samples`;")
 pha <- run.server.query("SELECT * FROM `Phases`;")
 sit <- run.server.query("SELECT * FROM `Sites`;")
 dead <- run.server.query("SELECT * FROM `zprivate_deadhead`;")
+tax <- run.server.query("SELECT * FROM `zoptions_TaxaList`;")
 
-c14 <- c14[,c('C14ID','LabID','PhaseID','SiteID','Period','C14.Age','C14.SD','δ13C','δ13C.SD','C/N_collagen','Material','CitationID')]
+c14 <- c14[,c('C14ID','LabID','PhaseID','SiteID','Period','C14.Age','C14.SD','δ13C','δ13C.SD','C/N_collagen','Material','CitationID','TaxonCode')]
 pha <- pha[,c('PhaseID','SiteID','Culture1','Culture2','Culture3','Period')]
 sit <- sit[,c('SiteID','SiteName','Latitude','Longitude','Country')]
 
@@ -54,3 +55,57 @@ materials <- do.call("rbind", list(dead, c14, matcul, stron, fauni, human, aboti
 materials <- materials %>%
   group_by(Material) %>%
   summarise(sum(n))
+#--------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
+# start inputting deadhead data into c14 table
+#--------------------------------------------------------------------------------------
+# 1. Lowest hanging fruit: matches on labcode AND c14 date AND SD
+all <- merge(biad, dead, by='LabID', all=FALSE)
+all <- all[all$C14.Age==all$CRA,]
+all <- all[all$C14.SD==all$Error,]
+
+# Periods
+# needs some thought later, as many deadhead samples have culture and period info where BIAD does not, but ideally should be assigned to the phase
+period <- all[,c('LabID','Period.x','Period.y','CulturalPeriod')]
+period <- period[!is.na(period$CulturalPeriod) & is.na(period$Period.x) & is.na(period$Period.y),]
+
+
+# δ13C. Many have a decimal place in the wrong place
+delta <- all[,c('LabID','δ13C','DC13')]
+delta <- delta[!is.na(delta$DC13) & is.na(delta$δ13C),]
+bad <- delta$DC13<(-99)
+delta$DC13[bad] <- delta$DC13[bad]/1000
+text <- c()
+for(n in 1:nrow(delta))text[n] <- paste("UPDATE `BIAD`.`C14Samples` SET `δ13C`=",delta$DC13[n]," WHERE  `LabID`='",delta$LabID[n],"';",sep='')
+# run.server.query(text)
+
+# Flags can be inherited, but needs thought. circa 15% have one
+
+# OthMeasures can be inherited, only 6% have one, various including human age and sex, and other FC14 values??
+
+# DateMethod
+dm <- all[,c('LabID','DateMethod')]
+dm <- dm[!is.na(dm$DateMethod),]
+dm$DateMethod[dm$DateMethod=='WMD'] <- NA
+dm$DateMethod[dm$DateMethod=='AWM'] <- NA
+dm$DateMethod[dm$DateMethod=='LSC (HP);LSC'] <- 'LSC (HP)'
+dm <- dm[!is.na(dm$DateMethod),]
+text <- c()
+for(n in 1:nrow(dm))text[n] <- paste("UPDATE `BIAD`.`C14Samples` SET `Method`='",dm$DateMethod[n],"' WHERE  `LabID`='",dm$LabID[n],"';",sep='')
+# run.server.query(text)
+
+# Species
+sp <- all[,c('LabID','TaxonCode','Species')]
+sp <- sp[!is.na(sp$Species) & is.na(sp$TaxonCode),]
+sp$Species[sp$Species=='Homo sapiens?'] <- 'Homo sapiens'
+
+
+# testing
+test <- data.frame(Species=unique(sp$Species))
+mm <- merge(test, tax, by.x='Species', by.y='FullNameOfTaxon', all=FALSE)
+bad <- sp$Species[!sp$Species%in%mm$Species]
+
+
+
+
+
