@@ -42,12 +42,12 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.101.triggers.R at Thu Aug 22 13:45:03 2024"
+[1] "Starting to run script: auto.make.daily.101.triggers.R at Fri Aug 23 13:45:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Thu Aug 22 13:45:10 2024"
-[1] "Starting to run script: auto.make.daily.103.descriptions.R at Thu Aug 22 13:45:33 2024"
-[1] "Starting to run script: auto.make.daily.104.map.R at Thu Aug 22 13:45:33 2024"
+[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Fri Aug 23 13:45:10 2024"
+[1] "Starting to run script: auto.make.daily.103.descriptions.R at Fri Aug 23 13:45:32 2024"
+[1] "Starting to run script: auto.make.daily.104.map.R at Fri Aug 23 13:45:33 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -56,19 +56,19 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Thu Aug 22 13:45:42 2024"
+[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Fri Aug 23 13:45:41 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.106.row.counts.R at Thu Aug 22 13:45:46 2024"
-[1] "Starting to run script: auto.make.daily.107.sql.examples.R at Thu Aug 22 13:45:46 2024"
-[1] "Starting to run script: auto.make.daily.108.table.png.R at Thu Aug 22 13:45:46 2024"
-[1] "Starting to run script: auto.make.daily.109.templates.R at Thu Aug 22 13:45:51 2024"
-[1] "Starting to run script: auto.make.daily.110.temporal.plots.R at Thu Aug 22 13:45:53 2024"
-[1] "Starting to run script: auto.make.daily.111.phase.models.R at Thu Aug 22 13:46:01 2024"
-[1] "mu.bw mean: 89.4886424049853"
-[1] "mu.bw SD: 255.076938860554"
-[1] "sigma.bw mean: 19.023707521516"
-[1] "sigma.bw SD: 25.4293411356938"
+[1] "Starting to run script: auto.make.daily.106.row.counts.R at Fri Aug 23 13:45:45 2024"
+[1] "Starting to run script: auto.make.daily.107.sql.examples.R at Fri Aug 23 13:45:45 2024"
+[1] "Starting to run script: auto.make.daily.108.table.png.R at Fri Aug 23 13:45:46 2024"
+[1] "Starting to run script: auto.make.daily.109.templates.R at Fri Aug 23 13:45:50 2024"
+[1] "Starting to run script: auto.make.daily.110.temporal.plots.R at Fri Aug 23 13:45:52 2024"
+[1] "Starting to run script: auto.make.daily.111.phase.models.R at Fri Aug 23 13:46:00 2024"
+[1] "mu.bw mean: 87.7727053519242"
+[1] "mu.bw SD: 168.532672563725"
+[1] "sigma.bw mean: 22.6469634571514"
+[1] "sigma.bw SD: 33.6222948761684"
 Warning message:
 In merge.data.frame(tmp, t1, by = "GraveID") :
   column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
@@ -78,6 +78,57 @@ In merge.data.frame(tmp, t1, by = "GraveID") :
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
+[1] "Starting to run script: auto.make.weekly.user.citation.hygiene.R at Fri Aug 23 14:04:41 2024"
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+Auto-refreshing stale OAuth token.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+[1] "Starting to run script: auto.make.weekly.user.email.checks.R at Fri Aug 23 14:04:45 2024"
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
 > 
 > #------------------------------------------------------------------
 > 	
@@ -87,4 +138,4 @@ In merge.data.frame(tmp, t1, by = "GraveID") :
 > 
 > proc.time()
     user   system  elapsed 
- 922.761  189.865 1130.842 
+ 970.183  192.793 1184.259 
