@@ -42,12 +42,12 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.101.triggers.R at Mon Sep 16 13:45:01 2024"
+[1] "Starting to run script: auto.make.daily.101.triggers.R at Tue Sep 17 13:45:01 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Mon Sep 16 13:45:08 2024"
-[1] "Starting to run script: auto.make.daily.103.descriptions.R at Mon Sep 16 13:45:32 2024"
-[1] "Starting to run script: auto.make.daily.104.map.R at Mon Sep 16 13:45:32 2024"
+[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Tue Sep 17 13:45:09 2024"
+[1] "Starting to run script: auto.make.daily.103.descriptions.R at Tue Sep 17 13:45:32 2024"
+[1] "Starting to run script: auto.make.daily.104.map.R at Tue Sep 17 13:45:32 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -56,19 +56,19 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Mon Sep 16 13:45:40 2024"
+[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Tue Sep 17 13:45:40 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.106.row.counts.R at Mon Sep 16 13:45:44 2024"
-[1] "Starting to run script: auto.make.daily.107.sql.examples.R at Mon Sep 16 13:45:44 2024"
-[1] "Starting to run script: auto.make.daily.108.table.png.R at Mon Sep 16 13:45:44 2024"
-[1] "Starting to run script: auto.make.daily.109.templates.R at Mon Sep 16 13:45:49 2024"
-[1] "Starting to run script: auto.make.daily.110.temporal.plots.R at Mon Sep 16 13:45:51 2024"
-[1] "Starting to run script: auto.make.daily.111.phase.models.R at Mon Sep 16 13:45:59 2024"
-[1] "mu.bw mean: 83.8436207788775"
-[1] "mu.bw SD: 136.968049724429"
-[1] "sigma.bw mean: 20.9596441148555"
-[1] "sigma.bw SD: 32.8689229921875"
+[1] "Starting to run script: auto.make.daily.106.row.counts.R at Tue Sep 17 13:45:44 2024"
+[1] "Starting to run script: auto.make.daily.107.sql.examples.R at Tue Sep 17 13:45:45 2024"
+[1] "Starting to run script: auto.make.daily.108.table.png.R at Tue Sep 17 13:45:45 2024"
+[1] "Starting to run script: auto.make.daily.109.templates.R at Tue Sep 17 13:45:50 2024"
+[1] "Starting to run script: auto.make.daily.110.temporal.plots.R at Tue Sep 17 13:45:52 2024"
+[1] "Starting to run script: auto.make.daily.111.phase.models.R at Tue Sep 17 13:46:00 2024"
+[1] "mu.bw mean: 101.291405623727"
+[1] "mu.bw SD: 328.08964170724"
+[1] "sigma.bw mean: 20.5631530689056"
+[1] "sigma.bw SD: 30.578501712045"
 Warning message:
 In merge.data.frame(tmp, t1, by = "GraveID") :
   column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
@@ -78,13 +78,8 @@ In merge.data.frame(tmp, t1, by = "GraveID") :
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-> 
-> #------------------------------------------------------------------
-> 	
-> 	
-> 	
-> 	
-> 
-> proc.time()
-    user   system  elapsed 
-1002.529  172.730 1194.118 
+[1] "Starting to run script: auto.make.weekly.user.citation.hygiene.R at Tue Sep 17 14:05:29 2024"
+Error: Can't get Google credentials.
+Are you running gmailr in a non-interactive session? Consider:
+  * Call `gm_auth()` directly with all necessary specifics.
+Execution halted
