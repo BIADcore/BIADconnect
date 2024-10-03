@@ -15,7 +15,6 @@ headers <- add_headers(Authorization = paste('Bearer',token))
 url <- 'https://biadwiki.org/u'
 
 # get image filepaths and types
-
 path <- list.files('../tools/plots', full.names=TRUE)
 type <- paste('image',file_ext(path),sep='/')
 

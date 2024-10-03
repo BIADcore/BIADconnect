@@ -42,12 +42,12 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.101.triggers.R at Thu Oct  3 16:44:02 2024"
+[1] "Starting to run script: auto.make.daily.101.triggers.R at Thu Oct  3 17:45:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Thu Oct  3 16:44:09 2024"
-[1] "Starting to run script: auto.make.daily.103.descriptions.R at Thu Oct  3 16:44:33 2024"
-[1] "Starting to run script: auto.make.daily.104.maps.R at Thu Oct  3 16:44:33 2024"
+[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Thu Oct  3 17:45:09 2024"
+[1] "Starting to run script: auto.make.daily.103.descriptions.R at Thu Oct  3 17:45:33 2024"
+[1] "Starting to run script: auto.make.daily.104.maps.R at Thu Oct  3 17:45:33 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -56,20 +56,95 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Thu Oct  3 16:44:40 2024"
+[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Thu Oct  3 17:45:54 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.106.row.counts.R at Thu Oct  3 16:44:42 2024"
-[1] "Starting to run script: auto.make.daily.107.table.plots.R at Thu Oct  3 16:44:42 2024"
-[1] "Starting to run script: auto.make.daily.108.templates.R at Thu Oct  3 16:44:43 2024"
-[1] "Starting to run script: auto.make.daily.109.temporal.plots.R at Thu Oct  3 16:44:45 2024"
-[1] "Starting to run script: auto.make.daily.111.images.to.wiki.R at Thu Oct  3 16:44:54 2024"
+[1] "Starting to run script: auto.make.daily.106.row.counts.R at Thu Oct  3 17:45:57 2024"
+[1] "Starting to run script: auto.make.daily.107.table.plots.R at Thu Oct  3 17:45:57 2024"
+[1] "Starting to run script: auto.make.daily.108.templates.R at Thu Oct  3 17:45:59 2024"
+[1] "Starting to run script: auto.make.daily.109.temporal.plots.R at Thu Oct  3 17:46:01 2024"
+[1] "Starting to run script: auto.make.daily.111.images.to.wiki.R at Thu Oct  3 17:46:10 2024"
 Loading required package: httr
 Loading required package: tools
-Error in curl::curl_fetch_memory(url, handle = handle) : 
-  SSL certificate problem: Invalid certificate chain
-Calls: source ... request_fetch -> request_fetch.write_memory -> <Anonymous>
-In addition: Warning message:
+[1] "../tools/plots/age.groups.1.plot.png ok"
+[1] "../tools/plots/citations.png ok"
+[1] "../tools/plots/citations.svg ok"
+[1] "../tools/plots/database.core.import.png ok"
+[1] "../tools/plots/database.items.example1.png ok"
+[1] "../tools/plots/database.items.example2.png ok"
+[1] "../tools/plots/database.items.example3.png ok"
+[1] "../tools/plots/database.items.example4.png ok"
+[1] "../tools/plots/database.items.example5.png ok"
+[1] "../tools/plots/database.relationships.plot.png ok"
+[1] "../tools/plots/database.relationships.plot.sub.1.png ok"
+[1] "../tools/plots/database.relationships.plot.sub.1.svg ok"
+[1] "../tools/plots/database.relationships.plot.sub1.png ok"
+[1] "../tools/plots/database.relationships.plot.svg ok"
+[1] "../tools/plots/items.example.1.png ok"
+[1] "../tools/plots/items.example.1.venn.png ok"
+[1] "../tools/plots/items.example.2.png ok"
+[1] "../tools/plots/items.example.2.venn.png ok"
+[1] "../tools/plots/items.overview.png ok"
+[1] "../tools/plots/map.C14.svg ok"
+[1] "../tools/plots/map.aDNA.svg ok"
+[1] "../tools/plots/map.botanicalspecies.svg ok"
+[1] "../tools/plots/map.faunalisotope.svg ok"
+[1] "../tools/plots/map.faunalspecies.svg ok"
+[1] "../tools/plots/map.graveindividuals.svg ok"
+[1] "../tools/plots/map.health.svg ok"
+[1] "../tools/plots/map.humanisotopes.svg ok"
+[1] "../tools/plots/map.humanstrontium.svg ok"
+[1] "../tools/plots/map.materialculture.svg ok"
+[1] "../tools/plots/map.svg ok"
+[1] "../tools/plots/phasecitation.png ok"
+[1] "../tools/plots/phasecitation.svg ok"
+[1] "../tools/plots/phases.png ok"
+[1] "../tools/plots/phases.svg ok"
+[1] "../tools/plots/phasetypes.png ok"
+[1] "../tools/plots/phasetypes.svg ok"
+[1] "../tools/plots/phasing.example.1.plot.png ok"
+[1] "../tools/plots/phasing.example.1a.table.png ok"
+[1] "../tools/plots/phasing.example.1b.table.png ok"
+[1] "../tools/plots/phasing.example.2.plot.png ok"
+[1] "../tools/plots/phasing.example.2.table.png ok"
+[1] "../tools/plots/phasing.example.2a.table.png ok"
+[1] "../tools/plots/phasing.example.2b.table.png ok"
+[1] "../tools/plots/sites.png ok"
+[1] "../tools/plots/sites.svg ok"
+[1] "../tools/plots/tiers.png ok"
+[1] "../tools/plots/time.phases.ABotIsotopes.png ok"
+[1] "../tools/plots/time.phases.ABotSamples.png ok"
+[1] "../tools/plots/time.phases.FaunalBiometrics.png ok"
+[1] "../tools/plots/time.phases.FaunalIsotopeSequences.png ok"
+[1] "../tools/plots/time.phases.FaunalIsotopes.png ok"
+[1] "../tools/plots/time.phases.FaunalSpecies.png ok"
+[1] "../tools/plots/time.phases.GraveIndividuals.png ok"
+[1] "../tools/plots/time.phases.Graves.png ok"
+[1] "../tools/plots/time.phases.HumanIsotopes.png ok"
+[1] "../tools/plots/time.phases.MaterialCulture.png ok"
+[1] "../tools/plots/time.phases.Rites.png ok"
+[1] "../tools/plots/time.phases.Strontium.png ok"
+[1] "../tools/plots/time.phases.StrontiumSequences.png ok"
+[1] "../tools/plots/time.phases.aDNA.png ok"
+[1] "../tools/plots/time.phases.all.png ok"
+[1] "../tools/plots/zoptions_types.png ok"
+[1] "../tools/plots/zoptions_types.svg ok"
+Warning message:
 In merge.data.frame(tmp, t1, by = "GraveID") :
   column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
-Execution halted
+> 
+> if(NW>0 & today%in%run.day)for(n in 1:NW){
++ 	file <- weekly.files[n]
++ 	print(paste('Starting to run script:',file,'at',date()))
++ 	source(file)
++ 	}
+> 
+> #------------------------------------------------------------------
+> 	
+> 	
+> 	
+> 	
+> 
+> proc.time()
+   user  system elapsed 
+ 42.599   2.496 134.757 
