@@ -16,10 +16,13 @@ standard <- d.tables[!d.tables%in%c(zoptions,zprivate,copy)]
 # all relationships
 d.tables <- paste(standard, collapse='; ')
 image <- database.relationship.plotter(d.tables, TRUE, user, password)
-export_svg(image) %>% charToRaw %>% rsvg_png("../tools/plots/database.relationships.plot.png")
+svg <- export_svg(image)
+writeLines(svg, '../tools/plots/database.relationships.plot.svg')
 #------------------------------------------------------------------
 # set 1
 d.tables <- paste(c('Sites','Phases','C14Samples','Graves','FaunalIsotopes','ABotPhases','StrontiumEnvironment'), collapse='; ')
 image <- database.relationship.plotter(d.tables, FALSE, user, password)
-export_svg(image) %>% charToRaw %>% rsvg_png("../tools/plots/database.relationships.plot.sub.1.png", height=350)
+svg <- export_svg(image)
+writeLines(svg, '../tools/plots/database.relationships.plot.sub.1.svg')
 #------------------------------------------------------------------
+
