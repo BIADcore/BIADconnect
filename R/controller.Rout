@@ -42,12 +42,12 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.101.triggers.R at Thu Oct  3 13:08:03 2024"
+[1] "Starting to run script: auto.make.daily.101.triggers.R at Thu Oct  3 16:44:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Thu Oct  3 13:08:10 2024"
-[1] "Starting to run script: auto.make.daily.103.descriptions.R at Thu Oct  3 13:08:34 2024"
-[1] "Starting to run script: auto.make.daily.104.maps.R at Thu Oct  3 13:08:34 2024"
+[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Thu Oct  3 16:44:09 2024"
+[1] "Starting to run script: auto.make.daily.103.descriptions.R at Thu Oct  3 16:44:33 2024"
+[1] "Starting to run script: auto.make.daily.104.maps.R at Thu Oct  3 16:44:33 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -56,34 +56,20 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Thu Oct  3 13:08:41 2024"
+[1] "Starting to run script: auto.make.daily.105.database.relationships.plot.R at Thu Oct  3 16:44:40 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.106.row.counts.R at Thu Oct  3 13:08:44 2024"
-[1] "Starting to run script: auto.make.daily.107.sql.examples.R at Thu Oct  3 13:08:44 2024"
-[1] "Starting to run script: auto.make.daily.108.table.png.R at Thu Oct  3 13:08:44 2024"
-[1] "Starting to run script: auto.make.daily.109.templates.R at Thu Oct  3 13:08:48 2024"
-[1] "Starting to run script: auto.make.daily.110.temporal.plots.R at Thu Oct  3 13:08:50 2024"
-[1] "Starting to run script: auto.make.daily.111.phase.models.R at Thu Oct  3 13:08:59 2024"[[1] "mu.bw mean: 98.3499469022669"
-[1] "mu.bw SD: 269.579890273314"
-[1] "sigma.bw mean: 22.3448073515525"
-[1] "sigma.bw SD: 36.8346287239078"
-Warning message:
+[1] "Starting to run script: auto.make.daily.106.row.counts.R at Thu Oct  3 16:44:42 2024"
+[1] "Starting to run script: auto.make.daily.107.table.plots.R at Thu Oct  3 16:44:42 2024"
+[1] "Starting to run script: auto.make.daily.108.templates.R at Thu Oct  3 16:44:43 2024"
+[1] "Starting to run script: auto.make.daily.109.temporal.plots.R at Thu Oct  3 16:44:45 2024"
+[1] "Starting to run script: auto.make.daily.111.images.to.wiki.R at Thu Oct  3 16:44:54 2024"
+Loading required package: httr
+Loading required package: tools
+Error in curl::curl_fetch_memory(url, handle = handle) : 
+  SSL certificate problem: Invalid certificate chain
+Calls: source ... request_fetch -> request_fetch.write_memory -> <Anonymous>
+In addition: Warning message:
 In merge.data.frame(tmp, t1, by = "GraveID") :
   column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
-> 
-> if(NW>0 & today%in%run.day)for(n in 1:NW){
-+ 	file <- weekly.files[n]
-+ 	print(paste('Starting to run script:',file,'at',date()))
-+ 	source(file)
-+ 	}
-> 
-> #------------------------------------------------------------------
-> 	
-> 	
-> 	
-> 	
-> 
-> proc.time()
-    user   system  elapsed 
-1079.183  219.712 1315.091 
+Execution halted
