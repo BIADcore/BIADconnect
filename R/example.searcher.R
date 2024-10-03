@@ -11,6 +11,9 @@ library(data.tree)
 # query any table with a primary key value, to get all direct relationships 
 x <- run.server.searcher(table.name = 'GraveIndividuals', primary.value = 'C03440') 
 
+# look at the data
+x
+
 # look at direct relationships (tree) above or below
 tree.down <- FromListSimple(x$down)
 tree.up <- FromListSimple(x$up)
@@ -23,6 +26,5 @@ print(tree.up)
 plot(tree.down)
 plot(tree.up)
 
-# extract data from some particular branch of the tree
-x$down$Phases$VEDRO1$C14Samples$data
+
 #----------------------------------------------------------------------------------------------------
