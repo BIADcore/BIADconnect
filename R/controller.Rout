@@ -64,10 +64,10 @@ Loading required package: DiagrammeR
 [1] "Starting to run script: auto.make.daily.108.table.png.R at Thu Oct  3 13:08:44 2024"
 [1] "Starting to run script: auto.make.daily.109.templates.R at Thu Oct  3 13:08:48 2024"
 [1] "Starting to run script: auto.make.daily.110.temporal.plots.R at Thu Oct  3 13:08:50 2024"
-[1] "Starting to run script: auto.make.daily.111.phase.models.R at Thu Oct  3 13:08:59 2024"[1] "mu.bw mean: 72.6852147181317"
-[1] "mu.bw SD: 93.9082787633921"
-[1] "sigma.bw mean: 19.1416151233519"
-[1] "sigma.bw SD: 26.7876983422473"
+[1] "Starting to run script: auto.make.daily.111.phase.models.R at Thu Oct  3 13:08:59 2024"[[1] "mu.bw mean: 98.3499469022669"
+[1] "mu.bw SD: 269.579890273314"
+[1] "sigma.bw mean: 22.3448073515525"
+[1] "sigma.bw SD: 36.8346287239078"
 Warning message:
 In merge.data.frame(tmp, t1, by = "GraveID") :
   column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
@@ -86,4 +86,4 @@ In merge.data.frame(tmp, t1, by = "GraveID") :
 > 
 > proc.time()
     user   system  elapsed 
- 996.432  179.857 1194.122 
+1079.183  219.712 1315.091 
