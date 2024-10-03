@@ -10,6 +10,7 @@ library(data.tree)
 #----------------------------------------------------------------------------------------------------
 # query any table with a primary key value, to get all direct relationships 
 x <- run.server.searcher(table.name = 'GraveIndividuals', primary.value = 'C03440') 
+x <- run.server.searcher(table.name = 'Sites', primary.value = 'S10050') 
 
 # look at the data
 x
