@@ -266,6 +266,52 @@ get.related.data <- function(table.name, primary.value, fnc, user, password){
 			}	
 		}
 
+	# relative level 4 data
+	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
+	rel.1.names <- rel.1.names[rel.1.names!='data']	
+	for(rel.1.name in rel.1.names){
+		rel.2.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]])
+		rel.2.names <- rel.2.names[rel.2.names!='data']	
+		for(rel.2.name in rel.2.names){
+			rel.3.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]])
+			rel.3.names <- rel.3.names[rel.3.names!='data']	
+			for(rel.3.name in rel.3.names){
+				rel.4.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]])
+				rel.4.names <- rel.4.names[rel.4.names!='data']	
+				for(rel.4.name in rel.4.names){
+					x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][rel.4.name]
+					x.sub <- wrapper(keys, x.data, fnc, user, password)
+					if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][rel.4.name] <- Map(c, x.data,x.sub)
+					}
+				}
+			}	
+		}
+
+	# relative level 5 data
+	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
+	rel.1.names <- rel.1.names[rel.1.names!='data']	
+	for(rel.1.name in rel.1.names){
+		rel.2.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]])
+		rel.2.names <- rel.2.names[rel.2.names!='data']	
+		for(rel.2.name in rel.2.names){
+			rel.3.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]])
+			rel.3.names <- rel.3.names[rel.3.names!='data']	
+			for(rel.3.name in rel.3.names){
+				rel.4.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]])
+				rel.4.names <- rel.4.names[rel.4.names!='data']	
+				for(rel.4.name in rel.4.names){
+					rel.5.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][[rel.4.name]])
+					rel.5.names <- rel.5.names[rel.5.names!='data']	
+					for(rel.5.name in rel.5.names){
+						x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][[rel.4.name]][rel.5.name]
+						x.sub <- wrapper(keys, x.data, fnc, user, password)
+						if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][rel.4.name]][rel.5.name] <- Map(c, x.data,x.sub)
+						}
+					}
+				}
+			}	
+		}
+
 return(all.data)}
 #----------------------------------------------------------------------------------------------------
 database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, user, password){

@@ -65,7 +65,7 @@ all <- all[all$C14.Age==all$CRA,]
 all <- all[all$C14.SD==all$Error,]
 
 # Periods
-# needs some thought later, as many deadhead samples have culture and period info where BIAD does not, but ideally should be assigned to the phase
+# needs some thought later, as many deadhead samples have CulturalPeriod info where BIAD does not, but ideally should be assigned to the phase
 period <- all[,c('LabID','Period.x','Period.y','CulturalPeriod')]
 period <- period[!is.na(period$CulturalPeriod) & is.na(period$Period.x) & is.na(period$Period.y),]
 
@@ -97,15 +97,25 @@ for(n in 1:nrow(dm))text[n] <- paste("UPDATE `BIAD`.`C14Samples` SET `Method`='"
 # Species
 sp <- all[,c('LabID','TaxonCode','Species')]
 sp <- sp[!is.na(sp$Species) & is.na(sp$TaxonCode),]
+sp$Species[sp$Species=='animal'] <- 'Animalia indeterminate (Animal indeterminate)'
+sp$Species[sp$Species=='Quercus'] <- 'Quercus spp.'
 sp$Species[sp$Species=='Homo sapiens?'] <- 'Homo sapiens'
+sp$Species[sp$Species=='Betula'] <- 'Betula spp.'
+sp$Species[sp$Species=='Corylus'] <- 'Corylus spp.'
+sp$Species[sp$Species=='Bos'] <- 'Bos species'
+sp$Species[sp$Species=='Alnus'] <- 'Alnus spp.'
+sp$Species[sp$Species=='Pinus'] <- 'Pinus spp.'
+sp$Species[sp$Species=='Tilia'] <- 'Tilia spp.'
+sp$Species[sp$Species=='Sus scrofa'] <- 'Sus species'
+sp$Species[sp$Species=='Fraxinus'] <- 'Fraxinus spp.'
+sp$Species[sp$Species=='Cerealia'] <- 'Cereal indeterminate'
+sp$Species[sp$Species=='Cerealia?'] <- 'Cereal indeterminate'
+sp <- merge(sp, tax, by.x='Species', by.y='FullNameOfTaxon', all=FALSE)
+sp <- sp[!is.na(sp$TaxonCode.y),]
+text <- c()
+for(n in 1:nrow(sp))text[n] <- paste("UPDATE `BIAD`.`C14Samples` SET `TaxonCode`='",sp$TaxonCode.y[n],"' WHERE  `LabID`='",sp$LabID[n],"';",sep='')
+# run.server.query(text)
 
-
-# testing
-test <- data.frame(Species=unique(sp$Species))
-mm <- merge(test, tax, by.x='Species', by.y='FullNameOfTaxon', all=FALSE)
-bad <- sp$Species[!sp$Species%in%mm$Species]
-
-
-
+sort(table(all$SiteContext))
 
 
