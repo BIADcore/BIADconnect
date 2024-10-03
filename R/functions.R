@@ -305,7 +305,7 @@ get.related.data <- function(table.name, primary.value, fnc, user, password){
 					for(rel.5.name in rel.5.names){
 						x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][[rel.4.name]][rel.5.name]
 						x.sub <- wrapper(keys, x.data, fnc, user, password)
-						if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][rel.4.name]][rel.5.name] <- Map(c, x.data,x.sub)
+						if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][[rel.4.name]][rel.5.name] <- Map(c, x.data,x.sub)
 						}
 					}
 				}

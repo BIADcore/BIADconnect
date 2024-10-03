@@ -8,21 +8,21 @@ source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
 #--------------------------------------------------------------------------------------
 library(data.tree)
 #----------------------------------------------------------------------------------------------------
-#query the selected table for the dependenancies of a SiteID or PhaseID
+# query any table with a primary key value, to get all direct relationships 
 x <- run.server.searcher(table.name = 'GraveIndividuals', primary.value = 'C03440') 
 
-#use the queried information to prepare the list of relationships up and down the hierarchical tree
+# look at direct relationships (tree) above or below
 tree.down <- FromListSimple(x$down)
 tree.up <- FromListSimple(x$up)
 
-#print the results as a list
+# print the results as a list
 print(tree.down)
 print(tree.up)
 
-#show the results as a plot
+# show the results as a plot
 plot(tree.down)
 plot(tree.up)
-#----------------------------------------------------------------------------------------------------
-# query to access information displayed in the list or graph as 'data'
+
+# extract data from some particular branch of the tree
 x$down$Phases$VEDRO1$C14Samples$data
 #----------------------------------------------------------------------------------------------------
