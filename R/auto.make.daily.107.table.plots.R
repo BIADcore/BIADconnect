@@ -2,6 +2,7 @@
 # Generate a bunch of examples of tables as images, for embedding in wiki
 #-------------------------------------------------------------------------------
 library(gridExtra)
+library(svglite)
 tables <- c('citations','phasecitation','phases','phasetypes','sites','zoptions_types')
 
 theme <- ttheme_minimal(
@@ -27,7 +28,7 @@ for(table in tables){
 	d <- d[,colSums(d=='\\N')<4]
 
 	path <- paste('../tools/plots/',table,'.svg',sep='')
-	svg(path,width=36, height=3)
+	svglite(path,width=36, height=3)
 	grid.table(d, theme=theme,rows=rep('',5))
 	dev.off()
 	}
