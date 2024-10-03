@@ -367,7 +367,7 @@ database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, user,
 	if(!include.look.ups)subgraph <- ""
 
 	diagram <- paste("digraph {", data.tables, look.ups, edges, subgraph, "}")
-	image <- DiagrammeR::grViz(diagram)
+	image <- DiagrammeR::grViz(diagram, engine='neato')
 return(image)}
 #--------------------------------------------------------------------------------------------------
 make.autopad.trigger <- function(table, columns, type, prefix){
