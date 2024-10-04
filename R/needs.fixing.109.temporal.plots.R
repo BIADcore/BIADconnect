@@ -1,4 +1,10 @@
 #--------------------------------------------------------------------------------------------------
+# Needs fixing!! Then change to running daily
+# Should output .svgs
+# should then be embedded into BIADwiki plots page
+# merges are throwing warnings as the queries are pulling all columns, so many are in common
+#--------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
 # Time dependent plots
 #--------------------------------------------------------------------------------------------------
 require(ggplot2)
