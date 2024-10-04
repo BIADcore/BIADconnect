@@ -42,12 +42,12 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.101.triggers.R at Thu Oct  3 21:13:01 2024"
+[1] "Starting to run script: auto.make.daily.101.triggers.R at Fri Oct  4 10:17:03 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Thu Oct  3 21:13:09 2024"
-[1] "Starting to run script: auto.make.daily.103.descriptions.R at Thu Oct  3 21:13:32 2024"
-[1] "Starting to run script: auto.make.daily.104.maps.R at Thu Oct  3 21:13:32 2024"
+[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Fri Oct  4 10:17:10 2024"
+[1] "Starting to run script: auto.make.daily.103.descriptions.R at Fri Oct  4 10:17:33 2024"
+[1] "Starting to run script: auto.make.daily.104.maps.R at Fri Oct  4 10:17:33 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -56,93 +56,77 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.105.relationships.plot.R at Thu Oct  3 21:13:38 2024"
+[1] "Starting to run script: auto.make.daily.105.relationships.plot.R at Fri Oct  4 10:17:42 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.106.row.counts.R at Thu Oct  3 21:13:40 2024"
-[1] "Starting to run script: auto.make.daily.107.table.plots.R at Thu Oct  3 21:13:40 2024"
-[1] "Starting to run script: auto.make.daily.108.templates.R at Thu Oct  3 21:13:42 2024"
-[1] "Starting to run script: auto.make.daily.109.temporal.plots.R at Thu Oct  3 21:13:44 2024"
-[1] "Starting to run script: auto.make.daily.110.images.to.wiki.R at Thu Oct  3 21:13:52 2024"
+[1] "Starting to run script: auto.make.daily.106.row.counts.R at Fri Oct  4 10:17:45 2024"
+[1] "Starting to run script: auto.make.daily.107.table.plots.R at Fri Oct  4 10:17:45 2024"
+[1] "Starting to run script: auto.make.daily.108.templates.R at Fri Oct  4 10:17:47 2024"
+[1] "Starting to run script: auto.make.daily.110.images.to.wiki.R at Fri Oct  4 10:17:49 2024"
 Loading required package: httr
 Loading required package: tools
-[1] "../tools/plots/age.groups.1.plot.png ok"
-[1] "../tools/plots/citations.png ok"
-[1] "../tools/plots/citations.svg ok"
-[1] "../tools/plots/database.core.import.png ok"
-[1] "../tools/plots/database.items.example1.png ok"
-[1] "../tools/plots/database.items.example2.png ok"
-[1] "../tools/plots/database.items.example3.png ok"
-[1] "../tools/plots/database.items.example4.png ok"
-[1] "../tools/plots/database.items.example5.png ok"
-[1] "../tools/plots/database.relationships.plot.png ok"
-[1] "../tools/plots/database.relationships.plot.sub.1.png ok"
-[1] "../tools/plots/database.relationships.plot.sub.1.svg ok"
-[1] "../tools/plots/database.relationships.plot.sub1.png ok"
-[1] "../tools/plots/database.relationships.plot.svg ok"
-[1] "../tools/plots/items.example.1.png ok"
-[1] "../tools/plots/items.example.1.venn.png ok"
-[1] "../tools/plots/items.example.2.png ok"
-[1] "../tools/plots/items.example.2.venn.png ok"
-[1] "../tools/plots/items.overview.png ok"
-[1] "../tools/plots/map.C14.svg ok"
-[1] "../tools/plots/map.aDNA.svg ok"
-[1] "../tools/plots/map.botanicalspecies.svg ok"
-[1] "../tools/plots/map.faunalisotope.svg ok"
-[1] "../tools/plots/map.faunalspecies.svg ok"
-[1] "../tools/plots/map.graveindividuals.svg ok"
-[1] "../tools/plots/map.health.svg ok"
-[1] "../tools/plots/map.humanisotopes.svg ok"
-[1] "../tools/plots/map.humanstrontium.svg ok"
-[1] "../tools/plots/map.materialculture.svg ok"
-[1] "../tools/plots/map.svg ok"
-[1] "../tools/plots/phasecitation.png ok"
-[1] "../tools/plots/phasecitation.svg ok"
-[1] "../tools/plots/phases.png ok"
-[1] "../tools/plots/phases.svg ok"
-[1] "../tools/plots/phasetypes.png ok"
-[1] "../tools/plots/phasetypes.svg ok"
-[1] "../tools/plots/phasing.example.1.plot.png ok"
-[1] "../tools/plots/phasing.example.1a.table.png ok"
-[1] "../tools/plots/phasing.example.1b.table.png ok"
-[1] "../tools/plots/phasing.example.2.plot.png ok"
-[1] "../tools/plots/phasing.example.2.table.png ok"
-[1] "../tools/plots/phasing.example.2a.table.png ok"
-[1] "../tools/plots/phasing.example.2b.table.png ok"
-[1] "../tools/plots/sites.png ok"
-[1] "../tools/plots/sites.svg ok"
-[1] "../tools/plots/tiers.png ok"
-[1] "../tools/plots/time.phases.ABotIsotopes.png ok"
-[1] "../tools/plots/time.phases.ABotSamples.png ok"
-[1] "../tools/plots/time.phases.FaunalBiometrics.png ok"
-[1] "../tools/plots/time.phases.FaunalIsotopeSequences.png ok"
-[1] "../tools/plots/time.phases.FaunalIsotopes.png ok"
-[1] "../tools/plots/time.phases.FaunalSpecies.png ok"
-[1] "../tools/plots/time.phases.GraveIndividuals.png ok"
-[1] "../tools/plots/time.phases.Graves.png ok"
-[1] "../tools/plots/time.phases.HumanIsotopes.png ok"
-[1] "../tools/plots/time.phases.MaterialCulture.png ok"
-[1] "../tools/plots/time.phases.Rites.png ok"
-[1] "../tools/plots/time.phases.Strontium.png ok"
-[1] "../tools/plots/time.phases.StrontiumSequences.png ok"
-[1] "../tools/plots/time.phases.aDNA.png ok"
-[1] "../tools/plots/time.phases.all.png ok"
-[1] "../tools/plots/zoptions_types.png ok"
-[1] "../tools/plots/zoptions_types.svg ok"
-[1] "Starting to run script: auto.make.daily.111.phase.models.R at Thu Oct  3 21:14:54 2024"
-[1] "mu.bw mean: 74.7270587159063"
-[1] "mu.bw SD: 110.407737099982"
-[1] "sigma.bw mean: 17.0484025986085"
-[1] "sigma.bw SD: 23.3133350053586"
-Warning message:
-In merge.data.frame(tmp, t1, by = "GraveID") :
-  column names 'notes.x', 'time_added.x', 'user_added.x', 'time_last_update.x', 'user_last_update.x', 'notes.y', 'time_added.y', 'user_added.y', 'time_last_update.y', 'user_last_update.y' are duplicated in the result
+[1] "Starting to run script: auto.make.daily.111.phase.models.R at Fri Oct  4 10:18:52 2024"
+[1] "mu.bw mean: 82.177402909607"
+[1] "mu.bw SD: 89.845070442938"
+[1] "sigma.bw mean: 17.8269914935556"
+[1] "sigma.bw SD: 24.3996282476796"
 > 
 > if(NW>0 & today%in%run.day)for(n in 1:NW){
 + 	file <- weekly.files[n]
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
+[1] "Starting to run script: auto.make.weekly.user.citation.hygiene.R at Fri Oct  4 10:20:42 2024"
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+Auto-refreshing stale OAuth token.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
+[1] "Starting to run script: auto.make.weekly.user.email.checks.R at Fri Oct  4 10:20:46 2024"
+! Using an auto-discovered, cached token.
+  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.
+  See gargle's "Non-interactive auth" vignette for more details:
+  <https://gargle.r-lib.org/articles/non-interactive-auth.html>
+i The gmailr package is using a cached token for 'biad.committee@gmail.com'.
 > 
 > #------------------------------------------------------------------
 > 	
@@ -152,4 +136,4 @@ In merge.data.frame(tmp, t1, by = "GraveID") :
 > 
 > proc.time()
    user  system elapsed 
-124.986  15.203 210.537 
+128.570  18.074 225.699 
