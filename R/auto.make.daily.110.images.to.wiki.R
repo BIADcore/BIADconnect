@@ -31,8 +31,9 @@ for(n in 1:N){
 	# Make the POST request
 	result <- POST(url, headers, body = body)
 
-	# Print the result
-	print(paste(path[n],content(result, "text")))
+	# Print the result if problematic
+	res <- content(result, "text")
+	if(res!='ok')print(res)
 	}
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
