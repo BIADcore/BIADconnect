@@ -50,7 +50,7 @@ res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
 
-svglite(file = '../tools/plots/map.aDNA.svg', width = 10, height = 5 )
+svglite(file = '../tools/plots/map.aDNA.svg', width = width, height = height )
 plot(NULL,xlim=xlim,ylim=ylim,frame.plot=F,axes=F, xlab='',ylab='',main='Human aDNA')
 map('world',xlim=xlim,ylim=ylim,col='grey90',add=T, fill=T, border='grey')
 points(x, y, col=res$summary$col, pch=16,cex=0.8)
