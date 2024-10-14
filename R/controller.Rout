@@ -42,12 +42,12 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.101.triggers.R at Sun Oct 13 10:17:02 2024"
+[1] "Starting to run script: auto.make.daily.101.triggers.R at Mon Oct 14 10:17:02 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Sun Oct 13 10:17:09 2024"
-[1] "Starting to run script: auto.make.daily.103.descriptions.R at Sun Oct 13 10:17:32 2024"
-[1] "Starting to run script: auto.make.daily.104.maps.R at Sun Oct 13 10:17:32 2024"
+[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Mon Oct 14 10:17:09 2024"
+[1] "Starting to run script: auto.make.daily.103.descriptions.R at Mon Oct 14 10:17:32 2024"
+[1] "Starting to run script: auto.make.daily.104.maps.R at Mon Oct 14 10:17:32 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -56,20 +56,20 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.105.relationships.plot.R at Sun Oct 13 10:17:39 2024"
+[1] "Starting to run script: auto.make.daily.105.relationships.plot.R at Mon Oct 14 10:17:39 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.106.row.counts.R at Sun Oct 13 10:17:41 2024"
-[1] "Starting to run script: auto.make.daily.107.table.plots.R at Sun Oct 13 10:17:41 2024"
-[1] "Starting to run script: auto.make.daily.108.templates.R at Sun Oct 13 10:17:43 2024"
-[1] "Starting to run script: auto.make.daily.110.images.to.wiki.R at Sun Oct 13 10:17:45 2024"
+[1] "Starting to run script: auto.make.daily.106.row.counts.R at Mon Oct 14 10:17:42 2024"
+[1] "Starting to run script: auto.make.daily.107.table.plots.R at Mon Oct 14 10:17:42 2024"
+[1] "Starting to run script: auto.make.daily.108.templates.R at Mon Oct 14 10:17:44 2024"
+[1] "Starting to run script: auto.make.daily.110.images.to.wiki.R at Mon Oct 14 10:17:46 2024"
 Loading required package: httr
 Loading required package: tools
-[1] "Starting to run script: auto.make.daily.111.phase.models.R at Sun Oct 13 10:18:41 2024"
-[1] "mu.bw mean: 58.5176268888415"
-[1] "mu.bw SD: 85.4158375015233"
-[1] "sigma.bw mean: 16.5188117498902"
-[1] "sigma.bw SD: 23.7561742853134"
+[1] "Starting to run script: auto.make.daily.111.phase.models.R at Mon Oct 14 10:18:49 2024"
+[1] "mu.bw mean: 60.7139185352296"
+[1] "mu.bw SD: 69.8913409763097"
+[1] "sigma.bw mean: 19.5529501705409"
+[1] "sigma.bw SD: 25.0253422472202"
 > 
 > if(NW>0 & today%in%run.day)for(n in 1:NW){
 + 	file <- weekly.files[n]
@@ -85,4 +85,4 @@ Loading required package: tools
 > 
 > proc.time()
    user  system elapsed 
-125.205  14.020 205.026 
+115.727  12.407 201.228 
