@@ -54,7 +54,7 @@ run.server.query.inner <- function(user, password, hostuser, hostname, pempath){
 
 return(query)}
 #--------------------------------------------------------------------------------------------------
-query.database.inner <- function(user, password, dbname, sql.command){
+query.database.inner <- function(user, password, host, port, dbname, sql.command){
 	require(RMySQL)
 	drv <- dbDriver("MySQL")
 
@@ -63,7 +63,7 @@ query.database.inner <- function(user, password, dbname, sql.command){
 	for(con in cons)dbDisconnect(con)
 
 	# connect locally to the database
-	con <- dbConnect(drv, user=user, pass=password, dbname=dbname, host = "127.0.0.1", port=3306)
+	con <- dbConnect(drv, user=user, pass=password, dbname=dbname, host = host, port = port)
 	dbSendStatement(con,"SET NAMES 'utf8'")
 
 	# query the database and tidy
@@ -76,8 +76,9 @@ query.database.inner <- function(user, password, dbname, sql.command){
 	for(con in cons)dbDisconnect(con)
 return(query)}
 #--------------------------------------------------------------------------------------------------
-query.database <- function(user, password, dbname, sql.command){
-	query <- suppressWarnings(query.database.inner(user, password, dbname, sql.command))
+query.database <- function(user, password, host, port, dbname, sql.command){
+
+	query <- query.database.inner(user, password, host, port, dbname, sql.command)
 return(query)}
 #--------------------------------------------------------------------------------------------------
 encoder <- function(df){
