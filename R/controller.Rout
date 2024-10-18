@@ -42,12 +42,12 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.101.triggers.R at Thu Oct 17 10:17:02 2024"
+[1] "Starting to run script: auto.make.daily.101.triggers.R at Fri Oct 18 10:17:01 2024"
 Loading required package: RMySQL
 Loading required package: DBI
-[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Thu Oct 17 10:17:09 2024"
-[1] "Starting to run script: auto.make.daily.103.descriptions.R at Thu Oct 17 10:17:32 2024"
-[1] "Starting to run script: auto.make.daily.104.maps.R at Thu Oct 17 10:17:33 2024"
+[1] "Starting to run script: auto.make.daily.102.clean.whitespace.R at Fri Oct 18 10:17:09 2024"
+[1] "Starting to run script: auto.make.daily.103.descriptions.R at Fri Oct 18 10:17:32 2024"
+[1] "Starting to run script: auto.make.daily.104.maps.R at Fri Oct 18 10:17:32 2024"
 Loading required package: ggplot2
 Loading required package: sf
 Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
@@ -56,33 +56,28 @@ Loading required package: rnaturalearthdata
 Loading required package: maps
 Loading required package: mapdata
 Loading required package: svglite
-[1] "Starting to run script: auto.make.daily.105.relationships.plot.R at Thu Oct 17 10:17:41 2024"
+[1] "Starting to run script: auto.make.daily.105.relationships.plot.R at Fri Oct 18 10:17:41 2024"
 Linking to librsvg 2.48.4
 Loading required package: DiagrammeR
-[1] "Starting to run script: auto.make.daily.106.row.counts.R at Thu Oct 17 10:17:43 2024"
-[1] "Starting to run script: auto.make.daily.107.table.plots.R at Thu Oct 17 10:17:43 2024"
-[1] "Starting to run script: auto.make.daily.108.templates.R at Thu Oct 17 10:17:45 2024"
-[1] "Starting to run script: auto.make.daily.110.images.to.wiki.R at Thu Oct 17 10:17:47 2024"
+[1] "Starting to run script: auto.make.daily.106.row.counts.R at Fri Oct 18 10:17:43 2024"
+[1] "Starting to run script: auto.make.daily.107.table.plots.R at Fri Oct 18 10:17:43 2024"
+[1] "Starting to run script: auto.make.daily.108.templates.R at Fri Oct 18 10:17:45 2024"
+[1] "Starting to run script: auto.make.daily.110.images.to.wiki.R at Fri Oct 18 10:17:47 2024"
 Loading required package: httr
 Loading required package: tools
-[1] "Starting to run script: auto.make.daily.111.phase.models.R at Thu Oct 17 10:18:43 2024"
-[1] "mu.bw mean: 68.7523342170393"
-[1] "mu.bw SD: 87.10569510917"
-[1] "sigma.bw mean: 19.3364833794925"
-[1] "sigma.bw SD: 24.881293661769"
+[1] "Starting to run script: auto.make.daily.111.phase.models.R at Fri Oct 18 10:18:40 2024"
+[1] "mu.bw mean: 76.2890356740677"
+[1] "mu.bw SD: 92.1945661745029"
+[1] "sigma.bw mean: 15.9314896344155"
+[1] "sigma.bw SD: 20.7960672537851"
 > 
 > if(NW>0 & today%in%run.day)for(n in 1:NW){
 + 	file <- weekly.files[n]
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-> 
-> #------------------------------------------------------------------
-> 	
-> 	
-> 	
-> 	
-> 
-> proc.time()
-   user  system elapsed 
-115.723  14.363 196.172 
+[1] "Starting to run script: auto.make.weekly.user.citation.hygiene.R at Fri Oct 18 10:20:40 2024"
+Error: Can't get Google credentials.
+Are you running gmailr in a non-interactive session? Consider:
+  * Call `gm_auth()` directly with all necessary specifics.
+Execution halted
