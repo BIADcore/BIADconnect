@@ -98,14 +98,14 @@ get.tables.from.backup <- function(file){
 		}
 return(tables)}
 #----------------------------------------------------------------------------------------------------
-get.child.relationships <- function(keys, table.name, primary.value, user, password, host, port){
-	primary.data <- get.table.data(keys, table.name, primary.value, user, password, host, port)
+get.child.relationships <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
+	primary.data <- get.table.data(keys, table.name, primary.value, conn = conn, db.credentials = db.credentials)
 	primary.column <- get.primary.column.from.table(keys, table.name)
 	res <- subset(keys, REFERENCED_COLUMN_NAME==primary.column & REFERENCED_TABLE_NAME==table.name)
 return(res)}
 #----------------------------------------------------------------------------------------------------
-get.parent.relationships <- function(keys, table.name, primary.value, user, password, host, port){
-	primary.data <- get.table.data(keys, table.name, primary.value, user, password, host, port)
+get.parent.relationships <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
+	primary.data <- get.table.data(keys, table.name, primary.value, conn = conn, db.credentials = db.credentials)
 	primary.column <- get.primary.column.from.table(keys, table.name)
 	res <- subset(keys, TABLE_NAME==table.name & grepl('FK_',CONSTRAINT_NAME))
 return(res)}
@@ -117,19 +117,18 @@ get.primary.column.from.table <- function(keys, table.name){
 	if(length(column)>1)stop('unclear which column to use')	
 return(column)}
 #----------------------------------------------------------------------------------------------------
-get.table.data <- function(keys, table.name, primary.value, user, password, host, port){
-
+get.table.data <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
 	if(length(primary.value)!=1)stop('provide a single primary value')
 	primary.column <- get.primary.column.from.table(keys, table.name)
 	sql.command <- paste("SELECT * FROM `BIAD`.`",table.name,"` WHERE ",primary.column," IN ('",primary.value,"')", sep='')
-	data <- suppressWarnings(query.database(user, password, host, port, dbname, sql.command))
+	data <- query.database(conn = conn,db.credentials = db.credentials, sql.command = sql.command)
 	data <- remove.blank.columns.from.table(data)
 return(data)}
 #----------------------------------------------------------------------------------------------------
-decendants <- function(keys, table.name, primary.value, user, password, host, port){
+decendants <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
 
 	if(is.null(primary.value))return(NULL)
-	relationships <- get.child.relationships(keys, table.name, primary.value, user, password, host, port)
+	relationships <- get.child.relationships(keys, table.name, primary.value, conn, db.credentials)
 	child.tables <- relationships$TABLE_NAME
 	child.columns <- relationships$COLUMN_NAME
 
@@ -140,7 +139,7 @@ decendants <- function(keys, table.name, primary.value, user, password, host, po
 		child.table <- child.tables[n]
 		child.column <- child.columns[n]
 		sql.command <- paste("SELECT * FROM `BIAD`.`",child.table,"` WHERE ",child.column," = '",primary.value,"'", sep='')
-		data <- suppressWarnings(query.database(user, password, host, port, dbname, sql.command))
+		data <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
 		data <- remove.blank.columns.from.table(data)
 		res[[child.table]]$data <- data
 		}
@@ -148,17 +147,17 @@ decendants <- function(keys, table.name, primary.value, user, password, host, po
 
 return(res)}
 #----------------------------------------------------------------------------------------------------
-ancestors <- function(keys, table.name, primary.value, user, password, host, port){
+ancestors <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
 
 	if(is.null(primary.value))return(NULL)
-	relationships <- get.parent.relationships(keys, table.name, primary.value, user, password, host, port)
+	relationships <- get.parent.relationships(keys, table.name, primary.value, conn, db.credentials)
 	
 	# whether or not to include zoptions parents? ... subset(relationships, !grepl('zoptions_',REFERENCED_TABLE_NAME))
 	parent.tables <- relationships$REFERENCED_TABLE_NAME
 	parent.columns <- relationships$REFERENCED_COLUMN_NAME
 	child.columns <- relationships$COLUMN_NAME
 	
-	table.data <- get.table.data(keys, table.name, primary.value, user, password, host, port)
+	table.data <- get.table.data(keys, table.name, primary.value, conn, db.credentials)
 	
 	res <- list()
 	N <- length(parent.tables)
@@ -175,7 +174,7 @@ ancestors <- function(keys, table.name, primary.value, user, password, host, por
 			values <- values[!is.na(values)]
 			values <- paste(values, collapse="','")
 			sql.command <- paste("SELECT * FROM `BIAD`.`",parent.table,"` WHERE ",parent.column," IN ('",values,"')", sep='')		
-			data <- suppressWarnings(query.database(user, password, host, port, dbname, sql.command))
+			data <- query.database(conn, db.credentials, sql.command)
 			data <- remove.blank.columns.from.table(data)
 			res[[parent.table]]$data <- data	
 			}	
@@ -185,7 +184,7 @@ ancestors <- function(keys, table.name, primary.value, user, password, host, por
 
 return(res)}
 #----------------------------------------------------------------------------------------------------
-wrapper <- function(keys, table.data, fnc, user, password, host, port){
+wrapper <- function(keys, table.data, fnc, conn = NULL, db.credentials = NULL){
 	rel.data <- list()
 	N <- length(table.data)
 	for(n in 1:N){
@@ -195,7 +194,7 @@ wrapper <- function(keys, table.data, fnc, user, password, host, port){
 		rel.values <- rel[[table.name]]$data[[col]]
 		for(rel in rel.values){
 
-			x <- fnc(keys, table.name, rel, user, password,host) 
+			x <- fnc(keys, table.name, rel, conn = conn , db.credentials = db.credentials) 
 			rel.data[[table.name]][[rel]] <- x
 			}
 		}
@@ -209,20 +208,20 @@ remove.blank.columns.from.table <- function(table){
 	tb <- tb[,keep.i,drop=F]
 return(tb)}
 #----------------------------------------------------------------------------------------------------
-get.related.data <- function(table.name, primary.value, fnc, user, password, host, port){
+get.related.data <- function(table.name, primary.value, fnc, conn = NULL, db.credentials = NULL){
 
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
-	keys <- query.database(user, password, host, port, dbname, sql.command)
+	keys <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
 
 	# table data
 	all.data <- list()
-	table.data <- get.table.data(keys, table.name, primary.value, user, password, host, port) 
+	table.data <- get.table.data(keys, table.name, primary.value, conn, db.credentials) 
 	if(is.null(table.data))return(NULL)
 	all.data[[table.name]]$data <- table.data
 	
 	# relative level 0 data
 	x.data <- all.data[table.name]
-	x.sub <- wrapper(keys, table.data=x.data, fnc, user, password, host, port)
+	x.sub <- wrapper(keys, table.data=x.data, fnc, conn = conn, db.credentials = db.credentials)
 	if(!is.null(x.sub))all.data[table.name] <- Map(c, x.data,x.sub)
 
 	# relative level 1 data
@@ -230,7 +229,7 @@ get.related.data <- function(table.name, primary.value, fnc, user, password, hos
 	rel.1.names <- rel.1.names[rel.1.names!='data']	
 	for(rel.1.name in rel.1.names){
 		x.data <- all.data[[table.name]][[primary.value]][rel.1.name]
-		x.sub <- wrapper(keys, x.data, fnc, user, password, host, port)
+		x.sub <- wrapper(keys, x.data, fnc, conn = conn, db.credentials = db.credentials)
 		if(!is.null(x.sub))all.data[[table.name]][[primary.value]][rel.1.name] <- Map(c, x.data,x.sub)
 		}
 
@@ -242,7 +241,7 @@ get.related.data <- function(table.name, primary.value, fnc, user, password, hos
 		rel.2.names <- rel.2.names[rel.2.names!='data']	
 		for(rel.2.name in rel.2.names){
 			x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][rel.2.name]
-			x.sub <- wrapper(keys, x.data, fnc, user, password, host, port)
+			x.sub <- wrapper(keys, x.data, fnc, conn, db.credentials)
 			if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][rel.2.name] <- Map(c, x.data,x.sub)
 			}
 		}
@@ -258,7 +257,7 @@ get.related.data <- function(table.name, primary.value, fnc, user, password, hos
 			rel.3.names <- rel.3.names[rel.3.names!='data']	
 			for(rel.3.name in rel.3.names){	
 				x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][rel.3.name]
-				x.sub <- wrapper(keys, x.data, fnc, user, password, host, port)
+				x.sub <- wrapper(keys, x.data, fnc, conn, db.credentials)
 				if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][rel.3.name] <- Map(c, x.data,x.sub)
 				}
 			}	
@@ -278,7 +277,7 @@ get.related.data <- function(table.name, primary.value, fnc, user, password, hos
 				rel.4.names <- rel.4.names[rel.4.names!='data']	
 				for(rel.4.name in rel.4.names){
 					x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][rel.4.name]
-					x.sub <- wrapper(keys, x.data, fnc, user, password, host, port)
+					x.sub <- wrapper(keys, x.data, fnc, conn, db.credentials)
 					if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][rel.4.name] <- Map(c, x.data,x.sub)
 					}
 				}
@@ -302,7 +301,7 @@ get.related.data <- function(table.name, primary.value, fnc, user, password, hos
 					rel.5.names <- rel.5.names[rel.5.names!='data']	
 					for(rel.5.name in rel.5.names){
 						x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][[rel.4.name]][rel.5.name]
-						x.sub <- wrapper(keys, x.data, fnc, user, password)
+						x.sub <- wrapper(keys, x.data, fnc, conn = conn , db.credentials = db.credentials)
 						if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][[rel.4.name]][rel.5.name] <- Map(c, x.data,x.sub)
 						}
 					}
@@ -312,12 +311,12 @@ get.related.data <- function(table.name, primary.value, fnc, user, password, hos
 
 return(all.data)}
 #----------------------------------------------------------------------------------------------------
-database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, user, password, host, port){
+database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, conn = NULL, db.credentials = NULL){
 
 	require(DiagrammeR)
 
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_SCHEMA = 'BIAD'"
-	d <- suppressWarnings(query.database(user, password, host, port, dbname, sql.command))
+	d <- query.database(conn, db.credentials, sql.command)
 	d <- subset(d, TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
 	if(!include.look.ups){
 		d <- subset(d, REFERENCED_TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
