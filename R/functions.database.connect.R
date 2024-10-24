@@ -54,42 +54,88 @@ run.server.query.inner <- function(user, password, hostuser, hostname, pempath){
 
 return(query)}
 #--------------------------------------------------------------------------------------------------
-query.database.inner <- function(user, password, host, port, dbname, sql.command){
-	require(RMySQL)
-	drv <- dbDriver("MySQL")
-
-	# close any connections to the database
-	cons <- dbListConnections(MySQL())
-	for(con in cons)dbDisconnect(con)
-
-	# connect locally to the database
-	con <- dbConnect(drv, user=user, pass=password, dbname=dbname, host = host, port = port)
-	dbSendStatement(con,"SET NAMES 'utf8'")
-
-	# query the database and tidy
-	for(n in 1:length(sql.command)) res <- dbSendStatement(con,sql.command[n])
+query.database <- function(sql.command, conn=NULL, db.credentials=NULL){
+    if(is.null(conn) || !dbIsValid(conn) ){
+        con <<- init.conn(db.credentials=db.credentials)
+    }
+	for(n in 1:length(sql.command)) {
+        res <- tryCatch(suppressWarnings(dbSendStatement(conn,sql.command[n])),
+                    error=function(e){
+                        print(e)
+                        error("error while sending command",sql.command[n])
+                    })
+    }
 	query <- fetch(res, n= -1)
+    dbClearResult(res)
 	query <- encoder(query)
+    return(query)
 
-	# close any connections to the database
-	cons <- dbListConnections(MySQL())
-	for(con in cons)dbDisconnect(con)
-return(query)}
-#--------------------------------------------------------------------------------------------------
-query.database <- function(user, password, host, port, dbname, sql.command){
-
-	query <- query.database.inner(user, password, host, port, dbname, sql.command)
 return(query)}
 #--------------------------------------------------------------------------------------------------
 encoder <- function(df){
-	if(nrow(df)==0) return(NULL)
-	names(df) <- iconv(names(df),from="UTF-8",to="UTF-8")
-	if(nrow(df)>0){
-		for(n in 1:ncol(df))
-		if(class(df[,n])=="character"){
-			df[,n] <- iconv(df[,n],from="UTF-8",to="UTF-8")
-			}
-		return(df)	
-		}
-	}
+    if(nrow(df)==0) return(NULL)
+    names(df) <- iconv(names(df),from="UTF-8",to="UTF-8")
+    char <- sapply(df,class) == 'character'
+    df[,char] <- apply(df[,char,drop=F],2,iconv,from="UTF-8",to="UTF-8")
+    return(df)	
+}
 #--------------------------------------------------------------------------------------------------
+#' Initialize Database Connection
+#'
+#' This function initializes a connection to the BIAD database using the provided
+#' credentials. If no credentials are supplied, it attempts to retrieve them from
+#' environment variables that should be stored in `~/.Renviron`
+#'
+#' @param db.credentials A list containing database connection details. The list 
+#' should include `user`, `password`, `host`, and `port`. If `NULL`, defaults 
+#' to fetching these values from environment variables. You can store these in
+#' `~/.Renviron` or export them in your environment using your favorite method
+#' (ie: $export host='127.0.0.1')
+
+#' @return A DBI connection object to the MySQL database.
+#' @examples
+#' \dontrun{
+#' # Using environment variables:
+#' conn <- init.conn()
+#'
+#' # Using explicit credentials:
+#' db.credentials <- list(
+#'   user = "my_user",
+#'   password = "my_password",
+#'   host = "localhost",
+#'   port = 3306
+#' )
+#' conn <- init.conn(db.credentials)
+#' }
+init.conn <- function(db.credentials=NULL){
+    require(RMySQL)
+    if(is.null(db.credentials)){
+        db.credentials <- list(
+            BIAD_DB_USER=Sys.getenv("BIAD_DB_USER"),
+            BIAD_DB_PASS=Sys.getenv("BIAD_DB_PASS"),
+            BIAD_DB_HOST=Sys.getenv("BIAD_DB_HOST"),
+            BIAD_DB_PORT=as.numeric(Sys.getenv("BIAD_DB_PORT"))
+        )
+    }
+    if(any(sapply(db.credentials,is.na)))warning("missing: ",names(db.credentials)[sapply(db.credentials,is.na)],", you may want to check your ~/.Renviron file and reload R, or manually provide db.credentials as a list to init.conn")
+    conn <-  tryCatch(
+            DBI::dbConnect(drv=DBI::dbDriver("MySQL"), user=db.credentials$BIAD_DB_USER, pass=db.credentials$BIAD_DB_PASS, dbname="biad", host = db.credentials$BIAD_DB_HOST, port=db.credentials$BIAD_DB_PORT) ,
+        error=function(e){
+            message("Couldn't initialise connection with the database, dbConnect returned error: ", e)
+            message("Check your db.credentials below:")
+            na <- sapply(names(db.credentials),function(nc)message(nc,": ", ifelse(nc=="password",msp(db.credentials[[nc]]),db.credentials[[nc]])))
+            message("Note: you can only connect to the dataset through ssh ; check aslo that this is done (cf:https://biadwiki.org/en/Connect)")
+            stop("DBConnection fail")
+    })
+    return(conn)	
+}
+#--------------------------------------------------------------------------------------------------
+#' msp(Mask Password)
+#' This function masks a given password by replacing all but the first and last character with asterisks.
+#' @param password A character string representing the password to be masked.
+#' @return A character string with the masked password.
+msp <- function(password) {
+    if(length(password)<=0)return(NULL)
+    maskp <- strsplit(password, "")[[1]]
+    paste0(maskp[1], paste0(rep("*", length(maskp) - 2), collapse = ""), maskp[length(maskp)])
+}
