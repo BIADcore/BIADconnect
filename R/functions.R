@@ -3,8 +3,6 @@
 # various functions and objects for BIAD
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
-dbname <<- 'BIAD'
-source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.database.connect.R")
 source("https://raw.githubusercontent.com/AdrianTimpson/snippets/main/R/functions.R")
 #----------------------------------------------------------------------------------------------------
 run.server.searcher <- function(table.name, primary.value){
