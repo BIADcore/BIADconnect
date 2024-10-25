@@ -85,6 +85,30 @@ run.server.query.inner <- function(db.credentials=NULL, hostuser=NULL, hostname=
     #ssh::ssh_exec_wait(session, command = paste("rm -r",tmp.path))
 	ssh::ssh_disconnect(session)
 return(query)}
+
+run.server.query.inner.alt <- function(db.credentials=NULL, hostuser=NULL, hostname=NULL, pempath=NULL){ 
+    tmp.path <- tempfile(pattern = "tmpdir")
+    linkcred="-i ${BIAD_SSH_PEM}"
+    host="${BIAD_SSH_USER}@${BIAD_SSH_HOST}" #we rely again on the ENV var
+    system(paste("ssh", linkcred, host, shQuote(paste("mkdir -p", tmp.path))))
+    sourcefold=here::here("R") #link to the source files
+    system(paste("scp", linkcred,"server.script.R", file.path(host,tmp.path)))
+    system(paste("scp", linkcred,file.path(sourcefold,"function*.R"), paste0(host,":",tmp.path,"/")))
+	RData <- file.path(tmp.path,"tmp.RData")
+	Rout <- file.path(tmp.path,"tmp.Rout")
+    system(paste("scp", linkcred, paste0(host,":",RData),"."))
+    system(paste("scp", linkcred, paste0(host,":",Rout),"."))
+	cond <- file.exists("tmp.RData")
+	if(cond){
+		load('tmp.RData')
+		unlink('tmp.RData')
+		}
+	if(!cond){
+		query <- NULL
+        na <- sapply( readLines("tmp.Rout"),function(i)cat(i,"\n"))
+		warning('sql command failed')
+		}
+}
 #--------------------------------------------------------------------------------------------------
 query.database <- function(sql.command, conn=NULL, db.credentials=NULL){
     if(is.null(conn) || !dbIsValid(conn) ){
