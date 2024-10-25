@@ -224,3 +224,5 @@ msp <- function(password) {
     maskp <- strsplit(password, "")[[1]]
     paste0(maskp[1], paste0(rep("*", length(maskp) - 2), collapse = ""), maskp[length(maskp)])
 }
+
+disconnect <- function(drv="MySQL") sapply(DBI::dbListConnections(DBI::dbDriver(drv)),dbDisconnect)
