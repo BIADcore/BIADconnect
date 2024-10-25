@@ -5,23 +5,30 @@
 #----------------------------------------------------------------------------------------------------
 source("https://raw.githubusercontent.com/AdrianTimpson/snippets/main/R/functions.R")
 #----------------------------------------------------------------------------------------------------
-run.server.searcher <- function(table.name, primary.value){
-
+run.server.searcher <- function(table.name, primary.value, db.credentials=NULL, hostuser=NULL, hostname=NULL, pempath=NULL){	
 	text <- c(
-		paste0("user <- '",user,"'"),
-		paste0("password <- '",password,"'"),
-		paste0("hostuser <- '",hostuser,"'"),
-		"source('https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R')",
+		"source('functions.R')",
+		"source('functions.database.connect.R')",
 		paste("table.name <- '",table.name,"'",sep=''),
 		paste("primary.value <- '",primary.value,"'",sep=''),
-		"down <- get.related.data(table.name, primary.value, fnc = decendants, user, password)",
-		"up <- get.related.data(table.name, primary.value, fnc = ancestors, user, password)",
+        "conn <- init.conn()", ##credendtial will be passed through env variable so they don't need to be written anywhere
+		"down <- get.related.data(table.name, primary.value, fnc = decendants, conn = conn)",
+		"up <- get.related.data(table.name, primary.value, fnc = ancestors, conn = conn)",
 		"query <- list(down=down,up=up)",
-		"save(query, file='tmp.RData')"
+		"save(query, file='tmp.RData')",
+		"DBI::dbDisconnect(conn)"
 		)
 	writeLines(text,con= 'server.script.R')
-	query <- run.server.query.inner(user, password, hostuser, hostname, pempath)
+	query <- run.server.query.inner(db.credentials=db.credentials, hostuser=hostuser, hostname=hostname, pempath=pempath)
 return(query)}
+
+#----------------------------------------------------------------------------------------------------
+#Create a function that use the remote connection to the database to do the search
+run.searcher <- function(table.name, primary.value, conn = NULL, db.credential = NULL){
+	down <- get.related.data(table.name, primary.value, fnc = decendants, conn = conn , db.credential = db.credential)
+	up <- get.related.data(table.name, primary.value, fnc = ancestors, conn = conn , db.credential = db.credential)
+	list(down=down,up=up)
+}
 #----------------------------------------------------------------------------------------------------
 create.markdown.for.single.table <- function(d.tables, d.cols, table.name){
 	
