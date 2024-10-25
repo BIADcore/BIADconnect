@@ -3,43 +3,75 @@
 # generic functions to query any database hosted at macelab
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
-run.server.query <- function(sql.command){	
+run.server.query <- function(sql.command,db.credentials=NULL, hostuser=NULL, hostname=NULL, pempath=NULL){	
 
 	# create 'server.script.R' to be run on server
 	text <- c(
-		paste0("user <- '",user,"'"),
-		paste0("password <- '",password,"'"),
-		paste0("hostuser <- '",hostuser,"'"),
-		paste0("dbname <- '",dbname,"'"),
-		"source('https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.database.connect.R')",
+		"source('functions.database.connect.R')",
+		"source('functions.R')",
 		paste('sql.command <- c("',paste(sql.command,collapse='","'),'")',sep=''),
-		"query <- query.database(user, password, dbname, sql.command)",
-		"save(query, file='tmp.RData')"
+        "conn <- init.conn()", ##credendtial will be passed through env variable so they don't need to be written anywhere
+		"query <- query.database(conn, sql.command)",
+		"save(query, file='tmp.RData')",
+		"DBI::dbDisconnect(conn)",
 		)
 	writeLines(text,con= 'server.script.R')
 
-	query <- run.server.query.inner(user, password, hostuser, hostname, pempath)
+	query <- run.server.query.inner(db.credentials=db.credentials, hostuser=hostuser, hostname=hostname, pempath=pempath)
 return(query)}
 #----------------------------------------------------------------------------------------------------
-run.server.query.inner <- function(user, password, hostuser, hostname, pempath){ 
+run.server.query.inner <- function(db.credentials=NULL, hostuser=NULL, hostname=NULL, pempath=NULL){ 
 	require(ssh)
+
+    hostuser <- Sys.getenv("BIAD_SSH_USER")
+    hostname <- Sys.getenv("BIAD_SSH_HOST")
+    pempath <- Sys.getenv("BIAD_SSH_PEM")
+    if (any(c(hostuser, hostname, pempath) == "") || any(is.na(c(hostuser, hostname, pempath)))) {
+        if (exists("hostuser", envir = .GlobalEnv) && exists("hostname", envir = .GlobalEnv) && exists("pempath", envir = .GlobalEnv)) {
+            warning(
+                "seems like SSH connection details are still set from global environment (using .Rprofile) \n",
+                "To avoid this warning in the future, please set the SSH connection details via environment variables in your .Renviron or .bashrc file:\n",
+                "- BIAD_SSH_USER=your_ssh_username\n",
+                "- BIAD_SSH_HOST=your_ssh_hostname\n",
+                "- BIAD_SSH_PEM=path_to_your_pem_file\n"
+            )
+        hostuser <- get("hostuser", envir = .GlobalEnv)
+        hostname <- get("hostname", envir = .GlobalEnv)
+        pempath <- get("pempath", envir = .GlobalEnv)
+        } else {
+            stop("Error: Missing details for SSH connection and no global environment values found.")
+        }
+    }
+
 	tmp.path <- paste("tmp/tmp",runif(1),sep='')
+    if(is.na(Sys.getenv("BIAD_DB_USER")) || is.null(Sys.getenv("BIAD_DB_USER")) || is.null(Sys.getenv("BIAD_DB_USER"))){
+        error("as probably only you adrian and I are using this ssh feature i won't do fancy test, but you need to put usernames and passwords in environment variable (via ~/.Renviron or export VAR=dsadsa")
+    }
+    env_vars <- paste0("BIAD_DB_USER=\"",Sys.getenv("BIAD_DB_USER"),"\" ",
+                       "BIAD_DB_PASS=\"",Sys.getenv("BIAD_DB_PASS"),"\" ",
+                       "BIAD_DB_PORT=",3306," ",  
+                       "BIAD_DB_HOST=","\"127.0.0.1\"")
 
 	# create bash commands to be run on server
 	commands <- c(
 		paste("cd",tmp.path),
-		"/Library/Frameworks/R.framework/Resources/bin/R CMD BATCH --no-save server.script.R tmp.Rout",
+		paste(env_vars,"/Library/Frameworks/R.framework/Resources/bin/R CMD BATCH --no-save server.script.R tmp.Rout"),
 		"cd .."
 		)
 
 	# ssh onto server, copy required files to server, tell server to run R, copy results back to local 
-	session <- ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
-	ssh_exec_wait(session, command = paste("mkdir",tmp.path))
-	scp_upload(session, files = "server.script.R" , to = tmp.path, verbose=FALSE)
+	session <- ssh::ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
+	ssh::ssh_exec_wait(session, command = paste("mkdir",tmp.path))
+	ssh::scp_upload(session, files = "server.script.R" , to = tmp.path, verbose=FALSE)
+    ## --- this should disapear when BIADwiki becomes a packages as we'll load the package instead of sourcing things
+	ssh::scp_upload(session, files = "functions.R" , to = tmp.path, verbose=FALSE)
+	ssh::scp_upload(session, files = "functions.database.connect.R" , to = tmp.path, verbose=FALSE)
 	unlink('server.script.R')
-	ssh_exec_wait(session, command = commands)
+	ssh::ssh_exec_wait(session, command = commands)
 	RData <- paste(tmp.path,"tmp.RData",sep="/")
-	scp_download(session, files = RData, to = getwd(), verbose=FALSE)
+	Rout <- paste(tmp.path,"tmp.Rout",sep="/")
+	ssh::scp_download(session, files = RData, to = getwd(), verbose=FALSE)
+	ssh::scp_download(session, files = Rout, to = getwd(), verbose=FALSE)
 	cond <- file.exists("tmp.RData")
 	if(cond){
 		load('tmp.RData')
@@ -47,11 +79,11 @@ run.server.query.inner <- function(user, password, hostuser, hostname, pempath){
 		}
 	if(!cond){
 		query <- NULL
+        na <- sapply( readLines("tmp.Rout"),function(i)cat(i,"\n"))
 		warning('sql command failed')
 		}
-	ssh_exec_wait(session, command = paste("rm -r",tmp.path))
-	ssh_disconnect(session)
-
+    #ssh::ssh_exec_wait(session, command = paste("rm -r",tmp.path))
+	ssh::ssh_disconnect(session)
 return(query)}
 #--------------------------------------------------------------------------------------------------
 query.database <- function(sql.command, conn=NULL, db.credentials=NULL){
