@@ -111,22 +111,30 @@ run.server.query.inner.alt <- function(db.credentials=NULL, hostuser=NULL, hostn
 }
 #--------------------------------------------------------------------------------------------------
 query.database <- function(sql.command, conn=NULL, db.credentials=NULL){
-    if(is.null(conn) || !dbIsValid(conn) ){
-        con <<- init.conn(db.credentials=db.credentials)
+    if(is.null(conn) || !DBI::dbIsValid(conn) ){ #check if no connector has been provided, or if the connector doesnt work
+        #print("no connector provided, creating one here connecting ")
+        if(exists("conn", envir = .GlobalEnv))conn <- get("conn", envir = .GlobalEnv) #check if a connector already exist at global level
+        if(is.null(conn) || !DBI::dbIsValid(conn) ){
+            #print("the global connector is not good, delete and retry ")
+            disco <- disconnect()
+            conn <- init.conn(db.credentials=db.credentials)
+            assign("conn",conn,envir = .GlobalEnv)
+        }
+        #else{ print("connector exist at global, continue with it")}
     }
+    #else{ print("connector provided")}
 	for(n in 1:length(sql.command)) {
-        res <- tryCatch(suppressWarnings(dbSendStatement(conn,sql.command[n])),
+        res <- tryCatch(suppressWarnings(DBI::dbSendStatement(conn,sql.command[n])),
                     error=function(e){
                         print(e)
-                        error("error while sending command",sql.command[n])
+                        stop("error while sending command:",sql.command[n])
                     })
     }
 	query <- fetch(res, n= -1)
-    dbClearResult(res)
+    DBI::dbClearResult(res)
 	query <- encoder(query)
     return(query)
-
-return(query)}
+}
 #--------------------------------------------------------------------------------------------------
 encoder <- function(df){
     if(nrow(df)==0) return(NULL)
@@ -174,6 +182,27 @@ init.conn <- function(db.credentials=NULL){
         )
     }
     if(any(sapply(db.credentials,is.na)))warning("missing: ",names(db.credentials)[sapply(db.credentials,is.na)],", you may want to check your ~/.Renviron file and reload R, or manually provide db.credentials as a list to init.conn")
+        if (all(sapply(db.credentials, function(cred) is.null(cred) || is.na(cred) || cred == ""))) {
+            if (exists("user", envir = .GlobalEnv) && exists("pass", envir = .GlobalEnv)) {
+                warning("It seems that you are still using credentials set in .Rprofile; we will slowly move to using environment variables that you will set in your .Renviron or you .bashrc.\n",
+                        ".Renviron should be like:\n",
+                        "  BIAD_DB_USER=your_username\n",
+                        "  BIAD_DB_PASS=your_password\n",
+                        "  BIAD_DB_HOST=127.0.0.1 \n",
+                        "  BIAD_DB_PORT=3306 #or something different if you specified a differentport\n",
+                        "or: export BIAD_DB_XXX=XXX if using .bashrc")
+                db.credentials$BIAD_DB_USER <- get("user", envir = .GlobalEnv)
+                db.credentials$BIAD_DB_PASS <- get("pass", envir = .GlobalEnv)
+                db.credentials$BIAD_DB_HOST <- "127.0.0.1"
+                db.credentials$BIAD_DB_PORT <- 3306
+            } 
+    }
+    missing_vars <- names(db.credentials)[sapply(db.credentials, function(x) is.null(x) || identical(x, "NA"))]
+    if (length(missing_vars) > 0) {
+        warning("Missing: ", paste(missing_vars, collapse = ", "), 
+                ". You may want to check your ~/.Renviron file and reload R, or manually provide db.credentials as a list to init.conn."
+        )
+    }
     conn <-  tryCatch(
             DBI::dbConnect(drv=DBI::dbDriver("MySQL"), user=db.credentials$BIAD_DB_USER, pass=db.credentials$BIAD_DB_PASS, dbname="biad", host = db.credentials$BIAD_DB_HOST, port=db.credentials$BIAD_DB_PORT) ,
         error=function(e){
