@@ -181,35 +181,32 @@ init.conn <- function(db.credentials=NULL){
             BIAD_DB_PORT=as.numeric(Sys.getenv("BIAD_DB_PORT"))
         )
     }
-    if(any(sapply(db.credentials,is.na)))warning("missing: ",names(db.credentials)[sapply(db.credentials,is.na)],", you may want to check your ~/.Renviron file and reload R, or manually provide db.credentials as a list to init.conn")
-        if (all(sapply(db.credentials, function(cred) is.null(cred) || is.na(cred) || cred == ""))) {
-            if (exists("user", envir = .GlobalEnv) && exists("pass", envir = .GlobalEnv)) {
-                warning("It seems that you are still using credentials set in .Rprofile; we will slowly move to using environment variables that you will set in your .Renviron or you .bashrc.\n",
-                        ".Renviron should be like:\n",
-                        "  BIAD_DB_USER=your_username\n",
-                        "  BIAD_DB_PASS=your_password\n",
-                        "  BIAD_DB_HOST=127.0.0.1 \n",
-                        "  BIAD_DB_PORT=3306 #or something different if you specified a differentport\n",
-                        "or: export BIAD_DB_XXX=XXX if using .bashrc")
-                db.credentials$BIAD_DB_USER <- get("user", envir = .GlobalEnv)
-                db.credentials$BIAD_DB_PASS <- get("pass", envir = .GlobalEnv)
-                db.credentials$BIAD_DB_HOST <- "127.0.0.1"
-                db.credentials$BIAD_DB_PORT <- 3306
-            } 
+    if (all(sapply(db.credentials, function(cred) is.null(cred) || is.na(cred) || cred == ""))) {
+        if (exists("user", envir = .GlobalEnv) && exists("password", envir = .GlobalEnv)) {
+            warning("It seems that you are still using credentials set in .Rprofile; we will slowly move to using environment variables that you will set in your ~/.Renviron or you ~/.bashrc.\n\r",
+                    "Your ~/.Renviron should be like:\n",
+                    "\t BIAD_DB_USER=\"your username\"\n",
+                    "\t BIAD_DB_PASS=\"your password\"\n",
+                    "\t BIAD_DB_HOST=127.0.0.1 \n",
+                    "\t BIAD_DB_PORT=3306 #or something different if you specified a different port\n",
+                    "  or add:  export BIAD_DB_XXX=XXX to your .bashrc")
+            db.credentials$BIAD_DB_USER <- get("user", envir = .GlobalEnv)
+            db.credentials$BIAD_DB_PASS <- get("password", envir = .GlobalEnv)
+            db.credentials$BIAD_DB_HOST <- "127.0.0.1"
+            db.credentials$BIAD_DB_PORT <- 3307
+        } 
     }
-    missing_vars <- names(db.credentials)[sapply(db.credentials, function(x) is.null(x) || identical(x, "NA"))]
-    if (length(missing_vars) > 0) {
-        warning("Missing: ", paste(missing_vars, collapse = ", "), 
-                ". You may want to check your ~/.Renviron file and reload R, or manually provide db.credentials as a list to init.conn."
-        )
-    }
+    missing_vars <- names(db.credentials)[sapply(db.credentials, function(x) is.null(x) || is.na(x) || x == "")]
+    if (length(missing_vars) > 0) 
+        warning("Missing: ", paste(missing_vars, collapse = ", "), ". You may want to check your ~/.Renviron file and reload R, or manually provide db.credentials as a list to init.conn.")
+    
     conn <-  tryCatch(
             DBI::dbConnect(drv=DBI::dbDriver("MySQL"), user=db.credentials$BIAD_DB_USER, pass=db.credentials$BIAD_DB_PASS, dbname="biad", host = db.credentials$BIAD_DB_HOST, port=db.credentials$BIAD_DB_PORT) ,
         error=function(e){
             message("Couldn't initialise connection with the database, dbConnect returned error: ", e)
             message("Check your db.credentials below:")
             na <- sapply(names(db.credentials),function(nc)message(nc,": ", ifelse(nc=="password",msp(db.credentials[[nc]]),db.credentials[[nc]])))
-            message("Note: you can only connect to the dataset through ssh ; check aslo that this is done (cf:https://biadwiki.org/en/Connect)")
+            message("Note: you can only connect to the dataset through ssh ; so you may want to check you're ssh tunel (or any plugin you may use to do so) is working (cf:https://biadwiki.org/en/Connect)")
             stop("DBConnection fail")
     })
     return(conn)	
