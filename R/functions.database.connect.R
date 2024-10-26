@@ -13,7 +13,7 @@ run.server.query <- function(sql.command,db.credentials=NULL, hostuser=NULL, hos
         "conn <- init.conn()", ##credendtial will be passed through env variable so they don't need to be written anywhere
 		"query <- query.database(conn, sql.command)",
 		"save(query, file='tmp.RData')",
-		"DBI::dbDisconnect(conn)",
+		"DBI::dbDisconnect(conn)"
 		)
 	writeLines(text,con= 'server.script.R')
 
@@ -43,7 +43,6 @@ run.server.query.inner <- function(db.credentials=NULL, hostuser=NULL, hostname=
         }
     }
 
-    tmp.path <- tempfile(pattern = "tmpdir")
     if(is.na(Sys.getenv("BIAD_DB_USER")) || is.null(Sys.getenv("BIAD_DB_USER")) || is.null(Sys.getenv("BIAD_DB_USER"))){
         error("as probably only you adrian and I are using this ssh feature i won't do fancy test, but you need to put usernames and passwords in environment variable (via ~/.Renviron or export VAR=dsadsa")
     }
@@ -53,6 +52,7 @@ run.server.query.inner <- function(db.credentials=NULL, hostuser=NULL, hostname=
                        "BIAD_DB_HOST=","\"127.0.0.1\"")
 
 	# create bash commands to be run on server
+    tmp.path <- tempfile(pattern = "tmpdir")
 	commands <- c(
 		paste("cd",tmp.path),
 		paste(env_vars,"/Library/Frameworks/R.framework/Resources/bin/R CMD BATCH --no-save server.script.R tmp.Rout"),
