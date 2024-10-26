@@ -43,7 +43,7 @@ run.server.query.inner <- function(db.credentials=NULL, hostuser=NULL, hostname=
         }
     }
 
-	tmp.path <- paste("tmp/tmp",runif(1),sep='')
+    tmp.path <- tempfile(pattern = "tmpdir")
     if(is.na(Sys.getenv("BIAD_DB_USER")) || is.null(Sys.getenv("BIAD_DB_USER")) || is.null(Sys.getenv("BIAD_DB_USER"))){
         error("as probably only you adrian and I are using this ssh feature i won't do fancy test, but you need to put usernames and passwords in environment variable (via ~/.Renviron or export VAR=dsadsa")
     }
@@ -82,7 +82,7 @@ run.server.query.inner <- function(db.credentials=NULL, hostuser=NULL, hostname=
         na <- sapply( readLines("tmp.Rout"),function(i)cat(i,"\n"))
 		warning('sql command failed')
 		}
-    #ssh::ssh_exec_wait(session, command = paste("rm -r",tmp.path))
+    ssh::ssh_exec_wait(session, command = paste("rm -r",tmp.path))
 	ssh::ssh_disconnect(session)
 return(query)}
 
