@@ -61,53 +61,60 @@ run.server.query.inner <- function(db.credentials=NULL, hostuser=NULL, hostname=
 
 	# ssh onto server, copy required files to server, tell server to run R, copy results back to local 
 	session <- ssh::ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
-	ssh::ssh_exec_wait(session, command = paste("mkdir",tmp.path))
+	ssh::ssh_exec_wait(session, command = paste("mkdir -p",tmp.path))
 	ssh::scp_upload(session, files = "server.script.R" , to = tmp.path, verbose=FALSE)
     ## --- this should disapear when BIADwiki becomes a packages as we'll load the package instead of sourcing things
 	ssh::scp_upload(session, files = "functions.R" , to = tmp.path, verbose=FALSE)
 	ssh::scp_upload(session, files = "functions.database.connect.R" , to = tmp.path, verbose=FALSE)
 	unlink('server.script.R')
 	ssh::ssh_exec_wait(session, command = commands)
-	RData <- paste(tmp.path,"tmp.RData",sep="/")
-	Rout <- paste(tmp.path,"tmp.Rout",sep="/")
-	ssh::scp_download(session, files = RData, to = getwd(), verbose=FALSE)
-	ssh::scp_download(session, files = Rout, to = getwd(), verbose=FALSE)
-	cond <- file.exists("tmp.RData")
-	if(cond){
-		load('tmp.RData')
-		unlink('tmp.RData')
-		}
-	if(!cond){
-		query <- NULL
-        na <- sapply( readLines("tmp.Rout"),function(i)cat(i,"\n"))
-		warning('sql command failed')
-		}
+    res <- c("tmp.RData","tmp.Rout")
+	res <- sapply(res,function(fn)paste(tmp.path,fn,sep="/"))
+	dl  <- sapply(res,function(fn)ssh::scp_download(session, files = fn, to = getwd(), verbose=FALSE))
+    if(file.exists("tmp.RData")){
+        load('tmp.RData')
+        unlink(c('tmp.RData','tmp.Rout'))
+    }
+    else{
+        query <- NULL
+        na <- sapply(readLines("tmp.Rout"),function(i)cat(i,"\n"))
+        unlink('tmp.Rout')
+        warning('sql command failed')
+    }
     ssh::ssh_exec_wait(session, command = paste("rm -r",tmp.path))
 	ssh::ssh_disconnect(session)
 return(query)}
 
-run.server.query.inner.alt <- function(db.credentials=NULL, hostuser=NULL, hostname=NULL, pempath=NULL){ 
+#--------------------------------------------------------------------------------------------------
+
+run.server.query.inner.alt <- function(scriptname){ 
+	commands <- c(
+		paste("cd",tmp.path),
+		paste("/Library/Frameworks/R.framework/Resources/bin/R CMD BATCH --no-save",scriptname," > tmp.Rout"),
+		"cd .."
+		)
     tmp.path <- tempfile(pattern = "tmpdir")
     linkcred="-i ${BIAD_SSH_PEM}"
     host="${BIAD_SSH_USER}@${BIAD_SSH_HOST}" #we rely again on the ENV var
     system(paste("ssh", linkcred, host, shQuote(paste("mkdir -p", tmp.path))))
     sourcefold=here::here("R") #link to the source files
-    system(paste("scp", linkcred,"server.script.R", file.path(host,tmp.path)))
-    system(paste("scp", linkcred,file.path(sourcefold,"function*.R"), paste0(host,":",tmp.path,"/")))
-	RData <- file.path(tmp.path,"tmp.RData")
-	Rout <- file.path(tmp.path,"tmp.Rout")
-    system(paste("scp", linkcred, paste0(host,":",RData),"."))
-    system(paste("scp", linkcred, paste0(host,":",Rout),"."))
-	cond <- file.exists("tmp.RData")
-	if(cond){
-		load('tmp.RData')
-		unlink('tmp.RData')
-		}
-	if(!cond){
-		query <- NULL
-        na <- sapply( readLines("tmp.Rout"),function(i)cat(i,"\n"))
-		warning('sql command failed')
-		}
+    filestosend <- paste(scriptname,file.path(sourcefold,"function*.R")) #send the script and all source file
+    system(paste("scp", linkcred,filestosend, paste0(host,":",tmp.path,"/")))
+    res <- c("tmp.RData","tmp.Rout")
+	res <- sapply(res,function(fn)paste(tmp.path,fn,sep="/"))
+	ssh::ssh_exec_wait(session, command = commands)
+    system(paste("ssh", linkcred, host, commands ))
+    dl  <- sapply(res,function(fn)system(paste("scp", linkcred, paste0(host,":",fn),".")))
+    if(file.exists("tmp.RData")){
+        load('tmp.RData')
+        unlink(c('tmp.RData','tmp.Rout'))
+    }
+    else{
+        query <- NULL
+        na <- sapply(readLines("tmp.Rout"),function(i)cat(i,"\n"))
+        unlink('tmp.Rout')
+        warning('sql command failed')
+    }
 }
 #--------------------------------------------------------------------------------------------------
 query.database <- function(sql.command, conn=NULL, db.credentials=NULL){
