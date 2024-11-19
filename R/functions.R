@@ -25,10 +25,12 @@ return(query)}
 
 #----------------------------------------------------------------------------------------------------
 #Create a function that use the remote connection to the database to do the search
-run.searcher <- function(table.name, primary.value, conn = NULL, db.credential = NULL){
-	down <- get.related.data(table.name, primary.value, fnc = decendants, conn = conn , db.credential = db.credential)
-	up <- get.related.data(table.name, primary.value, fnc = ancestors, conn = conn , db.credential = db.credential)
-	list(down=down,up=up)
+run.searcher <- function(table.name, primary.value, conn = NULL, db.credential = NULL, direction = NULL){
+    if(is.null(conn))  conn  <- init.conn() # du to the way function are handled by this searcher, we can't avoid passing the connecter explictly, so if it hasn't been done then we should create one.
+    if(is.null(direction))  directions  <- list(down = 'decendants', up = 'ancestors')
+    else if(direction == "down") directions  <- list(down = 'decendants')
+    else if(direction == "up") directions  <- list(up = 'ancestors')
+	lapply(directions,function(fn)  get.related.data(table.name, primary.value, fnc = get(fn) , conn = conn , db.credential = db.credential))
 }
 #----------------------------------------------------------------------------------------------------
 create.markdown.for.single.table <- function(d.tables, d.cols, table.name){
@@ -108,17 +110,18 @@ return(tables)}
 #----------------------------------------------------------------------------------------------------
 get.child.relationships <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
 	primary.data <- get.table.data(keys, table.name, primary.value, conn = conn, db.credentials = db.credentials)
-	primary.column <- get.primary.column.from.table(keys, table.name)
+	primary.column <- get.primary.column.from.table(keys, table.name, conn = conn, db.credentials = db.credentials)
 	res <- subset(keys, REFERENCED_COLUMN_NAME==primary.column & REFERENCED_TABLE_NAME==table.name)
 return(res)}
 #----------------------------------------------------------------------------------------------------
 get.parent.relationships <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
 	primary.data <- get.table.data(keys, table.name, primary.value, conn = conn, db.credentials = db.credentials)
-	primary.column <- get.primary.column.from.table(keys, table.name)
+	primary.column <- get.primary.column.from.table(keys, table.name, conn = conn, db.credentials = db.credentials)
 	res <- subset(keys, TABLE_NAME==table.name & grepl('FK_',CONSTRAINT_NAME))
 return(res)}
 #----------------------------------------------------------------------------------------------------
-get.primary.column.from.table <- function(keys, table.name){
+get.primary.column.from.table <- function(keys = NULL, table.name, conn = NULL, db.credentials = NULL){                                                                                                                 
+    if(is.null(keys))keys <- get.keys(conn = conn, db.credentials = db.credentials ) 
 	x <- subset(keys, TABLE_NAME == table.name & CONSTRAINT_NAME %in% c('unique','PRIMARY'))$COLUMN_NAME
 	column <- x[duplicated(x)]
 	if(length(column)==0)column <- NA
@@ -173,7 +176,7 @@ return(res)}
 ancestors <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
 
 	if(is.null(primary.value))return(NULL)
-	relationships <- get.parent.relationships(keys, table.name, primary.value, conn, db.credentials)
+	relationships <- get.parent.relationships(keys, table.name, primary.value, conn = conn, db.credentials = db.credentials)
 	
 	# whether or not to include zoptions parents? ... subset(relationships, !grepl('zoptions_',REFERENCED_TABLE_NAME))
 	parent.tables <- relationships$REFERENCED_TABLE_NAME
@@ -197,7 +200,7 @@ ancestors <- function(keys, table.name, primary.value, conn = NULL, db.credentia
 			values <- values[!is.na(values)]
 			values <- paste(values, collapse="','")
 			sql.command <- paste("SELECT * FROM `BIAD`.`",parent.table,"` WHERE ",parent.column," IN ('",values,"')", sep='')		
-			data <- query.database(conn, db.credentials, sql.command)
+			data <- query.database(conn = conn,db.credentials = db.credentials, sql.command = sql.command)
 			data <- remove.blank.columns.from.table(data)
 			res[[parent.table]]$data <- data	
 			}	
@@ -213,7 +216,7 @@ wrapper <- function(keys, table.data, fnc, conn = NULL, db.credentials = NULL){
 	for(n in 1:N){
 		rel <- table.data[n]	
 		table.name <- names(rel)
-		col <- get.primary.column.from.table(keys, table.name=table.name)
+		col <- get.primary.column.from.table(keys, table.name=table.name, conn = conn, db.credentials = db.credentials)
 		rel.values <- rel[[table.name]]$data[[col]]
 		for(rel in rel.values){
 
@@ -233,8 +236,7 @@ return(tb)}
 #----------------------------------------------------------------------------------------------------
 get.related.data <- function(table.name, primary.value, fnc, conn = NULL, db.credentials = NULL){
 
-	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
-	keys <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
+	keys <- get.keys(conn = conn, db.credentials = db.credentials)
 
 	# table data
 	all.data <- list()
@@ -339,7 +341,7 @@ database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, conn 
 	require(DiagrammeR)
 
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_SCHEMA = 'BIAD'"
-	d <- query.database(conn, db.credentials, sql.command)
+	d <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
 	d <- subset(d, TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
 	if(!include.look.ups){
 		d <- subset(d, REFERENCED_TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
@@ -425,7 +427,10 @@ make.all.triggers <- function(x, prefix, trigger){
                 }
 return(txt)}
 #--------------------------------------------------------------------------------------------------
-
+get.keys <- function(conn = NULL, db.credentials = NULL){
+	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
+	keys <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
+}
 
 
 
