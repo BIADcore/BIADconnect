@@ -11,7 +11,7 @@
 source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
 #--------------------------------------------------------------------------------------
 # Pull some data from BIAD
-query <- run.server.query("SELECT * FROM `Sites`")
+query <- run.server.query("SELECT * FROM `Sites`",db.credentials=NULL, hostuser=BIAD_SSH_USER, hostname=BIAD_SSH_HOST, pempath=BIAD_SSH_PEM)
 # Do something trivial
 plot(table(query$Country),las=2)
 #------------------------------------------------------------------
