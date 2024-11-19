@@ -15,3 +15,4 @@ query <- run.server.query("SELECT * FROM `Sites`")
 # Do something trivial
 plot(table(query$Country),las=2)
 #------------------------------------------------------------------
+query <-  query.database("SELECT * FROM `Sites`")
