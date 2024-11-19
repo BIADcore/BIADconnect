@@ -53,11 +53,6 @@ run.server.query.inner <- function(db.credentials=NULL, hostuser=NULL, hostname=
 
 	# create bash commands to be run on server
     tmp.path <- tempfile(pattern = "tmpdir")
-	commands <- c(
-		paste("cd",tmp.path),
-		paste(env_vars,"/Library/Frameworks/R.framework/Resources/bin/R CMD BATCH --no-save server.script.R tmp.Rout"),
-		"cd .."
-		)
 
 	# ssh onto server, copy required files to server, tell server to run R, copy results back to local 
 	session <- ssh::ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
@@ -135,6 +130,9 @@ query.database <- function(sql.command, conn=NULL, db.credentials=NULL){
                     error=function(e){
                         print(e)
                         stop("error while sending command:",sql.command[n])
+						disco <- disconnect()
+						conn <- init.conn(db.credentials=db.credentials)
+						assign("conn",conn,envir = .GlobalEnv)
                     })
     }
 	query <- fetch(res, n= -1)
