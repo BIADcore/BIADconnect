@@ -200,7 +200,7 @@ init.conn <- function(db.credentials=NULL){
             db.credentials$BIAD_DB_USER <- get("user", envir = .GlobalEnv)
             db.credentials$BIAD_DB_PASS <- get("password", envir = .GlobalEnv)
             db.credentials$BIAD_DB_HOST <- "127.0.0.1"
-            db.credentials$BIAD_DB_PORT <- 3307
+            db.credentials$BIAD_DB_PORT <- 3306
         } 
     }
     missing_vars <- names(db.credentials)[sapply(db.credentials, function(x) is.null(x) || is.na(x) || x == "")]
