@@ -53,6 +53,11 @@ run.server.query.inner <- function(db.credentials=NULL, hostuser=NULL, hostname=
 
 	# create bash commands to be run on server
     tmp.path <- tempfile(pattern = "tmpdir")
+	commands <- c(
+		paste("cd",tmp.path),
+		paste(env_vars,"/Library/Frameworks/R.framework/Resources/bin/R CMD BATCH --no-save server.script.R tmp.Rout"),
+		"cd .."
+		)
 
 	# ssh onto server, copy required files to server, tell server to run R, copy results back to local 
 	session <- ssh::ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
@@ -112,20 +117,11 @@ run.server.query.inner.alt <- function(scriptname){
     }
 }
 #--------------------------------------------------------------------------------------------------
-query.database <- function(sql.command, conn=NULL, db.credentials=NULL){
-    if(is.null(conn) || !DBI::dbIsValid(conn) ){ #check if no connector has been provided, or if the connector doesnt work
-        #print("no connector provided, creating one here connecting ")
-        if(exists("conn", envir = .GlobalEnv))conn <- get("conn", envir = .GlobalEnv) #check if a connector already exist at global level
-        if(is.null(conn) || !DBI::dbIsValid(conn) ){
-            #print("the global connector is not good, delete and retry ")
-            disco <- disconnect()
-            conn <- init.conn(db.credentials=db.credentials)
-            assign("conn",conn,envir = .GlobalEnv)
-        }
-        #else{ print("connector exist at global, continue with it")}
-    }
-    #else{ print("connector provided")}
+query.database <- function(sql.command, conn=NULL, db.credentials=NULL, wait = 0){
+    check.conn(conn = conn, db.credentials = db.credentials) #this doesn't return anything but modify conn if need, if not, nothing happen
+    if(is.null(conn))get("conn",envir = .GlobalEnv)
 	for(n in 1:length(sql.command)) {
+        if(wait>0)Sys.sleep(wait)
         res <- tryCatch(suppressWarnings(DBI::dbSendStatement(conn,sql.command[n])),
                     error=function(e){
                         print(e)
@@ -234,3 +230,14 @@ disconnect <- function(drv="MySQL"){
     sapply(DBI::dbListConnections(DBI::dbDriver(drv)),DBI::dbDisconnect)
 }
 #--------------------------------------------------------------------------------------------------
+check.conn <- function(conn = NULL, db.credentials=NULL){
+    if(is.null(conn) || !tryCatch(DBI::dbIsValid(conn),error=function(err)FALSE) ){ #check if no connector has been provided, or if the connector doesnt work
+        if(exists("conn", envir = .GlobalEnv))conn <- get("conn", envir = .GlobalEnv) #check if a connector already exist at global level
+        if(is.null(conn) || !tryCatch(DBI::dbIsValid(conn),error=function(err)FALSE) ){
+            #print("the global connector is not good, delete and retry ")
+            disco <- disconnect()
+            conn <- init.conn(db.credentials=db.credentials)
+            assign("conn",conn,envir = .GlobalEnv)
+        }
+    }
+}
