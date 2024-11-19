@@ -27,5 +27,27 @@ print(tree.up)
 plot(tree.down)
 plot(tree.up)
 
+# The same but with newer function get.relatives:
+conn <- init.conn()
+x <- get.relatives(table.name = 'GraveIndividuals', primary.value = 'C03440') 
+x <- get.relatives(table.name = 'Sites', primary.value = 'S10050') 
+disconnect()
+
+# look at the data
+x
+
+# look at direct relationships (tree) above or below
+tree.down <- FromListSimple(x$down)
+tree.up <- FromListSimple(x$up)
+
+# print the results as a list
+print(tree.down)
+print(tree.up)
+
+# show the results as a plot
+plot(tree.down)
+plot(tree.up)
+
+
 
 #----------------------------------------------------------------------------------------------------
