@@ -214,6 +214,8 @@ init.conn <- function(db.credentials=NULL){
             message("Note: you can only connect to the dataset through ssh ; so you may want to check you're ssh tunel (or any plugin you may use to do so) is working (cf:https://biadwiki.org/en/Connect)")
             stop("DBConnection fail")
     })
+	DBI::dbSendQuery(conn, 'set character set "utf8"')
+	DBI::dbSendQuery(conn, 'SET NAMES utf8')
     return(conn)	
 }
 #--------------------------------------------------------------------------------------------------
