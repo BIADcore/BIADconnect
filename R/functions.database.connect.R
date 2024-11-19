@@ -129,10 +129,10 @@ query.database <- function(sql.command, conn=NULL, db.credentials=NULL){
         res <- tryCatch(suppressWarnings(DBI::dbSendStatement(conn,sql.command[n])),
                     error=function(e){
                         print(e)
-                        stop("error while sending command:",sql.command[n])
 						disco <- disconnect()
 						conn <- init.conn(db.credentials=db.credentials)
 						assign("conn",conn,envir = .GlobalEnv)
+                        stop("error while sending command:",sql.command[n])
                     })
     }
 	query <- fetch(res, n= -1)
