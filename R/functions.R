@@ -125,12 +125,27 @@ get.primary.column.from.table <- function(keys, table.name){
 	if(length(column)>1)stop('unclear which column to use')	
 return(column)}
 #----------------------------------------------------------------------------------------------------
-get.table.data <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
-	if(length(primary.value)!=1)stop('provide a single primary value')
+#' Retrieve Table Entries from Database
+#'
+#' This function queries a database table to retrieve infor about one or multiple entries in the database 
+#'
+#' @param keys A vector of key names used to determine the primary column of the table.
+#' @param table.name A string specifying the name of the table from which to retrieve data.
+#' @param primary.value A value or a vector of values that are used to filter the rows in the table based on the primary column.
+#' @param conn A database connection object to be used for the query. If NULL, db.credentials should be provided.
+#' @param db.credentials Credentials required to establish a database connection, used when conn is NULL.
+#' @param na.rm A logical value indicating whether to remove columns with all NA values from the result. The default is TRUE.
+#'
+#' @return A data frame containing the queried data, potentially with NA columns removed.
+#'
+#' @export
+get.table.data <- function(keys = NULL, table.name = NULL, primary.value = NULL, conn = NULL, db.credentials = NULL, na.rm = TRUE){
 	primary.column <- get.primary.column.from.table(keys, table.name)
-	sql.command <- paste("SELECT * FROM `BIAD`.`",table.name,"` WHERE ",primary.column," IN ('",primary.value,"')", sep='')
-	data <- query.database(conn = conn,db.credentials = db.credentials, sql.command = sql.command)
-	data <- remove.blank.columns.from.table(data)
+    if(length(primary.value) == 1) matchexp <- paste0(" = '",primary.value,"'")
+    if(length(primary.value) > 1) matchexp <- paste0(" IN ('",paste0(primary.value,collapse=","),"')")
+    sql.command <- paste0("SELECT * FROM `BIAD`.`",table.name,"` WHERE ",primary.column, matchexp)
+	data <- query.database(sql.command = sql.command, conn = conn,db.credentials = db.credentials)
+	if(na.rm) data <- remove.blank.columns.from.table(data)
 return(data)}
 #----------------------------------------------------------------------------------------------------
 decendants <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
