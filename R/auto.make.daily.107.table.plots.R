@@ -4,6 +4,7 @@
 library(gridExtra)
 library(svglite)
 tables <- c('citations','phasecitation','phases','phasetypes','sites','zoptions_types')
+conn <- init.conn()
 
 theme <- ttheme_minimal(
 	core = list(fg_params = list(hjust = 0, x = 0.1, fontsize = 18, col='blue')),
@@ -13,7 +14,7 @@ theme <- ttheme_minimal(
 for(table in tables){
 
 	sql.command <- paste("SELECT * FROM BIAD.",table,sep='')
-	d <- query.database(user, password, 'biad', sql.command)[1:5,]
+    d <- query.database(sql.command = sql.command, conn=conn)[1:5,]
 	d[is.na(d)] <- '\\N'
 	d$time_added <- '\\N'
 	d$user_added <- '\\N'
@@ -33,3 +34,4 @@ for(table in tables){
 	dev.off()
 	}
 #-------------------------------------------------------------------------------
+disconnect()
