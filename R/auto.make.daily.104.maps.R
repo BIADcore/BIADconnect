@@ -172,7 +172,6 @@ dev.off()
 # Faunal strontium
 #-----------------------------------------------------------------
 sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`FaunIsoID` FROM `Sites`
-d <- query.database(sql.command = sql.command, conn=conn)
 INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
 INNER JOIN `FaunalIsotopes` ON `FaunalIsotopes`.`PhaseID`=`Phases`.`PhaseID`"
 
