@@ -189,12 +189,12 @@ init.conn <- function(db.credentials=NULL){
         warning("Missing: ", paste(missing_vars, collapse = ", "), ". You may want to check your ~/.Renviron file and reload R, or manually provide db.credentials as a list to init.conn.")
     
     conn <- tryCatch(
-            DBI::dbConnect(drv=DBI::dbDriver("MySQL"), user=db.credentials$BIAD_DB_USER, pass=db.credentials$BIAD_DB_PASS, dbname="biad", host = db.credentials$BIAD_DB_HOST, port=db.credentials$BIAD_DB_PORT) ,
+            DBI::dbConnect(drv=DBI::dbDriver("MySQL"), user=db.credentials$BIAD_DB_USER, pass=db.credentials$BIAD_DB_PASS, dbname="BIAD", host = db.credentials$BIAD_DB_HOST, port=db.credentials$BIAD_DB_PORT) ,
 		error=function(e){
 			message("Couldn't initialise connection with the database, dbConnect returned error: ")
 			message(e)
 			message("Check your db.credentials below:")
-			na <- sapply(names(db.credentials),function(nc)message(nc,": ", ifelse(nc=="password",msp(db.credentials[[nc]]),db.credentials[[nc]])))
+			na <- sapply(names(db.credentials),function(nc)message(nc,": ", ifelse(nc=="BIAD_DB_PASS",msp(db.credentials[[nc]]),db.credentials[[nc]])))
 			message("You probably haven't opened an SSH tunnel")
 			message("Try running: open.tunnel()")
 			stop("DBConnection fail")
