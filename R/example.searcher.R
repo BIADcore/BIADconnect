@@ -31,9 +31,8 @@ print(tree.up)
 # show the results as a plot
 plot(tree.down)
 plot(tree.up)
-#----------------------------------------------------------------------------------------------------
-# Same with the new 
 
+#--------------------------------------------------------
 open.tunnel()
 
 x <- get.relatives(table.name = 'Sites', primary.value = 'S10050') 
