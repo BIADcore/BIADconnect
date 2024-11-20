@@ -42,8 +42,13 @@ Type 'q()' to quit R.
 + 	print(paste('Starting to run script:',file,'at',date()))
 + 	source(file)
 + 	}
-[1] "Starting to run script: auto.make.daily.101.triggers.R at Tue Nov 19 13:50:03 2024"
-Error in query.database(user, password, "biad", "SELECT `TABLE_NAME` FROM `information_schema`.`TABLES` WHERE TABLE_SCHEMA='biad' AND `TABLE_TYPE`='BASE TABLE';") : 
-  unused argument ("SELECT `TABLE_NAME` FROM `information_schema`.`TABLES` WHERE TABLE_SCHEMA='biad' AND `TABLE_TYPE`='BASE TABLE';")
-Calls: source -> withVisible -> eval -> eval
+[1] "Starting to run script: auto.make.daily.101.triggers.R at Wed Nov 20 13:50:02 2024"
+Loading required package: RMySQL
+Loading required package: DBI
+Couldn't initialise connection with the database, dbConnect returned error: Error: $ operator is invalid for atomic vectors
+
+Check your db.credentials below:
+Note: you can only connect to the dataset through ssh ; so you may want to check you're ssh tunel (or any plugin you may use to do so) is working (cf:https://biadwiki.org/en/Connect)
+Error in value[[3L]](cond) : DBConnection fail
+Calls: source ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
 Execution halted
