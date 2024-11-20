@@ -14,10 +14,10 @@
 #--------------------------------------------------------------------------------------
 library(ADMUR)
 res <- 200
-
-sit <- query.database(user, password, 'biad',"SELECT * FROM `Sites`;")
-pha <- query.database(user, password, 'biad',"SELECT * FROM `Phases`;")
-c14 <- query.database(user, password, 'biad',"SELECT `PhaseID`,`SiteID`,`C14.Age`,`C14.SD` FROM `C14Samples`;")
+conn <- init.conn()
+sit <- query.database(conn = conn, sql.command = "SELECT * FROM `Sites`;")
+pha <- query.database(conn = conn, sql.command = "SELECT * FROM `Phases`;")
+c14 <- query.database(conn = conn, sql.command = "SELECT `PhaseID`,`SiteID`,`C14.Age`,`C14.SD` FROM `C14Samples`;")
 pha <- merge(pha,sit,by='SiteID', all.y=FALSE)
 c14 <- subset(c14, !is.na(PhaseID))
 #--------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ for(n in 1:N){
 		mu <- round(sum(local.mu * weights))
 		sigma <- round(sum(local.sigma * weights))	
 		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
-		query.database(user, password, 'biad',sql.command)	
+		query.database(conn=conn,sql.command=sql.command)	
 		}
 
 	if(nrow(data)>0 & NL==0){
@@ -98,7 +98,7 @@ for(n in 1:N){
 		mu <- mod.gaussian$mu
 		sigma <- mod.gaussian$sigma
 		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
-		if(!is.nan(mu) & !is.nan(sigma))query.database(user, password, 'biad',sql.command)
+		if(!is.nan(mu) & !is.nan(sigma))query.database(conn=conn,sql.command=sql.command)
 		}
 
 	if(nrow(data)>0 & NL==1){
@@ -119,7 +119,7 @@ for(n in 1:N){
 		mu <- mod.gaussian$mu
 		sigma <- mod.gaussian$sigma
 		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
-		if(!is.nan(mu) & !is.nan(sigma))query.database(user, password, 'biad',sql.command)
+		if(!is.nan(mu) & !is.nan(sigma))query.database(conn=conn,sql.command=sql.command)
 		}
 
 	if(nrow(data)>0 & NL>1){
@@ -142,7 +142,7 @@ for(n in 1:N){
 		mu <- mod.gaussian$mu
 		sigma <- mod.gaussian$sigma
 		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
-		if(!is.nan(mu) & !is.nan(sigma))query.database(user, password, 'biad',sql.command)
+		if(!is.nan(mu) & !is.nan(sigma))query.database(conn=conn,sql.command=sql.command)
 		}
 	}
 #--------------------------------------------------------------------------------------
@@ -152,5 +152,6 @@ print(paste('sigma.bw mean:',mean(sigma.bw,na.rm=T)))
 print(paste('sigma.bw SD:',sd(sigma.bw,na.rm=T)))
 #--------------------------------------------------------------------------------------
 
+disconnect()
 
 
