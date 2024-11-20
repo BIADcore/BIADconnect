@@ -8,8 +8,9 @@
 # check for users that are missing from the zprivate_users table
 #-----------------------------------------------------------------------------------------
 sources <- '/Users/admin/../BIAD/BIAD/SOURCES/primary sources/'
-d1 <- query.database(user, password, 'biad', sql.command = "SELECT * FROM BIAD.zprivate_users")
-d2 <- query.database(user, password, 'biad', sql.command = "SELECT CitationID, user_added FROM BIAD.citations")
+conn <- init.conn()
+d1 <- query.database(conn = conn, sql.command = "SELECT * FROM BIAD.zprivate_users")
+d2 <- query.database(conn = conn, sql.command = "SELECT CitationID, user_added FROM BIAD.citations")
 #-----------------------------------------------------------------------------------------
 x <- Sys.glob(paths=paste(sources,'*',sep=''))
 x <- gsub(sources,'',x)
@@ -48,5 +49,5 @@ for(n in 1:length(names)){
 		}
 	}
 #-----------------------------------------------------------------------------------------	
+disconnect()
 	
-#-----------------------------------------------------------------------------------------		
