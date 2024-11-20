@@ -118,8 +118,8 @@ run.server.query.inner.alt <- function(scriptname){
 }
 #--------------------------------------------------------------------------------------------------
 query.database <- function(sql.command, conn=NULL, db.credentials=NULL, wait = 0){
-    check.conn(conn = conn, db.credentials = db.credentials) #this doesn't return anything but modify conn if need, if not, nothing happen
-    if(is.null(conn))get("conn",envir = .GlobalEnv)
+    conn <- check.conn(conn = conn, db.credentials = db.credentials) #this doesn't return anything but modify conn if need, if not, nothing happen
+    if(is.null(conn))conn  <- get("conn",envir = .GlobalEnv)
 	for(n in 1:length(sql.command)) {
         if(wait>0)Sys.sleep(wait)
         res <- tryCatch(suppressWarnings(DBI::dbSendStatement(conn,sql.command[n])),
@@ -158,22 +158,9 @@ encoder <- function(df){
 #' (ie: $export host='127.0.0.1')
 
 #' @return A DBI connection object to the MySQL database.
-#' @examples
-#' \dontrun{
-#' # Using environment variables:
-#' conn <- init.conn()
-#'
-#' # Using explicit credentials:
-#' db.credentials <- list(
-#'   user = "my_user",
-#'   password = "my_password",
-#'   host = "localhost",
-#'   port = 3306
-#' )
-#' conn <- init.conn(db.credentials)
-#' }
 init.conn <- function(db.credentials=NULL){
     require(RMySQL)
+    if(length(DBI::dbListConnections(DBI::dbDriver("MySQL")))!=0) disconnect()
     if(is.null(db.credentials)){
         db.credentials <- list(
             BIAD_DB_USER=Sys.getenv("BIAD_DB_USER"),
@@ -240,4 +227,5 @@ check.conn <- function(conn = NULL, db.credentials=NULL){
             assign("conn",conn,envir = .GlobalEnv)
         }
     }
+    return(conn)
 }
