@@ -191,13 +191,12 @@ init.conn <- function(db.credentials=NULL){
     conn <- tryCatch(
             DBI::dbConnect(drv=DBI::dbDriver("MySQL"), user=db.credentials$BIAD_DB_USER, pass=db.credentials$BIAD_DB_PASS, dbname="biad", host = db.credentials$BIAD_DB_HOST, port=db.credentials$BIAD_DB_PORT) ,
 		error=function(e){
-			message(e)
 			message("Couldn't initialise connection with the database, dbConnect returned error: ")
 			message(e)
 			message("Check your db.credentials below:")
 			na <- sapply(names(db.credentials),function(nc)message(nc,": ", ifelse(nc=="password",msp(db.credentials[[nc]]),db.credentials[[nc]])))
-			message("You probably havent opened an SSH tunnel")
-			message("Try running open.tunnel()")
+			message("You probably haven't opened an SSH tunnel")
+			message("Try running: open.tunnel()")
 			stop("DBConnection fail")
    			}
 		)
@@ -237,7 +236,7 @@ check.conn <- function(conn = NULL, db.credentials=NULL){
 open.tunnel <- function(){
 	initial.pids <<- ps::ps()$pid # bit naughty making it global, but easier for close.tunnel()
 	cmd <- paste0('ssh -f -N -i ',Sys.getenv("BIAD_SSH_PEM"),' ',Sys.getenv("BIAD_SSH_USER"),'@',Sys.getenv("BIAD_SSH_HOST"),' -L 3306:127.0.0.1:3306')
-	shell(cmd, wait=FALSE)
+	system(cmd, wait=FALSE)
 	init.conn()
 	}
 #----------------------------------------------------------------------------------------------------

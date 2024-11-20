@@ -1,4 +1,8 @@
 #--------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
+# get all sites within a polygon
+#--------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
 # Requirements
 # You must have previously added the .Rprofile to your R_USER folder, here -> path.expand('~/') 
 # See the BIADwiki readme or BIADwiki for details about using the .Rprofile
