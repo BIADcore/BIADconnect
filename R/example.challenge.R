@@ -3,16 +3,13 @@
 # Example R script to test if R connection to BIAD is working
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
-# Requirements
-# You must have previously added the .Rprofile to your R_USER folder, here -> path.expand('~/') 
-# See the BIADwiki readme or BIADwiki for details about using the .Rprofile
-
-# Load some required functions
-source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
+# Requirements first read:
+# https://biadwiki.org/en/connectR
 #--------------------------------------------------------------------------------------
-# Pull some data from BIAD
-query <- run.server.query("SELECT * FROM `Sites`")
-# Do something trivial
+source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
+open.tunnel()
+query <- query.database("SELECT * FROM `Sites`")
 plot(table(query$Country),las=2)
+close.tunnel()
 #------------------------------------------------------------------
 
