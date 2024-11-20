@@ -14,7 +14,7 @@ width <- 15
 # overall sites
 #-----------------------------------------------------------------
 sql.command <- "SELECT `Longitude`,`Latitude` FROM `BIAD`.`Sites`"
-d <- query.database(user, password, 'biad', sql.command)
+d <- query.database(sql.command = sql.command, conn=conn)
 
 xmean <- mean(d$Longitude, na.rm=T)
 ymean <- mean(d$Latitude, na.rm=T)
@@ -45,7 +45,7 @@ INNER JOIN `Graves` ON `Phases`.`PhaseID`=`Graves`.`PhaseID`
 INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`
 WHERE `GraveIndividuals`.`aDNAID` IS NOT NULL;"
 
-d <- query.database(user, password, 'biad', sql.command)
+d <- query.database(sql.command = sql.command, conn=conn)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
@@ -64,7 +64,7 @@ INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
 INNER JOIN `Graves` ON `Phases`.`PhaseID`=`Graves`.`PhaseID`
 INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`"
 
-d <- query.database(user, password, 'biad', sql.command)
+d <- query.database(sql.command = sql.command, conn=conn)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
@@ -82,7 +82,7 @@ sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`FaunalSpeciesID`
 INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
 INNER JOIN `FaunalSpecies` ON `Phases`.`PhaseID`=`FaunalSpecies`.`PhaseID`"
 
-d <- query.database(user, password, 'biad', sql.command)
+d <- query.database(sql.command = sql.command, conn=conn)
 res <- summary.maker(d)
 x <- res$summary$Longitude
 y <- res$summary$Latitude
