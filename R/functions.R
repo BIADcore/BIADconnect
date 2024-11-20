@@ -26,7 +26,7 @@ return(query)}
 #----------------------------------------------------------------------------------------------------
 #Create a function that use the remote connection to the database to do the search
 run.searcher <- function(table.name, primary.value, conn = NULL, db.credential = NULL, direction = NULL){
-    if(is.null(conn))  conn  <- init.conn() # du to the way function are handled by this searcher, we can't avoid passing the connecter explictly, so if it hasn't been done then we should create one.
+    if(is.null(conn)) conn <- check.conn() # du to the way these functions are handled by this searcher, we can't avoid passing the connecter explictly, so if it hasn't been done then we should create one.
     if(is.null(direction))  directions  <- list(down = 'decendants', up = 'ancestors')
     else if(direction == "down") directions  <- list(down = 'decendants')
     else if(direction == "up") directions  <- list(up = 'ancestors')
@@ -443,6 +443,8 @@ return(txt)}
 #'
 get.relatives <- function(table.name, primary.value, directions = c("up","down"), conn = NULL, db.credentials = NULL,zoption=FALSE){
     stopifnot(directions %in% c("up","down"))
+    if(is.null(conn)) conn  <- check.conn()
+    
     keys  <- get.keys(conn)
     dir.functions = c("up"=get.ancestors,"down"=get.decendants)
     names(directions)=directions
