@@ -5,6 +5,10 @@
 #----------------------------------------------------------------------------------------------------
 source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.database.connect.R")
 source("https://raw.githubusercontent.com/AdrianTimpson/snippets/main/R/functions.R")
+
+list.of.packages <- c('ps','tools','DBI','RMySQL')
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
 #----------------------------------------------------------------------------------------------------
 run.server.searcher <- function(table.name, primary.value, db.credentials=NULL, hostuser=NULL, hostname=NULL, pempath=NULL){	
 	text <- c(
