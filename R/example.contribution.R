@@ -4,13 +4,12 @@
 # Example: radiocarbon dates
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
-# Requirements
-# You must have previously added the .Rprofile to your R_USER folder, here -> path.expand('~/') 
-# See the BIADwiki readme or BIADwiki for details about using the .Rprofile
-
-# Load some required functions
-source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
+# Requirements first read:
+# https://biadwiki.org/en/connectR
 #--------------------------------------------------------------------------------------
+source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
+open.tunnel()
+
 # query the requested dataset
 sql.command <- "SELECT *
 FROM C14Samples
@@ -35,3 +34,6 @@ prop.table(table(contribution)) # comparison of both values
 # barplot code
 counts <- table(contribution$type, contribution$author)
 barplot(counts, col = c("darkblue","red"), legend = rownames(counts))
+
+close.tunnel()
+#--------------------------------------------------------------------------------------
