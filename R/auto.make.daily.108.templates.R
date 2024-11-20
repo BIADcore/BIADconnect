@@ -1,11 +1,12 @@
 #-----------------------------------------------------------------------------------------
 # Pull table summaries from the database, and update github
 #-----------------------------------------------------------------------------------------
+conn <- init.conn()
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='BIAD'"
-d <- query.database(user, password, 'biad', sql.command)
+d <- query.database(sql.command = sql.command, conn=conn)
 
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema='BIAD';"	
-d.cols <- query.database(user, password, 'biad', sql.command)	
+d.cols <- query.database(sql.command = sql.command, conn=conn)
 #-----------------------------------------------------------------------------------------
 all <- d$TABLE_NAME
 zprivate <- all[grepl('zprivate', all)]
@@ -27,7 +28,7 @@ N <- nrow(standard)
 for(n in 1:N){
 
 	table <- standard$TABLE_NAME[n]
-	d.table <- query.database(user, password, 'biad', sql.command= paste("SELECT * FROM `",table,"`",sep=''))
+	d.table <- query.database(conn = conn, sql.command= paste("SELECT * FROM `",table,"`",sep=''))
 
 	# a blank example
 	example <- d.table[1,]
@@ -49,3 +50,4 @@ for(n in 1:N){
 	write.csv.utf8.BOM(example, filename=paste('../tools/templates/',table,'.csv',sep=''))
 	}
 #-----------------------------------------------------------------------------------------
+disconnect()
