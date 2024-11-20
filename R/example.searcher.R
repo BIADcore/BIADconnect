@@ -17,6 +17,7 @@ open.tunnel()
 x <- run.searcher(table.name = 'Sites', primary.value = 'S10050') 
 
 close.tunnel()
+
 # look at the data
 x
 
@@ -31,7 +32,6 @@ print(tree.up)
 # show the results as a plot
 plot(tree.down)
 plot(tree.up)
-
 #--------------------------------------------------------
 open.tunnel()
 
