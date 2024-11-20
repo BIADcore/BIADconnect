@@ -5,8 +5,9 @@ library(rsvg)
 library(DiagrammeRsvg)
 #----------------------------------------------------------------------------------
 # Pull all foreign keys
+conn <- init.conn()
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='BIAD';"	
-d.tables <- query.database(user, password, 'biad', sql.command)$TABLE_NAME	
+d.tables <- query.database(sql.command = sql.command, conn=conn)
 
 zprivate <- d.tables[grepl('zprivate', d.tables)]
 zoptions <- d.tables[grepl('zoptions', d.tables)]
@@ -25,4 +26,5 @@ image <- database.relationship.plotter(d.tables, FALSE, user, password)
 svg <- export_svg(image)
 writeLines(svg, '../tools/plots/database.relationships.plot.sub.1.svg')
 #------------------------------------------------------------------
+disconnect()
 
