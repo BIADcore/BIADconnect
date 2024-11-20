@@ -468,7 +468,7 @@ get.relatives <- function(table.name, primary.value, directions = c("up","down")
 #'
 get.decendants <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
 
-    if(is.null(primary.value))return(NULL)
+    if(is.null(primary.value) || primary.value == ""  )return(NULL)
 
     primary.column <- get.primary.column.from.table(keys, table.name)
     relative.info  <- subset(keys, REFERENCED_COLUMN_NAME==primary.column & REFERENCED_TABLE_NAME==table.name)
@@ -487,7 +487,7 @@ get.decendants <- function(keys, table.name, primary.value, conn = NULL, db.cred
             res[[rt]]=list()
             res[[rt]][["data"]]  <- data
             for(rv in data[[relative.key]]){
-                res[[rt]][[rv]] <- get.decendants(keys = keys,table.name = rt,primary.value = rv,conn = conn, db.credentials = db.credentials)
+                res[[rt]][[as.character(rv)]] <-  get.decendants(keys = keys,table.name = rt,primary.value = rv,conn = conn, db.credentials = db.credentials)
             }
         }
     }
