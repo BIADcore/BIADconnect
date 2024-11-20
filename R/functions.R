@@ -540,7 +540,7 @@ get.ancestors <- function(keys, table.name, primary.value, conn = NULL, db.crede
                     res[[rt]]=list()
                     res[[rt]][["data"]]  <- data
                     for(rv in data[[relative.key]]){
-                        res[[rt]][[rv]] <- get.ancestors(keys = keys,table.name = rt,primary.value = rv,conn = conn, db.credentials = db.credentials, orig.table = data)
+                        res[[rt]][[as.character(rv)]] <- get.ancestors(keys = keys,table.name = rt,primary.value = rv,conn = conn, db.credentials = db.credentials, orig.table = data)
                     }
                 }
             }
