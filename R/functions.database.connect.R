@@ -188,19 +188,23 @@ init.conn <- function(db.credentials=NULL){
     if (length(missing_vars) > 0) 
         warning("Missing: ", paste(missing_vars, collapse = ", "), ". You may want to check your ~/.Renviron file and reload R, or manually provide db.credentials as a list to init.conn.")
     
-    conn <-  tryCatch(
+    conn <- tryCatch(
             DBI::dbConnect(drv=DBI::dbDriver("MySQL"), user=db.credentials$BIAD_DB_USER, pass=db.credentials$BIAD_DB_PASS, dbname="biad", host = db.credentials$BIAD_DB_HOST, port=db.credentials$BIAD_DB_PORT) ,
-        error=function(e){
-            message("Couldn't initialise connection with the database, dbConnect returned error: ", e)
-            message("Check your db.credentials below:")
-            na <- sapply(names(db.credentials),function(nc)message(nc,": ", ifelse(nc=="password",msp(db.credentials[[nc]]),db.credentials[[nc]])))
-            message("Note: you can only connect to the dataset through ssh ; so you may want to check you're ssh tunel (or any plugin you may use to do so) is working (cf:https://biadwiki.org/en/Connect)")
-            stop("DBConnection fail")
-    })
+		error=function(e){
+			message(e)
+			message("Couldn't initialise connection with the database, dbConnect returned error: ")
+			message(e)
+			message("Check your db.credentials below:")
+			na <- sapply(names(db.credentials),function(nc)message(nc,": ", ifelse(nc=="password",msp(db.credentials[[nc]]),db.credentials[[nc]])))
+			message("You probably havent opened an SSH tunnel")
+			message("Try running open.tunnel()")
+			stop("DBConnection fail")
+   			}
+		)
 	DBI::dbSendQuery(conn, 'set character set "utf8"')
 	DBI::dbSendQuery(conn, 'SET NAMES utf8')
-    return(conn)	
-}
+    	return(conn)	
+	}
 #--------------------------------------------------------------------------------------------------
 #' msp(Mask Password)
 #' This function masks a given password by replacing all but the first and last character with asterisks.
@@ -229,3 +233,19 @@ check.conn <- function(conn = NULL, db.credentials=NULL){
     }
     return(conn)
 }
+#----------------------------------------------------------------------------------------------------
+open.tunnel <- function(){
+	initial.pids <<- ps::ps()$pid # bit naughty making it global, but easier for close.tunnel()
+	cmd <- paste0('ssh -f -N -i ',Sys.getenv("BIAD_SSH_PEM"),' ',Sys.getenv("BIAD_SSH_USER"),'@',Sys.getenv("BIAD_SSH_HOST"),' -L 3306:127.0.0.1:3306')
+	shell(cmd, wait=FALSE)
+	init.conn()
+	}
+#----------------------------------------------------------------------------------------------------
+close.tunnel <- function(){
+	pids <- ps::ps()$pid
+	pids <- pids[!pids%in%initial.pids]
+	disconnect()
+	for(p in pids)tools::pskill(p)
+	}
+#----------------------------------------------------------------------------------------------------
+
