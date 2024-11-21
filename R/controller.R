@@ -20,7 +20,7 @@ NW <- length(weekly.files)
 
 fails <- 0
 warnings <- 0
-succes <- 0
+success <- 0
 
 if(ND>0)for(n in 1:ND){
 	file <- daily.files[n]
@@ -44,9 +44,9 @@ if(ND>0)for(n in 1:ND){
 
 cat(paste0("#----------------n"));
 cat(paste0("summary of", today," checks\n "));
-cat(paste("❌:",fails,"/",nd,"failed\n"));
-cat(paste("⚠️:",warnings,"/",nd," w/ wrning \n"));
-cat(paste("✅:",success,"/",nd,"succeed \n"));
+cat(paste("❌:",fails,"/",ND,"failed\n"));
+cat(paste("⚠️:",warnings,"/",ND," w/ warning \n"));
+cat(paste("✅:",success,"/",ND,"succeed \n"));
 
 
 if(NW>0 & today%in%run.day)for(n in 1:NW){
@@ -71,9 +71,9 @@ if(NW>0 & today%in%run.day)for(n in 1:NW){
 
 cat(paste0("#----------------n"));
 cat(paste0("summary of weekly check made on:", today,"\n "));
-cat(paste("❌:",fails,"/",nd,"failed\n"));
-cat(paste("⚠️:",warnings,"/",nd," w/ wrning \n"));
-cat(paste("✅:",success,"/",nd,"succeed \n"));
+cat(paste("❌:",fails,"/",NW,"failed\n"));
+cat(paste("⚠️:",warnings,"/",NW," w/ warning \n"));
+cat(paste("✅:",success,"/",NW,"succeed \n"));
 #------------------------------------------------------------------
 	
 	
