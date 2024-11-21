@@ -18,19 +18,36 @@ weekly.files <- files[grepl('auto.make.weekly',files)]
 ND <- length(daily.files)
 NW <- length(weekly.files)
 
+fails <- 0
+warnings <- 0
+succes <- 0
+
 if(ND>0)for(n in 1:ND){
 	file <- daily.files[n]
 	tryCatch({
         cat(paste0("#-----------------------------------\n"));
         cat(paste('Starting to run script:',file,'at',date(),"\n"))
         source(file)
-        cat(paste0("#------------ run ",file,", success ✅\n"));
+        cat(paste0("#------------ run ",file,", succeed ✅\n"));
+        success <- success  + 1
     },
     error=function(err){
         cat(paste0("#------------ run ",file,", failed ❌\n"));
-        print(err);
+        cat(print(err))
+        fails <- fails  + 1
+	},
+    warning=function(war){
+        cat(paste0("#------------ run ",file,", failed ⚠️\n"));
+        warnings <- warnings  + 1
 	})
 }
+
+cat(paste0("#----------------n"));
+cat(paste0("summary of", today," checks\n "));
+cat(paste("❌:",fails,"/",nd,"failed\n"));
+cat(paste("⚠️:",warnings,"/",nd," w/ wrning \n"));
+cat(paste("✅:",success,"/",nd,"succeed \n"));
+
 
 if(NW>0 & today%in%run.day)for(n in 1:NW){
 	file <- weekly.files[n]
@@ -38,14 +55,25 @@ if(NW>0 & today%in%run.day)for(n in 1:NW){
         cat(paste0("#-----------------------------------\n"));
         cat(paste('Starting to run script:',file,'at',date(),"\n"))
         source(file)
-        cat(paste0("#------------ run ",file,", success ✅\n"));
+        cat(paste0("#------------ run ",file,", succeed ✅\n"));
+        success <- success  + 1
     },
     error=function(err){
         cat(paste0("#------------ run ",file,", failed ❌\n"));
-        print(err);
+        cat(print(err))
+        fails <- fails  + 1
+	},
+    warning=function(war){
+        cat(paste0("#------------ run ",file,", failed ⚠️\n"));
+        warnings <- warnings  + 1
 	})
 	}
 
+cat(paste0("#----------------n"));
+cat(paste0("summary of weekly check made on:", today,"\n "));
+cat(paste("❌:",fails,"/",nd,"failed\n"));
+cat(paste("⚠️:",warnings,"/",nd," w/ wrning \n"));
+cat(paste("✅:",success,"/",nd,"succeed \n"));
 #------------------------------------------------------------------
 	
 	
