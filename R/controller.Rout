@@ -1,4 +1,12 @@
 
+   File .Renviron contains invalid line(s)
+      BIAD_DB_USER <- 'Rscripts'
+      BIAD_DB_PASS <- 'delightfuldata'
+      BIAD_DB_HOST <- '127.0.0.1’
+      BIAD_DB_PORT <- 3306
+   They were ignored
+
+
 R version 3.6.3 (2020-02-29) -- "Holding the Windsock"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin15.6.0 (64-bit)
@@ -39,16 +47,22 @@ Type 'q()' to quit R.
 > 
 > if(ND>0)for(n in 1:ND){
 + 	file <- daily.files[n]
-+ 	print(paste('Starting to run script:',file,'at',date()))
-+ 	source(file)
-+ 	}
-[1] "Starting to run script: auto.make.daily.101.triggers.R at Wed Nov 20 13:50:02 2024"
++ 	tryCatch({
++         cat(paste0("#-----------------------------------n"));
++         cat(paste('Starting to run script:',file,'at',date(),"\n"))
++         source(file)
++         cat(paste0("#------------ run ",file,", success ✅\n"));
++     },
++     error=function(err){
++         cat(paste0("#------------ run ",file,", failed ❌\n"));
++         cat(err);
++ 	})
++ }
+#-----------------------------------nStarting to run script: auto.make.daily.101.triggers (Autosaved).R at Thu Nov 21 10:28:06 2024 
 Loading required package: RMySQL
 Loading required package: DBI
-Couldn't initialise connection with the database, dbConnect returned error: Error: $ operator is invalid for atomic vectors
-
-Check your db.credentials below:
-Note: you can only connect to the dataset through ssh ; so you may want to check you're ssh tunel (or any plugin you may use to do so) is working (cf:https://biadwiki.org/en/Connect)
-Error in value[[3L]](cond) : DBConnection fail
-Calls: source ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
+Couldn't initialise connection with the database, dbConnect returned error: 
+#------------ run auto.make.daily.101.triggers (Autosaved).R, failed ❌
+Error in cat(err) : argument 1 (type 'list') cannot be handled by 'cat'
+Calls: tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous> -> cat
 Execution halted
