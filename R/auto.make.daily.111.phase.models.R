@@ -21,7 +21,7 @@ c14 <- query.database(conn = conn, sql.command = "SELECT `PhaseID`,`SiteID`,`C14
 pha <- merge(pha,sit,by='SiteID', all.y=FALSE)
 c14 <- subset(c14, !is.na(PhaseID))
 #--------------------------------------------------------------------------------------
-N <- 200#2000
+N <- 50#2000
 mu.bw <- sigma.bw <- c()
 for(n in 1:N){
 

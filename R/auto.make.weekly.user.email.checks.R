@@ -22,12 +22,12 @@ if(length(missing)>0){
 	
 	body1 <- 'The following users are missing from the zprivate_users table. Please add them to this table, or remove them as users: '
 	body2 <- paste(missing,collapse=', ')
-	body3 <- 'Many thanks,'
+	body3 <- 'Please do not reply. Many thanks,'
 	body4 <- 'BIAD'	
 	
 	email <- gmailr::gm_mime(
     	To = subset(d2,administrator=='YES')$email,
-    	From = biad.address,
+    	From = 'BIAD.committee@gmail.com',
     	Subject = 'Missing users information',
     	body = paste(body1,body2,body3,body4,sep="\n")
     	)
