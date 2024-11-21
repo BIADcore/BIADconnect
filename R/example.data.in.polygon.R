@@ -3,18 +3,18 @@
 # get all sites within a polygon
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
-# Requirements
-# You must have previously added the .Rprofile to your R_USER folder, here -> path.expand('~/') 
-# See the BIADwiki readme or BIADwiki for details about using the .Rprofile
-
-# Load some required functions
+# Requirements first read:
+# https://biadwiki.org/en/connectR
+#--------------------------------------------------------------------------------------
 source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
+open.tunnel()
 #--------------------------------------------------------------------------------------
 library(mapdata)
 #--------------------------------------------------------------------------------------
 # get all sites within a polygon
 #--------------------------------------------------------------------------------------
-x <- run.server.query("SELECT `Longitude`,`Latitude` FROM `BIAD`.`Sites`")
+x <- query.database("SELECT `Longitude`,`Latitude` FROM `BIAD`.`Sites`")
+close.tunnel()
 d <- data.in.polygon(data=x,kml.path='../tools/kml/square.kml')
 #--------------------------------------------------------------------------------------
 # look at the data

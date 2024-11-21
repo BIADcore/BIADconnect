@@ -1,10 +1,13 @@
 #--------------------------------------------------------------------------------------
-# Requirements
-# You must have previously added the .Rprofile to your R_USER folder, here -> path.expand('~/') 
-# See the BIADwiki readme or BIADwiki for details about using the .Rprofile
-
-# Load some required functions
+#--------------------------------------------------------------------------------------
+# # query any table with a primary key value, to get all direct relationships 
+#--------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
+# Requirements first read:
+# https://biadwiki.org/en/connectR
+#--------------------------------------------------------------------------------------
 source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
+<<<<<<< Updated upstream
 #--------------------------------------------------------------------------------------
 library(data.tree)
 #----------------------------------------------------------------------------------------------------
@@ -20,8 +23,16 @@ close.tunnel()
 
 # look at the data
 x
+=======
+open.tunnel()
+x <- run.searcher(table.name = 'Sites', primary.value = 'S10050') 
+close.tunnel()
+
+x # look at the data
+>>>>>>> Stashed changes
 
 # look at direct relationships (tree) above or below
+library(data.tree)
 tree.down <- FromListSimple(x$down)
 tree.up <- FromListSimple(x$up)
 
@@ -32,8 +43,12 @@ print(tree.up)
 # show the results as a plot
 plot(tree.down)
 plot(tree.up)
+<<<<<<< Updated upstream
 #--------------------------------------------------------
 open.tunnel()
+=======
+#----------------------------------------------------------------------------------------------------
+>>>>>>> Stashed changes
 
 x <- get.relatives(table.name = 'Sites', primary.value = 'S10050') 
 
