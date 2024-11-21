@@ -20,14 +20,28 @@ NW <- length(weekly.files)
 
 if(ND>0)for(n in 1:ND){
 	file <- daily.files[n]
-	print(paste('Starting to run script:',file,'at',date()))
-	source(file)
-	}
+	tryCatch({
+        cat(paste0("#-----------------------------------n"));
+        cat(paste('Starting to run script:',file,'at',date(),"\n"))
+        source(file)
+        cat(paste0("#------------ run ",file,", success ✅\n"));
+    },
+    error=function(err){
+        cat(paste0("#------------ run ",file,", failed ❌\n"));
+	})
+}
 
 if(NW>0 & today%in%run.day)for(n in 1:NW){
 	file <- weekly.files[n]
-	print(paste('Starting to run script:',file,'at',date()))
-	source(file)
+	tryCatch({
+        cat(paste0("#-----------------------------------n"));
+        cat(paste('Starting to run script:',file,'at',date(),"\n"))
+        source(file)
+        cat(paste0("#------------ run ",file,", success ✅\n"));
+    },
+    error=function(err){
+        cat(paste0("#------------ run ",file,", failed ❌\n"));
+	})
 	}
 
 #------------------------------------------------------------------
