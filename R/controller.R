@@ -47,6 +47,9 @@ cat(paste("❌:",fails,"/",ND,"failed\n"));
 cat(paste("⚠️:",warnings,"/",ND," w/ warning \n"));
 cat(paste("✅:",success,"/",ND,"succeed \n"));
 
+fails <- 0
+warnings <- 0
+success <- 0
 
 if(NW>0 & today%in%run.day)for(n in 1:NW){
 	file <- weekly.files[n]
