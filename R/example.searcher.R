@@ -30,6 +30,8 @@ plot(tree.up)
 #--------------------------------------------------------------------------------------
 # more advance testing
 #--------------------------------------------------------------------------------------
+open.tunnel()
 x <- {a=Sys.time();res <- get.relatives(table.name = 'Sites', primary.value = 'S10050', directions = "down") ; print(Sys.time()-a); res}
 x <- {a=Sys.time();res <- run.searcher(table.name = 'Sites', primary.value = 'S10050', direction = "down") ; print(Sys.time()-a); res}
+close.tunnel()
 #--------------------------------------------------------------------------------------
