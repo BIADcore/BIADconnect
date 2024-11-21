@@ -33,7 +33,7 @@ if(ND>0)for(n in 1:ND){
     },
     error=function(err){
         cat(paste0("#------------ run ",file,", failed ❌\n"));
-        cat(print(err))
+        print(err)
         fails <- fails  + 1
 	},
     warning=function(war){
