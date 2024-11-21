@@ -42,7 +42,7 @@ pwidth <- pheight * round(diff(xlim)/diff(ylim),1)
 #--------------------------------------------------------------------------------------------------
 # common plot function
 #--------------------------------------------------------------------------------------------------
-common.plotter <- function(dates, tablename, pwidth, pheight, zposts){
+common.plotter <- function(dd, tablename, pwidth, pheight, zposts){
 	N <- length(zposts)-1
 	svglite(file = paste('../tools/plots/time.phases',tablename,'svg',sep='.'), width = pwidth, height = pheight )
 	par(mfrow=c(2,5))
@@ -60,7 +60,7 @@ common.plotter <- function(dates, tablename, pwidth, pheight, zposts){
 #--------------------------------------------------------------------------------------------------
 # all phases
 #--------------------------------------------------------------------------------------------------
-common.plotter(dates = d$date, tablename='all', pwidth=pwidth, pheight=pheight, zposts=zposts)
+common.plotter(dd=d, tablename='all', pwidth=pwidth, pheight=pheight, zposts=zposts)
 #--------------------------------------------------------------------------------------------------
 # Tables directly linked to Phases
 tables <- c('ABotIsotopes','ABotSamples','FaunalBiometrics','FaunalIsotopes','Graves','FaunalSpecies','MaterialCulture')
@@ -68,7 +68,7 @@ tables <- c('ABotIsotopes','ABotSamples','FaunalBiometrics','FaunalIsotopes','Gr
 for(t in 1:length(tables)){
 	tmp <- query.database(paste("SELECT * FROM `BIAD`.`",tables[t],"`",sep=''), conn=conn)
 	dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
-	common.plotter(dates = dd$date, tablename=tables[t], pwidth=pwidth, pheight=pheight, zposts=zposts)
+	common.plotter(dd = dd, tablename=tables[t], pwidth=pwidth, pheight=pheight, zposts=zposts)
 	}
 #--------------------------------------------------------------------------------------------------
 # More complicated relationships indirectly linked to Phases
@@ -78,14 +78,14 @@ t2 <- query.database("SELECT * FROM `BIAD`.`FaunalIsotopeSequences`", conn=conn)
 t2 <- subset(t2, !is.na(SampleID))
 tmp <- merge(t2, t1, by='SampleID') 
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
-common.plotter(dates = dd$date, tablename='FaunalIsotopeSequences', pwidth=pwidth, pheight=pheight, zposts=zposts)
+common.plotter(dd = dd, tablename='FaunalIsotopeSequences', pwidth=pwidth, pheight=pheight, zposts=zposts)
 #--------------------------------------------------------------------------------------------------
 t1 <- query.database("SELECT * FROM `BIAD`.`Graves`", conn=conn)
 t2 <- query.database("SELECT * FROM `BIAD`.`GraveIndividuals`", conn=conn)
 t2 <- subset(t2, !is.na(GraveID))
 tmp <- merge(t2, t1, by='GraveID')
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
-common.plotter(dates = dd$date, tablename='GraveIndividuals', pwidth=pwidth, pheight=pheight, zposts=zposts)
+common.plotter(dd = dd, tablename='GraveIndividuals', pwidth=pwidth, pheight=pheight, zposts=zposts)
 #--------------------------------------------------------------------------------------------------
 t1 <- query.database("SELECT * FROM `BIAD`.`Graves`", conn=conn)
 t2 <- query.database("SELECT * FROM `BIAD`.`GraveIndividuals`", conn=conn)
@@ -93,7 +93,7 @@ t3 <- query.database("SELECT * FROM `BIAD`.`HumanIsotopes`", conn=conn)
 tmp <- merge(t3, t2, by='IndividualID')
 tmp <- merge(tmp, t1, by='GraveID')
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
-common.plotter(dates = dd$date, tablename='HumanIsotopes', pwidth=pwidth, pheight=pheight, zposts=zposts)
+common.plotter(dd = dd, tablename='HumanIsotopes', pwidth=pwidth, pheight=pheight, zposts=zposts)
 #--------------------------------------------------------------------------------------------------
 t1 <- query.database("SELECT * FROM `BIAD`.`Graves`", conn=conn)
 t2 <- query.database("SELECT * FROM `BIAD`.`GraveIndividuals`", conn=conn)
@@ -101,7 +101,7 @@ t3 <- query.database("SELECT * FROM `BIAD`.`Rites`", conn=conn)
 tmp <- merge(t3, t2, by='IndividualID')
 tmp <- merge(tmp, t1, by='GraveID')
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
-common.plotter(dates = dd$date, tablename='Rites', pwidth=pwidth, pheight=pheight, zposts=zposts)
+common.plotter(dd = dd, tablename='Rites', pwidth=pwidth, pheight=pheight, zposts=zposts)
 #--------------------------------------------------------------------------------------------------
 t1 <- query.database("SELECT * FROM `BIAD`.`Graves`", conn=conn)
 t2 <- query.database("SELECT * FROM `BIAD`.`GraveIndividuals`", conn=conn)
@@ -109,21 +109,15 @@ t3 <- query.database("SELECT * FROM `BIAD`.`Strontium`", conn=conn)
 tmp <- merge(t3, t2, by='IndividualID')
 tmp <- merge(tmp, t1, by='GraveID')
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
-common.plotter(dates = dd$date, tablename='Strontium', pwidth=pwidth, pheight=pheight, zposts=zposts)
+common.plotter(dd = dd, tablename='Strontium', pwidth=pwidth, pheight=pheight, zposts=zposts)
 #--------------------------------------------------------------------------------------------------
 sql.command <- "SELECT `Graves`.`PhaseID` FROM `Graves`
 INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`
 INNER JOIN `Strontium` ON `Strontium`.`IndividualID`=`GraveIndividuals`.`IndividualID`
 INNER JOIN `StrontiumSequences` ON `StrontiumSequences`.`StrontiumID`=`Strontium`.`StrontiumID`;"
 tmp <- query.database(sql.command, conn=conn)
-
-sql.command <- "SELECT * FROM `Graves`
-INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`
-INNER JOIN `Strontium` ON `Strontium`.`IndividualID`=`GraveIndividuals`.`IndividualID`
-INNER JOIN `StrontiumSequences` ON `StrontiumSequences`.`StrontiumID`=`Strontium`.`StrontiumID`;"
-tmp <- query.database(sql.command, conn=conn)
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
-common.plotter(dates = dd$date, tablename='StrontiumSequences', pwidth=pwidth, pheight=pheight, zposts=zposts)
+common.plotter(dd = dd, tablename='StrontiumSequences', pwidth=pwidth, pheight=pheight, zposts=zposts)
 #--------------------------------------------------------------------------------------------------
 sql.command <- "SELECT `Sites`.`SiteID`,`Longitude`,`Latitude`,`aDNAID`,`Phases`.`PhaseID` FROM `Sites`
 INNER JOIN `Phases` ON `Sites`.`SiteID`=`Phases`.`SiteID`
@@ -132,7 +126,7 @@ INNER JOIN `GraveIndividuals` ON `GraveIndividuals`.`GraveID`=`Graves`.`GraveID`
 WHERE `GraveIndividuals`.`aDNAID` IS NOT NULL;"
 tmp <- query.database(sql.command, conn=conn)
 dd <- subset(d, PhaseID%in%unique(tmp$PhaseID))
-common.plotter(dates = dd$date, tablename='aDNA', pwidth=pwidth, pheight=pheight, zposts=zposts)
+common.plotter(dd = dd, tablename='aDNA', pwidth=pwidth, pheight=pheight, zposts=zposts)
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 disconnect()
