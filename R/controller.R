@@ -31,13 +31,13 @@ if(ND>0)for(n in 1:ND){
         success <- success  + 1
     },
     error=function(err){
+        fails <<- fails  + 1
         cat(paste0("#------------ run ",file,", failed ❌\n"));
         print(err)
-        fails <- fails  + 1
 	},
     warning=function(war){
         cat(paste0("#------------ run ",file,", got warning ⚠️\n"));
-        warnings <- warnings  + 1
+        warnings <<- warnings  + 1
 	})
 }
 
@@ -63,11 +63,11 @@ if(NW>0 & today%in%run.day)for(n in 1:NW){
     error=function(err){
         cat(paste0("#------------ run ",file,", failed ❌\n"));
         print(err)
-        fails <- fails  + 1
+        fails <<- fails  + 1
 	},
     warning=function(war){
         cat(paste0("#------------ run ",file,", warning ⚠️\n"));
-        warnings <- warnings  + 1
+        warnings <<- warnings  + 1
 	})
 	}
 
