@@ -60,7 +60,7 @@ if(NW>0 & today%in%run.day)for(n in 1:NW){
     },
     error=function(err){
         cat(paste0("#------------ run ",file,", failed ❌\n"));
-        cat(print(err))
+        print(err)
         fails <- fails  + 1
 	},
     warning=function(war){
