@@ -12,4 +12,3 @@ query <- query.database("SELECT * FROM `Sites`")
 plot(table(query$Country),las=2)
 close.tunnel()
 #------------------------------------------------------------------
-

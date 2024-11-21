@@ -16,7 +16,7 @@ FROM C14Samples
 INNER JOIN `Sites` ON `C14Samples`.`SiteID` = `Sites`.`SiteID`
 INNER JOIN `Phases` ON `C14Samples`.`PhaseID` = `Phases`.`PhaseID`
 WHERE `Phases`.`Culture1` IS NOT NULL AND `Sites`.`Country` = 'Sweden' OR `Phases`.`Culture1` IS NOT NULL AND `Sites`.`Country` = 'Denmark'"
-query <- run.server.query(sql.command)
+query <- query.database(sql.command)
 
 # generate a dataframe with the added and updated information
 added <- data.frame(query$user_added, "added")
