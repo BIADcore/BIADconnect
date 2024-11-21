@@ -32,12 +32,12 @@ for(n in 1:length(names)){
 	
 	body1 <- 'The following citations are missing from the shared drive, but are in the Citations table. Please put them in the shared drive: '
 	body2 <- paste(missing,collapse=', ')
-	body3 <- 'Many thanks,'
+	body3 <- 'Please do not reply. Many thanks,'
 	body4 <- 'BIAD'	
 	
 	email <- gmailr::gm_mime(
     	To = email.address,
-    	From = biad.address,
+    	From = 'BIAD.committee@gmail.com',
     	Subject = 'Missing citations',
     	body = paste(body1,body2,body3,body4,sep="\n")
     	)

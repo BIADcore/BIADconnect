@@ -13,7 +13,7 @@ prefix <- 'auto_pad_'
 old.triggers <- trig[substr(trig, 1, nchar(prefix)) ==prefix]
 drop.triggers <- paste('DROP TRIGGER `',old.triggers,'`;',sep='')
 new.triggers <- make.all.triggers(all, prefix, trigger = make.autopad.trigger)
-query.database(sql.command = drop.triggers, conn = conn)
+if(length(drop.triggers)>0)query.database(sql.command = drop.triggers, conn = conn)
 query.database(sql.command = new.triggers, conn = conn)
 
 # time/user stamp triggers
@@ -22,7 +22,7 @@ old.triggers <- trig[substr(trig, 1, nchar(prefix)) ==prefix]
 drop.triggers <- paste('DROP TRIGGER `',old.triggers,'`;',sep='')
 sub <- subset(all, COLUMN_NAME=='time_added')
 new.triggers <- make.all.triggers(sub, prefix, trigger = make.stamp.trigger)
-query.database(sql.command = drop.triggers,conn=conn)
+if(length(drop.triggers)>0)query.database(sql.command = drop.triggers,conn=conn)
 query.database(sql.command = new.triggers,conn=conn)
 disconnect()
 #--------------------------------------------------------------------------------------------------------------

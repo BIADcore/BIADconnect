@@ -1,97 +1,54 @@
-
-   File .Renviron contains invalid line(s)
-      BIAD_DB_USER <- 'Rscripts'
-      BIAD_DB_PASS <- 'delightfuldata'
-      BIAD_DB_HOST <- '127.0.0.1’
-      BIAD_DB_PORT <- 3306
-   They were ignored
-
-
-R version 3.6.3 (2020-02-29) -- "Holding the Windsock"
-Copyright (C) 2020 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
-
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
-
-  Natural language support but running in an English locale
-
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
-
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.
-
-> #------------------------------------------------------------------
-> # Runs all R scripts beginning with 'auto.make.'
-> # This script is invoked by a regular CRON schedule (Admin),
-> # However, some scripts need not be run so frequently.
-> # Rather than specifying a CRON schedule for each script, 
-> # this script decides when to run which script, based on the filename.
-> #------------------------------------------------------------------
-> source('functions.R')
-> source('.Rprofile')
-> #------------------------------------------------------------------
-> run.day <- c('Tue','Fri')
-> today <- strsplit(date(),split=' ')[[1]][1]
-> 
-> files <- list.files()
-> daily.files <- files[grepl('auto.make.daily',files)]
-> weekly.files <- files[grepl('auto.make.weekly',files)]
-> 
-> ND <- length(daily.files)
-> NW <- length(weekly.files)
-> 
-> fails <- 0
-> warnings <- 0
-> succes <- 0
-> 
-> if(ND>0)for(n in 1:ND){
-+ 	file <- daily.files[n]
-+ 	tryCatch({
-+         cat(paste0("#-----------------------------------\n"));
-+         cat(paste('Starting to run script:',file,'at',date(),"\n"))
-+         source(file)
-+         cat(paste0("#------------ run ",file,", succeed ✅\n"));
-+         success <- success  + 1
-+     },
-+     error=function(err){
-+         cat(paste0("#------------ run ",file,", failed ❌\n"));
-+         cat(print(err))
-+         fails <- fails  + 1
-+ 	},
-+     warning=function(war){
-+         cat(paste0("#------------ run ",file,", failed ⚠️\n"));
-+         warnings <- warnings  + 1
-+ 	})
-+ }
 #-----------------------------------
-Starting to run script: auto.make.daily.101.triggers.R at Thu Nov 21 11:12:02 2024 
-Loading required package: RMySQL
-Loading required package: DBI
-#------------ run auto.make.daily.101.triggers.R, failed ⚠️
+Starting to run script: auto.make.daily.101.triggers.R at Thu Nov 21 15:19:02 2024 
+#------------ run auto.make.daily.101.triggers.R, succeed ✅
 #-----------------------------------
-Starting to run script: auto.make.daily.102.clean.whitespace.R at Thu Nov 21 11:12:03 2024 
-#------------ run auto.make.daily.102.clean.whitespace.R, failed ⚠️
+Starting to run script: auto.make.daily.102.clean.whitespace.R at Thu Nov 21 15:19:09 2024 
+checking table: 1/58 [ABotCharcoal]                                             checking table: 2/58 [ABotIsotopes]                                             checking table: 3/58 [ABotPhases]                                               checking table: 4/58 [ABotSamples]                                              checking table: 5/58 [C14Ghosts]                                                checking table: 6/58 [C14Samples]                                               checking table: 7/58 [Citations]                                                checking table: 8/58 [FaunalBiometrics]                                         checking table: 9/58 [FaunalIsotopeSequences]                                   checking table: 10/58 [FaunalIsotopes]                                          checking table: 11/58 [FaunalSpecies]                                           checking table: 12/58 [GraveConstruction]                                       checking table: 13/58 [GraveIndividuals]                                        checking table: 14/58 [Graves]                                                  checking table: 15/58 [Health]                                                  checking table: 16/58 [HumanIsotopes]                                           checking table: 17/58 [Items]                                                   checking table: 18/58 [MaterialCulture]                                         checking table: 19/58 [Monuments]                                               checking table: 20/58 [PhaseCitation]                                           checking table: 21/58 [PhaseOrder]                                              checking table: 22/58 [PhaseTypes]                                              checking table: 23/58 [Phases]                                                  checking table: 24/58 [Rites]                                                   checking table: 25/58 [Sites]                                                   checking table: 26/58 [Strontium]                                               checking table: 27/58 [StrontiumEnvironment]                                    checking table: 28/58 [StrontiumSequences]                                      checking table: 29/58 [zoptions_ABotAnatomy]                                    checking table: 30/58 [zoptions_ABotRecoveryMethods]                            checking table: 31/58 [zoptions_AgeCategorical]                                 checking table: 32/58 [zoptions_C14laboratories]                                checking table: 33/58 [zoptions_C14method]                                      checking table: 34/58 [zoptions_Countries]                                      checking table: 35/58 [zoptions_Cultures]                                       checking table: 36/58 [zoptions_DecorStyle]                                     checking table: 37/58 [zoptions_DecorTechn]                                     checking table: 38/58 [zoptions_DecorTool]                                      checking table: 39/58 [zoptions_FaunalMeasurement]                              checking table: 40/58 [zoptions_GraveConstruction]                              checking table: 41/58 [zoptions_Health]                                         checking table: 42/58 [zoptions_Material]                                       checking table: 43/58 [zoptions_MaterialCulture_Material]                       checking table: 44/58 [zoptions_MaterialCulture_MaterialType]                   checking table: 45/58 [zoptions_MaterialCulture_Morphology]                     checking table: 46/58 [zoptions_MaterialCulture_MorphologySection]              checking table: 47/58 [zoptions_MaterialCulture_Object]                         checking table: 48/58 [zoptions_Material_construction_alpha]                    checking table: 49/58 [zoptions_Periods]                                        checking table: 50/58 [zoptions_Preservation]                                   checking table: 51/58 [zoptions_Quantity]                                       checking table: 52/58 [zoptions_SkeletalElements]                               checking table: 53/58 [zoptions_TaxaList]                                       checking table: 54/58 [zoptions_Types]                                          checking table: 55/58 [zprivate_deadhead]                                       checking table: 56/58 [zprivate_encoding]                                       checking table: 57/58 [zprivate_mapping]                                        checking table: 58/58 [zprivate_users]                                          [1] "done"
+#------------ run auto.make.daily.102.clean.whitespace.R, succeed ✅
 #-----------------------------------
-Starting to run script: auto.make.daily.103.descriptions.R at Thu Nov 21 11:12:03 2024 
-#------------ run auto.make.daily.103.descriptions.R, failed ⚠️
+Starting to run script: auto.make.daily.103.descriptions.R at Thu Nov 21 15:19:18 2024 
+#------------ run auto.make.daily.103.descriptions.R, succeed ✅
 #-----------------------------------
-Starting to run script: auto.make.daily.104.maps.R at Thu Nov 21 11:12:03 2024 
-Loading required package: ggplot2
-Loading required package: sf
-Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0; sf_use_s2() is TRUE
-Loading required package: rnaturalearth
-Loading required package: rnaturalearthdata
-Loading required package: maps
-Loading required package: mapdata
-Loading required package: svglite
-#------------ run auto.make.daily.104.maps.R, failed ❌
-<simpleError in check.conn(conn = conn, db.credentials = db.credentials): object 'conn' not found>
-Error in cat(print(err)) : 
-  argument 1 (type 'list') cannot be handled by 'cat'
-Calls: tryCatch ... doTryCatch -> tryCatchList -> tryCatchOne -> <Anonymous> -> cat
-Execution halted
+Starting to run script: auto.make.daily.104.maps.R at Thu Nov 21 15:19:19 2024 
+#------------ run auto.make.daily.104.maps.R, succeed ✅
+#-----------------------------------
+Starting to run script: auto.make.daily.105.relationships.plot.R at Thu Nov 21 15:19:26 2024 
+#------------ run auto.make.daily.105.relationships.plot.R, succeed ✅
+#-----------------------------------
+Starting to run script: auto.make.daily.106.row.counts.R at Thu Nov 21 15:19:28 2024 
+#------------ run auto.make.daily.106.row.counts.R, succeed ✅
+#-----------------------------------
+Starting to run script: auto.make.daily.107.table.plots.R at Thu Nov 21 15:19:28 2024 
+#------------ run auto.make.daily.107.table.plots.R, succeed ✅
+#-----------------------------------
+Starting to run script: auto.make.daily.108.templates.R at Thu Nov 21 15:19:30 2024 
+#------------ run auto.make.daily.108.templates.R, succeed ✅
+#-----------------------------------
+Starting to run script: auto.make.daily.109.temporal.plots.R at Thu Nov 21 15:19:32 2024 
+#------------ run auto.make.daily.109.temporal.plots.R, failed ❌
+<simpleError in common.plotter(dates = d$date, tablename = "all", pwidth = pwidth,     pheight = pheight, zposts = zposts): object 'dd' not found>
+#-----------------------------------
+Starting to run script: auto.make.daily.110.images.to.wiki.R at Thu Nov 21 15:19:33 2024 
+#------------ run auto.make.daily.110.images.to.wiki.R, succeed ✅
+#-----------------------------------
+Starting to run script: auto.make.daily.111.phase.models.R at Thu Nov 21 15:21:58 2024 
+[1] "mu.bw mean: 78.3115449021104"
+[1] "mu.bw SD: 81.0788659325063"
+[1] "sigma.bw mean: 23.2173747363271"
+[1] "sigma.bw SD: 34.1469218501885"
+#------------ run auto.make.daily.111.phase.models.R, succeed ✅
+#----------------nsummary ofThu checks
+ ❌: 0 / 11 failed
+⚠️: 0 / 11  w/ warning 
+✅: 10 / 11 succeed 
+#-----------------------------------
+Starting to run script: auto.make.weekly.user.citation.hygiene.R at Thu Nov 21 15:22:18 2024 
+#------------ run auto.make.weekly.user.citation.hygiene.R, succeed ✅
+#-----------------------------------
+Starting to run script: auto.make.weekly.user.email.checks.R at Thu Nov 21 15:22:22 2024 
+#------------ run auto.make.weekly.user.email.checks.R, failed ❌
+<simpleError in fix.by(by.x, x): 'by' must specify a uniquely valid column>
+#----------------nsummary of weekly check made on:Thu
+ ❌: 0 / 2 failed
+⚠️: 0 / 2  w/ warning 
+✅: 1 / 2 succeed 
