@@ -47,6 +47,7 @@ return(df)}
 #' @return A DBI connection object to the MySQL database.
 init.conn <- function(db.credentials=NULL){
     require(RMySQL)
+    require(DBI)
     if(length(DBI::dbListConnections(DBI::dbDriver("MySQL")))!=0) disconnect()
     if(is.null(db.credentials)){
         db.credentials <- list(
@@ -58,7 +59,7 @@ init.conn <- function(db.credentials=NULL){
     }
     if (all(sapply(db.credentials, function(cred) is.null(cred) || is.na(cred) || cred == ""))) {
         if (exists("user", envir = .GlobalEnv) && exists("password", envir = .GlobalEnv)) {
-            warning("It seems that you are still using credentials set in .Rprofile; we will slowly move to using environment variables that you will set in your ~/.Renviron or you ~/.bashrc.\n\r",
+            warning("It seems that you are still using credentials set in .Rprofile; please use environment variables  ~/.Renviron or you ~/.bashrc.\n\r",
                     "Your ~/.Renviron should be like:\n",
                     "\t BIAD_DB_USER=\"your username\"\n",
                     "\t BIAD_DB_PASS=\"your password\"\n",
@@ -101,13 +102,15 @@ msp <- function(password) {
     maskp <- strsplit(password, "")[[1]]
     paste0(maskp[1], paste0(rep("*", length(maskp) - 2), collapse = ""), maskp[length(maskp)])
 }
-
+#--------------------------------------------------------------------------------------------------
 disconnect <- function(drv="MySQL"){
     require(RMySQL)
+    require(DBI)
     sapply(DBI::dbListConnections(DBI::dbDriver(drv)),DBI::dbDisconnect)
 }
 #--------------------------------------------------------------------------------------------------
 check.conn <- function(conn = NULL, db.credentials=NULL){
+	require(DBI)
 	if(is.null(conn) || !tryCatch(DBI::dbIsValid(conn),error=function(err)FALSE) ){ #check if no connector has been provided, or if the connector doesnt work
 	if(exists("conn", envir = .GlobalEnv))conn <- get("conn", envir = .GlobalEnv) #check if a connector already exist at global level
 	if(is.null(conn) || !tryCatch(DBI::dbIsValid(conn),error=function(err)FALSE) ){
