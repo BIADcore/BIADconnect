@@ -78,7 +78,7 @@ if(NW>0 & today%in%run.day)for(n in 1:NW){
 	}
 
 cat(paste0("#----------------\n"));
-cat(paste0("summary of weekly check made on:\n", data(),"\n "));
+cat(paste0("summary of weekly check made on:\n", date(),"\n "));
 cat(paste("❌:",fails,"/",NW,"failed\n"));
 cat(paste("⚠️:",warnings,"/",NW," w/ warning \n"));
 cat(paste("✅:",success,"/",NW,"succeed \n"));
