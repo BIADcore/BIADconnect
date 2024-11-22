@@ -6,22 +6,20 @@
 query.database <- function(sql.command, conn=NULL, db.credentials=NULL, wait = 0){
 	conn <- check.conn(conn = conn, db.credentials = db.credentials) #this doesn't return anything but modify conn if need, if not, nothing happen
 	if(is.null(conn))conn  <- get("conn", envir = .GlobalEnv)
-	if(length(sql.command)>1){
-		sql.command <- sql.command[1]
-		warning('sql.command had length>1, only the first command will be run')
+	for(n in 1:length(sql.command)){
+ 		if(wait>0)Sys.sleep(wait)
+		res <- tryCatch(suppressWarnings(DBI::dbSendStatement(conn,sql.command[n])),
+			error = function(e){
+				print(e)
+				disco <- disconnect()
+				conn <- init.conn(db.credentials=db.credentials)
+				assign("conn", conn, envir = .GlobalEnv)
+				stop("error while sending command: ",sql.command[n], "\n Starting a new connection: you will need to re-run your last command.")
+				}
+			)
+		query <- fetch(res, n= -1)	
+		DBI::dbClearResult(res)
 		}
- 	if(wait>0)Sys.sleep(wait)
-	res <- tryCatch(suppressWarnings(DBI::dbSendStatement(conn,sql.command)),
-		error = function(e){
-			print(e)
-			disco <- disconnect()
-			conn <- init.conn(db.credentials=db.credentials)
-			assign("conn", conn, envir = .GlobalEnv)
-			stop("error while sending command: ",sql.command, "\n Starting a new connection: you will need to re-run your last command.")
-			}
-		)
-	query <- fetch(res, n= -1)
-	DBI::dbClearResult(res)
 	query <- encoder(query)
 return(query)}
 #--------------------------------------------------------------------------------------------------
