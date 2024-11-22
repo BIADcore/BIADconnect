@@ -559,14 +559,19 @@ get.ancestors <- function(keys, table.name, primary.value, conn = NULL, db.crede
 #' This function retrieves the sizes of BIAD, to help figuring out which dockers to use
 #'
 #' @param conn A database connection object. Default is `NULL`.
-#' @param db.credential Unused parameter for database credentials. Default is `NULL`.
+#' @param db.credential manually pass database credentials. Default is `NULL`.
+#' @param db name of the database to be returned
 #'
 #' @return A data frame with the database sizes in gigabytes.
 #' @export
-getSize <- function(conn = NULL, db.credential = NULL){
+getSize <- function(conn = NULL, db.credential = NULL, db = 'BIAD'){
     sql.command='SELECT table_schema AS "Database", (SUM(data_length)+SUM(index_length)) / 1024 / 1024 / 1024 AS "Size (GB)" FROM information_schema.TABLES GROUP BY table_schema'
-    query.database(sql.command,conn)
+    size <- query.database(sql.command,conn)
+    size[which( size[,1] == db),]
 }
+
+
+
 get.keys <- function(conn = NULL, db.credentials = NULL){
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
 	keys <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
