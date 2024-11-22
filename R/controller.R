@@ -13,7 +13,7 @@ today <- strsplit(date(),split=' ')[[1]][1]
 
 conn  <-  init.conn()
 cat(paste('BIAD check routine started on:\n',date(),'\n'))
-cat(paste(' - BIAD size is of:',round(geSize(conn = conn)[1,2]*1000),'Mo\n'))
+cat(paste(' - BIAD size is of:',round(getSize(conn = conn)[1,2]*1000),'Mo\n'))
 disconnect()
 
 files <- list.files()
