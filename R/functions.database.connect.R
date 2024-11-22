@@ -4,6 +4,7 @@
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
 query.database <- function(sql.command, conn=NULL, db.credentials=NULL, wait = 0){
+	require(DBI)
 	conn <- check.conn(conn = conn, db.credentials = db.credentials) #this doesn't return anything but modify conn if need, if not, nothing happen
 	if(is.null(conn))conn  <- get("conn", envir = .GlobalEnv)
 	for(n in 1:length(sql.command)){
