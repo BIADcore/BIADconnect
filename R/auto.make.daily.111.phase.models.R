@@ -21,7 +21,7 @@ c14 <- query.database(conn = conn, sql.command = "SELECT `PhaseID`,`SiteID`,`C14
 pha <- merge(pha,sit,by='SiteID', all.y=FALSE)
 c14 <- subset(c14, !is.na(PhaseID))
 #--------------------------------------------------------------------------------------
-N <- 50#2000
+N <- 500 #2000
 mu.bw <- sigma.bw <- c()
 for(n in 1:N){
 
@@ -146,10 +146,10 @@ for(n in 1:N){
 		}
 	}
 #--------------------------------------------------------------------------------------
-print(paste('mu.bw mean:',mean(mu.bw,na.rm=T)))
-print(paste('mu.bw SD:',sd(mu.bw,na.rm=T)))
-print(paste('sigma.bw mean:',mean(sigma.bw,na.rm=T)))
-print(paste('sigma.bw SD:',sd(sigma.bw,na.rm=T)))
+print(paste('mu.bw mean:', round(mean(mu.bw,na.rm=T),1))
+print(paste('mu.bw SD:', round(sd(mu.bw,na.rm=T),1))
+print(paste('sigma.bw mean:', round(mean(sigma.bw,na.rm=T),1))
+print(paste('sigma.bw SD:', round(sd(sigma.bw,na.rm=T),1))
 #--------------------------------------------------------------------------------------
 
 disconnect()
