@@ -6,7 +6,7 @@
 # this script decides when to run which script, based on the filename.
 #------------------------------------------------------------------
 source('functions.R')
-source('functions.database.R')
+source('functions.database.connect.R')
 #------------------------------------------------------------------
 run.day <- c('Thu')
 today <- strsplit(date(),split=' ')[[1]][1]
