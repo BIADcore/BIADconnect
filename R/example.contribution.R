@@ -8,7 +8,6 @@
 # https://biadwiki.org/en/connectR
 #--------------------------------------------------------------------------------------
 source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
-open.tunnel()
 
 # query the requested dataset
 sql.command <- "SELECT *
@@ -34,6 +33,4 @@ prop.table(table(contribution)) # comparison of both values
 # barplot code
 counts <- table(contribution$type, contribution$author)
 barplot(counts, col = c("darkblue","red"), legend = rownames(counts))
-
-close.tunnel()
 #--------------------------------------------------------------------------------------
