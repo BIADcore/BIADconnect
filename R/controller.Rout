@@ -1,52 +1,1 @@
-#-----------------------------------
-Starting to run script: auto.make.daily.101.triggers.R at Thu Nov 21 15:54:02 2024 
-#------------ run auto.make.daily.101.triggers.R, succeed ✅
-#-----------------------------------
-Starting to run script: auto.make.daily.102.clean.whitespace.R at Thu Nov 21 15:54:10 2024 
-checking table: 1/58 [ABotCharcoal]                                             checking table: 2/58 [ABotIsotopes]                                             checking table: 3/58 [ABotPhases]                                               checking table: 4/58 [ABotSamples]                                              checking table: 5/58 [C14Ghosts]                                                checking table: 6/58 [C14Samples]                                               checking table: 7/58 [Citations]                                                checking table: 8/58 [FaunalBiometrics]                                         checking table: 9/58 [FaunalIsotopeSequences]                                   checking table: 10/58 [FaunalIsotopes]                                          checking table: 11/58 [FaunalSpecies]                                           checking table: 12/58 [GraveConstruction]                                       checking table: 13/58 [GraveIndividuals]                                        checking table: 14/58 [Graves]                                                  checking table: 15/58 [Health]                                                  checking table: 16/58 [HumanIsotopes]                                           checking table: 17/58 [Items]                                                   checking table: 18/58 [MaterialCulture]                                         checking table: 19/58 [Monuments]                                               checking table: 20/58 [PhaseCitation]                                           checking table: 21/58 [PhaseOrder]                                              checking table: 22/58 [PhaseTypes]                                              checking table: 23/58 [Phases]                                                  checking table: 24/58 [Rites]                                                   checking table: 25/58 [Sites]                                                   checking table: 26/58 [Strontium]                                               checking table: 27/58 [StrontiumEnvironment]                                    checking table: 28/58 [StrontiumSequences]                                      checking table: 29/58 [zoptions_ABotAnatomy]                                    checking table: 30/58 [zoptions_ABotRecoveryMethods]                            checking table: 31/58 [zoptions_AgeCategorical]                                 checking table: 32/58 [zoptions_C14laboratories]                                checking table: 33/58 [zoptions_C14method]                                      checking table: 34/58 [zoptions_Countries]                                      checking table: 35/58 [zoptions_Cultures]                                       checking table: 36/58 [zoptions_DecorStyle]                                     checking table: 37/58 [zoptions_DecorTechn]                                     checking table: 38/58 [zoptions_DecorTool]                                      checking table: 39/58 [zoptions_FaunalMeasurement]                              checking table: 40/58 [zoptions_GraveConstruction]                              checking table: 41/58 [zoptions_Health]                                         checking table: 42/58 [zoptions_Material]                                       checking table: 43/58 [zoptions_MaterialCulture_Material]                       checking table: 44/58 [zoptions_MaterialCulture_MaterialType]                   checking table: 45/58 [zoptions_MaterialCulture_Morphology]                     checking table: 46/58 [zoptions_MaterialCulture_MorphologySection]              checking table: 47/58 [zoptions_MaterialCulture_Object]                         checking table: 48/58 [zoptions_Material_construction_alpha]                    checking table: 49/58 [zoptions_Periods]                                        checking table: 50/58 [zoptions_Preservation]                                   checking table: 51/58 [zoptions_Quantity]                                       checking table: 52/58 [zoptions_SkeletalElements]                               checking table: 53/58 [zoptions_TaxaList]                                       checking table: 54/58 [zoptions_Types]                                          checking table: 55/58 [zprivate_deadhead]                                       checking table: 56/58 [zprivate_encoding]                                       checking table: 57/58 [zprivate_mapping]                                        checking table: 58/58 [zprivate_users]                                          [1] "done"
-#------------ run auto.make.daily.102.clean.whitespace.R, succeed ✅
-#-----------------------------------
-Starting to run script: auto.make.daily.103.descriptions.R at Thu Nov 21 15:54:19 2024 
-#------------ run auto.make.daily.103.descriptions.R, succeed ✅
-#-----------------------------------
-Starting to run script: auto.make.daily.104.maps.R at Thu Nov 21 15:54:19 2024 
-#------------ run auto.make.daily.104.maps.R, succeed ✅
-#-----------------------------------
-Starting to run script: auto.make.daily.105.relationships.plot.R at Thu Nov 21 15:54:27 2024 
-#------------ run auto.make.daily.105.relationships.plot.R, succeed ✅
-#-----------------------------------
-Starting to run script: auto.make.daily.106.row.counts.R at Thu Nov 21 15:54:29 2024 
-#------------ run auto.make.daily.106.row.counts.R, succeed ✅
-#-----------------------------------
-Starting to run script: auto.make.daily.107.table.plots.R at Thu Nov 21 15:54:29 2024 
-#------------ run auto.make.daily.107.table.plots.R, succeed ✅
-#-----------------------------------
-Starting to run script: auto.make.daily.108.templates.R at Thu Nov 21 15:54:31 2024 
-#------------ run auto.make.daily.108.templates.R, succeed ✅
-#-----------------------------------
-Starting to run script: auto.make.daily.109.temporal.plots.R at Thu Nov 21 15:54:33 2024 
-#------------ run auto.make.daily.109.temporal.plots.R, succeed ✅
-#-----------------------------------
-Starting to run script: auto.make.daily.110.images.to.wiki.R at Thu Nov 21 15:54:41 2024 
-#------------ run auto.make.daily.110.images.to.wiki.R, succeed ✅
-#-----------------------------------
-Starting to run script: auto.make.daily.111.phase.models.R at Thu Nov 21 15:57:05 2024 
-[1] "mu.bw mean: 54.1983094297241"
-[1] "mu.bw SD: 65.0375485508227"
-[1] "sigma.bw mean: 12.7895925207429"
-[1] "sigma.bw SD: 25.8576423505138"
-#------------ run auto.make.daily.111.phase.models.R, succeed ✅
-#----------------nsummary ofThu checks
- ❌: 0 / 11 failed
-⚠️: 0 / 11  w/ warning 
-✅: 11 / 11 succeed 
-#-----------------------------------
-Starting to run script: auto.make.weekly.user.citation.hygiene.R at Thu Nov 21 15:57:38 2024 
-#------------ run auto.make.weekly.user.citation.hygiene.R, succeed ✅
-#-----------------------------------
-Starting to run script: auto.make.weekly.user.email.checks.R at Thu Nov 21 15:57:42 2024 
-#------------ run auto.make.weekly.user.email.checks.R, succeed ✅
-#----------------nsummary of weekly check made on:Thu
- ❌: 0 / 2 failed
-⚠️: 0 / 2  w/ warning 
-✅: 2 / 2 succeed 
+Fatal error: cannot open file 'controller.R': No such file or directory
