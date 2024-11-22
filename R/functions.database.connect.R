@@ -3,147 +3,34 @@
 # generic functions to query any database hosted at macelab
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
-run.server.query <- function(sql.command,db.credentials=NULL, hostuser=NULL, hostname=NULL, pempath=NULL){	
-
-	# create 'server.script.R' to be run on server
-	text <- c(
-		"source('functions.database.connect.R')",
-		"source('functions.R')",
-		paste('sql.command <- c("',paste(sql.command,collapse='","'),'")',sep=''),
-        "conn <- init.conn()", ##credendtial will be passed through env variable so they don't need to be written anywhere
-		"query <- query.database(conn, sql.command)",
-		"save(query, file='tmp.RData')",
-		"DBI::dbDisconnect(conn)"
-		)
-	writeLines(text,con= 'server.script.R')
-
-	query <- run.server.query.inner(db.credentials=db.credentials, hostuser=hostuser, hostname=hostname, pempath=pempath)
-return(query)}
-#----------------------------------------------------------------------------------------------------
-run.server.query.inner <- function(db.credentials=NULL, hostuser=NULL, hostname=NULL, pempath=NULL){ 
-	require(ssh)
-
-    hostuser <- Sys.getenv("BIAD_SSH_USER")
-    hostname <- Sys.getenv("BIAD_SSH_HOST")
-    pempath <- Sys.getenv("BIAD_SSH_PEM")
-    if (any(c(hostuser, hostname, pempath) == "") || any(is.na(c(hostuser, hostname, pempath)))) {
-        if (exists("hostuser", envir = .GlobalEnv) && exists("hostname", envir = .GlobalEnv) && exists("pempath", envir = .GlobalEnv)) {
-            warning(
-                "seems like SSH connection details are still set from global environment (using .Rprofile) \n",
-                "To avoid this warning in the future, please set the SSH connection details via environment variables in your .Renviron or .bashrc file:\n",
-                "- BIAD_SSH_USER=your_ssh_username\n",
-                "- BIAD_SSH_HOST=your_ssh_hostname\n",
-                "- BIAD_SSH_PEM=path_to_your_pem_file\n"
-            )
-        hostuser <- get("hostuser", envir = .GlobalEnv)
-        hostname <- get("hostname", envir = .GlobalEnv)
-        pempath <- get("pempath", envir = .GlobalEnv)
-        } else {
-            stop("Error: Missing details for SSH connection and no global environment values found.")
-        }
-    }
-
-    if(is.na(Sys.getenv("BIAD_DB_USER")) || is.null(Sys.getenv("BIAD_DB_USER")) || is.null(Sys.getenv("BIAD_DB_USER"))){
-        error("as probably only you adrian and I are using this ssh feature i won't do fancy test, but you need to put usernames and passwords in environment variable (via ~/.Renviron or export VAR=dsadsa")
-    }
-    env_vars <- paste0("BIAD_DB_USER=\"",Sys.getenv("BIAD_DB_USER"),"\" ",
-                       "BIAD_DB_PASS=\"",Sys.getenv("BIAD_DB_PASS"),"\" ",
-                       "BIAD_DB_PORT=",3306," ",  
-                       "BIAD_DB_HOST=","\"127.0.0.1\"")
-
-	# create bash commands to be run on server
-    tmp.path <- tempfile(pattern = "tmpdir")
-	commands <- c(
-		paste("cd",tmp.path),
-		paste(env_vars,"/Library/Frameworks/R.framework/Resources/bin/R CMD BATCH --no-save server.script.R tmp.Rout"),
-		"cd .."
-		)
-
-	# ssh onto server, copy required files to server, tell server to run R, copy results back to local 
-	session <- ssh::ssh_connect(host=paste(hostuser,"@",hostname,sep=''), keyfile=pempath)
-	ssh::ssh_exec_wait(session, command = paste("mkdir -p",tmp.path))
-	ssh::scp_upload(session, files = "server.script.R" , to = tmp.path, verbose=FALSE)
-    ## --- this should disapear when BIADwiki becomes a packages as we'll load the package instead of sourcing things
-	ssh::scp_upload(session, files = "functions.R" , to = tmp.path, verbose=FALSE)
-	ssh::scp_upload(session, files = "functions.database.connect.R" , to = tmp.path, verbose=FALSE)
-	unlink('server.script.R')
-	ssh::ssh_exec_wait(session, command = commands)
-    res <- c("tmp.RData","tmp.Rout")
-	res <- sapply(res,function(fn)paste(tmp.path,fn,sep="/"))
-	dl  <- sapply(res,function(fn)ssh::scp_download(session, files = fn, to = getwd(), verbose=FALSE))
-    if(file.exists("tmp.RData")){
-        load('tmp.RData')
-        unlink(c('tmp.RData','tmp.Rout'))
-    }
-    else{
-        query <- NULL
-        na <- sapply(readLines("tmp.Rout"),function(i)cat(i,"\n"))
-        unlink('tmp.Rout')
-        warning('sql command failed')
-    }
-    ssh::ssh_exec_wait(session, command = paste("rm -r",tmp.path))
-	ssh::ssh_disconnect(session)
-return(query)}
-
-#--------------------------------------------------------------------------------------------------
-
-run.server.query.inner.alt <- function(scriptname){ 
-	commands <- c(
-		paste("cd",tmp.path),
-		paste("/Library/Frameworks/R.framework/Resources/bin/R CMD BATCH --no-save",scriptname," > tmp.Rout"),
-		"cd .."
-		)
-    tmp.path <- tempfile(pattern = "tmpdir")
-    linkcred="-i ${BIAD_SSH_PEM}"
-    host="${BIAD_SSH_USER}@${BIAD_SSH_HOST}" #we rely again on the ENV var
-    system(paste("ssh", linkcred, host, shQuote(paste("mkdir -p", tmp.path))))
-    sourcefold=here::here("R") #link to the source files
-    filestosend <- paste(scriptname,file.path(sourcefold,"function*.R")) #send the script and all source file
-    system(paste("scp", linkcred,filestosend, paste0(host,":",tmp.path,"/")))
-    res <- c("tmp.RData","tmp.Rout")
-	res <- sapply(res,function(fn)paste(tmp.path,fn,sep="/"))
-	ssh::ssh_exec_wait(session, command = commands)
-    system(paste("ssh", linkcred, host, commands ))
-    dl  <- sapply(res,function(fn)system(paste("scp", linkcred, paste0(host,":",fn),".")))
-    if(file.exists("tmp.RData")){
-        load('tmp.RData')
-        unlink(c('tmp.RData','tmp.Rout'))
-    }
-    else{
-        query <- NULL
-        na <- sapply(readLines("tmp.Rout"),function(i)cat(i,"\n"))
-        unlink('tmp.Rout')
-        warning('sql command failed')
-    }
-}
-#--------------------------------------------------------------------------------------------------
 query.database <- function(sql.command, conn=NULL, db.credentials=NULL, wait = 0){
-    conn <- check.conn(conn = conn, db.credentials = db.credentials) #this doesn't return anything but modify conn if need, if not, nothing happen
-    if(is.null(conn))conn  <- get("conn",envir = .GlobalEnv)
-	for(n in 1:length(sql.command)) {
-        if(wait>0)Sys.sleep(wait)
-        res <- tryCatch(suppressWarnings(DBI::dbSendStatement(conn,sql.command[n])),
-                    error=function(e){
-                        print(e)
-						disco <- disconnect()
-						conn <- init.conn(db.credentials=db.credentials)
-						assign("conn",conn,envir = .GlobalEnv)
-                        stop("error while sending command: ",sql.command[n], "\n Starting a new connection: you will need to re-run your last command.")
-                    })
-    }
+	conn <- check.conn(conn = conn, db.credentials = db.credentials) #this doesn't return anything but modify conn if need, if not, nothing happen
+	if(is.null(conn))conn  <- get("conn", envir = .GlobalEnv)
+	if(length(sql.command)>1){
+		sql.command <- sql.command[1]
+		warning('sql.command had length>1, only the first command will be run')
+		}
+ 	if(wait>0)Sys.sleep(wait)
+	res <- tryCatch(suppressWarnings(DBI::dbSendStatement(conn,sql.command)),
+		error = function(e){
+			print(e)
+			disco <- disconnect()
+			conn <- init.conn(db.credentials=db.credentials)
+			assign("conn", conn, envir = .GlobalEnv)
+			stop("error while sending command: ",sql.command, "\n Starting a new connection: you will need to re-run your last command.")
+			}
+		)
 	query <- fetch(res, n= -1)
-    DBI::dbClearResult(res)
+	DBI::dbClearResult(res)
 	query <- encoder(query)
-    return(query)
-}
+return(query)}
 #--------------------------------------------------------------------------------------------------
 encoder <- function(df){
-    if(nrow(df)==0) return(NULL)
-    names(df) <- iconv(names(df),from="UTF-8",to="UTF-8")
-    char <- sapply(df,class) == 'character'
-    df[,char] <- apply(df[,char,drop=F],2,iconv,from="UTF-8",to="UTF-8")
-    return(df)	
-}
+	if(nrow(df)==0) return(NULL)
+	names(df) <- iconv(names(df),from="UTF-8",to="UTF-8")
+	char <- sapply(df,class) == 'character'
+	df[,char] <- apply(df[,char,drop=F],2,iconv,from="UTF-8",to="UTF-8")
+return(df)}	
 #--------------------------------------------------------------------------------------------------
 #' Initialize Database Connection
 #'
@@ -221,30 +108,16 @@ disconnect <- function(drv="MySQL"){
 }
 #--------------------------------------------------------------------------------------------------
 check.conn <- function(conn = NULL, db.credentials=NULL){
-    if(is.null(conn) || !tryCatch(DBI::dbIsValid(conn),error=function(err)FALSE) ){ #check if no connector has been provided, or if the connector doesnt work
-        if(exists("conn", envir = .GlobalEnv))conn <- get("conn", envir = .GlobalEnv) #check if a connector already exist at global level
-        if(is.null(conn) || !tryCatch(DBI::dbIsValid(conn),error=function(err)FALSE) ){
-            #print("the global connector is not good, delete and retry ")
-            disco <- disconnect()
-            conn <- init.conn(db.credentials=db.credentials)
-            assign("conn",conn,envir = .GlobalEnv)
-        }
-    }
-    return(conn)
-}
-#----------------------------------------------------------------------------------------------------
-open.tunnel <- function(){
-	initial.pids <<- ps::ps()$pid # bit naughty making it global, but easier for close.tunnel()
-	cmd <- paste0('ssh -f -N -i ',Sys.getenv("BIAD_SSH_PEM"),' ',Sys.getenv("BIAD_SSH_USER"),'@',Sys.getenv("BIAD_SSH_HOST"),' -L 3306:127.0.0.1:3306')
-	system(cmd, wait=FALSE)
-	init.conn()
+	if(is.null(conn) || !tryCatch(DBI::dbIsValid(conn),error=function(err)FALSE) ){ #check if no connector has been provided, or if the connector doesnt work
+	if(exists("conn", envir = .GlobalEnv))conn <- get("conn", envir = .GlobalEnv) #check if a connector already exist at global level
+	if(is.null(conn) || !tryCatch(DBI::dbIsValid(conn),error=function(err)FALSE) ){
+		# print("the global connector is not good, delete and retry ")
+		disco <- disconnect()
+		conn <- init.conn(db.credentials=db.credentials)
+		assign("conn",conn,envir = .GlobalEnv)
+		}
 	}
+return(conn)}
 #----------------------------------------------------------------------------------------------------
-close.tunnel <- function(){
-	pids <- ps::ps()$pid
-	pids <- pids[!pids%in%initial.pids]
-	disconnect()
-	for(p in pids)tools::pskill(p)
-	}
-#----------------------------------------------------------------------------------------------------
+
 
