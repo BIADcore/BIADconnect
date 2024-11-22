@@ -146,10 +146,10 @@ for(n in 1:N){
 		}
 	}
 #--------------------------------------------------------------------------------------
-print(paste('mu.bw mean:', round(mean(mu.bw,na.rm=T),1))
-print(paste('mu.bw SD:', round(sd(mu.bw,na.rm=T),1))
-print(paste('sigma.bw mean:', round(mean(sigma.bw,na.rm=T),1))
-print(paste('sigma.bw SD:', round(sd(sigma.bw,na.rm=T),1))
+print(paste('mu.bw mean:', round(mean(mu.bw,na.rm=T),1)))
+print(paste('mu.bw SD:', round(sd(mu.bw,na.rm=T),1)))
+print(paste('sigma.bw mean:', round(mean(sigma.bw,na.rm=T),1)))
+print(paste('sigma.bw SD:', round(sd(sigma.bw,na.rm=T),1)))
 #--------------------------------------------------------------------------------------
 
 disconnect()
