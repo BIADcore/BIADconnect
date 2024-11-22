@@ -6,9 +6,15 @@
 # this script decides when to run which script, based on the filename.
 #------------------------------------------------------------------
 source('functions.R')
+source('functions.database.R')
 #------------------------------------------------------------------
 run.day <- c('Thu')
 today <- strsplit(date(),split=' ')[[1]][1]
+
+conn  <-  init.conn()
+cat(paste('BIAD check routine started on:\n',date(),'\n'))
+cat(paste(' - BIAD size is of:',round(geSize(conn = conn)[1,2]*1000),'Mo\n'))
+disconnect()
 
 files <- list.files()
 daily.files <- files[grepl('auto.make.daily',files)]
@@ -41,8 +47,8 @@ if(ND>0)for(n in 1:ND){
 	})
 }
 
-cat(paste0("#----------------n"));
-cat(paste0("summary of", today," checks\n "));
+cat(paste0("#----------------\n"));
+cat(paste0("summary of daily check made\n", date()," \n "));
 cat(paste("❌:",fails,"/",ND,"failed\n"));
 cat(paste("⚠️:",warnings,"/",ND," w/ warning \n"));
 cat(paste("✅:",success,"/",ND,"succeed \n"));
@@ -71,8 +77,8 @@ if(NW>0 & today%in%run.day)for(n in 1:NW){
 	})
 	}
 
-cat(paste0("#----------------n"));
-cat(paste0("summary of weekly check made on:", today,"\n "));
+cat(paste0("#----------------\n"));
+cat(paste0("summary of weekly check made on:\n", data(),"\n "));
 cat(paste("❌:",fails,"/",NW,"failed\n"));
 cat(paste("⚠️:",warnings,"/",NW," w/ warning \n"));
 cat(paste("✅:",success,"/",NW,"succeed \n"));
