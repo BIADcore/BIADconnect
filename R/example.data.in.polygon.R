@@ -7,14 +7,12 @@
 # https://biadwiki.org/en/connectR
 #--------------------------------------------------------------------------------------
 source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
-open.tunnel()
 #--------------------------------------------------------------------------------------
 library(mapdata)
 #--------------------------------------------------------------------------------------
 # get all sites within a polygon
 #--------------------------------------------------------------------------------------
 x <- query.database("SELECT `Longitude`,`Latitude` FROM `BIAD`.`Sites`")
-close.tunnel()
 d <- data.in.polygon(data=x,kml.path='../tools/kml/square.kml')
 #--------------------------------------------------------------------------------------
 # look at the data

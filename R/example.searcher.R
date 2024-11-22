@@ -8,9 +8,7 @@
 #--------------------------------------------------------------------------------------
 source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
 #--------------------------------------------------------------------------------------
-open.tunnel()
 x <- run.searcher(table.name = 'Sites', primary.value = 'S10050') 
-close.tunnel()
 
 x # look at the data
 
