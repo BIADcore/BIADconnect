@@ -57,31 +57,33 @@ fails <- 0
 warnings <- 0
 success <- 0
 
-if(NW>0 & today%in%run.day)for(n in 1:NW){
-	file <- weekly.files[n]
-	tryCatch({
-        cat(paste0("#-----------------------------------\n"));
-        cat(paste('Starting to run script:',file,'at',date(),"\n"))
-        source(file)
-        cat(paste0("#------------ run ",file,", succeed ✅\n"));
-        success <- success  + 1
-    },
-    error=function(err){
-        cat(paste0("#------------ run ",file,", failed ❌\n"));
-        print(err)
-        fails <<- fails  + 1
-	},
-    warning=function(war){
-        cat(paste0("#------------ run ",file,", warning ⚠️\n"));
-        warnings <<- warnings  + 1
-	})
-	}
+if(NW>0 & today%in%run.day){
+    for(n in 1:NW){
+        file <- weekly.files[n]
+        tryCatch({
+            cat(paste0("#-----------------------------------\n"));
+            cat(paste('Starting to run script:',file,'at',date(),"\n"))
+            source(file)
+            cat(paste0("#------------ run ",file,", succeed ✅\n"));
+            success <- success  + 1
+        },
+        error=function(err){
+            cat(paste0("#------------ run ",file,", failed ❌\n"));
+            print(err)
+            fails <<- fails  + 1
+        },
+        warning=function(war){
+            cat(paste0("#------------ run ",file,", warning ⚠️\n"));
+            warnings <<- warnings  + 1
+        })
+    }
 
-cat(paste0("#----------------\n"));
-cat(paste0("summary of weekly check made on:\n", date(),"\n "));
-cat(paste("❌:",fails,"/",NW,"failed\n"));
-cat(paste("⚠️:",warnings,"/",NW," w/ warning \n"));
-cat(paste("✅:",success,"/",NW,"succeed \n"));
+    cat(paste0("#----------------\n"));
+    cat(paste0("summary of weekly check made on:\n", date(),"\n "));
+    cat(paste("❌:",fails,"/",NW,"failed\n"));
+    cat(paste("⚠️:",warnings,"/",NW," w/ warning \n"));
+    cat(paste("✅:",success,"/",NW,"succeed \n"));
+}
 #------------------------------------------------------------------
 	
 	
