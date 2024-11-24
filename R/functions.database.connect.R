@@ -49,12 +49,8 @@ init.conn <- function(db.credentials=NULL){
     require(DBI)
     if(length(DBI::dbListConnections(DBI::dbDriver("MySQL")))!=0) disconnect()
     if(is.null(db.credentials)){
-        db.credentials <- list(
-            BIAD_DB_USER=Sys.getenv("BIAD_DB_USER"),
-            BIAD_DB_PASS=Sys.getenv("BIAD_DB_PASS"),
-            BIAD_DB_HOST=Sys.getenv("BIAD_DB_HOST"),
-            BIAD_DB_PORT=as.numeric(Sys.getenv("BIAD_DB_PORT"))
-        )
+        
+        db.credentials <- get.credentials()
     }
     if (all(sapply(db.credentials, function(cred) is.null(cred) || is.na(cred) || cred == ""))) {
         if (exists("user", envir = .GlobalEnv) && exists("password", envir = .GlobalEnv)) {
@@ -121,5 +117,17 @@ check.conn <- function(conn = NULL, db.credentials=NULL){
 	}
 return(conn)}
 #----------------------------------------------------------------------------------------------------
-
-
+#' Retrieve Credentials from Environment Variables
+#'
+#' This function fetches database credentials from specified environment variables.
+#'
+#' @return A list containing the database user, password, host, and port.
+#' @export
+get.credentials  <-  functions(){
+    list(
+         BIAD_DB_USER=Sys.getenv("BIAD_DB_USER"),
+         BIAD_DB_PASS=Sys.getenv("BIAD_DB_PASS"),
+         BIAD_DB_HOST=Sys.getenv("BIAD_DB_HOST"),
+         BIAD_DB_PORT=as.numeric(Sys.getenv("BIAD_DB_PORT"))
+    )
+}
