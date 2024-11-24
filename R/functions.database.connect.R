@@ -123,7 +123,7 @@ return(conn)}
 #'
 #' @return A list containing the database user, password, host, and port.
 #' @export
-get.credentials  <-  functions(){
+get.credentials  <-  function(){
     list(
          BIAD_DB_USER=Sys.getenv("BIAD_DB_USER"),
          BIAD_DB_PASS=Sys.getenv("BIAD_DB_PASS"),
