@@ -43,6 +43,7 @@ if(ND>0)for(n in 1:ND){
 	},
     warning=function(war){
         cat(paste0("#------------ run ",file,", got warning ⚠️\n"));
+        print(war)
         warnings <<- warnings  + 1
 	})
 }
