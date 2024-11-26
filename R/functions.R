@@ -15,6 +15,52 @@ run.searcher <- function(table.name, primary.value, conn = NULL, db.credential =
 	lapply(directions,function(fn)  get.related.data(table.name, primary.value, fnc = get(fn) , conn = conn , db.credential = db.credential))
 	}
 #----------------------------------------------------------------------------------------------------
+create.svg.for.table.content <- function(x, d.cols, file){
+	require(stringr)
+	require(gt)
+	require(svglite)
+	
+	df <- as.data.frame(matrix(,nrow(x),4)); names(df) <- c('Table','Rows','Columns','Column names')
+	for(n in 1:nrow(x)){
+		cols <- subset(d.cols, TABLE_NAME==x$TABLE_NAME[n])
+		df$Rows[n] <- x$TABLE_ROWS[n]
+		df$Columns[n] <- nrow(cols)
+		df$Table[n] <- x$TABLE_NAME[n]
+		df$`Column names`[n] <- paste(cols$COLUMN_NAME,collapse=', ')     
+		}
+
+	# get rid of common names
+	df$`Column names` <- gsub(', time_added, user_added, time_last_update, user_last_update','',df$`Column names`)
+
+	# add \n to the long column names to spread across lines
+	max.char <- 100
+	for(n in 1:nrow(df)){
+		text <- df$`Column names`[n]
+		pos <- gregexpr(', ', text )[[1]]
+		i <- 0
+		while(i<max(pos)){
+			i <- pos[max(which(pos<(max.char+i)))]
+			if(i!=max(pos))substring(text, i, i+1) <- '\n'
+			}
+		df$`Column names`[n] <- text
+		}
+		
+	# crap hack to decide the image size, count line breaks etc
+	nlines <- sum(stringr::str_count(df$`Column names`, '\n')+3)
+
+	tab <- gt(df)
+	tab <- tab |> tab_style(style = cell_text(size = pct(120)),locations = cells_column_labels())
+	tab <- tab |> tab_style(style = cell_text(size = pct(100)),locations = cells_body())
+	tab <- tab |> tab_style(style = cell_borders(sides=c("top","bottom","left","right"), color="skyblue", weight=px(2), style="solid"),locations = cells_body())
+	tab <- tab |> opt_horizontal_padding(scale = 3)
+	tab <- tab |> opt_vertical_padding(scale = 3)
+
+	# plot svg
+	svglite(file=file, width = 13, height=nlines/4.5)
+	plot(tab)
+	dev.off()
+}
+#----------------------------------------------------------------------------------------------------
 create.markdown.for.single.table <- function(d.tables, d.cols, table.name){
 	
 	table.comment <- subset(d.tables, TABLE_NAME==table.name)$TABLE_COMMENT
