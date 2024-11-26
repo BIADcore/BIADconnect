@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------------------
-# Pull table summaries from the database, and update to Gists
+# Generate a summary of row counts etc
 #-----------------------------------------------------------------------------------------
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='BIAD'"
 d <- query.database(sql.command = sql.command, conn=conn)
@@ -19,8 +19,6 @@ standard <- subset(standard, TABLE_ROWS>10)
 
 lookup <- subset(d, TABLE_NAME%in%lookup)
 lookup <- subset(lookup, TABLE_ROWS>1)
-
 #-----------------------------------------------------------------------------------------
-# create.markdown.for.table.content(standard, d.cols, file = '../../Gists/summary_stats/row_counts/row_counts.md')
-create.svg.for.table.content <- function(x=standard, d.cols, file='../tools/plots/row_counts.svg')
+create.svg.for.table.content(x=standard, d.cols, file='../tools/plots/row_counts.svg')
 #-----------------------------------------------------------------------------------------
