@@ -15,8 +15,6 @@ run.searcher <- function(table.name, primary.value, conn = NULL, db.credential =
 	lapply(directions,function(fn)  get.related.data(table.name, primary.value, fnc = get(fn) , conn = conn , db.credential = db.credential))
 	}
 #----------------------------------------------------------------------------------------------------
-<<<<<<< HEAD
-=======
 create.svg.for.table.content <- function(x, d.cols, file){
 	require(stringr)
 	require(gt)
@@ -51,19 +49,19 @@ create.svg.for.table.content <- function(x, d.cols, file){
 	nlines <- sum(stringr::str_count(df$`Column names`, '\n')+3)
 
 	tab <- gt(df)
-	tab <- tab |> tab_style(style = cell_text(size = pct(120)),locations = cells_column_labels())
-	tab <- tab |> tab_style(style = cell_text(size = pct(100)),locations = cells_body())
-	tab <- tab |> tab_style(style = cell_borders(sides=c("top","bottom","left","right"), color="skyblue", weight=px(2), style="solid"),locations = cells_body())
-	tab <- tab |> opt_horizontal_padding(scale = 3)
-	tab <- tab |> opt_vertical_padding(scale = 3)
-
+	tab <- tab_style(tab, style = cell_text(size = pct(120)),locations = cells_column_labels())
+	tab <- tab_style(tab, style = cell_text(size = pct(120)),locations = cells_column_labels())
+	tab <- tab_style(tab, style = cell_text(size = pct(100)),locations = cells_body())
+	tab <- tab_style(tab, style = cell_borders(sides=c("top","bottom","left","right"), color="skyblue", weight=px(2), style="solid"),locations = cells_body())
+	tab <- opt_horizontal_padding(tab, scale = 3)
+	tab <- opt_vertical_padding(tab, scale = 3)
+	
 	# plot svg
 	svglite(file=file, width = 13, height=nlines/4.5)
 	plot(tab)
 	dev.off()
 }
 #----------------------------------------------------------------------------------------------------
->>>>>>> 271795b39ca6c2f9fabfcfd4032a0c8ae6fa445c
 create.markdown.for.single.table <- function(d.tables, d.cols, table.name){
 	
 	table.comment <- subset(d.tables, TABLE_NAME==table.name)$TABLE_COMMENT
