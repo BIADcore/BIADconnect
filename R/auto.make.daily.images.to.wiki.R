@@ -27,7 +27,9 @@ type <- c(paste('html',file_ext(path),sep='/'),type)
 # loop for each image file
 N <- length(path)
 print(paste("sending",N,"files to wiki"))
+
 for(n in 1:N){
+time.start <- proc.time()[3]
     prog  <-  paste0("sending file: ", n, "/", N, " [", basename(path[n]), "]")
     cat('\r',sprintf("%-*s", 80, prog), sep="")
 
@@ -41,6 +43,8 @@ for(n in 1:N){
         Sys.sleep(.1)
         # Make the POST request
         result <- httr::POST(url, headers, body = body)
+	time.end <- proc.time()[3]
+		print(paste('time taken to upload to wiki:', time.end-time.start))
 
         # Print the result if problematic
         res <- httr::content(result, "text")
