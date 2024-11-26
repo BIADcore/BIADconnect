@@ -44,7 +44,7 @@ time.start <- proc.time()[3]
         # Make the POST request
         result <- httr::POST(url, headers, body = body)
 	time.end <- proc.time()[3]
-		print(paste('time taken to upload to wiki:', time.end-time.start))
+		print(paste('time taken to upload to wiki:', round(time.end-time.start,2),'seconds'))
 
         # Print the result if problematic
         res <- httr::content(result, "text")
