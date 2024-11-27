@@ -31,14 +31,12 @@ zoptions.table.data  <- subset(zoptions.table.data, TABLE_ROWS>2)
 standard.column.data <- subset(d.cols, TABLE_NAME%in%standard.table.data$TABLE_NAME)[,c('TABLE_NAME','COLUMN_NAME','DATA_TYPE','COLUMN_COMMENT')]
 zoptions.column.data <- subset(d.cols, TABLE_NAME%in%zoptions.table.data$TABLE_NAME)[,c('TABLE_NAME','COLUMN_NAME','DATA_TYPE','COLUMN_COMMENT')]
 #-----------------------------------------------------------------------------------------
-# create various summary table .svg
+# create various summary table .html
 #-----------------------------------------------------------------------------------------
-create.svg.for.table.content(table.data=standard.table.data, column.data=standard.column.data, file='../tools/plots/row_counts.svg')
-create.svg.for.row.content(table.data=standard.table.data, column.data=standard.column.data, file='../tools/plots/table_summary.svg')
+create.html.for.table.comments(table.data=standard.table.data, column.data=standard.column.data, file='../tools/table_comments/row_counts.html')
+create.html.for.row.comments(table.data=standard.table.data, column.data=standard.column.data, file='../tools/table_comments/table_summary.html')
 #-----------------------------------------------------------------------------------------
 disconnect()
 
 
 
-
-	

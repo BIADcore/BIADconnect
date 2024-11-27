@@ -15,30 +15,8 @@ run.searcher <- function(table.name, primary.value, conn = NULL, db.credential =
 	lapply(directions,function(fn)  get.related.data(table.name, primary.value, fnc = get(fn) , conn = conn , db.credential = db.credential))
 	}
 #----------------------------------------------------------------------------------------------------
-# add \n to the long column names to spread across lines
-line.break.long.text <- function(text, sep, max.char=100){
-	N <- length(text)
-	for(n in 1:N){
-	txt <- text[n]
-
-	# remove any existing newline or carriage returns
-	txt <- trimws(gsub('\n|\r',' ',txt))
-
-	# find positions of proposed sep
-	pos <- gregexpr(sep, txt)[[1]]
-	i <- 0
-	while(i<max(pos)){
-		i <- pos[max(which(pos<(max.char+i)))]
-		if(i!=max(pos))substring(txt, i, i+1) <- '\n'
-		}
-	text[n] <- txt
-	}
-return(text)}
-#----------------------------------------------------------------------------------------------------
-create.svg.for.table.content <- function(table.data, column.data, file){
+create.html.for.table.comments <- function(table.data, column.data, file){
 	require(gt)
-	require(svglite)
-	require(stringr)
 
 	df <- as.data.frame(matrix(,nrow(table.data),4)); names(df) <- c('Table','Rows','Columns','Column names')
 	for(n in 1:nrow(table.data)){
@@ -49,80 +27,34 @@ create.svg.for.table.content <- function(table.data, column.data, file){
 		df$`Column names`[n] <- paste(cols$COLUMN_NAME,collapse=', ')     
 		}
 
-	# add \n to the long column names to spread across lines
-	df$`Column names` <- line.break.long.text(df$`Column names`, sep=', ')
-
-	# crap hack to decide the image size, count line breaks etc
-	nlines <- sum(stringr::str_count(df$`Column names`, '\n')) + nrow(df)*3 + 10
-
 	tab <- gt(df)
-	tab <- tab_style(tab, style = cell_text(size = pct(120)),locations = cells_column_labels())
-	tab <- tab_style(tab, style = cell_text(size = pct(120)),locations = cells_column_labels())
-	tab <- tab_style(tab, style = cell_text(size = pct(100)),locations = cells_body())
-	tab <- tab_style(tab, style = cell_borders(sides=c("top","bottom","left","right"), color="skyblue", weight=px(2), style="solid"),locations = cells_body())
+	tab <- tab_style(tab, style = cell_borders(sides=c("top"), color="skyblue", weight=px(2), style="solid"),locations = cells_body())
 	tab <- opt_horizontal_padding(tab, scale = 3)
-	tab <- opt_vertical_padding(tab, scale = 3)
-	
-	# plot svg
-	svglite(file=file, width = 13, height=nlines/4.5)
-	plot(tab)
-	dev.off()
+	suppressWarnings(gtsave(tab, filename=file)) # always a warning about NAs in factors
 	}
 #----------------------------------------------------------------------------------------------------
-create.svg.for.row.content <- function(table.data, column.data, file='../tools/plots/table_summary.svg'){
+create.html.for.row.comments <- function(table.data, column.data, file){
 	require(gt)
-	require(svglite)
-	require(stringr)
-
+	
 	N <- nrow(table.data)
 	for(n in 1:N){
 
 		df <- subset(column.data, TABLE_NAME==table.data$TABLE_NAME[n])
 		names(df) <- c('Table','Column name', 'Data type','Column description')
+		df <- df[,-1]
 
-		# add \n to the long column names to spread across lines
-		df$`Column description` <- line.break.long.text(df$`Column description`, sep=' ', max.char=50)
-	
 		# table description
-		table.desc <- line.break.long.text(table.data$TABLE_COMMENT[n],sep=' ', max.char=120)
+		table.desc <- table.data$TABLE_COMMENT[n]
 
 		tab <- gt(df)
 		tab <- tab_header(tab, title=table.data$TABLE_NAME[n], subtitle = table.desc)
-		tab <- tab_style(tab, style = cell_text(size = pct(120)),locations = cells_column_labels())
-
-		tab <- tab_style(tab, style = cell_text(size = pct(120)),locations = cells_column_labels())
-		tab <- tab_style(tab, style = cell_text(size = pct(100)),locations = cells_body())
-		tab <- tab_style(tab, style = cell_borders(sides=c("top","bottom","left","right"), color="skyblue", weight=px(2), style="solid"),locations = cells_body())
+		tab <- tab_style(tab, style = cell_borders(sides=c("top"), color="skyblue", weight=px(2), style="solid"),locations = cells_body())
 		tab <- opt_horizontal_padding(tab, scale = 3)
-		tab <- opt_vertical_padding(tab, scale = 3)
-		tab <- tab_options(tab, heading.title.font.size = 20)
-		tab <- tab_options(tab, heading.subtitle.font.size = 15)
-
-		# crap hack to decide the image size, count line breaks etc
-		nlines <- sum(stringr::str_count(df$`Column description`, '\n')) + sum(stringr::str_count(table.desc, '\n')) + nrow(df)*3 + 10
-	
-		# plot svg
-		svglite(file=gsub('.svg',paste0(n,'.svg'),file), width = 13, height=nlines/4.5)
-		plot(tab)
-		dev.off()
-		print(paste('svg summary of',table.data$TABLE_NAME[n], 'plotted'))
+		
+		suppressWarnings(gtsave(tab, filename=gsub('.html',paste0(n,'.html'),file))	) # always a warning about NAs in factors
+		print(paste('html summary of',table.data$TABLE_NAME[n], 'plotted'))
 		}
 	}
-#----------------------------------------------------------------------------------------------------
-create.markdown.for.single.table <- function(d.tables, d.cols, table.name){
-	
-	table.comment <- subset(d.tables, TABLE_NAME==table.name)$TABLE_COMMENT
-	col.names <- subset(d.cols, TABLE_NAME==table.name)$COLUMN_NAME
-	col.comments <- subset(d.cols, TABLE_NAME==table.name)$COLUMN_COMMENT
-
-	text <- paste('#', table.name)
-	text <- c(text, table.comment)
-	for(n in 1:length(col.names)){
-		text <- c(text, paste('###', col.names[n]))
-		text <- c(text, col.comments[n])
-		}
-	text <- c(text, '***')
-return(text)}
 #----------------------------------------------------------------------------------------------------
 get.tables.from.backup <- function(file){
 	tables <- list()
