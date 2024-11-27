@@ -28,7 +28,6 @@ create.html.for.table.comments <- function(table.data, column.data, file){
 		}
 
 	tab <- gt(df)
-	tab <- tab_style(tab, style = cell_borders(sides=c("top"), color="skyblue", weight=px(2), style="solid"),locations = cells_body())
 	tab <- opt_horizontal_padding(tab, scale = 3)
 	suppressWarnings(gtsave(tab, filename=file)) # always a warning about NAs in factors
 	}
@@ -48,7 +47,6 @@ create.html.for.row.comments <- function(table.data, column.data, file){
 
 		tab <- gt(df)
 		tab <- tab_header(tab, title=table.data$TABLE_NAME[n], subtitle = table.desc)
-		tab <- tab_style(tab, style = cell_borders(sides=c("top"), color="skyblue", weight=px(2), style="solid"),locations = cells_body())
 		tab <- opt_horizontal_padding(tab, scale = 3)
 		
 		suppressWarnings(gtsave(tab, filename=gsub('.html',paste0(n,'.html'),file))	) # always a warning about NAs in factors
