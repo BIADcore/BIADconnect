@@ -1,7 +1,8 @@
-conn  <-  init.conn()
 #-----------------------------------------------------------------------------------------
 # Generate a summary of row counts etc
 #-----------------------------------------------------------------------------------------
+conn  <-  init.conn()
+
 sql.command <- "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_schema='BIAD'"
 d.tables <- query.database(sql.command = sql.command, conn=conn)
 
