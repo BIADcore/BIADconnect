@@ -35,7 +35,7 @@ email <- gmailr::gm_mime(
 #-----------------------------------------------------------------------------------------
 if(length(missing.from.db)>0 | length(missing.from.zprivate)>0 ){
 	gmailr::gm_auth_configure(path='../tools/email/gmailr.json')
-	gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret copy")
+	gmailr::gm_auth(email = TRUE, cache = "../tools/email/.secret")
 	gmailr::gm_send_message(email)
 	}
 #-----------------------------------------------------------------------------------------
