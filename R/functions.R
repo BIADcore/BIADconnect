@@ -539,6 +539,7 @@ ancestors <- function(keys, table.name, primary.value, conn = NULL, db.credentia
 		if(child.column %in% names(table.data)){
 			values <- table.data[child.column]
 			values <- values[!is.na(values)]
+			values <- gsub("'","\\'",values, fixed=TRUE)
 			values <- paste(values, collapse="','")
 			sql.command <- paste("SELECT * FROM `BIAD`.`",parent.table,"` WHERE ",parent.column," IN ('",values,"')", sep='')		
 			data <- query.database(conn = conn,db.credentials = db.credentials, sql.command = sql.command)
