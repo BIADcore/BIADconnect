@@ -475,3 +475,20 @@ get.related.data <- function(table.name, primary.value, fnc, conn = NULL, db.cre
 
 return(all.data)}
 #----------------------------------------------------------------------------------------------------
+wrapper <- function(keys, table.data, fnc, conn = NULL, db.credentials = NULL){
+	rel.data <- list()
+	N <- length(table.data)
+	for(n in 1:N){
+		rel <- table.data[n]	
+		table.name <- names(rel)
+		col <- get.primary.column.from.table(keys, table.name=table.name, conn = conn, db.credentials = db.credentials)
+		rel.values <- rel[[table.name]]$data[[col]]
+		for(rel in rel.values){
+
+			x <- fnc(keys, table.name, rel, conn = conn , db.credentials = db.credentials) 
+			rel.data[[table.name]][[rel]] <- x
+			}
+		}
+	if(length(rel.data)==0)return(NULL)
+return(rel.data)}
+#----------------------------------------------------------------------------------------------------
