@@ -373,4 +373,105 @@ get.keys <- function(conn = NULL, db.credentials = NULL){
 	keys <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
 }
 #--------------------------------------------------------------------------------------------------
+get.related.data <- function(table.name, primary.value, fnc, conn = NULL, db.credentials = NULL){
 
+	keys <- get.keys(conn = conn, db.credentials = db.credentials)
+
+	# table data
+	all.data <- list()
+	table.data <- get.table.data(keys, table.name, primary.value, conn, db.credentials) 
+	if(is.null(table.data))return(NULL)
+	all.data[[table.name]]$data <- table.data
+	
+	# relative level 0 data
+	x.data <- all.data[table.name]
+	x.sub <- wrapper(keys, table.data=x.data, fnc, conn = conn, db.credentials = db.credentials)
+	if(!is.null(x.sub))all.data[table.name] <- Map(c, x.data,x.sub)
+
+	# relative level 1 data
+	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
+	rel.1.names <- rel.1.names[rel.1.names!='data']	
+	for(rel.1.name in rel.1.names){
+		x.data <- all.data[[table.name]][[primary.value]][rel.1.name]
+		x.sub <- wrapper(keys, x.data, fnc, conn = conn, db.credentials = db.credentials)
+		if(!is.null(x.sub))all.data[[table.name]][[primary.value]][rel.1.name] <- Map(c, x.data,x.sub)
+		}
+
+	# relative level 2 data
+	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
+	rel.1.names <- rel.1.names[rel.1.names!='data']	
+	for(rel.1.name in rel.1.names){
+		rel.2.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]])
+		rel.2.names <- rel.2.names[rel.2.names!='data']	
+		for(rel.2.name in rel.2.names){
+			x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][rel.2.name]
+			x.sub <- wrapper(keys, x.data, fnc, conn, db.credentials)
+			if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][rel.2.name] <- Map(c, x.data,x.sub)
+			}
+		}
+
+	# relative level 3 data
+	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
+	rel.1.names <- rel.1.names[rel.1.names!='data']	
+	for(rel.1.name in rel.1.names){
+		rel.2.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]])
+		rel.2.names <- rel.2.names[rel.2.names!='data']	
+		for(rel.2.name in rel.2.names){
+			rel.3.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]])
+			rel.3.names <- rel.3.names[rel.3.names!='data']	
+			for(rel.3.name in rel.3.names){	
+				x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][rel.3.name]
+				x.sub <- wrapper(keys, x.data, fnc, conn, db.credentials)
+				if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][rel.3.name] <- Map(c, x.data,x.sub)
+				}
+			}	
+		}
+
+	# relative level 4 data
+	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
+	rel.1.names <- rel.1.names[rel.1.names!='data']	
+	for(rel.1.name in rel.1.names){
+		rel.2.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]])
+		rel.2.names <- rel.2.names[rel.2.names!='data']	
+		for(rel.2.name in rel.2.names){
+			rel.3.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]])
+			rel.3.names <- rel.3.names[rel.3.names!='data']	
+			for(rel.3.name in rel.3.names){
+				rel.4.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]])
+				rel.4.names <- rel.4.names[rel.4.names!='data']	
+				for(rel.4.name in rel.4.names){
+					x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][rel.4.name]
+					x.sub <- wrapper(keys, x.data, fnc, conn, db.credentials)
+					if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][rel.4.name] <- Map(c, x.data,x.sub)
+					}
+				}
+			}	
+		}
+
+	# relative level 5 data
+	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
+	rel.1.names <- rel.1.names[rel.1.names!='data']	
+	for(rel.1.name in rel.1.names){
+		rel.2.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]])
+		rel.2.names <- rel.2.names[rel.2.names!='data']	
+		for(rel.2.name in rel.2.names){
+			rel.3.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]])
+			rel.3.names <- rel.3.names[rel.3.names!='data']	
+			for(rel.3.name in rel.3.names){
+				rel.4.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]])
+				rel.4.names <- rel.4.names[rel.4.names!='data']	
+				for(rel.4.name in rel.4.names){
+					rel.5.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][[rel.4.name]])
+					rel.5.names <- rel.5.names[rel.5.names!='data']	
+					for(rel.5.name in rel.5.names){
+						x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][[rel.4.name]][rel.5.name]
+						x.sub <- wrapper(keys, x.data, fnc, conn = conn , db.credentials = db.credentials)
+						if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][[rel.4.name]][rel.5.name] <- Map(c, x.data,x.sub)
+						}
+					}
+				}
+			}	
+		}
+
+return(all.data)}
+#----------------------------------------------------------------------------------------------------
