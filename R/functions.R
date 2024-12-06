@@ -492,3 +492,62 @@ wrapper <- function(keys, table.data, fnc, conn = NULL, db.credentials = NULL){
 	if(length(rel.data)==0)return(NULL)
 return(rel.data)}
 #----------------------------------------------------------------------------------------------------
+decendants <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
+
+	if(is.null(primary.value))return(NULL)
+	relationships <- get.child.relationships(keys, table.name, primary.value, conn, db.credentials)
+	child.tables <- relationships$TABLE_NAME
+	child.columns <- relationships$COLUMN_NAME
+
+	res <- list()
+	N <- length(child.tables)
+	if(N==0)return(NULL)
+	for(n in 1:N){
+		child.table <- child.tables[n]
+		child.column <- child.columns[n]
+		sql.command <- paste("SELECT * FROM `BIAD`.`",child.table,"` WHERE ",child.column," = '",primary.value,"'", sep='')
+		data <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
+		data <- remove.blank.columns.from.table(data)
+		res[[child.table]]$data <- data
+		}
+	if(length(res)==0)res <- NULL
+
+return(res)}
+#----------------------------------------------------------------------------------------------------
+ancestors <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
+
+	if(is.null(primary.value))return(NULL)
+	relationships <- get.parent.relationships(keys, table.name, primary.value, conn = conn, db.credentials = db.credentials)
+	
+	# whether or not to include zoptions parents? ... subset(relationships, !grepl('zoptions_',REFERENCED_TABLE_NAME))
+	parent.tables <- relationships$REFERENCED_TABLE_NAME
+	parent.columns <- relationships$REFERENCED_COLUMN_NAME
+	child.columns <- relationships$COLUMN_NAME
+	
+	table.data <- get.table.data(keys, table.name, primary.value, conn, db.credentials)
+	
+	res <- list()
+	N <- length(parent.tables)
+	if(N==0)return(NULL)
+	for(n in 1:N){
+		parent.table <- parent.tables[n]
+		parent.column <- parent.columns[n]
+		child.column <- child.columns[n]
+		
+
+		# get parent data
+		if(child.column %in% names(table.data)){
+			values <- table.data[child.column]
+			values <- values[!is.na(values)]
+			values <- paste(values, collapse="','")
+			sql.command <- paste("SELECT * FROM `BIAD`.`",parent.table,"` WHERE ",parent.column," IN ('",values,"')", sep='')		
+			data <- query.database(conn = conn,db.credentials = db.credentials, sql.command = sql.command)
+			data <- remove.blank.columns.from.table(data)
+			res[[parent.table]]$data <- data	
+			}	
+		}
+
+	if(length(res)==0)res <- NULL
+
+return(res)}
+#----------------------------------------------------------------------------------------------------
