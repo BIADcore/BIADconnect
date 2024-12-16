@@ -6,14 +6,11 @@
 source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.database.connect.R")
 source("https://raw.githubusercontent.com/AdrianTimpson/snippets/main/R/functions.R")
 #----------------------------------------------------------------------------------------------------
+# DEPRECATED
 # searhes for all directly related data
 run.searcher <- function(table.name, primary.value, conn = NULL, db.credential = NULL, direction = NULL){
-	if(is.null(conn)) conn <- check.conn() # due to the way these functions are handled by this searcher, we can't avoid passing the connecter explictly, so if it hasn't been done then we should create one.
-	if(is.null(direction))  directions  <- list(down = 'decendants', up = 'ancestors')
-	else if(direction == "down") directions  <- list(down = 'decendants')
-	else if(direction == "up") directions  <- list(up = 'ancestors')
-	lapply(directions,function(fn)  get.related.data(table.name, primary.value, fnc = get(fn) , conn = conn , db.credential = db.credential))
-	}
+    stop("this function as been replaced by:get.relatives ")
+}
 #----------------------------------------------------------------------------------------------------
 create.html.for.table.comments <- function(table.data, column.data, file){
 	require(gt)
@@ -87,18 +84,6 @@ get.tables.from.backup <- function(file){
 			}
 		}
 return(tables)}
-#----------------------------------------------------------------------------------------------------
-get.child.relationships <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
-	primary.data <- get.table.data(keys, table.name, primary.value, conn = conn, db.credentials = db.credentials)
-	primary.column <- get.primary.column.from.table(keys, table.name, conn = conn, db.credentials = db.credentials)
-	res <- subset(keys, REFERENCED_COLUMN_NAME==primary.column & REFERENCED_TABLE_NAME==table.name)
-return(res)}
-#----------------------------------------------------------------------------------------------------
-get.parent.relationships <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
-	primary.data <- get.table.data(keys, table.name, primary.value, conn = conn, db.credentials = db.credentials)
-	primary.column <- get.primary.column.from.table(keys, table.name, conn = conn, db.credentials = db.credentials)
-	res <- subset(keys, TABLE_NAME==table.name & grepl('FK_',CONSTRAINT_NAME))
-return(res)}
 #----------------------------------------------------------------------------------------------------
 get.primary.column.from.table <- function(keys = NULL, table.name, conn = NULL, db.credentials = NULL){                                                                                                                 
     if(is.null(keys))keys <- get.keys(conn = conn, db.credentials = db.credentials ) 
@@ -373,182 +358,3 @@ get.keys <- function(conn = NULL, db.credentials = NULL){
 	keys <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
 }
 #--------------------------------------------------------------------------------------------------
-get.related.data <- function(table.name, primary.value, fnc, conn = NULL, db.credentials = NULL){
-
-	keys <- get.keys(conn = conn, db.credentials = db.credentials)
-
-	# table data
-	all.data <- list()
-	table.data <- get.table.data(keys, table.name, primary.value, conn, db.credentials) 
-	if(is.null(table.data))return(NULL)
-	all.data[[table.name]]$data <- table.data
-	
-	# relative level 0 data
-	x.data <- all.data[table.name]
-	x.sub <- wrapper(keys, table.data=x.data, fnc, conn = conn, db.credentials = db.credentials)
-	if(!is.null(x.sub))all.data[table.name] <- Map(c, x.data,x.sub)
-
-	# relative level 1 data
-	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
-	rel.1.names <- rel.1.names[rel.1.names!='data']	
-	for(rel.1.name in rel.1.names){
-		x.data <- all.data[[table.name]][[primary.value]][rel.1.name]
-		x.sub <- wrapper(keys, x.data, fnc, conn = conn, db.credentials = db.credentials)
-		if(!is.null(x.sub))all.data[[table.name]][[primary.value]][rel.1.name] <- Map(c, x.data,x.sub)
-		}
-
-	# relative level 2 data
-	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
-	rel.1.names <- rel.1.names[rel.1.names!='data']	
-	for(rel.1.name in rel.1.names){
-		rel.2.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]])
-		rel.2.names <- rel.2.names[rel.2.names!='data']	
-		for(rel.2.name in rel.2.names){
-			x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][rel.2.name]
-			x.sub <- wrapper(keys, x.data, fnc, conn, db.credentials)
-			if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][rel.2.name] <- Map(c, x.data,x.sub)
-			}
-		}
-
-	# relative level 3 data
-	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
-	rel.1.names <- rel.1.names[rel.1.names!='data']	
-	for(rel.1.name in rel.1.names){
-		rel.2.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]])
-		rel.2.names <- rel.2.names[rel.2.names!='data']	
-		for(rel.2.name in rel.2.names){
-			rel.3.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]])
-			rel.3.names <- rel.3.names[rel.3.names!='data']	
-			for(rel.3.name in rel.3.names){	
-				x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][rel.3.name]
-				x.sub <- wrapper(keys, x.data, fnc, conn, db.credentials)
-				if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][rel.3.name] <- Map(c, x.data,x.sub)
-				}
-			}	
-		}
-
-	# relative level 4 data
-	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
-	rel.1.names <- rel.1.names[rel.1.names!='data']	
-	for(rel.1.name in rel.1.names){
-		rel.2.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]])
-		rel.2.names <- rel.2.names[rel.2.names!='data']	
-		for(rel.2.name in rel.2.names){
-			rel.3.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]])
-			rel.3.names <- rel.3.names[rel.3.names!='data']	
-			for(rel.3.name in rel.3.names){
-				rel.4.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]])
-				rel.4.names <- rel.4.names[rel.4.names!='data']	
-				for(rel.4.name in rel.4.names){
-					x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][rel.4.name]
-					x.sub <- wrapper(keys, x.data, fnc, conn, db.credentials)
-					if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][rel.4.name] <- Map(c, x.data,x.sub)
-					}
-				}
-			}	
-		}
-
-	# relative level 5 data
-	rel.1.names <- names(all.data[[table.name]][[primary.value]])	
-	rel.1.names <- rel.1.names[rel.1.names!='data']	
-	for(rel.1.name in rel.1.names){
-		rel.2.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]])
-		rel.2.names <- rel.2.names[rel.2.names!='data']	
-		for(rel.2.name in rel.2.names){
-			rel.3.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]])
-			rel.3.names <- rel.3.names[rel.3.names!='data']	
-			for(rel.3.name in rel.3.names){
-				rel.4.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]])
-				rel.4.names <- rel.4.names[rel.4.names!='data']	
-				for(rel.4.name in rel.4.names){
-					rel.5.names <- names(all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][[rel.4.name]])
-					rel.5.names <- rel.5.names[rel.5.names!='data']	
-					for(rel.5.name in rel.5.names){
-						x.data <- all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][[rel.4.name]][rel.5.name]
-						x.sub <- wrapper(keys, x.data, fnc, conn = conn , db.credentials = db.credentials)
-						if(!is.null(x.sub))all.data[[table.name]][[primary.value]][[rel.1.name]][[rel.2.name]][[rel.3.name]][[rel.4.name]][rel.5.name] <- Map(c, x.data,x.sub)
-						}
-					}
-				}
-			}	
-		}
-
-return(all.data)}
-#----------------------------------------------------------------------------------------------------
-wrapper <- function(keys, table.data, fnc, conn = NULL, db.credentials = NULL){
-	rel.data <- list()
-	N <- length(table.data)
-	for(n in 1:N){
-		rel <- table.data[n]	
-		table.name <- names(rel)
-		col <- get.primary.column.from.table(keys, table.name=table.name, conn = conn, db.credentials = db.credentials)
-		rel.values <- rel[[table.name]]$data[[col]]
-		for(rel in rel.values){
-
-			x <- fnc(keys, table.name, rel, conn = conn , db.credentials = db.credentials) 
-			rel.data[[table.name]][[rel]] <- x
-			}
-		}
-	if(length(rel.data)==0)return(NULL)
-return(rel.data)}
-#----------------------------------------------------------------------------------------------------
-decendants <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
-
-	if(is.null(primary.value))return(NULL)
-	relationships <- get.child.relationships(keys, table.name, primary.value, conn, db.credentials)
-	child.tables <- relationships$TABLE_NAME
-	child.columns <- relationships$COLUMN_NAME
-
-	res <- list()
-	N <- length(child.tables)
-	if(N==0)return(NULL)
-	for(n in 1:N){
-		child.table <- child.tables[n]
-		child.column <- child.columns[n]
-		sql.command <- paste("SELECT * FROM `BIAD`.`",child.table,"` WHERE ",child.column," = '",primary.value,"'", sep='')
-		data <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
-		data <- remove.blank.columns.from.table(data)
-		res[[child.table]]$data <- data
-		}
-	if(length(res)==0)res <- NULL
-
-return(res)}
-#----------------------------------------------------------------------------------------------------
-ancestors <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
-
-	if(is.null(primary.value))return(NULL)
-	relationships <- get.parent.relationships(keys, table.name, primary.value, conn = conn, db.credentials = db.credentials)
-	
-	# whether or not to include zoptions parents? ... subset(relationships, !grepl('zoptions_',REFERENCED_TABLE_NAME))
-	parent.tables <- relationships$REFERENCED_TABLE_NAME
-	parent.columns <- relationships$REFERENCED_COLUMN_NAME
-	child.columns <- relationships$COLUMN_NAME
-	
-	table.data <- get.table.data(keys, table.name, primary.value, conn, db.credentials)
-	
-	res <- list()
-	N <- length(parent.tables)
-	if(N==0)return(NULL)
-	for(n in 1:N){
-		parent.table <- parent.tables[n]
-		parent.column <- parent.columns[n]
-		child.column <- child.columns[n]
-		
-
-		# get parent data
-		if(child.column %in% names(table.data)){
-			values <- table.data[child.column]
-			values <- values[!is.na(values)]
-			values <- gsub("'","\\'",values, fixed=TRUE)
-			values <- paste(values, collapse="','")
-			sql.command <- paste("SELECT * FROM `BIAD`.`",parent.table,"` WHERE ",parent.column," IN ('",values,"')", sep='')		
-			data <- query.database(conn = conn,db.credentials = db.credentials, sql.command = sql.command)
-			data <- remove.blank.columns.from.table(data)
-			res[[parent.table]]$data <- data	
-			}	
-		}
-
-	if(length(res)==0)res <- NULL
-
-return(res)}
-#----------------------------------------------------------------------------------------------------
