@@ -37,8 +37,9 @@ zoptions.column.data <- subset(d.cols, TABLE_NAME%in%zoptions.table.data$TABLE_N
 create.html.for.table.comments(table.data=standard.table.data, column.data=standard.column.data, file='../tools/table_comments/row_counts.html')
 create.html.for.row.comments(table.data=standard.table.data, column.data=standard.column.data, file='../tools/table_comments/table_summary.html')
 create.html.for.row.comments(table.data=zoptions.table.data, column.data=zoptions.column.data, file='../tools/table_comments/zoptions_summary.html')
-#-----------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
 disconnect()
+#--------------------------------------------------------------------------------------
 
 
 

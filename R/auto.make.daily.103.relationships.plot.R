@@ -25,6 +25,7 @@ d.tables <- paste(c('Sites','Phases','C14Samples','Graves','FaunalIsotopes','ABo
 image <- database.relationship.plotter(d.tables, include.look.ups=FALSE, conn = conn)
 svg <- export_svg(image)
 writeLines(svg, '../tools/plots/database.relationships.plot.sub.1.svg')
-#------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
 disconnect()
+#--------------------------------------------------------------------------------------
 

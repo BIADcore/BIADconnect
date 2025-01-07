@@ -84,7 +84,7 @@ init.conn <- function(db.credentials=NULL){
 			message("Check your db.credentials below:")
 			na <- sapply(names(db.credentials),function(nc)message(nc,": ", ifelse(nc=="BIAD_DB_PASS",msp(db.credentials[[nc]]),db.credentials[[nc]])))
 			message("You probably haven't opened an SSH tunnel")
-			message("Try running: open.tunnel()")
+			message("Try opening a tunnel first, e.g. using PuTTY")
 			stop("DBConnection fail")
    			}
 		)

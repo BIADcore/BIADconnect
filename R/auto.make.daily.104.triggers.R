@@ -24,8 +24,8 @@ sub <- subset(all, COLUMN_NAME=='time_added')
 new.triggers <- make.all.triggers(sub, prefix, trigger = make.stamp.trigger)
 if(length(old.triggers)>0)query.database(sql.command = drop.triggers,conn=conn)
 query.database(sql.command = new.triggers,conn=conn)
+#--------------------------------------------------------------------------------------
 disconnect()
-#--------------------------------------------------------------------------------------------------------------
-
+#--------------------------------------------------------------------------------------
 
 

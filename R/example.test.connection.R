@@ -5,8 +5,13 @@
 #--------------------------------------------------------------------------------------
 # Requirements first read:
 # https://biadwiki.org/en/connectR
+# ensure you have opened a tunnel first (e.g. putty)
 #--------------------------------------------------------------------------------------
 source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
-query <- query.database("SELECT * FROM `Sites`")
+conn  <-  init.conn()
+#--------------------------------------------------------------------------------------
+query <- query.database("SELECT * FROM `Sites`", conn=conn)
 plot(table(query$Country),las=2)
-#------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
+disconnect()
+#--------------------------------------------------------------------------------------
