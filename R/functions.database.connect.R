@@ -49,7 +49,7 @@ return(df)}
 #' (ie: $export host='127.0.0.1')
 
 #' @return A DBI connection object to the MySQL database.
-init.conn <- function(db.credentials=NULL){
+init.conn <- function(db.credentials=NULL, dbname="BIAD"){
     require(RMySQL)
     require(DBI)
     if(length(DBI::dbListConnections(DBI::dbDriver("MySQL")))!=0) disconnect()
@@ -77,7 +77,7 @@ init.conn <- function(db.credentials=NULL){
         warning("Missing: ", paste(missing_vars, collapse = ", "), ". You may want to check your ~/.Renviron file and reload R, or manually provide db.credentials as a list to init.conn.")
     
     conn <- tryCatch(
-            DBI::dbConnect(drv=DBI::dbDriver("MySQL"), user=db.credentials$BIAD_DB_USER, pass=db.credentials$BIAD_DB_PASS, dbname="BIAD", host = db.credentials$BIAD_DB_HOST, port=db.credentials$BIAD_DB_PORT) ,
+            DBI::dbConnect(drv=DBI::dbDriver("MySQL"), user=db.credentials$BIAD_DB_USER, pass=db.credentials$BIAD_DB_PASS, dbname=dbname, host = db.credentials$BIAD_DB_HOST, port=db.credentials$BIAD_DB_PORT) ,
 		error=function(e){
 			message("Couldn't initialise connection with the database, dbConnect returned error: ")
 			message(e)
