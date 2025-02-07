@@ -109,8 +109,9 @@ return(column)}
 #' @export
 get.table.data <- function(keys = NULL, table.name = NULL, primary.value = NULL, conn = NULL, db.credentials = NULL, na.rm = TRUE){
 	primary.column <- get.primary.column.from.table(keys, table.name)
-    if(length(primary.value) == 1) matchexp <- paste0(" = '",primary.value,"'")
-    if(length(primary.value) > 1) matchexp <- paste0(" IN ('",paste0(primary.value,collapse=","),"')")
+    primary.value  <- DBI::dbQuoteString(ANSI(),primary.value) #Sanitize strings
+    if(length(primary.value) == 1) matchexp <- paste0(" = ",primary.value)
+    if(length(primary.value) > 1) matchexp <- paste0(" IN (",paste0(primary.value,collapse=","),")")
     sql.command <- paste0("SELECT * FROM `BIAD`.`",table.name,"` WHERE ",primary.column, matchexp)
 	data <- query.database(sql.command = sql.command, conn = conn,db.credentials = db.credentials)
 	if(na.rm) data <- remove.blank.columns.from.table(data)
@@ -236,7 +237,7 @@ get.relatives <- function(table.name, primary.value, directions = c("up","down")
     dir.functions = c("up"=get.ancestors,"down"=get.decendants)
     names(directions)=directions
     trees=lapply(directions,function(dir)dir.functions[[dir]](keys=keys, table.name=table.name, primary.value = primary.value, conn = conn, db.credentials = db.credentials))
-    root=list() #root is here for esthetic trees root -> 'S01200' followd by three branches: data up and down
+    root=list() #root is here to create 'esthetic' tree roots. Trees will start as root -> 'S01200' followed by three branches: data (the data available at the root), up (ancestors in the trees) and down (child in the tree)
     root[[primary.value]]=c(list(data=get.table.data(keys=keys, table.name, primary.value, conn, db.credentials,na.rm = F)),trees)
     return(root)
 }
@@ -269,7 +270,8 @@ get.decendants <- function(keys, table.name, primary.value, conn = NULL, db.cred
     for(n in 1:length(relative.tables)){
         rt <- relative.tables[n]
         rc <- relative.columns[n]
-        sql.command <- paste("SELECT * FROM `BIAD`.`",rt,"` WHERE ",rc," = '",primary.value,"'", sep='')
+        primary.value  <- DBI::dbQuoteString(ANSI(),primary.value) #Sanitize primary values
+        sql.command <- paste("SELECT * FROM `BIAD`.`",rt,"` WHERE ",rc," = ",primary.value, sep='')
         data <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
         if(length(data)>0){
             relative.key  <- get.primary.column.from.table(keys, rt)
@@ -317,9 +319,10 @@ get.ancestors <- function(keys, table.name, primary.value, conn = NULL, db.crede
         rv.c <- orig.column.alt[n] #column where the reference value is stored
         if(rv.c %in% names(orig.table)){
             values <- unique(unlist(na.omit(orig.table[rv.c])))
+            values  <- DBI::dbQuoteString(ANSI(),values) #Sanitize strings
             if(length(values) > 0){
-                if(length(values) == 1) matchexp <- paste0(" = '",values,"'")
-                if(length(values) > 1) matchexp <- paste0(" IN ('",paste0(values,collapse=","),"')")
+                if(length(values) == 1) matchexp <- paste0(" = ",values)
+                if(length(values) > 1) matchexp <- paste0(" IN (",paste0(values,collapse=","),")")
                 sql.command <- paste0("SELECT * FROM `BIAD`.`",rt,"` WHERE ",rc,matchexp)
                 data <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
                 if(length(data)>0){
