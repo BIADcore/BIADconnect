@@ -270,7 +270,8 @@ get.decendants <- function(keys, table.name, primary.value, conn = NULL, db.cred
     for(n in 1:length(relative.tables)){
         rt <- relative.tables[n]
         rc <- relative.columns[n]
-        primary.value  <- DBI::dbQuoteString(ANSI(),as.character(primary.value)) #Sanitize primary values
+        if(is.numeric(primary.value))primary.value  <- as.character(primary.value)
+        primary.value  <- DBI::dbQuoteString(ANSI(),primary.value) #Sanitize primary values
         sql.command <- paste("SELECT * FROM `BIAD`.`",rt,"` WHERE ",rc," = ",primary.value, sep='')
         data <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
         if(length(data)>0){
@@ -319,7 +320,8 @@ get.ancestors <- function(keys, table.name, primary.value, conn = NULL, db.crede
         rv.c <- orig.column.alt[n] #column where the reference value is stored
         if(rv.c %in% names(orig.table)){
             values <- unique(unlist(na.omit(orig.table[rv.c])))
-            values  <- DBI::dbQuoteString(ANSI(),as.character(values)) #Sanitize strings
+            if(is.numeric(values))values  <- as.character(values)
+            values  <- DBI::dbQuoteString(ANSI(),values) #Sanitize strings
             if(length(values) > 0){
                 if(length(values) == 1) matchexp <- paste0(" = ",values)
                 if(length(values) > 1) matchexp <- paste0(" IN (",paste0(values,collapse=","),")")
