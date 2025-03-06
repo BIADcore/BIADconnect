@@ -3,11 +3,11 @@
 # Currently implemented:
 # local phases inform on a prior
 # include all phases with same culture/period as local, weighted by distance. 
+# prioritise phases with no modelled chronology yet
 
 # Still to implement:
 # use log mean and log sigma, as neither can be negative
 # add ellipsoid model
-# slightly prioritise phases with no data yet
 # increase resolution
 # Upgrade distance weighting to include friction surface distance
 # adjust for sequential phases
@@ -20,12 +20,16 @@ pha <- query.database(conn = conn, sql.command = "SELECT * FROM `Phases`;")
 c14 <- query.database(conn = conn, sql.command = "SELECT `PhaseID`,`SiteID`,`C14.Age`,`C14.SD` FROM `C14Samples`;")
 pha <- merge(pha,sit,by='SiteID', all.y=FALSE)
 c14 <- subset(c14, !is.na(PhaseID))
+
+# prioritise phases with no modelled chronology yet
+priority <- rep(1,nrow(pha))
+priority[is.na(pha$GMM)] <- 2
 #--------------------------------------------------------------------------------------
-N <- 500 #2000
+N <- 2000
 mu.bw <- sigma.bw <- c()
 for(n in 1:N){
 
-	i <- sample(1:nrow(pha),size=1)
+	i <- sample(1:nrow(pha),size=1,prob=priority)
 	phase <- pha[i,]
 
 	# get other phases with same culture and period, and have a model estimate
@@ -37,8 +41,8 @@ for(n in 1:N){
 		near.phases$dist <- slc(x=phase$Longitude, y=phase$Latitude, ax=near.phases$Longitude, ay=near.phases$Latitude, input='deg') * 6378.1
 		}
 
-	# if almost no other phases available, get phases with same period
-	if(nrow(near.phases)<=1){
+	# if almost no phases available, get phases with same period
+	if(nrow(near.phases)==0){
 		near.phases <- subset(pha, Period%in%phase$Period & PhaseID!=phase$PhaseID)
 		near.phases <- subset(near.phases, !is.na(GMM))
 		if(nrow(near.phases)>0){
@@ -48,7 +52,7 @@ for(n in 1:N){
 
 	# weighting by distance from target site using a Gaussian, requires a parameter
 	if(nrow(near.phases)!=0){
-		weights <- dnorm(near.phases$dist, 0 , 25)
+		weights <- dnorm(near.phases$dist, 0 , 100)
 		local.mu <- near.phases$GMM
 		local.sigma <- near.phases$GMS
 		i <- !is.na(local.mu) & weights!=0
@@ -74,17 +78,18 @@ for(n in 1:N){
 		data <- data[i,]
 		}		
 
-	# Do not store posterior estimates if zero 14C dates AND less than 3 local phases
-	# If there are any local estimates, use them to update prior non-parameterically (kernel density)
-	# Bandwidth calculated automatically from the data, except if there is only one local phase
-	# Note mu and sigma are independent in the prior. 
+	# Update chronology according to following rules. Note mu and sigma are independent in the prior. 
 
-	if(nrow(data)==0 & NL>=3){
+	if(nrow(data)==0 & NL==0){
+		# no useful information. Ensure value is null
+		mu <- 'NULL '
+		sigma <- 'NULL '
+		}
+
+	if(nrow(data)==0 & NL>0){
 		# no local 14C, so just use the weighted mean estimates from the local phases
 		mu <- round(sum(local.mu * weights))
 		sigma <- round(sum(local.sigma * weights))	
-		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
-		query.database(conn=conn,sql.command=sql.command)	
 		}
 
 	if(nrow(data)>0 & NL==0){
@@ -97,8 +102,6 @@ for(n in 1:N){
 		mod.gaussian <- phaseModel(data, calcurve=intcal20, prior.matrix=prior.matrix, model='norm', plot = FALSE)
 		mu <- mod.gaussian$mu
 		sigma <- mod.gaussian$sigma
-		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
-		if(!is.nan(mu) & !is.nan(sigma))query.database(conn=conn,sql.command=sql.command)
 		}
 
 	if(nrow(data)>0 & NL==1){
@@ -118,12 +121,10 @@ for(n in 1:N){
 		mod.gaussian <- phaseModel(data, calcurve=intcal20, prior.matrix=prior.matrix, model='norm', plot = FALSE)
 		mu <- mod.gaussian$mu
 		sigma <- mod.gaussian$sigma
-		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
-		if(!is.nan(mu) & !is.nan(sigma))query.database(conn=conn,sql.command=sql.command)
 		}
 
 	if(nrow(data)>0 & NL>1){
-		# bandwidth be calculated automatically. Print, to assist choosing a bandwdith for previous codeblock		
+		# bandwidth can be calculated automatically. Print, to assist choosing a bandwdith for previous codeblock		
 		m1 <- estimateDataDomain(data, calcurve=intcal20)
 		m2 <- range(local.mu) 
 		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2])) + c(-500,500)
@@ -141,9 +142,10 @@ for(n in 1:N){
 		mod.gaussian <- phaseModel(data, calcurve=intcal20, prior.matrix=prior.matrix, model='norm', plot = FALSE)
 		mu <- mod.gaussian$mu
 		sigma <- mod.gaussian$sigma
-		sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
-		if(!is.nan(mu) & !is.nan(sigma))query.database(conn=conn,sql.command=sql.command)
 		}
+
+	sql.command <- paste("UPDATE `BIAD`.`Phases` SET `GMM`=",mu,", `GMS`=",sigma," WHERE `PhaseID`='",phase$PhaseID,"';",sep='')
+	if(!is.nan(mu) & !is.nan(sigma))query.database(conn=conn,sql.command=sql.command)
 	}
 #--------------------------------------------------------------------------------------
 print(paste('mu.bw mean:', round(mean(mu.bw,na.rm=T),1)))
