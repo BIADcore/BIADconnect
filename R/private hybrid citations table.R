@@ -3,24 +3,29 @@
 #------------------------------------------------------------------
 source('functions.R')
 source('functions.database.connect.R')
+conn  <- init.conn()
 #------------------------------------------------------------------
 # A single phaseCitations table for all citations
 #------------------------------------------------------------------
-# 1. Might need a better name Not intuitive
-# 2. Needs a trigger that autopopulates, provided triplet values are unique. Probably use an update
-conn  <- init.conn()
+# triplets (PhaseID / CitationID / DataCited ) are unique in DB
 
-# clean up triplet duplicates
-# Automatically update 
-# Need to ensure no duplicate triplets, and if there is a dup, use the one with greater info
+# check every other table that currently has a CitationID, to check it is in the PhaseCitations table
+
+x <- query.database(sql.command = "SELECT `TABLE_NAME`, `COLUMN_NAME` from information_schema.columns WHERE table_schema = 'BIAD'",conn = conn)
+x <- subset(x, COLUMN_NAME=='CitationID')
+tables <- x$TABLE_NAME
+tables <- tables[!grepl('PhaseCitation',tables)]
+
+t <- 1
 
 for(t in c(2,5,6)){
 
 options(warn=2)
-	table <- tables$Tablename[t]
+	table <- tables[t]
 	x <- query.database(sql.command = paste("SELECT `PhaseID`, `CitationID` ,`time_added`,`user_added`,`time_last_update`, `user_last_update` FROM `BIAD`.`",table,"`;",sep=''),conn = conn)
 	x <- subset(x, !is.na(CitationID))
-	x <- unique(x)
+	x <- x[!duplicated(x[,1:2]),]
+
 	each <- unique(x[,c('PhaseID', 'CitationID')])
 	each <- subset(each, !is.na(PhaseID))
 	keep <- matrix(, nrow(each), ncol(x))
