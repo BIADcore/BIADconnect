@@ -25,7 +25,7 @@ c14 <- subset(c14, !is.na(PhaseID))
 priority <- rep(1,nrow(pha))
 priority[is.na(pha$GMM)] <- 2
 #--------------------------------------------------------------------------------------
-N <- 2000
+N <- 500 #2000
 mu.bw <- sigma.bw <- c()
 for(n in 1:N){
 
