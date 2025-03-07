@@ -13,7 +13,7 @@
 # adjust for sequential phases
 #--------------------------------------------------------------------------------------
 library(ADMUR)
-res <- 200
+res <- 250
 conn <- init.conn()
 sit <- query.database(conn = conn, sql.command = "SELECT * FROM `Sites`;")
 pha <- query.database(conn = conn, sql.command = "SELECT * FROM `Phases`;")
@@ -25,7 +25,7 @@ c14 <- subset(c14, !is.na(PhaseID))
 priority <- rep(1,nrow(pha))
 priority[is.na(pha$GMM)] <- 2
 #--------------------------------------------------------------------------------------
-N <- 500 #2000
+N <- 800 #2000
 mu.bw <- sigma.bw <- c()
 for(n in 1:N){
 
@@ -68,7 +68,6 @@ for(n in 1:N){
 	d <- subset(c14, PhaseID==phase$PhaseID)
 	data <- data.frame(age=d$C14.Age, sd=d$C14.SD)
 
-	# remove outlier dates: either mathematically estimated or archaeologically informed using the 'Flag' column.
 	# remove outlier C14 dates retaining dates 3x the width of the 50% quantile
 	if(nrow(data)>1){
 		q <- quantile(data$age,prob=c(0.25,0.5,0.75))
@@ -94,7 +93,7 @@ for(n in 1:N){
 
 	if(nrow(data)>0 & NL==0){
 		# no local phases available, so use a uniform prior across a wider range than the 14c data, to account for low number of samples
-		mu.range <- estimateDataDomain(data, calcurve=intcal20) + c(-500,500)
+		mu.range <- estimateDataDomain(data, calcurve=intcal20) + c(-1000,1000)
 		sigma.range <- c(diff(mu.range)/10, diff(mu.range)/3)
 		prior.matrix <- matrix(1/(res^2),res,res)
 		row.names(prior.matrix) <- seq(min(mu.range),max(mu.range),length.out=res)
@@ -106,7 +105,7 @@ for(n in 1:N){
 
 	if(nrow(data)>0 & NL==1){
 		# only one local phase available, bandwidth cannot be calculated automatically
-		m1 <- estimateDataDomain(data, calcurve=intcal20) + c(-500,500)		
+		m1 <- estimateDataDomain(data, calcurve=intcal20) + c(-1000,1000)		
 		m2 <- range(local.mu) 
 		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2]))	
 		s1 <- c(diff(m1)/10, diff(m2)/3)	
@@ -127,7 +126,7 @@ for(n in 1:N){
 		# bandwidth can be calculated automatically. Print, to assist choosing a bandwdith for previous codeblock		
 		m1 <- estimateDataDomain(data, calcurve=intcal20)
 		m2 <- range(local.mu) 
-		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2])) + c(-500,500)
+		mu.range <- c(min(m1[1],m2[1]),max(m1[2],m2[2])) + c(-1000,1000)
 		s1 <- c(diff(m1)/10, diff(m2)/3)	
 		s2 <- range(local.sigma)
 		sigma.range <- c(min(s1[1],s2[1]),max(s1[2],s2[2]))
