@@ -361,5 +361,32 @@ getSize <- function(conn = NULL, db.credential = NULL, db = 'BIAD'){
 get.keys <- function(conn = NULL, db.credentials = NULL){
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
 	keys <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
+    return(keys)
 }
 #--------------------------------------------------------------------------------------------------
+#' Get Elements from a Tree Structure
+#'
+#' This function extracts from a tree, as created by the function \code{get.relatives}, 
+#' all nodes/leaves that have names corresponding to the specified element.
+#' trees should be as named list of list like list(a=1,b=list(a=2,b=3,c=4),d=list(e=1,f=4))
+#' Based on the answers here: https://stackoverflow.com/questions/64578972/pull-all-elements-with-specific-name-from-a-nested-list/79168230#79168230
+#'
+#' @param x A list representing the tree structure.
+#' @param element A character string specifying the name of elements to extract from the tree.
+#' 
+#' @return A list containing all elements from the tree that have names matching the specified element.
+#'
+#' @examples
+#' \dontrun{
+#' tree <- list(a = 1, b = list(a = 2, c = 3), d = 4)
+#' get_elements(tree, "a")
+#' # Expected output: list(1, 2)
+#' }
+get_elements <- function(x, element) {
+	newlist=list()
+	for(elt in names(x)){
+		if(elt == element) newlist=append(newlist,x[[elt]])
+		else if(is.list(x[[elt]])) newlist=append(newlist,get_elements(x[[elt]],element) )
+	}
+	return(newlist)
+}
