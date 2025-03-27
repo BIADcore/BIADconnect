@@ -8,7 +8,6 @@
 # https://biadwiki.org/en/connectR
 # ensure you have opened a tunnel first (e.g. putty)
 #--------------------------------------------------------------------------------------
-source("https://raw.githubusercontent.com/BIADwiki/BIADwiki/main/R/functions.R")
 conn  <-  init.conn()
 #--------------------------------------------------------------------------------------
 # query the requested dataset
