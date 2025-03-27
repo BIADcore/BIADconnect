@@ -3,6 +3,37 @@
 # generic functions to query any database hosted at macelab
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
+#' Query Database
+#'
+#' This function sends a SQL command to query BIAD 
+#' It handles SQL command execution, error management, and automatic reconnection if the 
+#' connection fails.
+#'
+#' @param sql.command A character vector containing SQL queries to be executed.
+#' @param conn A DBI connection object. If `NULL`, it will check or initialize a connection 
+#' from the global environment.
+#' @param db.credentials A list of database credentials including user, password, host, and port. 
+#' If `NULL`, credentials are fetched from environment variables using `get.credentials`.
+#' @param wait A numeric value specifying the time in seconds to wait between each SQL command execution. Default is 0.
+#'
+#' @return The function returns the fetched query results as a dataframe.
+#' @examples
+#' \dontrun{
+#'   # Example of connecting and querying
+#'   credentials <- list(
+#'     BIAD_DB_USER = "yourusername",
+#'     BIAD_DB_PASS = "yourpassword",
+#'     BIAD_DB_HOST = "127.0.0.1",
+#'     BIAD_DB_PORT = 3306
+#'   )
+#'   
+#'   result <- query.database(
+#'     sql.command=c("SELECT * FROM table"),
+#'     db.credentials=credentials
+#'   )
+#' }
+#'
+#' @export
 query.database <- function(sql.command, conn=NULL, db.credentials=NULL, wait = 0){
 	require(DBI)
 	conn <- check.conn(conn = conn, db.credentials = db.credentials) #this doesn't return anything but modify conn if need, if not, nothing happen
@@ -49,6 +80,7 @@ return(df)}
 #' (ie: $export host='127.0.0.1')
 
 #' @return A DBI connection object to the MySQL database.
+#' @export
 init.conn <- function(db.credentials=NULL, dbname="BIAD"){
     require(RMySQL)
     require(DBI)
