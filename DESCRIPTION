@@ -2,6 +2,9 @@ Package: BIADconnect
 Title: Big Interdisciplinary Archaeological Database Connection
 Version: 0.0.1
 Authors@R: 
+    c(person("The", "BIAD Team", 
+       email = "contact@biadteam.org", 
+       role = c("aut", "cre")))
 Description: Provides tools for connecting and interacting with the 
     Big Interdisciplinary Archaeological Database (BIAD). This package 
     facilitates seamless access and data manipulation, supporting 
