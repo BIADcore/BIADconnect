@@ -135,12 +135,59 @@ msp <- function(password) {
     paste0(maskp[1], paste0(rep("*", length(maskp) - 2), collapse = ""), maskp[length(maskp)])
 }
 #--------------------------------------------------------------------------------------------------
+#' Disconnect from Database
+#'
+#' This function disconnects all active connections to the specified database driver. By default, it 
+#' disconnects all MySQL database connections. It requires the RMySQL and DBI packages to manage 
+#' database connections.
+#'
+#' @param drv A character string specifying the database driver to disconnect. Default is `"MySQL"`.
+#'
+#' @return None. All connections using the specified driver are closed.
+#'
+#' @examples
+#' \dontrun{
+#'   # Disconnect all MySQL connections
+#'   disconnect()
+#'   
+#'   # Disconnect all connections of a specific driver (e.g., PostgreSQL)
+#'   disconnect(drv = "PostgreSQL")
+#' }
+#'
+#' @export
 disconnect <- function(drv="MySQL"){
     require(RMySQL)
     require(DBI)
     sapply(DBI::dbListConnections(DBI::dbDriver(drv)),DBI::dbDisconnect)
 }
 #--------------------------------------------------------------------------------------------------
+#' Check and Validate Database Connection
+#'
+#' This function verifies the validity of a given database connection. If the connection is not valid 
+#' or not provided, it attempts to retrieve an existing connection from the global environment. If no 
+#' valid connection is found, it initializes a new connection using the provided database credentials.
+#'
+#' @param conn A DBI connection object. If `NULL`, the function attempts to find a valid connection 
+#' in the global environment or initialize a new connection.
+#' @param db.credentials A list of database credentials including user, password, host, and port. 
+#' If `NULL`, credentials are fetched using `get.credentials`.
+#'
+#' @return A valid DBI connection object.
+#'
+#' @examples
+#' \dontrun{
+#'   # Check an existing connection or create a new one
+#'   credentials <- list(
+#'     BIAD_DB_USER = "yourusername",
+#'     BIAD_DB_PASS = "yourpassword",
+#'     BIAD_DB_HOST = "127.0.0.1",
+#'     BIAD_DB_PORT = 3306
+#'   )
+#'   
+#'   conn <- check.conn(conn = NULL, db.credentials = credentials)
+#' }
+#'
+#' @export
 check.conn <- function(conn = NULL, db.credentials=NULL){
 	require(DBI)
 	if(is.null(conn) || !tryCatch(DBI::dbIsValid(conn),error=function(err)FALSE) ){ #check if no connector has been provided, or if the connector doesnt work
