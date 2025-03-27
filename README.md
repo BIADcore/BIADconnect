@@ -1,6 +1,6 @@
 <a href="http://biadwiki.org/"><img src="https://biadwiki.org/biad.logo.png" alt="BIAD" height="150"/></a>
 
-# BIAD -- Big Interdisciplinary Archaeological Database
+# BIAD : Big Interdisciplinary Archaeological Database
 
 ## Installation
 
