@@ -81,6 +81,20 @@ get.tables.from.backup <- function(file){
 			}
 		}
 return(tables)}
+#' Get Primary Key Column from Table
+#'
+#' This function retrieves the name of the primary key column from a specified table in the database.
+#' It first checks for any unique or primary constraints, and then determines which column serves as
+#' the primary key. If there is ambiguity in determining the primary key, the function will stop with an error.
+#'
+#' @param keys A data frame containing key information for database tables. If `NULL`, keys are retrieved from the database using the `get.keys` function.
+#' @param table.name A character string specifying the name of the table for which the primary key column is being queried.
+#' @param conn A DBI connection object. If `NULL`, the function will attempt to check or initialize a  connection using the provided or default `db.credentials`.
+#' @param db.credentials A list containing database connection details, including user, password, host, and port. If `NULL`, credentials are fetched using `get.credentials`.
+#'
+#' @return A character string representing the name of the primary key column. If no primary key is found, `NA` is returned. If multiple potential primary keys are found, the function stops with an error.
+#'
+#' @export
 #----------------------------------------------------------------------------------------------------
 get.primary.column.from.table <- function(keys = NULL, table.name, conn = NULL, db.credentials = NULL){                                                                                                                 
     if(is.null(keys))keys <- get.keys(conn = conn, db.credentials = db.credentials ) 
