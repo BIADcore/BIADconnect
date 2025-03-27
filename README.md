@@ -1,4 +1,4 @@
-<a href="http://biadwiki.org/"><img src="tools/logos/BIAD.logo.net.png" alt="BIAD" height="150"/></a>
+<a href="http://biadwiki.org/"><img src="https://biadwiki.org/biad.logo.png" alt="BIAD" height="150"/></a>
 
 # BIAD -- Big Interdisciplinary Archaeological Database
 
