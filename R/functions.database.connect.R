@@ -130,7 +130,7 @@ init.conn <- function(db.credentials=NULL, dbname="BIAD"){
 #' @param password A character string representing the password to be masked.
 #' @return A character string with the masked password.
 msp <- function(password) {
-    if(length(password)<=0)return(NULL)
+    if(length(password)<2)return(NULL)
     maskp <- strsplit(password, "")[[1]]
     paste0(maskp[1], paste0(rep("*", length(maskp) - 2), collapse = ""), maskp[length(maskp)])
 }
