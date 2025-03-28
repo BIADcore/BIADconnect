@@ -11,6 +11,11 @@ To install this package from GitHub, you can use the `devtools` package. If you 
   devtools::install_github("BIADwiki/BIADconnect")
   ```
 
+- You can also install the package from a local source folder (avoid installing devtools):
+  ```R
+  install.packages("folder/path", repos = NULL, type = "source")
+  ```
+
 - To load the package without installing, for testing purposes, use:
   ```R
   devtools::load_all("/path/to/BIADconnect")
