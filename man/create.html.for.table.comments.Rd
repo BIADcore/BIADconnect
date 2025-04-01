@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{create.html.for.table.comments}
 \alias{create.html.for.table.comments}
-\title{Create an HTML Table with Comments}
+\title{Create an HTML Table with Comments should be move to BIADWIKI}
 \usage{
 create.html.for.table.comments(table.data, column.data, file)
 }

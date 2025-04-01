@@ -12,7 +12,8 @@ run.searcher <- function(table.name, primary.value, conn = NULL, db.credential =
     stop("this function as been replaced by:get.relatives ")
 }
 #----------------------------------------------------------------------------------------------------
-#' Create an HTML Table with Comments
+#' Create an HTML Table with Comments should be move to BIADWIKI 
+
 #'
 #' This function generates an HTML table summarizing the number of rows, columns, and column names for a given set of tables. 
 #' It utilizes the `gt` package to format the table and saves it to a specified HTML file.
@@ -39,6 +40,9 @@ create.html.for.table.comments <- function(table.data, column.data, file){
 	tab <- opt_horizontal_padding(tab, scale = 3)
 	suppressWarnings(gtsave(tab, filename=file)) # always a warning about NAs in factors
 	}
+#----------------------------------------------------------------------------------------------------
+#' Create an HTML file : should be move to BIADWIKI 
+#' @export
 #----------------------------------------------------------------------------------------------------
 create.html.for.row.comments <- function(table.data, column.data, file){
 	require(gt)
