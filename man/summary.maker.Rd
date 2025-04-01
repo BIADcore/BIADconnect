@@ -6,6 +6,9 @@
 \usage{
 \method{summary}{maker}(d)
 }
+\arguments{
+\item{d}{dataframe of site, with SiteID}
+}
 \description{
 Summary Maker for Site Data
 }
