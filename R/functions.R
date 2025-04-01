@@ -421,3 +421,63 @@ get_elements <- function(x, element) {
 	}
 	return(newlist)
 }
+#--------------------------------------------------------------------------------------------------
+
+#' Shortest Distance Calculation Using Spherical Law of Cosines
+#'
+#' This function calculates the shortest distance between a single point \code{(x, y)} and a set of points \code{(ax, ay)}
+#' using the spherical law of cosines. The distances are returned in radians and can be converted to kilometers by
+#' multiplying by the Earth's radius (6378.1 km).
+#'
+#' @param x A numeric value representing the longitude of the single point in radians or degrees.
+#' @param y A numeric value representing the latitude of the single point in radians or degrees.
+#' @param ax A numeric vector representing the longitudes of the point set in radians or degrees.
+#' @param ay A numeric vector representing the latitudes of the point set in radians or degrees.
+#' @param input A character string indicating the input unit. It can be either \code{'rad'} for radians 
+#'        (default) or \code{'deg'} for degrees.
+#'
+#' @return A numeric vector of distances in radians from the single point \code{(x, y)} to each of the points in \code{(ax, ay)}.
+#'
+#' @details The function requires input coordinates in either radians or degrees. If the input is in degrees, they will be 
+#' converted to radians internally. The function ensures that the cosine law calculation stays within its valid range to avoid floating point inaccuracies.
+#' 
+#' @export
+slc <- function(x,y,ax,ay,input='rad'){
+	# inputs required in rad or deg
+	# calculate shortest distance between a single point (x,y) and all points(xa,ya) using spherical law of cosines
+	# returns distances in radians, therefore only needs multiplying by radius of earth 6378.1 to convert to km
+	if(length(ax)!=length(ay))stop('ax must be same length as ay')
+	if(length(ax)==0)return(0); if(length(ax)>0){
+	if(input=='deg'){x <- x*pi/180; y <- y*pi/180; ax <- ax*pi/180; ay <- ay*pi/180;}
+	step.1 = sin(y) * sin (ay) + cos(y) * cos(ay) * cos(ax - x)
+	
+	# floating point bullshit, as sometimes 1 is greater than 1 (Rinferno!) 
+	step.1[step.1>1]=1
+	step.1[step.1<(-1)]=-1
+	dist <- acos(step.1)	
+return(dist)}}
+#--------------------------------------------------------------------------------------------------
+#' Summary Maker for Site Data
+#'
+#' @export
+summary.maker <- function(d){
+
+	x <- as.data.frame(table(d$SiteID)); names(x) <- c('SiteID','count')
+	x <- merge(x,unique(d[,1:3]),by='SiteID')
+	x$code[x$count==1] <- 1
+	x$code[x$count==2] <- 2
+	posts <- floor(unique(quantile(x$count[!x$count%in%c(1,2)])))
+	N <- length(posts)-1
+	posts[N+1] <- posts[N+1]+1
+	key <- c()
+	for(n in 1:N){
+		lower <- posts[n]
+		upper <- posts[n+1]
+		key[n] <- paste(lower,upper,sep='=>')
+		i <- x$count>=lower & x$count<upper
+		x$code[i] <- n+2
+		}
+	cols <- colorRampPalette(c("red", "blue"))(N+2)
+	for(n in 1:(N+2))x$col[x$code==n] <- cols[n]
+	legend <- c(1,2,key)
+return(list(summary=x,cols=cols,legend=legend))}
