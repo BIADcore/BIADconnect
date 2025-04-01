@@ -26,7 +26,3 @@ This function calculates the shortest distance between a single point \code{(x, 
 using the spherical law of cosines. The distances are returned in radians and can be converted to kilometers by
 multiplying by the Earth's radius (6378.1 km).
 }
-\details{
-The function requires input coordinates in either radians or degrees. If the input is in degrees, they will be
-converted to radians internally. The function ensures that the cosine law calculation stays within its valid range to avoid floating point inaccuracies.
-}

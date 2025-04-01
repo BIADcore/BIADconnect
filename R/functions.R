@@ -438,8 +438,6 @@ get_elements <- function(x, element) {
 #'
 #' @return A numeric vector of distances in radians from the single point \code{(x, y)} to each of the points in \code{(ax, ay)}.
 #'
-#' @details The function requires input coordinates in either radians or degrees. If the input is in degrees, they will be 
-#' converted to radians internally. The function ensures that the cosine law calculation stays within its valid range to avoid floating point inaccuracies.
 #' 
 #' @export
 slc <- function(x,y,ax,ay,input='rad'){
@@ -459,26 +457,30 @@ return(dist)}}
 #--------------------------------------------------------------------------------------------------
 
 #' Summary Maker for Site Data
+#'
 #' @param  d dataframe of site, with SiteID
+#'
+#' @return a smumarry
 #'
 #' @export
 summary_maker <- function(d){
-	x <- as.data.frame(table(d$SiteID)); names(x) <- c('SiteID','count')
-	x <- merge(x,unique(d[,1:3]),by='SiteID')
-	xi$code[x$count==1] <- 1
-	x$code[x$count==2] <- 2
-	posts <- floor(unique(quantile(x$count[!x$count%in%c(1,2)])))
-	N <- length(posts)-1
-	posts[N+1] <- posts[N+1]+1
-	key <- c()
-	for(n in 1:N){
-		lower <- posts[n]
-		upper <- posts[n+1]
-		key[n] <- paste(lower,upper,sep='=>')
-		i <- x$count>=lower & x$count<upper
-		x$code[i] <- n+2
-		}
-	cols <- colorRampPalette(c("red", "blue"))(N+2)
-	for(n in 1:(N+2))x$col[x$code==n] <- cols[n]
-	legend <- c(1,2,key)
-return(list(summary=x,cols=cols,legend=legend))}
+    x <- as.data.frame(table(d$SiteID)); names(x) <- c('SiteID','count')
+    x <- merge(x,unique(d[,1:3]),by='SiteID')
+    xi$code[x$count==1] <- 1
+    x$code[x$count==2] <- 2
+    posts <- floor(unique(quantile(x$count[!x$count%in%c(1,2)])))
+    N <- length(posts)-1
+    posts[N+1] <- posts[N+1]+1
+    key <- c()
+    for(n in 1:N){
+        lower <- posts[n]
+        upper <- posts[n+1]
+        key[n] <- paste(lower,upper,sep='=>')
+        i <- x$count>=lower & x$count<upper
+        x$code[i] <- n+2
+    }
+    cols <- colorRampPalette(c("red", "blue"))(N+2)
+    for(n in 1:(N+2))x$col[x$code==n] <- cols[n]
+    legend <- c(1,2,key)
+    return(list(summary=x,cols=cols,legend=legend))
+}

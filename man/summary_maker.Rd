@@ -9,6 +9,9 @@ summary_maker(d)
 \arguments{
 \item{d}{dataframe of site, with SiteID}
 }
+\value{
+a smumarry
+}
 \description{
 Summary Maker for Site Data
 }
