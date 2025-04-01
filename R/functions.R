@@ -12,6 +12,19 @@ run.searcher <- function(table.name, primary.value, conn = NULL, db.credential =
     stop("this function as been replaced by:get.relatives ")
 }
 #----------------------------------------------------------------------------------------------------
+#' Create an HTML Table with Comments
+#'
+#' This function generates an HTML table summarizing the number of rows, columns, and column names for a given set of tables. 
+#' It utilizes the `gt` package to format the table and saves it to a specified HTML file.
+#'
+#' @param table.data A data frame containing information about tables including their names and row counts. 
+#' @param column.data A data frame containing information about table columns. 
+#' @param file A string specifying the path to the output HTML file.
+#' @return This function does not return a value. It creates and saves an HTML file as a side effect.
+#'
+#' @import gt
+#' 
+#' @export
 create.html.for.table.comments <- function(table.data, column.data, file){
 	require(gt)
 
@@ -84,6 +97,7 @@ get.tables.from.backup <- function(file){
 			}
 		}
 return(tables)}
+
 #' Get Primary Key Column from Table
 #'
 #' This function retrieves the name of the primary key column from a specified table in the database.
