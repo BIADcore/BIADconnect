@@ -3,6 +3,9 @@
 # various functions and objects for BIAD
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
+# old hack for some mapping 
+source("https://raw.githubusercontent.com/AdrianTimpson/snippets/main/R/functions.R")
+
 # DEPRECATED
 # searhes for all directly related data
 run.searcher <- function(table.name, primary.value, conn = NULL, db.credential = NULL, direction = NULL){
