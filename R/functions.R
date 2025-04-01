@@ -22,8 +22,6 @@ run.searcher <- function(table.name, primary.value, conn = NULL, db.credential =
 #' @param file A string specifying the path to the output HTML file.
 #' @return This function does not return a value. It creates and saves an HTML file as a side effect.
 #'
-#' @import gt
-#' 
 #' @export
 create.html.for.table.comments <- function(table.data, column.data, file){
 	require(gt)
