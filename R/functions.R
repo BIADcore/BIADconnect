@@ -462,7 +462,7 @@ return(dist)}}
 #' @param  d dataframe of site, with SiteID
 #'
 #' @export
-summary.maker <- function(d){
+summary_maker <- function(d){
 	x <- as.data.frame(table(d$SiteID)); names(x) <- c('SiteID','count')
 	x <- merge(x,unique(d[,1:3]),by='SiteID')
 	xi$code[x$count==1] <- 1
