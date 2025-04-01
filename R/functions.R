@@ -150,6 +150,7 @@ remove.blank.columns.from.table <- function(table){
 	tb <- tb[,keep.i,drop=F]
 return(tb)}
 #----------------------------------------------------------------------------------------------------
+#' @export
 database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, conn = NULL, db.credentials = NULL){
 
 	require(DiagrammeR)

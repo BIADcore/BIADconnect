@@ -2,6 +2,7 @@
 
 export(check.conn)
 export(create.html.for.table.comments)
+export(database.relationship.plotter)
 export(disconnect)
 export(get.ancestors)
 export(get.credentials)
