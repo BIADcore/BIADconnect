@@ -484,3 +484,66 @@ summary_maker <- function(d){
     legend <- c(1,2,key)
     return(list(summary=x,cols=cols,legend=legend))
 }
+#--------------------------------------------------------------------------------------------------
+#' Set up new BIAD user NOT SURE WHERE TO PUT THIS FUNCTION YET
+#'
+#' This function is a headstart setting up a new user, or changing details for an existing user.
+#' It stores username, email and credential level in the database, writes a draft email (sending will be automated eventually),
+#' and creates the user credentials in the database, including a random generated password.
+#'
+#' @param databases A character vector of length >=1, giving names of the databases to give access permission to. Typically 'BIAD'. 
+#' @param username A character vector of length = 1. Ideally all lowercase, first name and surname joined with an underscore. 
+#' @param email A character vector of length =1, giving a valid email address.
+#' @param team A Either 'YES' or 'NO'.
+#' @param committee A Either 'YES' or 'NO'.
+#' @param administrator A Either 'YES' or 'NO'.
+
+#' @return This function does not return a value. It performs various changes to the database, and creates and saves 'email.txt'.
+#'
+#' @export
+make.database.user <- function(databases, username, email, team, committee, administrator){
+
+	# store email and username in zprivate_users
+	sql <- paste0("DELETE FROM `BIAD`.`zprivate_users` WHERE  `user`='",username,"';")
+	query.database(sql.command =sql , conn=conn)
+	sql <- paste0("INSERT INTO `BIAD`.`zprivate_users` (`user`, `email`, `team`, `committee`, `administrator`) VALUES ('",username,"', '",email,"', '",team,"', '",committee,"', '",administrator,"');")
+	query.database(sql.command =sql , conn=conn)
+
+	# create user and password
+	users <- query.database(sql.command ="SELECT User FROM mysql.user;", conn=conn)$User
+	if(username%in%users){
+		query.database(sql.command =paste0("DROP USER '",username,"'@'localhost';") , conn=conn)
+		query.database(sql.command ="FLUSH PRIVILEGES;" , conn=conn)
+		}
+	sql <- paste0("CREATE USER '",username,"'@'localhost' IDENTIFIED BY RANDOM PASSWORD;")	
+	password <- query.database(sql.command = sql, conn=conn)[,'generated password']
+	query.database(sql.command ="FLUSH PRIVILEGES;" , conn=conn)
+
+	# allow specific access to databases and tables
+	all.tables <- query.database(sql.command ="SELECT TABLE_SCHEMA, TABLE_NAME FROM information_schema.tables;" , conn=conn)	
+	all.tables <- all.tables[!all.tables$TABLE_SCHEMA%in%c('information_schema','mysql','performance_schema','sys'),]
+	if(sum(!databases%in%all.tables$TABLE_SCHEMA)>0)stop('your databases dont exist. Maybe a typo?')
+	tables <- all.tables[all.tables$TABLE_SCHEMA%in%databases,]
+	for(d in 1:length(databases)){
+		sql <- paste0("GRANT ALL PRIVILEGES ON ",databases[d],".* TO '",username,"'@'localhost';")
+		query.database(sql.command =sql , conn=conn)
+		}
+	query.database(sql.command ="FLUSH PRIVILEGES;" , conn=conn)
+
+	# create an email text (later to be integrated into an auto email)
+	body <- c()
+	body[1] <- "Welcome to BIAD !!"
+	body[2] <- "This is an automated email, please dont reply."
+	body[3] <- "The easiest way to connect to BIAD is to first install a program such as heidiSQL, or sequelPro, or DBeaver etc..."
+	body[4] <- "The following are all the credentials you will need. Note, your password will expire after 12 months."
+	body[5] <- "Network type: MariaDB or MySQL (TCP/IP)"
+	body[6] <- "Hostname / IP: biad.cloud"
+	body[7] <- paste0("User: ",username)
+	body[8] <- paste0("Password: ", password)
+	body[9] <- "Port: 3316"
+
+	writeLines(body, '../tools/email.txt')
+	}
+#----------------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------------
