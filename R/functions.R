@@ -3,8 +3,6 @@
 # various functions and objects for BIAD
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
-# old hack for some mapping 
-source("https://raw.githubusercontent.com/AdrianTimpson/snippets/main/R/functions.R")
 
 # DEPRECATED
 # searhes for all directly related data
@@ -148,6 +146,7 @@ get.table.data <- function(keys = NULL, table.name = NULL, primary.value = NULL,
 	if(na.rm) data <- remove.blank.columns.from.table(data)
 return(data)}
 #----------------------------------------------------------------------------------------------------
+#' @export
 remove.blank.columns.from.table <- function(table){
 	if(is.null(table))return(table)
 	tb <- table
