@@ -99,6 +99,7 @@ get.tables.from.backup <- function(file){
 			}
 		}
 return(tables)}
+#----------------------------------------------------------------------------------------------------
 
 #' Get Primary Key Column from Table
 #'
@@ -139,10 +140,10 @@ return(column)}
 #' @export
 get.table.data <- function(keys = NULL, table.name = NULL, primary.value = NULL, conn = NULL, db.credentials = NULL, na.rm = TRUE){
 	primary.column <- get.primary.column.from.table(keys, table.name)
-    primary.value  <- DBI::dbQuoteString(ANSI(),as.character(primary.value)) #Sanitize strings
-    if(length(primary.value) == 1) matchexp <- paste0(" = ",primary.value)
-    if(length(primary.value) > 1) matchexp <- paste0(" IN (",paste0(primary.value,collapse=","),")")
-    sql.command <- paste0("SELECT * FROM `BIAD`.`",table.name,"` WHERE ",primary.column, matchexp)
+	primary.value  <- DBI::dbQuoteString(ANSI(),as.character(primary.value)) #Sanitize strings
+	if(length(primary.value) == 1) matchexp <- paste0(" = ",primary.value)
+	if(length(primary.value) > 1) matchexp <- paste0(" IN (",paste0(primary.value,collapse=","),")")
+	sql.command <- paste0("SELECT * FROM `BIAD`.`",table.name,"` WHERE ",primary.column, matchexp)
 	data <- query.database(sql.command = sql.command, conn = conn,db.credentials = db.credentials)
 	if(na.rm) data <- remove.blank.columns.from.table(data)
 return(data)}
@@ -210,41 +211,6 @@ database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, conn 
 	diagram <- paste("digraph {", data.tables, look.ups, edges, subgraph, "}")
 	image <- DiagrammeR::grViz(diagram, engine='neato')
 return(image)}
-#--------------------------------------------------------------------------------------------------
-make.autopad.trigger <- function(table, columns, type, prefix){
-        triggername <- paste(prefix, type,'_',table,sep='')
-        t1 <- paste('CREATE DEFINER=`Rscripts`@`%` TRIGGER `',triggername,'` BEFORE ',type,' ON `',table,'` FOR EACH ROW BEGIN',sep='')
-        t2 <- paste("SET NEW.`",columns,"` = TRIM(REPLACE(REPLACE(REPLACE(NEW.`",columns,"`, '\r', ' '), '\n', ' '), '\t', ' '));",sep='')
-        t3 <- 'END'
-        txt <- c(t1,t2,t3)
-        txt <- paste(txt,collapse=' ')
-return(txt)}
-#--------------------------------------------------------------------------------------------------
-make.stamp.trigger <- function(table, columns, type, prefix){
-        triggername <- paste(prefix, type,'_',table,sep='')
-        t1 <- paste('CREATE DEFINER=`Rscripts`@`%` TRIGGER `',triggername,'` BEFORE ',type,' ON `',table,'` FOR EACH ROW BEGIN',sep='')
-        if(type=='INSERT')t2 <- c('SET NEW.user_added = SYSTEM_USER();','SET NEW.time_added = CURRENT_TIMESTAMP;','SET NEW.user_last_update = SYSTEM_USER();','SET NEW.time_last_update = CURRENT_TIMESTAMP;')
-        if(type=='UPDATE')t2 <- c('SET NEW.user_last_update = SYSTEM_USER();','SET NEW.time_last_update = CURRENT_TIMESTAMP;')
-        t3 <- 'END'
-        txt <- c(t1,t2,t3)
-        txt <- paste(txt,collapse=' ')
-return(txt)}
-#--------------------------------------------------------------------------------------------------
-make.all.triggers <- function(x, prefix, trigger){
-        txt <- c()
-        tables <- unique(x$TABLE_NAME)
-        N <- length(tables)
-        if(N==0)return(NULL)
-        if(N>0){
-                for(n in 1:N){
-                        table <- tables[n]
-                        columns <- subset(x, TABLE_NAME==table)$COLUMN_NAME
-                        inserts <- trigger(table,columns,type = 'INSERT', prefix)
-                        updates <- trigger(table,columns,type = 'UPDATE', prefix)
-                        txt <- c(txt,inserts,updates)
-                        }
-                }
-return(txt)}
 #--------------------------------------------------------------------------------------------------
 #' Retrieve Relatives from Database Table
 #'
