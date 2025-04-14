@@ -8,7 +8,7 @@ To install this package from GitHub, you can use the `devtools` package. If you 
 
 - To install the latest version directly from GitHub, use:
   ```R
-  devtools::install_github("BIADwiki/BIADconnect")
+  devtools::install_github("BIADcore/BIADconnect")
   ```
 
 - You can also install the package from a local source folder (avoid installing devtools):

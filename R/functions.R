@@ -3,7 +3,10 @@
 # various functions and objects for BIAD
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 # DEPRECATED
 # searhes for all directly related data
 run.searcher <- function(table.name, primary.value, conn = NULL, db.credential = NULL, direction = NULL){
@@ -498,7 +501,7 @@ make.database.user <- function(databases, username, email, team, committee, admi
 	# create an email text (later to be integrated into an auto email)
 	body <- c()
 	body[1] <- "Welcome to BIAD !!"
-	body[2] <- "This is an automated email, please dont reply."
+	body[2] <- "This is an automated email, please do not reply."
 	body[3] <- "The easiest way to connect to BIAD is to first install a program such as heidiSQL, or sequelPro, or DBeaver etc..."
 	body[4] <- "The following are all the credentials you will need. Note, your password will expire after 12 months."
 	body[5] <- "Network type: MariaDB or MySQL (TCP/IP)"
@@ -506,6 +509,8 @@ make.database.user <- function(databases, username, email, team, committee, admi
 	body[7] <- paste0("User: ",username)
 	body[8] <- paste0("Password: ", password)
 	body[9] <- "Port: 3316"
+	body[10] <- ""
+	body[11] <- "If this fails, try port 8080 instead and report to admin or the slack channel"
 
 	writeLines(body, '../tools/email.txt')
 	}
