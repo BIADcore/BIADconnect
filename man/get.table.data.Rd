@@ -30,5 +30,5 @@ get.table.data(
 A data frame containing the queried data, potentially with NA columns removed.
 }
 \description{
-This function queries a database table to retrieve infor about one or multiple entries in the database
+This function queries a database table to retrieve information about one or multiple entries in the database
 }
