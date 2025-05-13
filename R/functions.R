@@ -1,13 +1,7 @@
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
-# various functions and objects for BIAD
+# Generic functions for connecting to and interacting with BIAD
 #----------------------------------------------------------------------------------------------------
-#----------------------------------------------------------------------------------------------------
-# DEPRECATED
-# searhes for all directly related data
-run.searcher <- function(table.name, primary.value, conn = NULL, db.credential = NULL, direction = NULL){
-    stop("this function as been replaced by:get.relatives ")
-}
 #----------------------------------------------------------------------------------------------------
 #' Get Primary Key Column from Table
 #'
@@ -55,7 +49,7 @@ get.table.data <- function(keys = NULL, table.name = NULL, primary.value = NULL,
 	if(na.rm) data <- remove.blank.columns.from.table(data)
 return(data)}
 #----------------------------------------------------------------------------------------------------
-#' @export
+# internal helper function
 remove.blank.columns.from.table <- function(table){
 	if(is.null(table))return(table)
 	tb <- table
@@ -296,7 +290,6 @@ get_elements <- function(x, element) {
 	return(newlist)
 }
 #--------------------------------------------------------------------------------------------------
-
 #' Shortest Distance Calculation Using Spherical Law of Cosines
 #'
 #' This function calculates the shortest distance between a single point \code{(x, y)} and a set of points \code{(ax, ay)}

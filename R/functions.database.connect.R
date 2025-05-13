@@ -60,6 +60,7 @@ query.database <- function(sql.command, conn=NULL, db.credentials=NULL, wait = 0
 	query <- encoder(query)
 return(query)}
 #--------------------------------------------------------------------------------------------------
+# internal helper function
 encoder <- function(df){
 	if(nrow(df)==0) return(NULL)
 	names(df) <- iconv(names(df),from="UTF-8",to="UTF-8")
