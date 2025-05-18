@@ -31,7 +31,7 @@ connection fails.
   credentials <- list(
     BIAD_DB_USER = "yourusername",
     BIAD_DB_PASS = "yourpassword",
-    BIAD_DB_HOST = "127.0.0.1",
+    BIAD_DB_HOST = "host",
     BIAD_DB_PORT = 3306
   )
   

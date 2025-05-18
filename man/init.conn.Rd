@@ -8,10 +8,10 @@ init.conn(db.credentials = NULL, dbname = "BIAD")
 }
 \arguments{
 \item{db.credentials}{A list containing database connection details. The list
-should include \code{user}, \code{password}, \code{host}, and \code{port}. If \code{NULL}, defaults
+should include \code{BIAD_DB_USER}, \code{BIAD_DB_PASS}, \code{BIAD_DB_HOST}, and \code{BIAD_DB_USER}. If \code{NULL}, defaults
 to fetching these values from environment variables. You can store these in
 \verb{~/.Renviron} or export them in your environment using your favorite method
-(ie: $export host='127.0.0.1')}
+(ie: $export BIAD_DB_HOST='127.0.0.1')}
 }
 \value{
 A DBI connection object to the MySQL database.
@@ -19,5 +19,23 @@ A DBI connection object to the MySQL database.
 \description{
 This function initializes a connection to the BIAD database using the provided
 credentials. If no credentials are supplied, it attempts to retrieve them from
-environment variables that should be stored in \verb{~/.Renviron}
+environment variables that should be stored in \verb{~/.Renviron}. For more info see
+\code{\link{https://biadwiki.org/en/connectR}}
+}
+\examples{
+\dontrun{
+  # Example of connecting and querying
+  conn  <- init.conn(
+      db.credentials = list(
+          BIAD_DB_USER = "yourusername",
+          BIAD_DB_PASS = "yourpassword",
+          BIAD_DB_HOST = "hostname",
+          BIAD_DB_PORT = 3306
+      )
+  )
+ }
+  result <- query.database(
+    sql.command=c("SELECT * FROM table"),
+    conn=conn
+  )
 }
