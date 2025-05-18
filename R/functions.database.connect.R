@@ -79,7 +79,7 @@ return(df)}
 #' should include `BIAD_DB_USER`, `BIAD_DB_PASS`, `BIAD_DB_HOST`, and `BIAD_DB_USER`. If `NULL`, defaults 
 #' to fetching these values from environment variables. You can store these in
 #' `~/.Renviron` or export them in your environment using your favorite method
-#' (ie: $export BIAD_DB_USER='127.0.0.1')
+#' (ie: $export BIAD_DB_HOST='127.0.0.1')
 #'
 #' @return A DBI connection object to the MySQL database.
 #' @examples
