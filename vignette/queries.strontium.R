@@ -1,5 +1,4 @@
 #--------------------------------------------------------------------------------------
-devtools::load_all()
 conn  <-  init.conn()
 strcol <- query.database("DESCRIBE Strontium", conn=conn)
 sql.command <- paste0("SELECT `Sites`.`SiteName`, `Sites`.`SiteID`, `Sites`.`Latitude`, `Sites`.`Longitude`", paste0(paste0("`Strontium`.`",strcol$Field,"`"),collapse=","),"
