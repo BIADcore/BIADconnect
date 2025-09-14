@@ -41,9 +41,9 @@ jobs:
       - name: Run R CMD check
         run: |
           R CMD check .
-      env:
-        R_TEST_DB_HOST: 127.0.0.1
-        R_TEST_DB_PORT: 3306
-        R_TEST_DB_USER: test_user
-        R_TEST_DB_PASSWORD: test1234
-        R_TEST_DB_NAME: BIAD
+        env:
+           R_TEST_DB_HOST: 127.0.0.1
+           R_TEST_DB_PORT: 3306
+           R_TEST_DB_USER: test_user
+           R_TEST_DB_PASSWORD: test1234
+           R_TEST_DB_NAME: BIAD
