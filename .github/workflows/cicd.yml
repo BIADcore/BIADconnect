@@ -28,7 +28,7 @@ jobs:
           MYSQL_PASSWORD: test1234
       - name: Wait for MySQL to be ready
         run: |
-          while ! docker exec mini-biad mariadb -proot1234 -h"127.0.0.1" --silent; do
+          while ! docker exec mini-biad mariadb-admin -ping -h"127.0.0.1" --silent; do
             echo "Waiting for MariaDB..."
             sleep 1
           done
