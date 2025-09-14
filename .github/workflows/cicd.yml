@@ -6,8 +6,6 @@ name: BIADConnect_checks
 jobs:
   check_biadconnect:
     runs-on: ubuntu-latest
-    container:
-      image: rocker/r-base  # Use an appropriate Rocker image
     steps:
       - name: Checkout BIADconnect
         uses: actions/checkout@v2
