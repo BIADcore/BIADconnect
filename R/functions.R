@@ -19,7 +19,7 @@
 #' @export
 get.primary.column.from.table <- function(keys = NULL, table.name, conn = NULL, db.credentials = NULL){                                                                                                                 
     if(is.null(keys))keys <- get.keys(conn = conn, db.credentials = db.credentials ) 
-	x <- subset(keys, TABLE_NAME == table.name & CONSTRAINT_NAME %in% c('unique','PRIMARY'))$COLUMN_NAME
+	x <- subset(keys, keys$TABLE_NAME == table.name & keys$CONSTRAINT_NAME %in% c('unique','PRIMARY'))$COLUMN_NAME
 	column <- x[duplicated(x)]
 	if(length(column)==0)column <- NA
 	if(length(column)>1)stop('unclear which column to use')	
@@ -64,10 +64,10 @@ database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, conn 
 
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_SCHEMA = 'BIAD'"
 	d <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
-	d <- subset(d, TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
+	d <- subset(d, d$TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
 	if(!include.look.ups){
-		d <- subset(d, REFERENCED_TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
-		d <- subset(d,!grepl('zoptions', REFERENCED_TABLE_NAME))
+		d <- subset(d, d$REFERENCED_TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
+		d <- subset(d,!grepl('zoptions', d$REFERENCED_TABLE_NAME))
 		}
 	z.tables <- d$REFERENCED_TABLE_NAME[grep('zoptions',d$REFERENCED_TABLE_NAME)]
 
@@ -121,9 +121,10 @@ return(image)}
 #' @param table.name A string specifying the name of the table where the entry is.
 #' @param primary.value The primary key value used to find the entry in the database.
 #' @param directions A character vector indicating direction(s) for retrieving the data related to the entry 
-#' Available options are "up" for ancestors and "down" for descendants. Default is both (`directions=c("up", "down")`).
+#' Available options are "up" for ancestors and "down" for descendants. Default is both (\code{directions=c("up", "down")}).
 #' @param conn A database connection object. Default is `NULL`.
 #' @param db.credentials parameter for manual setup of database credentials. Default is `NULL`.
+#' @param zoption if TRUE, zoptions tables linked to the object  are also returned. Default is `FALSE`.
 #'
 #' @return A list containing a root element with one branch with all the data associated with the specific entry and two other branches storing trees as nested list with all related entries.
 #' @export
@@ -160,7 +161,7 @@ get.decendants <- function(keys, table.name, primary.value, conn = NULL, db.cred
     if(is.null(primary.value) || primary.value == ""  )return(NULL)
 
     primary.column <- get.primary.column.from.table(keys, table.name)
-    relative.info  <- subset(keys, REFERENCED_COLUMN_NAME==primary.column & REFERENCED_TABLE_NAME==table.name)
+    relative.info  <- subset(keys, keys$REFERENCED_COLUMN_NAME==primary.column & keys$REFERENCED_TABLE_NAME==table.name)
     if(nrow(relative.info) == 0) return(NULL)
     
     relative.tables <- relative.info$TABLE_NAME #table using the key
@@ -195,13 +196,15 @@ get.decendants <- function(keys, table.name, primary.value, conn = NULL, db.cred
 #' @param primary.value The primary key value from which to find descendant records. 
 #' @param conn A database connection object. 
 #' @param db.credentials manual database credentials. 
+#' @param zoption if TRUE, zoptions tables linked to the object  are also returned. Default is `FALSE`.!!NOT IMPLEMENTED
+#' @param orig.table a parameter that store the orinal table at the level of the row matching the object. Used for the recursion
 #'
 #' @return A nested list containing data frames of descendant records for each related table.
 #' @export
 #'
 get.ancestors <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL, orig.table = NULL , zoption = FALSE){
 
-    relative.info  <- subset(keys, TABLE_NAME==table.name & grepl('FK_',CONSTRAINT_NAME))
+    relative.info  <- subset(keys, keys$TABLE_NAME==table.name & grepl('FK_',keys$CONSTRAINT_NAME))
     #if(!zoption) relative.info  <- subset(relative.info, !grepl('zoptions_',REFERENCED_TABLE_NAME))
 
     if(is.null(orig.table)) orig.table <- get.table.data(keys, table.name, primary.value, conn, db.credentials,na.rm = F) 
@@ -218,7 +221,7 @@ get.ancestors <- function(keys, table.name, primary.value, conn = NULL, db.crede
         rc <- relative.columns[n]
         rv.c <- orig.column.alt[n] #column where the reference value is stored
         if(rv.c %in% names(orig.table)){
-            values <- unique(unlist(na.omit(orig.table[rv.c])))
+            values <- unique(unlist(stats::na.omit(orig.table[rv.c])))
             if(is.numeric(values))values  <- as.character(values)
             values  <- DBI::dbQuoteString(DBI::ANSI(),values) #Sanitize strings
             if(length(values) > 0){
@@ -334,7 +337,7 @@ summary_maker <- function(d){
     x <- merge(x,unique(d[,1:3]),by='SiteID')
     x$code[x$count==1] <- 1
     x$code[x$count==2] <- 2
-    posts <- floor(unique(quantile(x$count[!x$count%in%c(1,2)])))
+    posts <- floor(unique(stats::quantile(x$count[!x$count%in%c(1,2)])))
     N <- length(posts)-1
     posts[N+1] <- posts[N+1]+1
     key <- c()
@@ -345,7 +348,7 @@ summary_maker <- function(d){
         i <- x$count>=lower & x$count<upper
         x$code[i] <- n+2
     }
-    cols <- colorRampPalette(c("red", "blue"))(N+2)
+    cols <- grDevices::colorRampPalette(c("red", "blue"))(N+2)
     for(n in 1:(N+2))x$col[x$code==n] <- cols[n]
     legend <- c(1,2,key)
     return(list(summary=x,cols=cols,legend=legend))
