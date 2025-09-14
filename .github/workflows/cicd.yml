@@ -4,12 +4,12 @@ on:
       - main
 name: BIADConnect_checks
 jobs:
-  test: 
+  check_biadconnect:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout BIADconnect
         uses: actions/checkout@v2
-      - name: Checkout minibiad
+      - name: Checkout minibiad docker
         uses: actions/checkout@v2
         with:
           repository: simoncarrignon/BIADdocker
@@ -28,8 +28,8 @@ jobs:
           MYSQL_PASSWORD: test1234
       - name: Wait for MySQL to be ready
         run: |
-          while ! docker exec mini-biad mysqladmin ping -h"127.0.0.1" --silent; do
-            echo "Waiting for MySQL..."
+          while ! docker exec mini-biad mariadb -proot1234 -h"127.0.0.1" --silent; do
+            echo "Waiting for MariaDB..."
             sleep 1
           done
       - name: Set up R
