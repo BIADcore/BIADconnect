@@ -28,7 +28,7 @@ jobs:
           MYSQL_PASSWORD: test1234
       - name: Wait for MySQL to be ready
         run: |
-          while ! docker exec mysql mysqladmin ping -h"127.0.0.1" --silent; do
+          while ! docker exec mini-biad mysqladmin ping -h"127.0.0.1" --silent; do
             echo "Waiting for MySQL..."
             sleep 1
           done
