@@ -1,0 +1,61 @@
+name: BIADConnect CI
+                                                                               
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+                                                                               
+jobs:
+  test:
+    runs-on: ubuntu-latest
+                                                                               
+    steps:
+      - name: Checkout BIADconnect
+        uses: actions/checkout@v2
+                                                                               
+      - name: Checkout minibiad
+        uses: actions/checkout@v2
+        with:
+          repository: simoncarrignon/BIADdocker
+          path: mini-biad
+                                                                               
+      - name: Build Mini-biad docker image
+        run: |
+          cd mini-biad
+          docker build -t mini-biad .
+                                                                               
+      - name: Run Mini-biad container
+        run: |
+          docker run -d  --name=mini-biad  --network="host"  biad-mini:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root12345
+          MYSQL_DATABASE: BIAD
+          MYSQL_USER: test_user
+          MYSQL_PASSWORD: test_user123456
+                                                                               
+      - name: Wait for MySQL to be ready
+        run: |
+          while ! docker exec mysql mysqladmin ping -h"127.0.0.1" --silent; do
+            echo "Waiting for MySQL..."
+            sleep 1
+          done
+                                                                               
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+                                                                               
+      - name: Install package dependencies
+        run: |
+          install.packages('devtools')
+          devtools::install_deps(dependencies = TRUE)
+                                                                               
+      - name: Run R CMD check
+        run: |
+          R CMD check .
+                                                                               
+      env:
+        R_TEST_DB_HOST: 127.0.0.1
+        R_TEST_DB_PORT: 3306
+        R_TEST_DB_USER: test_user
+        R_TEST_DB_PASSWORD: test_user123456
+        R_TEST_DB_NAME: BIAD
