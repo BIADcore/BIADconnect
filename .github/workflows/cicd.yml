@@ -4,7 +4,7 @@ on:
       - main
 name: BIADConnect_checks
 jobs:
-  test: CI
+  test: 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout BIADconnect
