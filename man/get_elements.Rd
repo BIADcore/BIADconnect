@@ -18,7 +18,7 @@ A list containing all elements from the tree that have names matching the specif
 This function extracts from a tree, as created by the function \code{get.relatives},
 all nodes/leaves that have names corresponding to the specified element.
 trees should be as named list of list like list(a=1,b=list(a=2,b=3,c=4),d=list(e=1,f=4))
-Based on the answers here: https://stackoverflow.com/questions/64578972/pull-all-elements-with-specific-name-from-a-nested-list/79168230#79168230
+Based on the answers here: \link{https://stackoverflow.com/questions/64578972/pull-all-elements-with-specific-name-from-a-nested-list/79168230#79168230}
 }
 \examples{
 \dontrun{
