@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
                                                                                
 jobs:
   test:
@@ -27,12 +26,12 @@ jobs:
                                                                                
       - name: Run Mini-biad container
         run: |
-          docker run -d  --name=mini-biad  --network="host"  biad-mini:latest
+          docker run -d  --name=mini-biad  --network="host"  mini-biad:latest
         env:
-          MYSQL_ROOT_PASSWORD: root12345
+          MYSQL_ROOT_PASSWORD: root1234
           MYSQL_DATABASE: BIAD
           MYSQL_USER: test_user
-          MYSQL_PASSWORD: test_user123456
+          MYSQL_PASSWORD: test1234
                                                                                
       - name: Wait for MySQL to be ready
         run: |
@@ -57,5 +56,5 @@ jobs:
         R_TEST_DB_HOST: 127.0.0.1
         R_TEST_DB_PORT: 3306
         R_TEST_DB_USER: test_user
-        R_TEST_DB_PASSWORD: test_user123456
+        R_TEST_DB_PASSWORD: test1234
         R_TEST_DB_NAME: BIAD
