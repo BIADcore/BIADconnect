@@ -54,7 +54,7 @@ query.database <- function(sql.command, conn=NULL, db.credentials=NULL, wait = 0
                     print(e)
 				}
 			)
-		query <- fetch(res, n= -1)	
+		query <- DBI::fetch(res, n= -1)	
 		DBI::dbClearResult(res)
 		}
 	query <- encoder(query)

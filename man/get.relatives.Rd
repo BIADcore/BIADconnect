@@ -24,6 +24,8 @@ Available options are "up" for ancestors and "down" for descendants. Default is 
 \item{conn}{A database connection object. Default is \code{NULL}.}
 
 \item{db.credentials}{parameter for manual setup of database credentials. Default is \code{NULL}.}
+
+\item{zoption}{if TRUE, zoptions tables linked to the object  are also returned. Default is \code{FALSE}.}
 }
 \value{
 A list containing a root element with one branch with all the data associated with the specific entry and two other branches storing trees as nested list with all related entries.
