@@ -1,18 +1,15 @@
 Package: BIADconnect
 Title: Big Interdisciplinary Archaeological Database Connection
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: 
-    c(person("The", "BIAD Team", 
-       email = "contact@biadteam.org", 
-       role = c("aut", "cre")))
+    person("BIAD", "committee", , "contact@biadwiki.org", role = c("aut", "cre"))
 Description: Provides tools for connecting and interacting with the 
     Big Interdisciplinary Archaeological Database (BIAD). This package 
     facilitates seamless access and data manipulation, supporting 
     archaeological research and interdisciplinary studies.
-License: MIT
 URL: http://biadwiki.org/
 BugReports: https://github.com/BIADwiki/BIADconnect/issues
+License: GPL (>= 3)
+Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-Encoding: UTF-8
-LazyData: true
