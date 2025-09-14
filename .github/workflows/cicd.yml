@@ -5,7 +5,7 @@ on:
 name: BIADConnect_checks
 jobs:
   check_biadconnect:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     container:
       image: rocker/r-base:latest  # Use an appropriate Rocker image
     steps:
