@@ -1,10 +1,8 @@
-name: BIADConnect CI
-                                                                               
 on:
   push:
     branches:
       - main
-                                                                               
+name: BIADConnect_checks
 jobs:
   test:
     runs-on: ubuntu-latest
