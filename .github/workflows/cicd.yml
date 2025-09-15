@@ -34,9 +34,14 @@ jobs:
           done
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
+      - name: Setup tinytex
+        uses: r-lib/actions/setup-tinytex@v2
+        run: tlmgr --version
+      - name: Setup tinytex
+        uses: r-lib/actions/setup-pandoc@v2 
       - name: Install depencies 
         run: |
-          Rscript -e 'install.packages(c("DBI", "RMySQL"))'
+          Rscript -e 'install.packages(c("DBI", "RMySQL","testthat"))'
       - name: Run R CMD build
         run: |
           R CMD build .
