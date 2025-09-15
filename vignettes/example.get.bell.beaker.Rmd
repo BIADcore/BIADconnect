@@ -5,13 +5,13 @@ author:
   - name: "Adrian Timpson"
     affiliation: "UCL"
     email: "a.timpson@ucl.ac.uk"
-vignette: > Dates
+vignette: > 
   %\VignetteIndexEntry{get all C14 dates associated with bell beaker}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-TODO
+TODO 
 
 ```{r eval=F}
 library(BIADconnect)

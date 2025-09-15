@@ -12,7 +12,7 @@ vignette: >
 ---
 
 
-Requires `r data.tree`
+Requires `data.tree`
 
 
 ```{r,eval=F}

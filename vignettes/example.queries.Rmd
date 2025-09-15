@@ -89,9 +89,8 @@ head(query)
 #--------------------------------------------------------------------------------------
 query <- query.database("SELECT * FROM `PhaseTypes`", conn=conn)
 type.count <- sort(table(query$Type), decreasing = TRUE)
-View(type.count)
+knitr::kable(type.count, col.names = c("Type", "Count"), caption = "PhaseType Entries")
 sum(type.count)
-
 ```
 
 
