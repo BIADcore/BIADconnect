@@ -1,0 +1,54 @@
+on:
+  push:
+    branches:
+      - main
+name: BIADConnect_checks
+jobs:
+  check_biadconnect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout BIADconnect
+        uses: actions/checkout@v2
+      - name: Checkout minibiad docker
+        uses: actions/checkout@v2
+        with:
+          repository: simoncarrignon/BIADdocker
+          path: mini-biad
+      - name: Build Mini-biad docker image
+        run: |
+          cd mini-biad
+          docker build -t mini-biad .
+      - name: Run Mini-biad container
+        run: |
+          docker run -d  --name=mini-biad  --network="host"  mini-biad:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root1234
+          MYSQL_DATABASE: BIAD
+          MYSQL_USER: test_user
+          MYSQL_PASSWORD: test1234
+      - name: Wait for MySQL to be ready
+        run: |
+          while ! docker exec mini-biad mariadb-admin ping -h"127.0.0.1" --silent; do
+            echo "Waiting for MariaDB..."
+            sleep 1
+          done
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-pandoc@v2
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck
+          needs: check
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          upload-snapshots: true
+          build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
+        env:
+           _R_CHECK_FORCE_SUGGESTS_: false
+           R_TEST_DB_HOST: 127.0.0.1
+           R_TEST_DB_PORT: 3306
+           R_TEST_DB_USER: test_user
+           R_TEST_DB_PASSWORD: test1234
+           R_TEST_DB_NAME: BIAD
