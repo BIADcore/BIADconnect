@@ -38,6 +38,7 @@ return(column)}
 #'
 #' @return A data frame containing the queried data, potentially with NA columns removed.
 #'
+#' @import DBI
 #' @export
 get.table.data <- function(keys = NULL, table.name = NULL, primary.value = NULL, conn = NULL, db.credentials = NULL, na.rm = TRUE){
 	primary.column <- get.primary.column.from.table(keys, table.name)
@@ -60,7 +61,6 @@ return(tb)}
 #' @export
 database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, conn = NULL, db.credentials = NULL){
 
-	require(DiagrammeR)
 
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_SCHEMA = 'BIAD'"
 	d <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
@@ -154,6 +154,7 @@ get.relatives <- function(table.name, primary.value, directions = c("up","down")
 #' @param db.credentials manual database credentials. 
 #'
 #' @return A nested list containing data frames of descendant records for each related table.
+#' @import DBI
 #' @export
 #'
 get.decendants <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
@@ -279,11 +280,9 @@ get.keys <- function(conn = NULL, db.credentials = NULL){
 #' @return A list containing all elements from the tree that have names matching the specified element.
 #'
 #' @examples
-#' \dontrun{
 #' tree <- list(a = 1, b = list(a = 2, c = 3), d = 4)
 #' get_elements(tree, "a")
-#' # Expected output: list(1, 2)
-#' }
+#' # This will return as an output: list(1, 2)
 get_elements <- function(x, element) {
 	newlist=list()
 	for(elt in names(x)){
@@ -293,7 +292,7 @@ get_elements <- function(x, element) {
 	return(newlist)
 }
 #--------------------------------------------------------------------------------------------------
-#' Shortest Distance Calculation Using Spherical Law of Cosines
+#' Shorest Distance Calculation Using Spherical Law of Cosines
 #'
 #' This function calculates the shortest distance between a single point \code{(x, y)} and a set of points \code{(ax, ay)}
 #' using the spherical law of cosines. The distances are returned in radians and can be converted to kilometers by

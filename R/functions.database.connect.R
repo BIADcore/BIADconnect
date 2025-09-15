@@ -33,9 +33,9 @@
 #'   )
 #' }
 #'
+#' @import DBI
 #' @export
 query.database <- function(sql.command, conn=NULL, db.credentials=NULL, wait = 0){
-	require(DBI)
 	conn <- check.conn(conn = conn, db.credentials = db.credentials) #this doesn't return anything but modify conn if need, if not, nothing happen
 	if(is.null(conn))conn  <- get("conn", envir = .GlobalEnv)
 	for(n in 1:length(sql.command)){
@@ -98,10 +98,10 @@ return(df)}
 #'     sql.command=c("SELECT * FROM table"),
 #'     conn=conn
 #'   )
+#' @import RMySQL
+#' @import DBI
 #' @export
 init.conn <- function(db.credentials=NULL, dbname="BIAD"){
-    require(RMySQL)
-    require(DBI)
     if(length(DBI::dbListConnections(DBI::dbDriver("MySQL")))!=0) disconnect()
     if(is.null(db.credentials)){
         
@@ -170,10 +170,10 @@ msp <- function(password) {
 #'   disconnect(drv = "PostgreSQL")
 #' }
 #'
+#' @import RMySQL
+#' @import DBI
 #' @export
 disconnect <- function(drv="MySQL"){
-    require(RMySQL)
-    require(DBI)
     sapply(DBI::dbListConnections(DBI::dbDriver(drv)),DBI::dbDisconnect)
 }
 #--------------------------------------------------------------------------------------------------
@@ -203,6 +203,7 @@ disconnect <- function(drv="MySQL"){
 #'   conn <- check.conn(conn = NULL, db.credentials = credentials)
 #' }
 #'
+#' @import DBI
 #' @export
 check.conn <- function(conn = NULL, db.credentials=NULL){
 	require(DBI)
