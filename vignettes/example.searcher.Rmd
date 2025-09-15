@@ -1,3 +1,21 @@
+--- 
+title: "Using get.relatives"
+output: rmarkdown::html_vignette
+author: 
+  - name: "Simon Carrignon"
+    affiliation: "UCL"
+    email: "s.carrignon@ucl.ac.uk"
+vignette: >
+  %\VignetteIndexEntry{Using get relative}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+Requires `r data.tree`
+
+
+```{r,eval=F}
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
 # # query any table with a primary key value, to get all direct relationships 
@@ -29,3 +47,4 @@ plot(tree.up)
 disconnect()
 #--------------------------------------------------------------------------------------
 
+```

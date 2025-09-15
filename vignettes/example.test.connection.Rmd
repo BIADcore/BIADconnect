@@ -1,3 +1,19 @@
+--- 
+title: "Example R script to test if R connection to BIAD is working"
+output: rmarkdown::html_vignette
+author: 
+  - name: "Adrian Timpson"
+    affiliation: "UCL"
+    email: "a.timpson@ucl.ac.uk"
+vignette: >
+  %\VignetteIndexEntry{Example R script to test if R connection to BIAD is working}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r}
+
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
 # Example R script to test if R connection to BIAD is working
@@ -14,3 +30,4 @@ plot(table(query$Country),las=2)
 #--------------------------------------------------------------------------------------
 disconnect()
 #--------------------------------------------------------------------------------------
+```

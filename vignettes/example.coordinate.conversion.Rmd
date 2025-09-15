@@ -1,3 +1,20 @@
+--- 
+title: "Example R script for converting local coordinates to WGS 84"
+output: rmarkdown::html_vignette
+author: 
+  - name: "Adrian Timpson"
+    affiliation: "UCL"
+    email: "a.timpson@ucl.ac.uk"
+vignette: >
+  %\VignetteIndexEntry{Example R script for converting local coordinates to WGS 84}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Need real data to replace placeholder `___`
+
+```{r, eval=F}
+
 #------------------------------------------------------------------
 # Example R script for converting local coordinates to WGS 84
 #------------------------------------------------------------------
@@ -33,3 +50,4 @@ head(___)
 
 # save the file as .csv ready for import
 st_write(___, "___.csv", layer_options = "GEOMETRY=AS_YX", delete_dsn = TRUE)
+```

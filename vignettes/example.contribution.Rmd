@@ -1,6 +1,10 @@
 --- 
 title: "Contribution Analysis in BIAD: Radiocarbon Dates"
 output: rmarkdown::html_vignette
+author: 
+  - name: "Adrian Timpson"
+    affiliation: "UCL"
+    email: "a.timpson@ucl.ac.uk"
 vignette: >
   %\VignetteIndexEntry{Contribution Analysis in BIAD: Radiocarbon Dates}
   %\VignetteEngine{knitr::rmarkdown}

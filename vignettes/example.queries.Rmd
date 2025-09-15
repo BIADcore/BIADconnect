@@ -1,3 +1,18 @@
+--- 
+title: "Example R script for querying BIAD"
+output: rmarkdown::html_vignette
+author: 
+  - name: "Adrian Timpson"
+    affiliation: "UCL"
+    email: "a.timpson@ucl.ac.uk"
+vignette: >
+  %\VignetteIndexEntry{Example R script for querying BIAD}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
 # Example R script for querying BIAD
@@ -23,7 +38,12 @@ tables <- query.database(sql.command = sql.command, conn=conn)
 head(query)
 table(query$Country)
 plot(log(table(query$Country)),las=2)
+```
 
+
+## Example 2: Joins done in MySQL
+
+```{r}
 #--------------------------------------------------------------------------------------
 # Example 2: Joins done in MySQL
 #--------------------------------------------------------------------------------------
@@ -36,6 +56,12 @@ WHERE `AgeCategorical` = 'infant'
 ORDER BY `IndividualID`"
 query <- query.database(sql.command, conn=conn)
 head(query)
+```
+
+
+## Example 3: Exactly the same output, but joins done in R
+
+```{r}
 #--------------------------------------------------------------------------------------
 # Example 3: Exactly the same output, but joins done in R
 #--------------------------------------------------------------------------------------
@@ -50,6 +76,13 @@ query <- merge(query,  query4, by = "GraveID")
 query <- subset(query, AgeCategorical=='infant')
 query <- query[order(query$IndividualID),]
 head(query)
+```
+
+
+## Example 4: quantifying PhaseType entries in BIAD 
+
+
+```{r}
 #--------------------------------------------------------------------------------------
 # Example 4: quantifying PhaseType entries in BIAD 
 #--------------------------------------------------------------------------------------
@@ -58,6 +91,12 @@ type.count <- sort(table(query$Type), decreasing = TRUE)
 View(type.count)
 sum(type.count)
 
+```
+
+
+## Example 5: updating the database directly
+
+```{r}
 #--------------------------------------------------------------------------------------
 # Example 5: updating the database directly
 #--------------------------------------------------------------------------------------
@@ -70,6 +109,12 @@ for(n in 1:nrow(old)){
 	}
 query.database(sql.command, conn=conn)
 
+```
+
+
+## Example 6: get LabIDs from C14Samples table
+
+```{r}
 #--------------------------------------------------------------------------------------
 # Example 6: get LabIDs from C14Samples table
 #--------------------------------------------------------------------------------------
@@ -81,6 +126,12 @@ head(query)
 sql.command <- "SELECT GraveID, Graves.PhaseID, SiteID, Period FROM Graves JOIN Phases ON Graves.PhaseID = Phases.PhaseID GROUP BY GraveID ORDER BY GraveID"
 query <- query.database(sql.command, conn=conn)
 
+```
+
+
+## Example 8: get c14 for a culture and country
+
+```{r}
 #--------------------------------------------------------------------------------------
 # Example 8: get c14 for a culture and country
 #--------------------------------------------------------------------------------------
@@ -93,17 +144,25 @@ m2 <- merge(m1, query3, by = "PhaseID")
 
 head(m2)
 
+```
+
+
+## Example 3: Exactly the same output, but joins done in R
+
+```{r}
 #--------------------------------------------------------------------------------------
 # Example 9: country-based distribution of aDNA samples per country
 #--------------------------------------------------------------------------------------
 sql.command <- "SELECT Country, Count(aDNAID) AS Frequency FROM Sites LEFT JOIN Phases on Sites.SiteID = Phases.SiteID LEFT JOIN Graves ON Phases.PhaseID = Graves.PhaseID LEFT JOIN GraveIndividuals ON Graves.GraveID = GraveIndividuals.GraveID WHERE aDNAID IS NOT NULL GROUP BY Country;"
 query <- query.database(sql.command, conn=conn)
-library(ggplot2)
-ggplot(query, aes(x = Country, y = Frequency)) + 
-	geom_bar(stat="identity") +
-	labs(title = "aDNA samples in BIAD [n=2045") +
-	coord_flip()
+#library(ggplot2)
+#ggplot(query, aes(x = Country, y = Frequency)) + 
+#	geom_bar(stat="identity") +
+#	labs(title = "aDNA samples in BIAD [n=2045") +
+#	coord_flip()
+barplot(query[,2],horiz=T,ylab="Country",xlab="Frequency",title=paste0("aDNA samples in (local) BIAD [n=",sum(query[,2]),"]"))
 #--------------------------------------------------------------------------------------
 disconnect()
 #--------------------------------------------------------------------------------------
 
+```

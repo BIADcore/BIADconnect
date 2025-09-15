@@ -1,3 +1,19 @@
+--- 
+title: "get all C14 dates associated with bell beaker"
+output: rmarkdown::html_vignette
+author: 
+  - name: "Adrian Timpson"
+    affiliation: "UCL"
+    email: "a.timpson@ucl.ac.uk"
+vignette: > Dates
+  %\VignetteIndexEntry{get all C14 dates associated with bell beaker}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+TODO
+
+```{r eval=F}
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
 # get all C14 dates associated with bell beaker
@@ -14,3 +30,4 @@ head(x)
 #--------------------------------------------------------------------------------------
 disconnect()
 #--------------------------------------------------------------------------------------
+```

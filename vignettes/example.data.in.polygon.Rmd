@@ -1,3 +1,20 @@
+--- 
+title: "get all sites within a polygon"
+output: rmarkdown::html_vignette
+author: 
+  - name: "Adrian Timpson"
+    affiliation: "UCL"
+    email: "a.timpson@ucl.ac.uk"
+vignette: >
+  %\VignetteIndexEntry{get all sites within a polygon}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Function data.in.polugon doesn't exist, this could be run using a fake polygin made in sf
+
+```{r eval=F}
+
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
 # get all sites within a polygon
@@ -5,7 +22,6 @@
 #--------------------------------------------------------------------------------------
 # Requirements first read:
 # https://biadwiki.org/en/connectR
-# ensure you have opened a tunnel first (e.g. putty)
 #--------------------------------------------------------------------------------------
 conn  <-  init.conn()
 #--------------------------------------------------------------------------------------
@@ -26,3 +42,4 @@ points(d$Longitude, d$Latitude, pch=16)
 #--------------------------------------------------------------------------------------
 disconnect()
 #--------------------------------------------------------------------------------------
+```
