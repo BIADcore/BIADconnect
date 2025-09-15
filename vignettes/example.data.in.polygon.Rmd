@@ -15,6 +15,7 @@ Function data.in.polugon doesn't exist, this could be run using a fake polygin m
 
 ```{r eval=F}
 
+library(BIADconnect)
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
 # get all sites within a polygon
