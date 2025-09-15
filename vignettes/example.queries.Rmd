@@ -96,7 +96,7 @@ sum(type.count)
 
 ## Example 5: updating the database directly
 
-```{r}
+```{r, eval=F}
 #--------------------------------------------------------------------------------------
 # Example 5: updating the database directly
 #--------------------------------------------------------------------------------------
@@ -126,6 +126,7 @@ head(query)
 sql.command <- "SELECT GraveID, Graves.PhaseID, SiteID, Period FROM Graves JOIN Phases ON Graves.PhaseID = Phases.PhaseID GROUP BY GraveID ORDER BY GraveID"
 query <- query.database(sql.command, conn=conn)
 
+knitr::kable(query[1:min(10,nrow(query)),])
 ```
 
 
