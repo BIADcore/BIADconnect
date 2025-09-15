@@ -48,7 +48,7 @@ jobs:
               library(RMySQL)
             })
             con <- dbConnect(RMySQL::MySQL(),
-                             dbname = Sys.getenv("MYSQL_DATABASE"),
+                             dbname = "BIAD",
                              host = Sys.getenv("BIAD_DB_HOST"),
                              port = as.integer(Sys.getenv("BIAD_DB_PORT")),
                              user = Sys.getenv("BIAD_DB_USER"),
