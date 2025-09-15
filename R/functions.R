@@ -58,6 +58,19 @@ remove.blank.columns.from.table <- function(table){
 	tb <- tb[,keep.i,drop=F]
 return(tb)}
 #----------------------------------------------------------------------------------------------------
+#' Plot Database Table Relationships
+#'
+#' helper to visualizes the relationships between all the tables (used for the wiki)
+#'
+#' @param d.tables A character vector of table names to include in the plot, separated by semicolons and spaces (e.g., "table1; table2").
+#' @param include.look.ups Logical. If TRUE, lookup tables and their relationships are included in the plot. Default is TRUE.
+#' @param conn A database connection object. If NULL, `db.credentials` is used to establish a connection.
+#' @param db.credentials A list containing database credentials, such as username, password, and database name. Used to establish a connection if `conn` is NULL.
+#'
+#' @return A DiagrammeR graph object representing the database schema as a visual diagram.
+#'
+#' @details The function queries the `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` to obtain foreign key relationships between tables in the database schema named 'BIAD'. It then uses DiagrammeR to create a visual representation of these relationships.
+#'
 #' @export
 database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, conn = NULL, db.credentials = NULL){
 
@@ -272,13 +285,14 @@ get.keys <- function(conn = NULL, db.credentials = NULL){
 #' This function extracts from a tree, as created by the function \code{get.relatives}, 
 #' all nodes/leaves that have names corresponding to the specified element.
 #' trees should be as named list of list like list(a=1,b=list(a=2,b=3,c=4),d=list(e=1,f=4))
-#' Based on the answers here: \link{https://stackoverflow.com/questions/64578972/pull-all-elements-with-specific-name-from-a-nested-list/79168230#79168230}
+#' Based on the on \href{this stackoverflow discussion}{https://stackoverflow.com/questions/64578972/pull-all-elements-with-specific-name-from-a-nested-list/79168230#79168230}
 #'
 #' @param x A list representing the tree structure.
 #' @param element A character string specifying the name of elements to extract from the tree.
 #' 
 #' @return A list containing all elements from the tree that have names matching the specified element.
 #'
+#' @export
 #' @examples
 #' tree <- list(a = 1, b = list(a = 2, c = 3), d = 4)
 #' get_elements(tree, "a")

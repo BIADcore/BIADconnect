@@ -73,13 +73,14 @@ return(df)}
 #' This function initializes a connection to the BIAD database using the provided
 #' credentials. If no credentials are supplied, it attempts to retrieve them from
 #' environment variables that should be stored in `~/.Renviron`. For more info see
-#' \code{\link{https://biadwiki.org/en/connectR}} 
+#' \url{https://biadwiki.org/en/connectR}
 #'
+#' @param dbname The name of the database to connect. Should  be BIAD, but that could be change if using a local, modified version of the database.
 #' @param db.credentials A list containing database connection details. The list 
 #' should include `BIAD_DB_USER`, `BIAD_DB_PASS`, `BIAD_DB_HOST`, and `BIAD_DB_USER`. If `NULL`, defaults 
 #' to fetching these values from environment variables. You can store these in
 #' `~/.Renviron` or export them in your environment using your favorite method
-#' (ie: $export BIAD_DB_HOST='127.0.0.1')
+#' (ie: \code{$export BIAD_DB_HOST='127.0.0.1'})
 #'
 #' @return A DBI connection object to the MySQL database.
 #' @examples
@@ -93,11 +94,11 @@ return(df)}
 #'           BIAD_DB_PORT = 3306
 #'       )
 #'   )
-#'  }
 #'   result <- query.database(
 #'     sql.command=c("SELECT * FROM table"),
 #'     conn=conn
 #'   )
+#'  }
 #' @import RMySQL
 #' @import DBI
 #' @export

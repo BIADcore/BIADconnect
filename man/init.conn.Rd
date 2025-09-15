@@ -11,7 +11,9 @@ init.conn(db.credentials = NULL, dbname = "BIAD")
 should include \code{BIAD_DB_USER}, \code{BIAD_DB_PASS}, \code{BIAD_DB_HOST}, and \code{BIAD_DB_USER}. If \code{NULL}, defaults
 to fetching these values from environment variables. You can store these in
 \verb{~/.Renviron} or export them in your environment using your favorite method
-(ie: $export BIAD_DB_HOST='127.0.0.1')}
+(ie: \code{$export BIAD_DB_HOST='127.0.0.1'})}
+
+\item{dbname}{The name of the database to connect. Should  be BIAD, but that could be change if using a local, modified version of the database.}
 }
 \value{
 A DBI connection object to the MySQL database.
@@ -20,7 +22,7 @@ A DBI connection object to the MySQL database.
 This function initializes a connection to the BIAD database using the provided
 credentials. If no credentials are supplied, it attempts to retrieve them from
 environment variables that should be stored in \verb{~/.Renviron}. For more info see
-\code{\link{https://biadwiki.org/en/connectR}}
+\url{https://biadwiki.org/en/connectR}
 }
 \examples{
 \dontrun{
@@ -33,9 +35,9 @@ environment variables that should be stored in \verb{~/.Renviron}. For more info
           BIAD_DB_PORT = 3306
       )
   )
- }
   result <- query.database(
     sql.command=c("SELECT * FROM table"),
     conn=conn
   )
+ }
 }
