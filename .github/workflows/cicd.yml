@@ -61,7 +61,7 @@ jobs:
            BIAD_DB_HOST: 127.0.0.1
            BIAD_DB_PORT: 3306
            BIAD_DB_USER: test_user
-           BIAD_DB_PASSWORD: test1234
+           BIAD_DB_PASS: test1234
       - name: R CMD check
         uses: r-lib/actions/check-r-package@v2
         with:
@@ -71,4 +71,4 @@ jobs:
            BIAD_DB_HOST: 127.0.0.1
            BIAD_DB_PORT: 3306
            BIAD_DB_USER: test_user
-           BIAD_DB_PASSWORD: test1234
+           BIAD_DB_PASS: test1234
