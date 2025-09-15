@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{slc}
 \alias{slc}
-\title{Shortest Distance Calculation Using Spherical Law of Cosines}
+\title{Shorest Distance Calculation Using Spherical Law of Cosines}
 \usage{
 slc(x, y, ax, ay, input = "rad")
 }

@@ -1,3 +1,4 @@
+
 test_that("connetions works", {
 conn <-   init.conn(
      db.credentials = list(

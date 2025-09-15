@@ -10,6 +10,13 @@ License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Imports: 
+    DBI,
+    RMySQL
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    DiagrammeR,
+    grDevices,
+    data.tree,
+    stats
 Config/testthat/edition: 3

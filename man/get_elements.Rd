@@ -21,9 +21,7 @@ trees should be as named list of list like list(a=1,b=list(a=2,b=3,c=4),d=list(e
 Based on the answers here: \link{https://stackoverflow.com/questions/64578972/pull-all-elements-with-specific-name-from-a-nested-list/79168230#79168230}
 }
 \examples{
-\dontrun{
 tree <- list(a = 1, b = list(a = 2, c = 3), d = 4)
 get_elements(tree, "a")
-# Expected output: list(1, 2)
-}
+# This will return as an output: list(1, 2)
 }
