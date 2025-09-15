@@ -66,8 +66,7 @@ jobs:
         uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
-          build_args: 'c("--no-build-vignettes","--no-manual","--compact-vignettes=gs+qpdf")'
-          check_args: '--no-vignettes'
+          args: 'c("--no-vignette","--no-build-vignettes","--no-manual","--compact-vignettes=gs+qpdf")'
         env:
            _R_CHECK_FORCE_SUGGESTS_: false
            BIAD_DB_HOST: 127.0.0.1
