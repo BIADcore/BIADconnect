@@ -40,6 +40,8 @@ jobs:
       - name: Run R CMD build
         run: |
           R CMD build .
+        env: 
+           _R_CHECK_FORCE_SUGGESTS_: false
       - name: Run R CMD check
         run: |
           R CMD check BIADconnect_0.0.2.tar.gz
