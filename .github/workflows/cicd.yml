@@ -65,7 +65,6 @@ jobs:
       - name: R CMD check
         uses: r-lib/actions/check-r-package@v2
         with:
-          upload-snapshots: true
           args: 'c("--no-vignette","--no-build-vignettes","--no-manual","--compact-vignettes=gs+qpdf")'
         env:
            _R_CHECK_FORCE_SUGGESTS_: false
