@@ -29,7 +29,7 @@ test_that("get.relative works", {
              BIAD_DB_PORT = 3306
          )
     )
-    res <- get.relatives(table.name="Sites",primary.value="S12592")
+    res <- get.relatives(conn=conn,table.name="Sites",primary.value="S12592")
     testthat::expect_type(res,'list')
     testthat::expect_length(res,1)
     testthat::expect_named(res,"S12592")
