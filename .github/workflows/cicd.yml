@@ -40,18 +40,11 @@ jobs:
       - name: Install depencies 
         run: |
           Rscript -e 'install.packages(c("DBI", "RMySQL","rcmdcheck","testthat","knitr","rmarkdown"))'
-      - name: Run R CMD build
-        run: |
-          R CMD build .
-        env:
-           _R_CHECK_FORCE_SUGGESTS_: false
-           BIAD_DB_HOST: 127.0.0.1
-           BIAD_DB_PORT: 3306
-           BIAD_DB_USER: test_user
-           BIAD_DB_PASSWORD: test1234
-      - name: Run R CMD check
-        run: |
-          R CMD check BIADconnect_0.0.2.tar.gz
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          upload-snapshots: true
+          build_args: 'c("--no-build-vignettes","--no-manual","--compact-vignettes=gs+qpdf")'
+          check_args: '--no-vignettes'
         env:
            _R_CHECK_FORCE_SUGGESTS_: false
            BIAD_DB_HOST: 127.0.0.1
