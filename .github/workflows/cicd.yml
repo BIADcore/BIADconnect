@@ -40,7 +40,30 @@ jobs:
       - name: Install depencies 
         run: |
           Rscript -e 'install.packages(c("DBI", "RMySQL","rcmdcheck","testthat","knitr","rmarkdown"))'
-      - uses: r-lib/actions/check-r-package@v2
+      - name: Test Database Connection in R
+        run: |
+          Rscript -e '
+            suppressPackageStartupMessages({
+              library(DBI)
+              library(RMySQL)
+            })
+            con <- dbConnect(RMySQL::MySQL(),
+                             dbname = Sys.getenv("MYSQL_DATABASE"),
+                             host = Sys.getenv("BIAD_DB_HOST"),
+                             port = as.integer(Sys.getenv("BIAD_DB_PORT")),
+                             user = Sys.getenv("BIAD_DB_USER"),
+                             password = Sys.getenv("BIAD_DB_PASSWORD"))
+            dbListTables(con)
+            dbDisconnect(con)
+          '
+        env:
+           _R_CHECK_FORCE_SUGGESTS_: false
+           BIAD_DB_HOST: 127.0.0.1
+           BIAD_DB_PORT: 3306
+           BIAD_DB_USER: test_user
+           BIAD_DB_PASSWORD: test1234
+      - name: R CMD check
+        uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
           build_args: 'c("--no-build-vignettes","--no-manual","--compact-vignettes=gs+qpdf")'
