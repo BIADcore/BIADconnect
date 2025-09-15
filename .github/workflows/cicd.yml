@@ -39,7 +39,7 @@ jobs:
           use-public-rspm: true
       - name: Install depencies 
         run: |
-          Rscript -e 'install.packages(c("DBI", "RMySQL","rcmdcheck","testthat","knitr"))'
+          Rscript -e 'install.packages(c("DBI", "RMySQL","rcmdcheck","testthat","knitr","rmarkdown"))'
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
