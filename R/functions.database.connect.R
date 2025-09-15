@@ -207,7 +207,6 @@ disconnect <- function(drv="MySQL"){
 #' @import DBI
 #' @export
 check.conn <- function(conn = NULL, db.credentials=NULL){
-	require(DBI)
 	if(is.null(conn) || !tryCatch(DBI::dbIsValid(conn),error=function(err)FALSE) ){ #check if no connector has been provided, or if the connector doesnt work
 	if(exists("conn", envir = .GlobalEnv))conn <- get("conn", envir = .GlobalEnv) #check if a connector already exist at global level
 	if(is.null(conn) || !tryCatch(DBI::dbIsValid(conn),error=function(err)FALSE) ){
