@@ -1,3 +1,15 @@
+--- 
+title: "Contribution Analysis in BIAD: Radiocarbon Dates"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Contribution Analysis in BIAD: Radiocarbon Dates}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r}
+
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
 # Determining the % of contribution towards data collection in BIAD
@@ -37,3 +49,4 @@ barplot(counts, col = c("darkblue","red"), legend = rownames(counts))
 #--------------------------------------------------------------------------------------
 disconnect()
 #--------------------------------------------------------------------------------------
+```
