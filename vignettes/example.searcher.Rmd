@@ -6,7 +6,7 @@ author:
     affiliation: "UCL"
     email: "s.carrignon@ucl.ac.uk"
 vignette: >
-  %\VignetteIndexEntry{Using get relative}
+  %\VignetteIndexEntry{Using get.relative}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
