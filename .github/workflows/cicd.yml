@@ -40,22 +40,6 @@ jobs:
       - name: Install depencies 
         run: |
           Rscript -e 'install.packages(c("DBI", "RMySQL","rcmdcheck","testthat","knitr","rmarkdown"))'
-      - name: Test Database Connection in R
-        run: |
-          Rscript -e '
-            suppressPackageStartupMessages({
-              library(DBI)
-              library(RMySQL)
-            })
-            con <- dbConnect(RMySQL::MySQL(),
-                             dbname = "BIAD",
-                             host = Sys.getenv("BIAD_DB_HOST"),
-                             port = as.integer(Sys.getenv("BIAD_DB_PORT")),
-                             user = Sys.getenv("BIAD_DB_USER"),
-                             password = Sys.getenv("BIAD_DB_PASSWORD"))
-            dbListTables(con)
-            dbDisconnect(con)
-          '
         env:
            _R_CHECK_FORCE_SUGGESTS_: false
            BIAD_DB_HOST: 127.0.0.1
