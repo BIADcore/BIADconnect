@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-name: BIADConnect_checks
+name: BIAD Conn. Check
 jobs:
   check_biadconnect:
     runs-on: ubuntu-latest
