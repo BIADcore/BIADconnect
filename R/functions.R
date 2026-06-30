@@ -257,6 +257,15 @@ getSize <- function(conn = NULL, db.credential = NULL, db = 'BIAD'){
     size[which( size[,1] == db),]
 }
 #--------------------------------------------------------------------------------------------------
+#' Retrieve BIAD information schema key
+#'
+#' This function retrieves the key column usage from BIAD
+#'
+#' @param conn A database connection object. Default is `NULL`.
+#' @param db.credential manually pass database credentials. Default is `NULL`.
+#'
+#' @return A data frame with the key column data.
+#' @export
 get.keys <- function(conn = NULL, db.credentials = NULL){
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='BIAD'"
 	keys <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
