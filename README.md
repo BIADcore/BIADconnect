@@ -1,4 +1,8 @@
+[![R-CMD-check](https://github.com/BIADcore/BIADconnect/actions/workflows/cicd.yml/badge.svg)](https://github.com/BIADcore/BIADconnect/actions/workflows/cicd.yml)
+
 <a href="http://biadwiki.org/"><img src="https://biadwiki.org/biad.logo.png" alt="BIAD" height="150"/></a>
+
+
 
 # BIAD : Big Interdisciplinary Archaeological Database
 

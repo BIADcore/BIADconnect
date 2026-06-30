@@ -1,0 +1,50 @@
+--- 
+title: "Using get.relatives"
+output: rmarkdown::html_vignette
+author: 
+  - name: "Simon Carrignon"
+    affiliation: "UCL"
+    email: "s.carrignon@ucl.ac.uk"
+vignette: >
+  %\VignetteIndexEntry{Using get.relatives}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+Requires `data.tree`
+
+
+```{r,eval=F}
+#--------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
+# # query any table with a primary key value, to get all direct relationships 
+#--------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
+# Requirements first read:
+# https://biadwiki.org/en/connectR
+# ensure you have opened a tunnel first (e.g. putty)
+#--------------------------------------------------------------------------------------
+conn  <-  init.conn()
+#--------------------------------------------------------------------------------------
+x <- get.relatives(table.name = 'Sites', primary.value = 'S10050') 
+
+x # look at the data
+
+# look at direct relationships (tree) above or below
+require(data.tree)
+tree.down <- FromListSimple(x[[1]]$down)
+tree.up <- FromListSimple(x[[1]]$up)
+
+# print the results as a list
+print(tree.down)
+print(tree.up)
+
+# show the results as a plot
+plot(tree.down)
+plot(tree.up)
+#--------------------------------------------------------------------------------------
+disconnect()
+#--------------------------------------------------------------------------------------
+
+```

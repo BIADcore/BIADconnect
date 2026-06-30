@@ -33,9 +33,9 @@
 #'   )
 #' }
 #'
+#' @import DBI
 #' @export
 query.database <- function(sql.command, conn=NULL, db.credentials=NULL, wait = 0){
-	require(DBI)
 	conn <- check.conn(conn = conn, db.credentials = db.credentials) #this doesn't return anything but modify conn if need, if not, nothing happen
 	if(is.null(conn))conn  <- get("conn", envir = .GlobalEnv)
 	for(n in 1:length(sql.command)){
@@ -54,7 +54,7 @@ query.database <- function(sql.command, conn=NULL, db.credentials=NULL, wait = 0
                     print(e)
 				}
 			)
-		query <- fetch(res, n= -1)	
+		query <- DBI::fetch(res, n= -1)	
 		DBI::dbClearResult(res)
 		}
 	query <- encoder(query)
@@ -73,13 +73,14 @@ return(df)}
 #' This function initializes a connection to the BIAD database using the provided
 #' credentials. If no credentials are supplied, it attempts to retrieve them from
 #' environment variables that should be stored in `~/.Renviron`. For more info see
-#' \code{\link{https://biadwiki.org/en/connectR}} 
+#' \url{https://biadwiki.org/en/connectR}
 #'
+#' @param dbname The name of the database to connect. Should  be BIAD, but that could be change if using a local, modified version of the database.
 #' @param db.credentials A list containing database connection details. The list 
 #' should include `BIAD_DB_USER`, `BIAD_DB_PASS`, `BIAD_DB_HOST`, and `BIAD_DB_USER`. If `NULL`, defaults 
 #' to fetching these values from environment variables. You can store these in
 #' `~/.Renviron` or export them in your environment using your favorite method
-#' (ie: $export BIAD_DB_HOST='127.0.0.1')
+#' (ie: \code{$export BIAD_DB_HOST='127.0.0.1'})
 #'
 #' @return A DBI connection object to the MySQL database.
 #' @examples
@@ -93,15 +94,15 @@ return(df)}
 #'           BIAD_DB_PORT = 3306
 #'       )
 #'   )
-#'  }
 #'   result <- query.database(
 #'     sql.command=c("SELECT * FROM table"),
 #'     conn=conn
 #'   )
+#'  }
+#' @import RMySQL
+#' @import DBI
 #' @export
 init.conn <- function(db.credentials=NULL, dbname="BIAD"){
-    require(RMySQL)
-    require(DBI)
     if(length(DBI::dbListConnections(DBI::dbDriver("MySQL")))!=0) disconnect()
     if(is.null(db.credentials)){
         
@@ -170,10 +171,10 @@ msp <- function(password) {
 #'   disconnect(drv = "PostgreSQL")
 #' }
 #'
+#' @import RMySQL
+#' @import DBI
 #' @export
 disconnect <- function(drv="MySQL"){
-    require(RMySQL)
-    require(DBI)
     sapply(DBI::dbListConnections(DBI::dbDriver(drv)),DBI::dbDisconnect)
 }
 #--------------------------------------------------------------------------------------------------
@@ -203,9 +204,9 @@ disconnect <- function(drv="MySQL"){
 #'   conn <- check.conn(conn = NULL, db.credentials = credentials)
 #' }
 #'
+#' @import DBI
 #' @export
 check.conn <- function(conn = NULL, db.credentials=NULL){
-	require(DBI)
 	if(is.null(conn) || !tryCatch(DBI::dbIsValid(conn),error=function(err)FALSE) ){ #check if no connector has been provided, or if the connector doesnt work
 	if(exists("conn", envir = .GlobalEnv))conn <- get("conn", envir = .GlobalEnv) #check if a connector already exist at global level
 	if(is.null(conn) || !tryCatch(DBI::dbIsValid(conn),error=function(err)FALSE) ){

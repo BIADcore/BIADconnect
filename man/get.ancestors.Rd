@@ -24,6 +24,10 @@ get.ancestors(
 \item{conn}{A database connection object.}
 
 \item{db.credentials}{manual database credentials.}
+
+\item{orig.table}{a parameter that store the orinal table at the level of the row matching the object. Used for the recursion}
+
+\item{zoption}{if TRUE, zoptions tables linked to the object  are also returned. Default is \code{FALSE}.!!NOT IMPLEMENTED}
 }
 \value{
 A nested list containing data frames of descendant records for each related table.

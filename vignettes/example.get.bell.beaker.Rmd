@@ -1,6 +1,23 @@
+--- 
+title: "get all C14 dates associated with bell beaker"
+output: rmarkdown::html_vignette
+author: 
+  - name: "Adrian Timpson"
+    affiliation: "UCL"
+    email: "a.timpson@ucl.ac.uk"
+vignette: > 
+  %\VignetteIndexEntry{get all C14 dates associated with bell beaker}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+TODO 
+
+```{r eval=F}
+library(BIADconnect)
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
-# # query any table with a primary key value, to get all direct relationships 
+# get all C14 dates associated with bell beaker
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
 # Requirements first read:
@@ -9,23 +26,9 @@
 #--------------------------------------------------------------------------------------
 conn  <-  init.conn()
 #--------------------------------------------------------------------------------------
-x <- get.relatives(table.name = 'Sites', primary.value = 'S10050') 
-
-x # look at the data
-
-# look at direct relationships (tree) above or below
-require(data.tree)
-tree.down <- FromListSimple(x[[1]]$down)
-tree.up <- FromListSimple(x[[1]]$up)
-
-# print the results as a list
-print(tree.down)
-print(tree.up)
-
-# show the results as a plot
-plot(tree.down)
-plot(tree.up)
+x <- query.database(sql.command)
+head(x)
 #--------------------------------------------------------------------------------------
 disconnect()
 #--------------------------------------------------------------------------------------
-
+```

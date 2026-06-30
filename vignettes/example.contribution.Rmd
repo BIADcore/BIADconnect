@@ -1,3 +1,20 @@
+--- 
+title: "Contribution Analysis in BIAD: Radiocarbon Dates"
+output: rmarkdown::html_vignette
+author: 
+  - name: "Adrian Timpson"
+    affiliation: "UCL"
+    email: "a.timpson@ucl.ac.uk"
+vignette: >
+  %\VignetteIndexEntry{Contribution Analysis in BIAD: Radiocarbon Dates}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r}
+library(BIADconnect)
+
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
 # Determining the % of contribution towards data collection in BIAD
@@ -37,3 +54,4 @@ barplot(counts, col = c("darkblue","red"), legend = rownames(counts))
 #--------------------------------------------------------------------------------------
 disconnect()
 #--------------------------------------------------------------------------------------
+```

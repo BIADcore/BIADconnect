@@ -1,5 +1,20 @@
+--- 
+title: "Example of a query to get strontium isotopes"
+output: rmarkdown::html_vignette
+author: 
+  - name: "Simon Carrignon"
+    affiliation: "UCL"
+    email: "s.carrignon@ucl.ac.uk"
+vignette: >
+  %\VignetteIndexEntry{Example of a query to get strontium isotopes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r,eval=F}
+
+
 #--------------------------------------------------------------------------------------
-devtools::load_all()
 conn  <-  init.conn()
 strcol <- query.database("DESCRIBE Strontium", conn=conn)
 sql.command <- paste0("SELECT `Sites`.`SiteName`, `Sites`.`SiteID`, `Sites`.`Latitude`, `Sites`.`Longitude`", paste0(paste0("`Strontium`.`",strcol$Field,"`"),collapse=","),"
@@ -31,3 +46,4 @@ FROM `Sites`
 LEFT JOIN `C14Samples` ON `Sites`.`SiteID` = `C14Samples`.`SiteID` ")
 query <- query.database(sql.command, conn=conn)
 
+```

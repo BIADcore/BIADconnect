@@ -1,0 +1,58 @@
+on:
+  push:
+    branches:
+      - main
+name: BIAD Conn. Check
+jobs:
+  check_biadconnect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout BIADconnect
+        uses: actions/checkout@v4
+      - name: Checkout minibiad docker
+        uses: actions/checkout@v2
+        with:
+          repository: simoncarrignon/BIADdocker
+          path: mini-biad
+      - name: Build Mini-biad docker image
+        run: |
+          cd mini-biad
+          docker build -t mini-biad .
+      - name: Run Mini-biad container
+        run: |
+          docker run -d  --name=mini-biad  --network="host"  mini-biad:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root1234
+          MYSQL_DATABASE: BIAD
+          MYSQL_USER: test_user
+          MYSQL_PASSWORD: test1234
+      - name: Wait for MySQL to be ready
+        run: |
+          while ! docker exec mini-biad mariadb-admin ping -h"127.0.0.1" --silent; do
+            echo "Waiting for MariaDB..."
+            sleep 1
+          done
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-pandoc@v2
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+      - name: Install depencies 
+        run: |
+          Rscript -e 'install.packages(c("DBI", "RMySQL","rcmdcheck","testthat","knitr","rmarkdown"))'
+        env:
+           _R_CHECK_FORCE_SUGGESTS_: false
+           BIAD_DB_HOST: 127.0.0.1
+           BIAD_DB_PORT: 3306
+           BIAD_DB_USER: test_user
+           BIAD_DB_PASS: test1234
+      - name: R CMD check
+        uses: r-lib/actions/check-r-package@v2
+        with:
+          args: 'c("--no-vignette","--no-build-vignettes","--no-manual","--compact-vignettes=gs+qpdf")'
+        env:
+           _R_CHECK_FORCE_SUGGESTS_: false
+           BIAD_DB_HOST: 127.0.0.1
+           BIAD_DB_PORT: 3306
+           BIAD_DB_USER: test_user
+           BIAD_DB_PASS: test1234

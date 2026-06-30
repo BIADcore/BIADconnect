@@ -19,7 +19,7 @@
 #' @export
 get.primary.column.from.table <- function(keys = NULL, table.name, conn = NULL, db.credentials = NULL){                                                                                                                 
     if(is.null(keys))keys <- get.keys(conn = conn, db.credentials = db.credentials ) 
-	x <- subset(keys, TABLE_NAME == table.name & CONSTRAINT_NAME %in% c('unique','PRIMARY'))$COLUMN_NAME
+	x <- subset(keys, keys$TABLE_NAME == table.name & keys$CONSTRAINT_NAME %in% c('unique','PRIMARY'))$COLUMN_NAME
 	column <- x[duplicated(x)]
 	if(length(column)==0)column <- NA
 	if(length(column)>1)stop('unclear which column to use')	
@@ -38,10 +38,11 @@ return(column)}
 #'
 #' @return A data frame containing the queried data, potentially with NA columns removed.
 #'
+#' @import DBI
 #' @export
 get.table.data <- function(keys = NULL, table.name = NULL, primary.value = NULL, conn = NULL, db.credentials = NULL, na.rm = TRUE){
 	primary.column <- get.primary.column.from.table(keys, table.name)
-	primary.value  <- DBI::dbQuoteString(ANSI(),as.character(primary.value)) #Sanitize strings
+	primary.value  <- DBI::dbQuoteString(DBI::ANSI(),as.character(primary.value)) #Sanitize strings
 	if(length(primary.value) == 1) matchexp <- paste0(" = ",primary.value)
 	if(length(primary.value) > 1) matchexp <- paste0(" IN (",paste0(primary.value,collapse=","),")")
 	sql.command <- paste0("SELECT * FROM `BIAD`.`",table.name,"` WHERE ",primary.column, matchexp)
@@ -57,17 +58,29 @@ remove.blank.columns.from.table <- function(table){
 	tb <- tb[,keep.i,drop=F]
 return(tb)}
 #----------------------------------------------------------------------------------------------------
+#' Plot Database Table Relationships
+#'
+#' helper to visualizes the relationships between all the tables (used for the wiki)
+#'
+#' @param d.tables A character vector of table names to include in the plot, separated by semicolons and spaces (e.g., "table1; table2").
+#' @param include.look.ups Logical. If TRUE, lookup tables and their relationships are included in the plot. Default is TRUE.
+#' @param conn A database connection object. If NULL, `db.credentials` is used to establish a connection.
+#' @param db.credentials A list containing database credentials, such as username, password, and database name. Used to establish a connection if `conn` is NULL.
+#'
+#' @return A DiagrammeR graph object representing the database schema as a visual diagram.
+#'
+#' @details The function queries the `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` to obtain foreign key relationships between tables in the database schema named 'BIAD'. It then uses DiagrammeR to create a visual representation of these relationships.
+#'
 #' @export
 database.relationship.plotter <- function(d.tables, include.look.ups=TRUE, conn = NULL, db.credentials = NULL){
 
-	require(DiagrammeR)
 
 	sql.command <- "SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_SCHEMA = 'BIAD'"
 	d <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
-	d <- subset(d, TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
+	d <- subset(d, d$TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
 	if(!include.look.ups){
-		d <- subset(d, REFERENCED_TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
-		d <- subset(d,!grepl('zoptions', REFERENCED_TABLE_NAME))
+		d <- subset(d, d$REFERENCED_TABLE_NAME%in%strsplit(d.tables,split='; ')[[1]])
+		d <- subset(d,!grepl('zoptions', d$REFERENCED_TABLE_NAME))
 		}
 	z.tables <- d$REFERENCED_TABLE_NAME[grep('zoptions',d$REFERENCED_TABLE_NAME)]
 
@@ -121,9 +134,10 @@ return(image)}
 #' @param table.name A string specifying the name of the table where the entry is.
 #' @param primary.value The primary key value used to find the entry in the database.
 #' @param directions A character vector indicating direction(s) for retrieving the data related to the entry 
-#' Available options are "up" for ancestors and "down" for descendants. Default is both (`directions=c("up", "down")`).
+#' Available options are "up" for ancestors and "down" for descendants. Default is both (\code{directions=c("up", "down")}).
 #' @param conn A database connection object. Default is `NULL`.
 #' @param db.credentials parameter for manual setup of database credentials. Default is `NULL`.
+#' @param zoption if TRUE, zoptions tables linked to the object  are also returned. Default is `FALSE`.
 #'
 #' @return A list containing a root element with one branch with all the data associated with the specific entry and two other branches storing trees as nested list with all related entries.
 #' @export
@@ -153,6 +167,7 @@ get.relatives <- function(table.name, primary.value, directions = c("up","down")
 #' @param db.credentials manual database credentials. 
 #'
 #' @return A nested list containing data frames of descendant records for each related table.
+#' @import DBI
 #' @export
 #'
 get.decendants <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL){
@@ -160,7 +175,7 @@ get.decendants <- function(keys, table.name, primary.value, conn = NULL, db.cred
     if(is.null(primary.value) || primary.value == ""  )return(NULL)
 
     primary.column <- get.primary.column.from.table(keys, table.name)
-    relative.info  <- subset(keys, REFERENCED_COLUMN_NAME==primary.column & REFERENCED_TABLE_NAME==table.name)
+    relative.info  <- subset(keys, keys$REFERENCED_COLUMN_NAME==primary.column & keys$REFERENCED_TABLE_NAME==table.name)
     if(nrow(relative.info) == 0) return(NULL)
     
     relative.tables <- relative.info$TABLE_NAME #table using the key
@@ -170,7 +185,7 @@ get.decendants <- function(keys, table.name, primary.value, conn = NULL, db.cred
         rt <- relative.tables[n]
         rc <- relative.columns[n]
         if(is.numeric(primary.value))primary.value  <- as.character(primary.value)
-        primary.value  <- DBI::dbQuoteString(ANSI(),primary.value) #Sanitize primary values
+        primary.value  <- DBI::dbQuoteString(DBI::ANSI(),primary.value) #Sanitize primary values
         sql.command <- paste("SELECT * FROM `BIAD`.`",rt,"` WHERE ",rc," = ",primary.value, sep='')
         data <- query.database(conn = conn, db.credentials = db.credentials, sql.command = sql.command)
         if(length(data)>0){
@@ -195,13 +210,15 @@ get.decendants <- function(keys, table.name, primary.value, conn = NULL, db.cred
 #' @param primary.value The primary key value from which to find descendant records. 
 #' @param conn A database connection object. 
 #' @param db.credentials manual database credentials. 
+#' @param zoption if TRUE, zoptions tables linked to the object  are also returned. Default is `FALSE`.!!NOT IMPLEMENTED
+#' @param orig.table a parameter that store the orinal table at the level of the row matching the object. Used for the recursion
 #'
 #' @return A nested list containing data frames of descendant records for each related table.
 #' @export
 #'
 get.ancestors <- function(keys, table.name, primary.value, conn = NULL, db.credentials = NULL, orig.table = NULL , zoption = FALSE){
 
-    relative.info  <- subset(keys, TABLE_NAME==table.name & grepl('FK_',CONSTRAINT_NAME))
+    relative.info  <- subset(keys, keys$TABLE_NAME==table.name & grepl('FK_',keys$CONSTRAINT_NAME))
     #if(!zoption) relative.info  <- subset(relative.info, !grepl('zoptions_',REFERENCED_TABLE_NAME))
 
     if(is.null(orig.table)) orig.table <- get.table.data(keys, table.name, primary.value, conn, db.credentials,na.rm = F) 
@@ -218,9 +235,9 @@ get.ancestors <- function(keys, table.name, primary.value, conn = NULL, db.crede
         rc <- relative.columns[n]
         rv.c <- orig.column.alt[n] #column where the reference value is stored
         if(rv.c %in% names(orig.table)){
-            values <- unique(unlist(na.omit(orig.table[rv.c])))
+            values <- unique(unlist(stats::na.omit(orig.table[rv.c])))
             if(is.numeric(values))values  <- as.character(values)
-            values  <- DBI::dbQuoteString(ANSI(),values) #Sanitize strings
+            values  <- DBI::dbQuoteString(DBI::ANSI(),values) #Sanitize strings
             if(length(values) > 0){
                 if(length(values) == 1) matchexp <- paste0(" = ",values)
                 if(length(values) > 1) matchexp <- paste0(" IN (",paste0(values,collapse=","),")")
@@ -277,19 +294,18 @@ get.keys <- function(conn = NULL, db.credentials = NULL){
 #' This function extracts from a tree, as created by the function \code{get.relatives}, 
 #' all nodes/leaves that have names corresponding to the specified element.
 #' trees should be as named list of list like list(a=1,b=list(a=2,b=3,c=4),d=list(e=1,f=4))
-#' Based on the answers here: https://stackoverflow.com/questions/64578972/pull-all-elements-with-specific-name-from-a-nested-list/79168230#79168230
+#' Based on the on \href{this stackoverflow discussion}{https://stackoverflow.com/questions/64578972/pull-all-elements-with-specific-name-from-a-nested-list/79168230#79168230}
 #'
 #' @param x A list representing the tree structure.
 #' @param element A character string specifying the name of elements to extract from the tree.
 #' 
 #' @return A list containing all elements from the tree that have names matching the specified element.
 #'
+#' @export
 #' @examples
-#' \dontrun{
 #' tree <- list(a = 1, b = list(a = 2, c = 3), d = 4)
 #' get_elements(tree, "a")
-#' # Expected output: list(1, 2)
-#' }
+#' # This will return as an output: list(1, 2)
 get_elements <- function(x, element) {
 	newlist=list()
 	for(elt in names(x)){
@@ -299,7 +315,7 @@ get_elements <- function(x, element) {
 	return(newlist)
 }
 #--------------------------------------------------------------------------------------------------
-#' Shortest Distance Calculation Using Spherical Law of Cosines
+#' Shorest Distance Calculation Using Spherical Law of Cosines
 #'
 #' This function calculates the shortest distance between a single point \code{(x, y)} and a set of points \code{(ax, ay)}
 #' using the spherical law of cosines. The distances are returned in radians and can be converted to kilometers by
@@ -343,7 +359,7 @@ summary_maker <- function(d){
     x <- merge(x,unique(d[,1:3]),by='SiteID')
     x$code[x$count==1] <- 1
     x$code[x$count==2] <- 2
-    posts <- floor(unique(quantile(x$count[!x$count%in%c(1,2)])))
+    posts <- floor(unique(stats::quantile(x$count[!x$count%in%c(1,2)])))
     N <- length(posts)-1
     posts[N+1] <- posts[N+1]+1
     key <- c()
@@ -354,7 +370,7 @@ summary_maker <- function(d){
         i <- x$count>=lower & x$count<upper
         x$code[i] <- n+2
     }
-    cols <- colorRampPalette(c("red", "blue"))(N+2)
+    cols <- grDevices::colorRampPalette(c("red", "blue"))(N+2)
     for(n in 1:(N+2))x$col[x$code==n] <- cols[n]
     legend <- c(1,2,key)
     return(list(summary=x,cols=cols,legend=legend))
